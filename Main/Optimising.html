@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Optimising - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">Optimising</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><p>Optimising in Lua is often counter-intuitive. Never assume a change has improved performance, even if you "know", logically, that it would have. Always check. Always.
+</p>
+<h1><span class="mw-headline" id="General_Optimising_Tips">General Optimising Tips</span></h1>
+<h2><span class="mw-headline" id="Root_of_all_evil">Root of all evil</span></h2>
+<dl><dt><b>Donald Knuth</b> said,</dt>
+<dd><i>" premature optimization is the root of all evil"</i></dd></dl>
+<p>In other words, don't do heavy optimisation until you see things slowing down.
+</p><p>That is all.
+</p>
+<h2><span id="Be_a_sniper.2C_not_a_carpet_bomber"></span><span class="mw-headline" id="Be_a_sniper,_not_a_carpet_bomber">Be a sniper, not a carpet bomber</span></h2>
+<p>Hit the target, not the square mile its in.
+</p><p>Much like the CPU cycles you are trying to save, your time is valuable. Don't waste it optimising code that isn't slowing you down. Profile your code, figure out where your bottlenecks are, and optimise <i>those</i>.
+</p>
+<h1><span class="mw-headline" id="General_Lua_Optimisation">General Lua Optimisation</span></h1>
+<h2><span class="mw-headline" id="Keep_loops_short_and_sweet">Keep loops short and sweet</span></h2>
+<p>While loops are useful and important construct in any program, they are also <i>repetitious</i>, and like to magnify the effects of any statements within them. Every performance tip in here applies double to loops.
+</p><p>When designing loops, consider if each individual statement <i>really</i> needs to be in the body of the loop, everything that can be legitimately moved outside the body of the loop will reduce the time it takes for the loop to complete.
+</p>
+<h2><span id="Prefer_numerical_fors.2C_and_ipairs"></span><span class="mw-headline" id="Prefer_numerical_fors,_and_ipairs">Prefer numerical <i>for</i>s, and <i>ipairs</i></span></h2>
+<p>Lua's <i>table</i>s are powerful useful and, to Lua's credit, fairly fast. The <i>pairs</i> iterator allows you to easily loop through all of the elements in a <i>table</i>, rather than <i>ipairs</i> merely looping through the elements with integral numeric keys in 1 to n. It is, however, not the fastest way to loop through a table, <i>ipairs</i> is faster, but the fastest is the humble numerical for; "for i=1,n do ... end". Yes, its not as elegant, but its still the fastest.
+</p>
+<h2><span class="mw-headline" id="Use_Locals">Use <i>Local</i>s</span></h2>
+<p>In Lua, Variables are generally either <i>global</i>s (the default), or <i><a href="../Main/local.html" title="local">local</a></i>s. Lua  keeps a short list of <i>local</i> variables that it checks before checking the global environment. Generally this means that <i>local</i> look-ups are "just plain faster" than <i>global</i>s.
+Normally this performance gain is splitting hairs, but there's a common situation where it can be noticeable.
+</p><p>Consider the following:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="w"> </span><span class="c1">--WRONG WAY</span>
+<span class="w">   </span><span class="kr">for</span><span class="w"> </span><span class="nv">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000000</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">     </span><span class="nv">localx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">math.sin</span><span class="p">(</span><span class="nv">i</span><span class="p">)</span>
+<span class="w">   </span><span class="kr">end</span>
+
+<span class="w"> </span><span class="c1">--RIGHT WAY</span>
+<span class="w">   </span><span class="kd">local</span><span class="w"> </span><span class="nv">sin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">math.sin</span>
+<span class="w">   </span><span class="kr">for</span><span class="w"> </span><span class="nv">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1000000</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">     </span><span class="nv">localx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sin</span><span class="p">(</span><span class="nv">i</span><span class="p">)</span>
+<span class="w">   </span><span class="kr">end</span>
+</pre></div>
+<ul><li>In the <b>WRONG WAY</b> example, each use of <i>math.sin()</i> would require two look-ups, once in <i>_G</i>, looking for <i>math</i>, and again in <i>math</i> looking for <i>sin</i>; and this would happen every iteration of the loop (so about 2,000,000 look-ups).</li></ul>
+<ul><li>In the <b>RIGHT WAY</b> example, we begin by creating a local containing the <i>math.sin()</i> function. its this value which is then used in the loop. Immediately its obvious that we've basically halved the number of look-ups required by this section code, and that's without considering that local look-ups are cheaper than global look ups.</li></ul>
+<h1><span class="mw-headline" id="Love-Specific_Tips">Love-Specific Tips</span></h1>
+<h2><span class="mw-headline" id="Cull_the_herd">Cull the herd</span></h2>
+<p>It can be tempting to design drawing functions that make little or no attempt to consider the visibility of game elements, relying instead on the graphics hardware's basic <a class="external text" href="https://en.wikipedia.org/wiki/Clipping_(computer_graphics)" rel="nofollow">clipping</a> capabilities. if nothing else, this can often give simpler and easier to understand functions.
+</p><p>But even if these elements aren't visible, they still need to be transformed and processed, and their data sent to the card's hardware. Depending on your game's design, you might do additional calculations for that element, such as calculating look-ats, or blending colors. All of which are unnecessary, give that the element isn't actually visible, and on non-trivial projects, this can be a performance cost you can ill-afford.
+</p><p><a class="external text" href="https://en.wikipedia.org/wiki/Code_refactoring" rel="nofollow">Refactor</a> your code to avoid calculations that only need to be done visible elements, and avoid sending any data to the hardware about objects you can determine won't be visible.
+</p>
+<h2><span class="mw-headline" id="Avoid_Overdraw">Avoid Overdraw</span></h2>
+<p>Overdraw is when you draw over part of the screen that you had already drawn to in the current frame. much like in the <i>Cull the Herd</i> tip above, this is wasted effort. Why spend time drawing something that won't be seen?
+</p><p>The old axiom from the early days of graphical gaming was "touch every pixel only once", (I.E. zero-overdraw). fortunately hardware has come a long way since then, and some slovenliness is perfectly reasonable if it offers some other advantage (such as simpler code), but should avoid engine designs that are likely to create large amounts of overdraw.
+</p>
+<h2><span class="mw-headline" id="Watch_the_hidden_loops">Watch the hidden loops</span></h2>
+<p>Love calls the functions <i><a href="../Main/love.update.html" title="love.update">love.update</a>(dt)</i> and <i><a href="../Main/love.draw.html" title="love.draw">love.draw</a>()</i> frequently during the lifetime of a Love game. in fact, they are the body of loops hidden in <i><a href="../Main/love.run.html" title="love.run">love.run</a>()</i>. All the performance considerations that apply to loops, apply to these two callbacks as well.
+</p>
+<h1><span class="mw-headline" id="Further_Tips">Further Tips</span></h1>
+<ul><li><a class="external text" href="http://trac.caspring.org/wiki/LuaPerformance" rel="nofollow">LuaPerformance</a> at trac</li></ul>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/L%C3%96VE.html">LÖVE</a></li><li><a href="../Category/Tips.html">Tips</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

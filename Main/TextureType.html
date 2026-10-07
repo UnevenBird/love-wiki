@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>TextureType - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">TextureType</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><table bgcolor="#d0d0ff" class="new-section" data-newin="[[11.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/11.0.html" title="11.0">11.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This enum is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Types of textures (2D, cubemap, etc.)
+</p>
+<h2><span class="mw-headline" id="Constants">Constants</span></h2>
+<dl><dt>2d</dt>
+<dd>Regular 2D texture with width and height.</dd>
+<dt>array</dt>
+<dd>Several same-size 2D textures organized into a single object. Similar to a texture atlas / sprite sheet, but avoids sprite bleeding and other issues.</dd>
+<dt>cube</dt>
+<dd><a class="external text" href="https://en.wikipedia.org/wiki/Cube_mapping" rel="nofollow">Cubemap</a> texture with 6 faces. Requires a custom shader (and <a href="../Main/Shader__send.html" title="Shader:send">Shader:send</a>) to use. Sampling from a cube texture in a shader takes a 3D direction vector instead of a texture coordinate.</dd>
+<dt>volume</dt>
+<dd>3D texture with width, height, and <a href="../Main/Texture__getDepth.html" title="Texture:getDepth">depth</a>. Requires a custom shader to use. Volume textures can have <a href="../Main/Texture__setFilter.html" title="Texture:setFilter">texture filtering</a> applied along the 3rd axis.</dd></dl>
+<h2><span class="mw-headline" id="Notes">Notes</span></h2>
+<p><a class="external text" href="http://codeflow.org/entries/2010/dec/09/minecraft-like-rendering-experiments-in-opengl-4/illustrations/textures.jpg" rel="nofollow">Array textures</a> can be rendered with <a href="../Main/love.graphics.drawLayer.html" title="love.graphics.drawLayer">love.graphics.drawLayer</a>, with <a href="../Main/love.graphics.draw.html" title="love.graphics.draw">love.graphics.draw</a> and a <a href="../Main/Quad.html" title="Quad">Quad</a> via <a href="../Main/Quad__setLayer.html" title="Quad:setLayer">Quad:setLayer</a>, or by <a href="../Main/Shader__send.html" title="Shader:send">sending</a> it to a custom <a href="../Main/Shader.html" title="Shader">Shader</a>. When getting the pixels of a layer of an Array Texture in a shader, a third texture coordinate component is used to choose which layer to get.
+</p><p><br/>
+When using a custom Shader, each texture type has a different GLSL type.
+</p>
+<ul><li><code>Image</code> (or <code>sampler2D</code>) is a 2D texture.</li>
+<li><code>ArrayImage</code> (or <code>sampler2DArray</code>) is an array texture.</li>
+<li><code>CubeImage</code> (or <code>samplerCube</code>) is a cubemap texture.</li>
+<li><code>VolumeImage</code> (or <code>sampler3D</code>) is a volume texture.</li></ul>
+<p><br/>
+The <code>Texel</code> shader function can be used to sample from all types of textures in a shader. <code>Texel</code> is recommended instead of <code>texture2D</code>, <code>textureCube</code> etc., because the latter do not work across all versions of GLSL supported by LÖVE, whereas Texel does (GLSL 3 removed <code>texture2D</code> and added a generic <code>texture</code> function).
+</p><p><br/>
+Each texture type has a different <a href="../Main/GraphicsLimit.html" title="GraphicsLimit">maximum size</a> on a user's system. Use <a href="../Main/love.graphics.getSystemLimits.html" title="love.graphics.getSystemLimits">love.graphics.getSystemLimits</a> to check.
+</p><p>Not all texture types are supported by all systems. <a href="../Main/love.graphics.getTextureTypes.html" title="love.graphics.getTextureTypes">love.graphics.getTextureTypes</a> can check for support.
+</p><p>2D and cube texture types are supported everywhere. Array textures require a system that supports OpenGL 3 or OpenGL ES 3. Volume / 3D textures require a system that supports OpenGL 2 or OpenGL ES 3.
+</p>
+<h2><span class="mw-headline" id="See_Also">See Also</span></h2>
+<ul><li><a href="../Main/love.graphics.html" title="love.graphics">love.graphics</a></li>
+<li><a href="../Main/Texture.html" title="Texture">Texture</a></li>
+<li><a href="../Main/Texture__getTextureType.html" title="Texture:getTextureType">Texture:getTextureType</a></li>
+<li><a href="../Main/love.graphics.newImage.html" title="love.graphics.newImage">love.graphics.newImage</a></li>
+<li><a href="../Main/love.graphics.newArrayImage.html" title="love.graphics.newArrayImage">love.graphics.newArrayImage</a></li>
+<li><a href="../Main/love.graphics.newCubeImage.html" title="love.graphics.newCubeImage">love.graphics.newCubeImage</a></li>
+<li><a href="../Main/love.graphics.newVolumeImage.html" title="love.graphics.newVolumeImage">love.graphics.newVolumeImage</a></li>
+<li><a href="../Main/love.graphics.newCanvas.html" title="love.graphics.newCanvas">love.graphics.newCanvas</a></li>
+<li><a href="../Main/love.graphics.drawLayer.html" title="love.graphics.drawLayer">love.graphics.drawLayer</a></li></ul>
+<h2><span class="mw-headline" id="Other_Languages">Other Languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Enums.html">Enums</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

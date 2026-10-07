@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Tutorial:Networking with UDP - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-500" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-namespace">Tutorial</span><span class="mw-page-title-separator">:</span><span class="mw-page-title-main">Networking with UDP</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><p>This is an introduction to networking, using <i>Luasocket</i>. Don't run away! Luasocket is compiled into LÖVE, and is really not that bad once you get used to it.
+</p><p>This tutorial assumes that you are familiar with <a href="../Tutorial/Callback_Functions.html" title="Tutorial:Callback Functions">Callbacks</a>, and Lua in general. Networking should be considered a moderately advanced topic.
+</p><p>There are two basic kinds of sockets, and we'll be covering UDP in this tutorial. UDP networking is message-oriented (as opposed to TCP being stream-oriented), meaning that it's oriented around distinct (and otherwise independent) messages called <i>datagrams</i>.
+</p><p>In the long run it pays to have a solid understanding on how networking works, but for now lets just get cracking. :3
+We'll start with the LÖVE client, then follow up with a stand-alone server written in Lua.
+</p>
+<h2><span class="mw-headline" id="The_Client">The Client</span></h2>
+<p>To start, we need to require the "socket" lib. <i>socket</i> provides low-level networking features.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">require</span><span class="w"> </span><span class="s2">"socket"</span>
+
+<span class="c1">-- the address and port of the server</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">address</span><span class="p">,</span><span class="w"> </span><span class="nv">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"localhost"</span><span class="p">,</span><span class="w"> </span><span class="mi">12345</span>
+
+<span class="kd">local</span><span class="w"> </span><span class="nv">entity</span><span class="w"> </span><span class="c1">-- entity is what we'll be controlling</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">updaterate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="c1">-- how long to wait, in seconds, before requesting an update</span>
+
+<span class="kd">local</span><span class="w"> </span><span class="nv">world</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="c1">-- the empty world-state</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">t</span>
+</pre></div>
+<h3><span class="mw-headline" id="love.load"><a href="../Main/love.load.html" title="love.load">love.load</a></span></h3>
+<p>First up, we need a UDP socket, from which we'll do all our networking.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+<span class="w">	</span><span class="nv">udp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">socket</span><span class="p">.</span><span class="nf">udp</span><span class="p">()</span>
+</pre></div>
+<p>Normally socket reads block (cause your game to stop and wait) until they have data. That doesn't suit us, so we tell it not to do that by setting the <i>timeout</i> to zero.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="w">	</span><span class="nv">udp</span><span class="p">:</span><span class="nf">settimeout</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+<p>Unlike the server, we'll just be talking to the one machine, so we'll "connect" this socket to the server's address and port using <i>udp:setpeername</i>.
+</p>
+<table align="center" bgcolor="gold" class="notice" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+<tbody><tr>
+<td width="1"><span class="mw-default-size" typeof="mw:File"><a class="mw-file-description" href="../File/O.png.html"><img class="mw-file-element" data-file-height="64" data-file-width="64" decoding="async" height="64" src="../assets/images/O.png" width="64"/></a></span>
+</td>
+<td>UDP is actually connectionless, this is purely a convenience provided by the socket library. It doesn't actually change the 'bits on the wire', and in fact we can change/remove this at any time.
+</td>
+<td width="1"> 
+</td></tr></tbody></table><p><br/>
+</p><div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="w">	</span><span class="nv">udp</span><span class="p">:</span><span class="nf">setpeername</span><span class="p">(</span><span class="nv">address</span><span class="p">,</span><span class="w"> </span><span class="nv">port</span><span class="p">)</span>
+</pre></div>
+<p>Seed the <a class="extiw" href="https://en.wikipedia.org/wiki/PRNG" title="wikipedia:PRNG">PRNG</a>, so we don't just get the same numbers each time. <i>entity</i> will be what we'll be controlling, for the sake of this tutorial.
+It's just a number, but it'll do. We'll just use <i>math.random</i> to give us a reasonably unique identity for little effort.
+</p>
+<table align="center" bgcolor="gold" class="notice" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+<tbody><tr>
+<td width="1"><span class="mw-default-size" typeof="mw:File"><a class="mw-file-description" href="../File/O.png.html"><img class="mw-file-element" data-file-height="64" data-file-width="64" decoding="async" height="64" src="../assets/images/O.png" width="64"/></a></span>
+</td>
+<td>A random number to identify yourself isn't actually a very good way of doing this, but the "correct" ways are beyond the scope of this article.)
+</td>
+<td width="1"> 
+</td></tr></tbody></table><p><br/>
+</p><div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="w">	</span><span class="nb">math.randomseed</span><span class="p">(</span><span class="nb">os.time</span><span class="p">())</span><span class="w"> </span>
+<span class="w">	</span><span class="nv">entity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">tostring</span><span class="p">(</span><span class="nb">math.random</span><span class="p">(</span><span class="mi">99999</span><span class="p">))</span>
+</pre></div>
+<p>Here we do our first bit of actual networking: we set up a string containing the data we want to send (using <i>string.format</i>) and then send it using <i>udp.send</i>.
+Since we used <i>udp:setpeername</i> earlier we don't even have to specify where to send it.
+</p><p>Thats... it, really. The rest of this is just putting this context and practical use.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">dg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">string.format</span><span class="p">(</span><span class="s2">"%s %s %d %d"</span><span class="p">,</span><span class="w"> </span><span class="nv">entity</span><span class="p">,</span><span class="w"> </span><span class="s1">'at'</span><span class="p">,</span><span class="w"> </span><span class="mi">320</span><span class="p">,</span><span class="w"> </span><span class="mi">240</span><span class="p">)</span>
+<span class="w">	</span><span class="nv">udp</span><span class="p">:</span><span class="nf">send</span><span class="p">(</span><span class="nv">dg</span><span class="p">)</span><span class="w"> </span><span class="c1">-- the magic line in question.</span>
+<span class="w">	</span>
+<span class="w">	</span><span class="c1">-- t is just a variable we use to help us with the update rate in love.update.</span>
+<span class="w">	</span><span class="nv">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c1">-- (re)set t to 0</span>
+<span class="kr">end</span>
+</pre></div>
+<h3><span class="mw-headline" id="love.update"><a href="../Main/love.update.html" title="love.update">love.update</a></span></h3>
+<p>We start with a little bit of nonsense involving <i>t</i> we declared earlier;
+It's <b>very easy</b> to completely saturate a network connection if you aren't careful with the packets we send (or request!), so we hedge our chances by limiting how often we send (and request) updates.
+</p><p><i>(For the record, ten times a second is considered good for most normal games (including many <a class="extiw" href="https://en.wikipedia.org/wiki/Massively_Multiplayer_Online_game" title="wikipedia:Massively Multiplayer Online game">MMOs</a>), and you shouldn't ever really need more than 30 updates a second, even for fast-paced games.)</i>
+</p><p>We could send updates for every little move, but we'll consolidate the last update-worth here into a single packet, drastically reducing our bandwidth use.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="nv">deltatime</span><span class="p">)</span>
+<span class="w">	</span><span class="nv">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">deltatime</span><span class="w"> </span><span class="c1">-- increase t by the deltatime</span>
+<span class="w">	</span>
+<span class="w">	</span><span class="kr">if</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nv">updaterate</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">		</span><span class="kd">local</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">		</span><span class="kr">if</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">keyboard</span><span class="p">.</span><span class="nf">isDown</span><span class="p">(</span><span class="s1">'up'</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span><span class="w"> 	</span><span class="nv">y</span><span class="o">=</span><span class="nv">y</span><span class="o">-</span><span class="p">(</span><span class="mi">20</span><span class="o">*</span><span class="nv">t</span><span class="p">)</span><span class="w"> </span><span class="kr">end</span>
+<span class="w">		</span><span class="kr">if</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">keyboard</span><span class="p">.</span><span class="nf">isDown</span><span class="p">(</span><span class="s1">'down'</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span><span class="w"> 	</span><span class="nv">y</span><span class="o">=</span><span class="nv">y</span><span class="o">+</span><span class="p">(</span><span class="mi">20</span><span class="o">*</span><span class="nv">t</span><span class="p">)</span><span class="w"> </span><span class="kr">end</span>
+<span class="w">		</span><span class="kr">if</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">keyboard</span><span class="p">.</span><span class="nf">isDown</span><span class="p">(</span><span class="s1">'left'</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span><span class="w"> 	</span><span class="nv">x</span><span class="o">=</span><span class="nv">x</span><span class="o">-</span><span class="p">(</span><span class="mi">20</span><span class="o">*</span><span class="nv">t</span><span class="p">)</span><span class="w"> </span><span class="kr">end</span>
+<span class="w">		</span><span class="kr">if</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">keyboard</span><span class="p">.</span><span class="nf">isDown</span><span class="p">(</span><span class="s1">'right'</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span><span class="w"> 	</span><span class="nv">x</span><span class="o">=</span><span class="nv">x</span><span class="o">+</span><span class="p">(</span><span class="mi">20</span><span class="o">*</span><span class="nv">t</span><span class="p">)</span><span class="w"> </span><span class="kr">end</span>
+</pre></div>
+<p>Again, we prepare a packet <i>payload</i> using string.format, then send it on its way with udp:send. This is the move update mentioned above.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="w">		</span><span class="kd">local</span><span class="w"> </span><span class="nv">dg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">string.format</span><span class="p">(</span><span class="s2">"%s %s %f %f"</span><span class="p">,</span><span class="w"> </span><span class="nv">entity</span><span class="p">,</span><span class="w"> </span><span class="s1">'move'</span><span class="p">,</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="p">)</span>
+<span class="w">		</span><span class="nv">udp</span><span class="p">:</span><span class="nf">send</span><span class="p">(</span><span class="nv">dg</span><span class="p">)</span>
+</pre></div>
+<p>And again! This is a request that the server send us an update for the world state.
+</p>
+<table align="center" bgcolor="gold" class="notice" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+<tbody><tr>
+<td width="1"><span class="mw-default-size" typeof="mw:File"><a class="mw-file-description" href="../File/O.png.html"><img class="mw-file-element" data-file-height="64" data-file-width="64" decoding="async" height="64" src="../assets/images/O.png" width="64"/></a></span>
+</td>
+<td>In most designs you don't request world-state updates, you just get them sent to you periodically.
+<p>There's various reasons for this, but there's one <b>BIG</b> one you will have to solemnly take note of: "anti-griefing". World-updates are probably one of biggest things the average game-server will pump out on a regular basis, and griefing with forged update requests would be simple effective.
+So they just don't support update requests, instead giving them out when they feel its appropriate
+</p>
+</td>
+<td width="1"> 
+</td></tr></tbody></table><p><br/>
+</p><div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="w">		</span><span class="kd">local</span><span class="w"> </span><span class="nv">dg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">string.format</span><span class="p">(</span><span class="s2">"%s %s $"</span><span class="p">,</span><span class="w"> </span><span class="nv">entity</span><span class="p">,</span><span class="w"> </span><span class="s1">'update'</span><span class="p">)</span>
+<span class="w">		</span><span class="nv">udp</span><span class="p">:</span><span class="nf">send</span><span class="p">(</span><span class="nv">dg</span><span class="p">)</span>
+
+<span class="w">		</span><span class="nv">t</span><span class="o">=</span><span class="nv">t</span><span class="o">-</span><span class="nv">updaterate</span><span class="w"> </span><span class="c1">-- set t for the next round</span>
+<span class="w">	</span><span class="kr">end</span>
+</pre></div>
+<p><br/>	
+There could well be more than one message waiting for us, so we'll loop until we run out!
+</p><p>And here is something new, the much anticipated other end of <code>udp:send</code>!
+<code>udp:receive</code> will return a waiting packet (or nil, and an error message).
+<i>data</i> is a string, the <b>payload</b> of the far-end's <i>udp:send</i>. We can deal with it the same ways we could deal with any other string in Lua (needless to  say, getting familiar with Lua's <a class="external text" href="http://www.lua.org/manual/5.1/manual.html#5.4" rel="nofollow">string handling functions</a> is a must.)
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="w">	</span><span class="kr">repeat</span>
+<span class="w">		</span><span class="nv">data</span><span class="p">,</span><span class="w"> </span><span class="nv">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">udp</span><span class="p">:</span><span class="nf">receive</span><span class="p">()</span>
+
+<span class="w">		</span><span class="kr">if</span><span class="w"> </span><span class="nv">data</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="c1">-- you remember, right? that all values in lua evaluate as true, save nil and false?</span>
+</pre></div>
+<p><code>string.match</code> is our friend here, its part of <i>string.*</i>, and <i>data</i> is (or should be!) a <b>string</b>. That funky set of characters bares some explanation, though. <i>(Which I haven't gotten to, but I'll leave you with a link to <a class="external text" href="http://www.lua.org/manual/5.1/manual.html#5.4.1" rel="nofollow">5.4.1:Patterns</a>)</i>
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="w">			</span><span class="nv">ent</span><span class="p">,</span><span class="w"> </span><span class="nv">cmd</span><span class="p">,</span><span class="w"> </span><span class="nv">parms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">data</span><span class="p">:</span><span class="nf">match</span><span class="p">(</span><span class="s2">"^(%S*) (%S*) (.*)"</span><span class="p">)</span>
+<span class="w">			</span><span class="kr">if</span><span class="w"> </span><span class="nv">cmd</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'at'</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">				</span><span class="kd">local</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">parms</span><span class="p">:</span><span class="nf">match</span><span class="p">(</span><span class="s2">"^(%-?[%d.e]*) (%-?[%d.e]*)$"</span><span class="p">)</span>
+</pre></div>
+<p>Confirming that the values you received are what you expect is important, since you never known who or what is on the other end (or in between...). Since this is just an example, we'll just use asserts.
+</p><p>And don't forget, even if you matched a "number", the result is still a <b>string</b>! Thankfully conversion is easy in Lua using <code>tonumber()</code>.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="w">				</span><span class="nb">assert</span><span class="p">(</span><span class="nv">x</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nv">y</span><span class="p">)</span>
+<span class="w">				</span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">tonumber</span><span class="p">(</span><span class="nv">x</span><span class="p">),</span><span class="w"> </span><span class="nb">tonumber</span><span class="p">(</span><span class="nv">y</span><span class="p">)</span>
+<span class="w">				</span><span class="nv">world</span><span class="p">[</span><span class="nv">ent</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="nv">x</span><span class="o">=</span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="o">=</span><span class="nv">y</span><span class="p">}</span>
+</pre></div>
+<p>This case shouldn't trigger often, but its always a good idea to check (and log!) any unexpected messages and events. It can help you find bugs in your code...or people trying to hack the server.
+Never forget, you can not trust the client!
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="w">			</span><span class="kr">else</span>
+<span class="w">				</span><span class="nb">print</span><span class="p">(</span><span class="s2">"unrecognised command:"</span><span class="p">,</span><span class="w"> </span><span class="nv">cmd</span><span class="p">)</span>
+<span class="w">			</span><span class="kr">end</span>
+</pre></div>
+<p>If <i>data</i> was <code>nil</code>, then <i>msg</i> will contain a short description of the problem (which are also double as error IDs...).
+The most common will be <code>'timeout'</code>, since we <code>socket:settimeout()</code> to zero, any time there isn't data <i>waiting</i> for us, it'll <code>'timeout'</code>. But we should check to see if its a <i>different</i> error, and act accordingly.
+In this case we don't even try to save ourselves, we just error out.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="w">		</span><span class="kr">elseif</span><span class="w"> </span><span class="nv">msg</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="s1">'timeout'</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span>
+<span class="w">			</span><span class="nb">error</span><span class="p">(</span><span class="s2">"Network error: "</span><span class="o">..</span><span class="nb">tostring</span><span class="p">(</span><span class="nv">msg</span><span class="p">))</span>
+<span class="w">		</span><span class="kr">end</span>
+<span class="w">	</span><span class="kr">until</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nv">data</span>
+<span class="kr">end</span>
+</pre></div>
+<h3><span class="mw-headline" id="love.draw">love.draw</span></h3>
+<p>Draw is stunningly simple, since its not really the meat of this example.
+It just loops over the <i>world</i> table, and print the name (key) of everything in there, at its own stored co-ords.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+<span class="w">	</span><span class="c1">-- pretty simple, we </span>
+<span class="w">	</span><span class="kr">for</span><span class="w"> </span><span class="nv">k</span><span class="p">,</span><span class="w"> </span><span class="nv">v</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nb">pairs</span><span class="p">(</span><span class="nv">world</span><span class="p">)</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">		</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="nv">k</span><span class="p">,</span><span class="w"> </span><span class="nv">v</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="nv">v</span><span class="p">.</span><span class="py">y</span><span class="p">)</span>
+<span class="w">	</span><span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+<p>And that's the end of the Client code.
+</p>
+<h2><span class="mw-headline" id="The_Server">The Server</span></h2>
+<p>The server is a little different, for starters its a stand-alone Lua program: it doesn't run in LÖVE.
+</p><p>Once again we begin by <code>require</code>ing socket, and creating  a UDP socket.
+</p><p><i>(LuaSocket </i>isn't<i> compiled into Lua by default. If you are on Windows just get the all-in-one <a class="external autonumber" href="https://github.com/rjpcomputing/luaforwindows/releases" rel="nofollow">[1]</a> installer, I wouldn't know for Mac, and Linux? you guys know what to do :3)</i>
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">require</span><span class="w"> </span><span class="s2">"socket"</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">udp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">socket</span><span class="p">.</span><span class="nf">udp</span><span class="p">()</span>
+</pre></div>
+<p>And once again, we set the <code>'timeout'</code> to zero.
+</p><p>But next we do something a little different; unlike the client, the server has to be specific about where its 'bound', or the poor clients will never find it. Thus while we can happily let the client auto-bind to whatever it likes, we have to tell the server to bind to something known.
+</p><p>The first part is which <i>interface</i> we should bind to, <code>'*'</code> basically means "all of them". <i>port</i> is simple, the system maintains a list of up to 65535 (!) "ports" ... really just numbers.
+</p><p>Point is that if you send to a particular port, then only things "listening" to that port will be able to receive it,  and likewise you can only read data sent to ports you are listening too. 
+</p><p>Generally speaking, if an address is which machine you want to talk to, then a port is what program on that machine you want to talk to.
+</p>
+<table align="center" bgcolor="gold" class="notice" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+<tbody><tr>
+<td width="1"><span class="mw-default-size" typeof="mw:File"><a class="mw-file-description" href="../File/O.png.html"><img class="mw-file-element" data-file-height="64" data-file-width="64" decoding="async" height="64" src="../assets/images/O.png" width="64"/></a></span>
+</td>
+<td>On some operating systems, ports between <i>0</i> and <i>1024</i> are "reserved for privileged processes". Its a security precaution for those system. Generally speaking, just not using ports in that range avoids a lot of problems
+</td>
+<td width="1"> 
+</td></tr></tbody></table><p><br/>
+</p><div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">udp</span><span class="p">:</span><span class="nf">settimeout</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="nv">udp</span><span class="p">:</span><span class="nf">setsockname</span><span class="p">(</span><span class="s1">'*'</span><span class="p">,</span><span class="w"> </span><span class="mi">12345</span><span class="p">)</span>
+</pre></div>
+<p>We declare a whole bunch of local variables that we'll be using the in main server loop below. you probably recognise some of them from the client example, but you are also probably wondering what's with the fruity names, <i>msg_or_ip</i>? <i>port_or_nil</i>?
+</p><p>Well, we're using a slightly different function this time, you'll see when we get there.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">world</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="c1">-- the empty world-state</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">data</span><span class="p">,</span><span class="w"> </span><span class="nv">msg_or_ip</span><span class="p">,</span><span class="w"> </span><span class="nv">port_or_nil</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">entity</span><span class="p">,</span><span class="w"> </span><span class="nv">cmd</span><span class="p">,</span><span class="w"> </span><span class="nv">parms</span>
+</pre></div>
+<p>Indefinite loops are probably not something you are used to if you only know love, but they are quite common. And in fact love has one at its heart, you just don't see it. Regardless, we'll be needing one for our server. And this little variable lets us <i>stop</i> it :3
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">running</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="nb">print</span><span class="w"> </span><span class="s2">"Beginning server loop."</span>
+<span class="kr">while</span><span class="w"> </span><span class="nv">running</span><span class="w"> </span><span class="kr">do</span>
+</pre></div>
+<p>This next line looks familiar, I'm sure, but we're using <code>udp:receivefrom()</code> this time. its similar to receive, but returns the data, sender's ip address, and the sender's port (which you'll hopefully recognise  as the two things we need to send messages to someone). We didn't have to do this in the client example because we just bound the socket to the server, but that also ignores messages from  sources other than what we've bound to, which obviously won't do at all as a server.
+</p><p><i>(Strictly, we could have just used <code>udp:receivefrom()</code> (and its counterpart, <code>udp:sendto()</code>) in the client. there's nothing special about the functions to prevent it, however <code>send</code>/<code>receive</code> are convenient and perform slightly better.)</i>
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="w">	</span><span class="nv">data</span><span class="p">,</span><span class="w"> </span><span class="nv">msg_or_ip</span><span class="p">,</span><span class="w"> </span><span class="nv">port_or_nil</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">udp</span><span class="p">:</span><span class="nf">receivefrom</span><span class="p">()</span>
+<span class="w">	</span><span class="kr">if</span><span class="w"> </span><span class="nv">data</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">		</span><span class="c1">-- more of these funky match paterns!</span>
+<span class="w">		</span><span class="nv">entity</span><span class="p">,</span><span class="w"> </span><span class="nv">cmd</span><span class="p">,</span><span class="w"> </span><span class="nv">parms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">data</span><span class="p">:</span><span class="nf">match</span><span class="p">(</span><span class="s2">"^(%S*) (%S*) (.*)"</span><span class="p">)</span>
+</pre></div>
+<p>The server implements a few more commands than the client does, the 'move' command updates the position of an entity <i>relative to its current position</i>, 'at' simply sets an entity's location (which we saw in the client), then there's <i>update</i>, which loops through the server's world-state and sends 'at' commands back to the client. and finally there's 'quit', which kills the server.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="w">		</span><span class="kr">if</span><span class="w"> </span><span class="nv">cmd</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'move'</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">			</span><span class="kd">local</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">parms</span><span class="p">:</span><span class="nf">match</span><span class="p">(</span><span class="s2">"^(%-?[%d.e]*) (%-?[%d.e]*)$"</span><span class="p">)</span>
+<span class="w">			</span><span class="nb">assert</span><span class="p">(</span><span class="nv">x</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nv">y</span><span class="p">)</span><span class="w"> </span><span class="c1">-- validation is better, but asserts will serve.</span>
+<span class="w">			</span><span class="c1">-- don't forget, even if you matched a "number", the result is still a string!</span>
+<span class="w">			</span><span class="c1">-- thankfully conversion is easy in lua.</span>
+<span class="w">			</span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">tonumber</span><span class="p">(</span><span class="nv">x</span><span class="p">),</span><span class="w"> </span><span class="nb">tonumber</span><span class="p">(</span><span class="nv">y</span><span class="p">)</span>
+<span class="w">			</span><span class="c1">-- and finally we stash it away</span>
+<span class="w">			</span><span class="kd">local</span><span class="w"> </span><span class="nv">ent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">world</span><span class="p">[</span><span class="nv">entity</span><span class="p">]</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="p">{</span><span class="nv">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="o">=</span><span class="mi">0</span><span class="p">}</span>
+<span class="w">			</span><span class="nv">world</span><span class="p">[</span><span class="nv">entity</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="nv">x</span><span class="o">=</span><span class="nv">ent</span><span class="p">.</span><span class="py">x</span><span class="o">+</span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="o">=</span><span class="nv">ent</span><span class="p">.</span><span class="py">y</span><span class="o">+</span><span class="nv">y</span><span class="p">}</span>
+<span class="w">		</span><span class="kr">elseif</span><span class="w"> </span><span class="nv">cmd</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'at'</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">			</span><span class="kd">local</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">parms</span><span class="p">:</span><span class="nf">match</span><span class="p">(</span><span class="s2">"^(%-?[%d.e]*) (%-?[%d.e]*)$"</span><span class="p">)</span>
+<span class="w">			</span><span class="nb">assert</span><span class="p">(</span><span class="nv">x</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nv">y</span><span class="p">)</span><span class="w"> </span><span class="c1">-- validation is better, but asserts will serve.</span>
+<span class="w">			</span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">tonumber</span><span class="p">(</span><span class="nv">x</span><span class="p">),</span><span class="w"> </span><span class="nb">tonumber</span><span class="p">(</span><span class="nv">y</span><span class="p">)</span>
+<span class="w">			</span><span class="nv">world</span><span class="p">[</span><span class="nv">entity</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="nv">x</span><span class="o">=</span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="o">=</span><span class="nv">y</span><span class="p">}</span>
+<span class="w">		</span><span class="kr">elseif</span><span class="w"> </span><span class="nv">cmd</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'update'</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">			</span><span class="kr">for</span><span class="w"> </span><span class="nv">k</span><span class="p">,</span><span class="w"> </span><span class="nv">v</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nb">pairs</span><span class="p">(</span><span class="nv">world</span><span class="p">)</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">				</span><span class="nv">udp</span><span class="p">:</span><span class="nf">sendto</span><span class="p">(</span><span class="nb">string.format</span><span class="p">(</span><span class="s2">"%s %s %d %d"</span><span class="p">,</span><span class="w"> </span><span class="nv">k</span><span class="p">,</span><span class="w"> </span><span class="s1">'at'</span><span class="p">,</span><span class="w"> </span><span class="nv">v</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="nv">v</span><span class="p">.</span><span class="py">y</span><span class="p">),</span><span class="w"> </span><span class="nv">msg_or_ip</span><span class="p">,</span><span class="w">  </span><span class="nv">port_or_nil</span><span class="p">)</span>
+<span class="w">			</span><span class="kr">end</span>
+<span class="w">		</span><span class="kr">elseif</span><span class="w"> </span><span class="nv">cmd</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'quit'</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">			</span><span class="nv">running</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+</pre></div>
+<p>There's nothing much left to see, other than the <i>socket.sleep' call, which helps reduce the CPU load of the server.</i>
+Generally, people seem to prefer to just rely on blocking behaviour (which we turned off) to keep CPU usage down, but its nice to know how do this without blocking.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="w">		</span><span class="kr">else</span>
+<span class="w">			</span><span class="nb">print</span><span class="p">(</span><span class="s2">"unrecognised command:"</span><span class="p">,</span><span class="w"> </span><span class="nv">cmd</span><span class="p">)</span>
+<span class="w">		</span><span class="kr">end</span>
+<span class="w">	</span><span class="kr">elseif</span><span class="w"> </span><span class="nv">msg_or_ip</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="s1">'timeout'</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">		</span><span class="nb">error</span><span class="p">(</span><span class="s2">"Unknown network error: "</span><span class="o">..</span><span class="nb">tostring</span><span class="p">(</span><span class="nv">msg</span><span class="p">))</span>
+<span class="w">	</span><span class="kr">end</span>
+<span class="w">	</span>
+<span class="w">	</span><span class="nv">socket</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="nb">print</span><span class="w"> </span><span class="s2">"Thank you."</span>
+</pre></div>
+<h2><span class="mw-headline" id="Conclusion">Conclusion</span></h2>
+<ul><li><a href="../Tutorial/Networking_with_UDP-TheClient.html" title="Tutorial:Networking with UDP-TheClient"> The Complete Client Source</a></li>
+<li><a href="../Tutorial/Networking_with_UDP-TheServer.html" title="Tutorial:Networking with UDP-TheServer"> The Complete Server Source</a></li></ul>
+<p><a class="extiw" href="https://en.wikipedia.org/wiki/User_Datagram_Protocol" title="wikipedia:User Datagram Protocol">UDP</a> is simple in its usage, but also relies on the developer to get a lot more right, since UDP doesn't make any assurances about the order that datagrams arrive, or even that they arrive at all. These are things that you obviously have to take into account when designing your protocol.
+</p><p>Additionally UDP datagrams have limited sizes; the luasocket Documentation specifically notes that it doesn't support anything over 8k, and frankly you should assume much less.
+</p>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul><li>Networking with TCP</li>
+<li><a class="external text" href="http://w3.impa.br/~diego/software/luasocket/reference.html" rel="nofollow">luaSocket Reference</a></li>
+<li><a class="external text" href="http://www.beej.us/guide/bgnet/" rel="nofollow">Beej's Networking Tutorial</a></li></ul>
+<p><br/>
+</p><p><br/>
+</p>
+<h2><span class="mw-headline" id="Other_languages">Other languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Tutorials.html">Tutorials</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

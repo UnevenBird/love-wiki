@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>11.4 - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">11.4</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><figure class="mw-default-size" typeof="mw:File/Thumb"><a class="mw-file-description" href="../File/11.0-NoGame.png.html"><img class="mw-file-element" data-file-height="600" data-file-width="800" decoding="async" height="225" src="../assets/images/11.0-NoGame.png" width="300"/></a><figcaption>no-game screen</figcaption></figure>
+<p>The codename for LÖVE 11.4 is <b>Mysterious Mysteries</b>. It is currently <b><span style="color:#0000ff;">released</span></b>.
+</p>
+<h2><span class="mw-headline" id="Changes_from_11.3">Changes from <a href="../Main/11.3.html" title="11.3">11.3</a></span></h2>
+<h3><span class="mw-headline" id="Additions">Additions</span></h3>
+<ul><li>Added native Apple Silicon (arm64) support on macOS.</li>
+<li>Added a variant of <a href="../Main/love.filesystem.newFileData.html" title="love.filesystem.newFileData">love.filesystem.newFileData</a> which accepts a <a href="../Main/Data.html" title="Data">Data</a> object.</li>
+<li>Added <a href="../Main/Body__getLocalPoints.html" title="Body:getLocalPoints">Body:getLocalPoints</a>.</li>
+<li>Added <a href="../Main/Font__getKerning.html" title="Font:getKerning">Font:getKerning</a>.</li>
+<li>Added support for r16, rg16, and rgba16 <a href="../Main/PixelFormat.html" title="PixelFormat">pixel formats</a> in Canvases.</li>
+<li>Added <a href="../Main/Shader__send.html" title="Shader:send">Shader:send</a>(name, matrixlayout, data, ...) variant, whose argument order is more consistent than <code>Shader:send(name, data, matrixlayout, ...)</code>.</li></ul>
+<p><br/>
+</p>
+<h3><span class="mw-headline" id="Other_Changes">Other Changes</span></h3>
+<ul><li>Changed all builds and platforms where LOVE provides LuaJIT to use LuaJIT 2.1 instead of 2.0.</li>
+<li>Changed <a href="../Main/love.timer.getTime.html" title="love.timer.getTime">love.timer.getTime</a> to start at 0 when the module is first loaded.</li>
+<li>Changed certain out-of-Lua-memory situations to show a message box instead of instantly crashing.</li>
+<li>Changed the naming scheme of LOVE's embedded Lua files for improved integration with Lua chunkname APIs.</li></ul>
+<p><br/>
+</p>
+<h3><span class="mw-headline" id="Fixes">Fixes</span></h3>
+<ul><li>Fixed build-time compatibility with Lua 5.4.</li>
+<li>Fixed code compatibility with math.mod and string.gfind when LuaJIT 2.1 is used.</li>
+<li>Fixed errors on some systems related to &gt; 53 bit pointer addresses, when recent versions of LuaJIT 2.1 are used.</li>
+<li>Fixed the default <a href="../Main/love.errorhandler.html" title="love.errorhandler">error handler</a> showing a blank screen on some mobile devices.</li>
+<li>Fixed drag-and-drop to open a love game on macOS causing <a href="../Main/love.event.quit.html#Function_2" title="love.event.quit">love.event.quit("restart")</a> to fail.</li>
+<li>Fixed fused macOS apps opening other love games when drag-and-drop is used (if the fused app hasn't already removed .love files from recognized document types).</li>
+<li>Fixed <a href="../Main/(File)__isEOF.html" title="(File):isEOF">File:isEOF</a> when called on a dropped file.</li>
+<li>Fixed support for &gt; 2GB <a href="../Main/love.filedropped.html" title="love.filedropped">dropped files</a> on desktops.</li>
+<li>Fixed <a href="../Main/ByteData.html" title="ByteData">ByteData</a> missing a <a href="../Main/Data__clone.html" title="Data:clone">Data:clone</a> implementation.</li>
+<li>Fixed love.physics <a href="../Main/love.physics.setMeter.html" title="love.physics.setMeter">meter scale value</a> persisting after love.event.quit("restart").</li>
+<li>Fixed audio to resume properly after interruption on iOS.</li>
+<li>Fixed <a href="../Main/love.graphics.newVideo.html" title="love.graphics.newVideo">love.graphics.newVideo</a> to error instead of crash when an invalid video file is given.</li>
+<li>Fixed initial window creation to set the window's title during creation instead of after.</li>
+<li>Fixed the window's screen position when exiting fullscreen via <a href="../Main/love.window.setFullscreen.html" title="love.window.setFullscreen">love.window.setFullscreen</a>.</li>
+<li>Fixed <a href="../Main/love.displayrotated.html" title="love.displayrotated">love.displayrotated</a> being given a boolean instead of an enum string.</li>
+<li>Fixed memory corruption and a crash when drawing smooth lines.</li>
+<li>Fixed a crash in <a href="../Main/Canvas__newImageData.html" title="Canvas:newImageData">Canvas:newImageData</a> when the pixel format's pixel byte size multiplied by its width isn't a multiple of 4.</li>
+<li>Fixed <a href="../Main/love.graphics.newVolumeImage.html" title="love.graphics.newVolumeImage">love.graphics.newVolumeImage</a> when explicit mipmaps are provided.</li>
+<li>Fixed freezes and crashes in automatic batching when an AMD GPU is used.</li>
+<li>Fixed <a href="../Main/love.graphics.print.html" title="love.graphics.print">love.graphics.print</a> and <a href="../Main/(Image)__replacePixels.html" title="(Image):replacePixels">Image:replacePixels</a> on more AMD/ATI GPUs.</li>
+<li>Fixed <a href="../Main/Font__setFallbacks.html" title="Font:setFallbacks">Font:setFallbacks</a> to account for different DPI scales in each fallback font.</li>
+<li>Fixed <a href="../Main/Font__getWrap.html" title="Font:getWrap">Font:getWrap</a> to not remove trailing newlines.</li>
+<li>Fixed <a href="../Main/Text__getWidth.html" title="Text:getWidth">Text:getWidth</a> when the Text's string only contains spaces.</li>
+<li>Fixed a crash with some Intel graphics drivers on Linux.</li>
+<li>Fixed a hang with some Intel graphics drivers on Windows, by preventing gamma correct rendering on affected systems.</li>
+<li>Fixed a crash with some Intel graphics drivers on Windows when mipmapped Canvases are used.</li>
+<li>Fixed texture memory reported by <a href="../Main/love.graphics.getStats.html" title="love.graphics.getStats">love.graphics.getStats</a> when a volume or array Canvas is created.</li>
+<li>Fixed DXT1 textures which use 1 bit alpha-cutout.</li>
+<li>Fixed rare issues where textures were not sent to shaders correctly.</li>
+<li>Fixed Shader:send(name, data, matrixlayout, ...).</li>
+<li>Fixed quad offsets in <a href="../Main/ParticleSystem.html" title="ParticleSystem">ParticleSystems</a> when ParticleSystem:setOffset is not used.</li>
+<li>Fixed a performance issue with setting a small subrange of data in non-stream <a href="../Main/Mesh.html" title="Mesh">Meshes</a> and <a href="../Main/SpriteBatch.html" title="SpriteBatch">SpriteBatches</a>.</li>
+<li>Fixed rounded rectangles breaking if the rx or ry parameters are negative.</li>
+<li>Fixed rounded rectangle automatic points calculation when rx or ry are more than half the rectangle's size.</li>
+<li>Fixed source code compilation on Xcode 12+.</li>
+<li>Fixed source code compilation on Linux systems that don't provide posix_spawn APIs.</li></ul>
+<p><br/>
+</p><p><br/>
+</p></div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Versions.html">Versions</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

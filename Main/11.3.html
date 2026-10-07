@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>11.3 - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">11.3</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><figure class="mw-default-size" typeof="mw:File/Thumb"><a class="mw-file-description" href="../File/11.0-NoGame.png.html"><img class="mw-file-element" data-file-height="600" data-file-width="800" decoding="async" height="225" src="../assets/images/11.0-NoGame.png" width="300"/></a><figcaption>no-game screen</figcaption></figure>
+<p>The codename for LÖVE 11.3 is <b>Mysterious Mysteries</b>. It is currently <b><span style="color:#0000ff;">released</span></b>.
+</p>
+<h2><span class="mw-headline" id="Changes_from_11.2">Changes from <a href="../Main/11.2.html" title="11.2">11.2</a></span></h2>
+<h3><span class="mw-headline" id="Additions">Additions</span></h3>
+<ul><li>Added support for FLAC audio files.</li>
+<li>Added support for microphone recording on Android.</li>
+<li>Added <a href="../Main/Config_Files.html#audio.mic" title="Config Files">t.audio.mic</a> (false by default). On Android, setting it to true requests microphone recording permission from the user.</li>
+<li>Added <a href="../Main/Decoder__clone.html" title="Decoder:clone">Decoder:clone</a>.</li>
+<li>Added <a href="../Main/Data__getFFIPointer.html" title="Data:getFFIPointer">Data:getFFIPointer</a>.</li>
+<li>Added <a href="../Main/Joystick__getDeviceInfo.html" title="Joystick:getDeviceInfo">Joystick:getDeviceInfo</a>.</li>
+<li>Added <a href="../Main/Joystick__getGamepadMappingString.html" title="Joystick:getGamepadMappingString">Joystick:getGamepadMappingString</a> and <a href="../Main/love.joystick.getGamepadMappingString.html" title="love.joystick.getGamepadMappingString">love.joystick.getGamepadMappingString</a>.</li>
+<li>Added <a href="../Main/love.math.colorToBytes.html" title="love.math.colorToBytes">love.math.colorToBytes</a> and <a href="../Main/love.math.colorFromBytes.html" title="love.math.colorFromBytes">love.math.colorFromBytes</a>.</li>
+<li>Added 'usedpiscale' boolean (true by default) to <a href="../Main/love.window.setMode.html" title="love.window.setMode">love.window.setMode</a> and <a class="mw-redirect" href="../Main/Config_Files.html" title="love.conf">love.conf</a>. Disables automatic DPI scaling when false.</li>
+<li>Added <a href="../Main/love.window.getDisplayOrientation.html" title="love.window.getDisplayOrientation">love.window.getDisplayOrientation</a> and a <a href="../Main/love.displayrotated.html" title="love.displayrotated">love.displayrotated</a> callback.</li>
+<li>Added <a href="../Main/love.window.getVSync.html" title="love.window.getVSync">love.window.get</a>/<a href="../Main/love.window.setVSync.html" title="love.window.setVSync">setVSync</a>, to allow setting vsync without recreating the window.</li>
+<li>Added <a href="../Main/love.window.getSafeArea.html" title="love.window.getSafeArea">love.window.getSafeArea</a>.</li>
+<li>Added an optional vertex count parameter to <a href="../Main/Mesh__setVertices.html" title="Mesh:setVertices">Mesh:setVertices</a>.</li>
+<li>Added support for rgba4, rgb5a1, rgb565, rgb10a2, rg11b10f, r8, rg8, r16, rg16, r16f, rg16f, r32f, and rg32f <a href="../Main/PixelFormat.html" title="PixelFormat">formats</a> in <a href="../Main/ImageData.html" title="ImageData">ImageData</a> and <a href="../Main/Image.html" title="Image">Images</a>.</li>
+<li>Added support for loading .dds files that contain uncompressed pixel data.</li></ul>
+<p><br/>
+</p>
+<h3><span class="mw-headline" id="Other_Changes">Other Changes</span></h3>
+<ul><li>Changed audio file type detection, so it probes all supported backends for unrecognized extensions.</li></ul>
+<p><br/>
+</p>
+<h3><span class="mw-headline" id="Fixes">Fixes</span></h3>
+<ul><li>Fixed "bad lightuserdata" errors when running love on some arm64 devices.</li>
+<li>Fixed boot.lua's line numbers in stack traces to match its source code.</li>
+<li>Fixed the <a href="../Main/love.hasDeprecationOutput.html" title="love.hasDeprecationOutput">deprecation</a> <a href="../Main/love.setDeprecationOutput.html" title="love.setDeprecationOutput">system</a> not fully restarting when <a href="../Main/love.event.quit.html#Function_2" title="love.event.quit">love.event.quit("restart")</a> is used.</li>
+<li>Fixed <a href="../Main/love.isVersionCompatible.html" title="love.isVersionCompatible">love.isVersionCompatible</a>.</li>
+<li>Fixed <a href="../Main/love.thread.getChannel.html" title="love.thread.getChannel">named Channels</a> persisting across love.event.quit("restart") occurrences.</li>
+<li>Fixed race conditions when different love.physics <a href="../Main/World.html" title="World">Worlds</a> are used in different threads.</li>
+<li>Fixed <a href="../Main/World__getJoints.html" title="World:getJoints">World:getJoints</a> to return the fully resolved type of the Joint, instead of the base type.</li>
+<li>Fixed <a href="../Main/love.timer.sleep.html" title="love.timer.sleep">love.timer.sleep</a>(0) to return control to the OS scheduler instead of being a no-op.</li>
+<li>Fixed love.math.randomNormal incorrectly using cached state after love.math.setRandomSeed or setRandomState.</li>
+<li>Fixed <a href="../Main/love.data.hash.html" title="love.data.hash">love.data.hash</a> returning an incorrect hash for certain input sizes.</li>
+<li>Fixed <a href="../Main/love.data.newByteData.html" title="love.data.newByteData">love.data.newByteData</a> to cause a Lua error instead of crashing when invalid arguments are used.</li>
+<li>Fixed the Data-returning variant of love.filesystem.read and File:read to return the number of bytes that were read.</li>
+<li>Fixed love.filesystem's require loaders to error instead of crashing when no argument is given.</li>
+<li>Fixed love.filesystem.mount(Data).</li>
+<li>Fixed a memory leak when loading files in some situations.</li>
+<li>Fixed <a href="../Main/Config_Files.html#audio.mixwithsystem" title="Config Files">t.audio.mixwithsystem</a>.</li>
+<li>Fixed audio clicks immediately after playing a Source on iOS.</li>
+<li>Fixed <a href="../Main/Source__play.html" title="Source:play">Source:play</a> + <a href="../Main/Source__stop.html" title="Source:stop">Source:stop</a> + <a href="../Main/Source__play.html" title="Source:play">Source:play</a> looping the first few ms of sound for streaming Sources on iOS.</li>
+<li>Fixed <a href="../Main/Source__play.html" title="Source:play">Source:play</a> + <a href="../Main/Source__seek.html" title="Source:seek">Source:seek</a> looping the first few ms of sound for streaming Sources on iOS.</li>
+<li>Fixed occasional pops in streaming sources on iOS.</li>
+<li>Fixed <a href="../Main/love.audio.play.html" title="love.audio.play">love.audio.play</a>(sources) to use previously set playback positions on stopped Sources.</li>
+<li>Fixed <a href="../Main/Source__setEffect.html" title="Source:setEffect">Source:setEffect</a>(name, true) and <a href="../Main/Source__getEffect.html" title="Source:getEffect">Source:getEffect</a>(name) when the effect has no associated Filter.</li>
+<li>Fixed <a href="../Main/love.audio.newSource.html" title="love.audio.newSource">love.audio.newSource</a>(filename, "queue") to cause a Lua error.</li>
+<li>Fixed <a href="../Main/Source__setPitch.html" title="Source:setPitch">Source:setPitch</a> to error if the given pitch is &lt;= 0, NaN, or infinity.</li>
+<li>Fixed video seeking and pausing in various scenarios.</li>
+<li>Fixed an audio Source memory leak when a Video gets garbage collected after playing it.</li>
+<li>Fixed video playback support on some Adreno-based Android devices.</li>
+<li>Fixed black fringes around text in some situations.</li>
+<li>Fixed extreme flickering when text moves along non-integer coordinates.</li>
+<li>Fixed the first character in a string sometimes not being processed during text vertex generation.</li>
+<li>Fixed <a href="../Main/Text__set.html" title="Text:set">Text:set</a>(" ") not clearing any previously set text in a Text object.</li>
+<li>Fixed <a href="../Main/love.graphics.getTextureTypes.html" title="love.graphics.getTextureTypes">love.graphics.getTextureTypes</a> to return a table with boolean values in its fields instead of number values.</li>
+<li>Fixed lines not rendering properly if a single line has more than 65,000 vertices.</li>
+<li>Fixed a pixel shader performance regression on some graphics drivers when OpenGL 3 or OpenGL ES 3 is used.</li>
+<li>Fixed text not showing up on Radeon HD 3000-series graphics cards on Windows.</li>
+<li>Fixed non-integer DPI scale values being truncated to integers in <a href="../Main/love.graphics.newCanvas.html" title="love.graphics.newCanvas">love.graphics.newCanvas</a>.</li>
+<li>Fixed creating depth canvases on Windows systems when using an Intel HD 3000 GPU.</li>
+<li>Fixed automatic batching performance to be more consistent on all operating systems.</li>
+<li>Fixed gammaToLinearPrecise in shaders not being as precise as it should be.</li>
+<li>Fixed <a href="../Main/ImageData__paste.html" title="ImageData:paste">ImageData:paste</a> and <a href="../Main/ImageData__setPixel.html" title="ImageData:setPixel">ImageData:setPixel</a> to have more consistent clamping and rounding of color values when different formats are used.</li></ul>
+<p><br/>
+</p><p><br/>
+</p></div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Versions.html">Versions</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

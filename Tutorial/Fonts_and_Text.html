@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Tutorial:Fonts and Text - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-500" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-namespace">Tutorial</span><span class="mw-page-title-separator">:</span><span class="mw-page-title-main">Fonts and Text</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><p>Adding and using fonts in LÖVE isn't very complicated, but what you have to keep in mind is that you need to set the font before you can use it. There is no way to render text directly from a font object, it must always be done via the <code><a href="../Main/love.graphics.print.html" title="love.graphics.print">love.graphics.print</a></code> function which will render text based on the current font.
+There are three types of fonts available in love: 
+</p>
+<ul><li>The default font (Bitstream Vera Sans)</li>
+<li>Any font file supported by FreeType 2</li>
+<li>An image containing glyphs (ImageFont)</li></ul>
+<h2><span class="mw-headline" id="Creating_a_font_object_using_the_default_font">Creating a font object using the default font</span></h2>
+<p>The default font is available for everyone and anyone and can be created using the following code: 
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">font</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newFont</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span><span class="w"> </span><span class="c1">-- the number denotes the font size</span>
+</pre></div>
+<h2><span class="mw-headline" id="Creating_a_font_object_using_a_font_file">Creating a font object using a font file</span></h2>
+<p>Font files are just normal files that you download from the internet (or create yourself) that contains font information. They can be used just like the default font, just that you specify the filepath along with the font size:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">font</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newFont</span><span class="p">(</span><span class="s2">"AwesomeFont.ttf"</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+<p>Keep in mind the that some fonts you download come with restrictions on when/how you can use them.
+</p>
+<h2><span class="mw-headline" id="Creating_a_font_object_using_an_image">Creating a font object using an image</span></h2>
+<p>An image font is a little tougher to explain, as it all depends on a specifically formatted image. If you look at this <span class="mw-default-size" typeof="mw:File"><a class="mw-file-description" href="../File/Resource-Imagefont.png.html" title="example image"><img alt="example image" class="mw-file-element" data-file-height="17" data-file-width="973" decoding="async" height="17" src="../assets/images/Resource-Imagefont.png" width="973"/></a></span> you will see that it contains glyphs along one row, each separated by a specific color. This color is used to separate the glyphs and needs to be found at between every character and at the beginning of the list (all the way to the left). Creating a font based on this image would be as follows:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">font</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newImageFont</span><span class="p">(</span><span class="s2">"imagefont.png"</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">" abcdefghijklmnopqrstuvwxyz"</span><span class="w"> </span><span class="o">..</span>
+<span class="w">    </span><span class="s2">"ABCDEFGHIJKLMNOPQRSTUVWXYZ0"</span><span class="w"> </span><span class="o">..</span>
+<span class="w">    </span><span class="s2">"123456789.,!?-+/():;%&amp;`'*#=[]</span><span class="se">\"</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+<p><b>Warning: Make sure that the image starts and also ends with the separation color or else the last character (in this case " ) won't work.</b>
+</p>
+<h2><span class="mw-headline" id="Using_the_font_object">Using the font object</span></h2>
+<p>Now that you have created your font object, you need to set it as the current font before it can be used. That is done with the following code:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="c1">-- font = the font object you made before</span>
+<span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setFont</span><span class="p">(</span><span class="nv">font</span><span class="p">)</span>
+</pre></div>
+<p>One can also immediately use a TTF-font by calling
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setNewFont</span><span class="p">(</span><span class="nv">filename</span><span class="p">,</span><span class="w"> </span><span class="nv">size</span><span class="p">)</span>
+</pre></div>
+<p>Or, in the case of the default font, 
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setNewFont</span><span class="p">(</span><span class="nv">size</span><span class="p">)</span>
+</pre></div>
+<h2><span class="mw-headline" id="Drawing_and_formatting_text">Drawing and formatting text</span></h2>
+<p>So now that you have your wonderful new font object, you want to use it for something. To draw text, you simply call the <code><a href="../Main/love.graphics.print.html" title="love.graphics.print">love.graphics.print</a></code> function:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="s2">"This is some awesome text"</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+<p>You can easily draw numbers as well:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">15</span>
+<span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="nv">num</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">150</span><span class="p">)</span>
+</pre></div>
+<p>The default text rendering function can handle line breaks (the '\n' character) and will draw text aligned to the left: 
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="s2">"This is the first line</span><span class="se">\n</span><span class="s2">This is the second one.</span><span class="se">\n</span><span class="s2">(and a third)</span><span class="se">\n\n</span><span class="s2">fifth"</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+<p>The parameters '100' and '200' are the <i>x</i>- and <i>y</i>-locations of the text, respectively. In LÖVE versions prior to 0.6.0, <code><a href="../Main/love.graphics.draw.html" title="love.graphics.draw">love.graphics.draw</a></code> was instead used to draw text.
+</p><p>However, LÖVE can also draw text with word wrapping and alignment by using the more complicated <code><a href="../Main/love.graphics.printf.html" title="love.graphics.printf">love.graphics.printf</a></code> function: 
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">printf</span><span class="p">(</span><span class="s2">"A really long sentence which will probably be broken into many pieces by my love."</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">250</span><span class="p">,</span><span class="w"> </span><span class="s1">'right'</span><span class="p">)</span>
+</pre></div>
+<p>Where, here, the parameters '500' and '100' are <i>x</i>- and <i>y</i>-locations, '250' is the maximum text width, and 'right' is the text alignment.
+</p><p>This way it is relatively easy to draw completely centered text if you pass the width of the window as the word-wrap limit and 0 as the x-position: 
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">printf</span><span class="p">(</span><span class="s2">"This text will be centered no matter what.</span><span class="se">\n</span><span class="s2">(and you LOVE it)"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="mi">800</span><span class="p">,</span><span class="w"> </span><span class="s1">'center'</span><span class="p">)</span>
+</pre></div>
+<p>Text will always align to the left by default if you omit the <a href="../Main/AlignMode.html" title="AlignMode">alignment value</a>: 
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">printf</span><span class="p">(</span><span class="s2">"Aligned to the left, yes very much so."</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="mi">150</span><span class="p">)</span>
+</pre></div>
+<p>That is how to draw text. For more information about the specific functions and their use, please visit the documentation. 
+</p><p><i>Note: All fonts (even the image font) will be affected by the current color, there is no need to set the color mode to 'modulate'.</i>
+</p><p><br/>
+</p><p><br/>
+</p>
+<h2><span class="mw-headline" id="Other_languages">Other languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Tutorials.html">Tutorials</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

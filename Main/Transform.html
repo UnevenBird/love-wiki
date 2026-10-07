@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Transform - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">Transform</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><table bgcolor="#d0d0ff" class="new-section" data-newin="[[11.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/11.0.html" title="11.0">11.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This type is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Object containing a coordinate system transformation.
+</p><p>The <a href="../Main/love.graphics.html" title="love.graphics">love.graphics</a> module has several functions and function variants which accept Transform objects.
+</p>
+<h2><span class="mw-headline" id="Constructors">Constructors</span></h2>
+<table class="smwtable" style="background-color: #eeeeff;">
+<tbody><tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.math.newTransform.html" title="love.math.newTransform">love.math.newTransform</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Creates a new Transform object.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+</tbody></table>
+<h2><span class="mw-headline" id="Functions">Functions</span></h2>
+<table class="smwtable" style="background-color: #eeeeff;">
+<tbody><tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Object__release.html" title="Object:release">Object:release</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Immediately destroys the object's Lua reference.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Object__type.html" title="Object:type">Object:type</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the type of the object as a string.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Object__typeOf.html" title="Object:typeOf">Object:typeOf</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Checks whether an object is of a certain type.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Transform__apply.html" title="Transform:apply">Transform:apply</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Applies the given other Transform object to this one.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Transform__clone.html" title="Transform:clone">Transform:clone</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Creates a new copy of this Transform.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Transform__getMatrix.html" title="Transform:getMatrix">Transform:getMatrix</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the internal transformation matrix stored by this Transform.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Transform__inverse.html" title="Transform:inverse">Transform:inverse</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Creates a new Transform containing the inverse of this Transform.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Transform__inverseOf.html" title="Transform:inverseOf">Transform:inverseOf</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the Transform to the inverse of another Transform.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Transform__inverseTransformPoint.html" title="Transform:inverseTransformPoint">Transform:inverseTransformPoint</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Applies the reverse of the Transform object's transformation to the given 2D position.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Transform__isAffine2DTransform.html" title="Transform:isAffine2DTransform">Transform:isAffine2DTransform</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Checks whether the Transform is an affine transformation.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Transform__reset.html" title="Transform:reset">Transform:reset</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Resets the Transform to an identity state.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Transform__rotate.html" title="Transform:rotate">Transform:rotate</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Applies a rotation to the Transform's coordinate system.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Transform__scale.html" title="Transform:scale">Transform:scale</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Scales the Transform's coordinate system.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Transform__setMatrix.html" title="Transform:setMatrix">Transform:setMatrix</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Directly sets the Transform's internal transformation matrix.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Transform__setTransformation.html" title="Transform:setTransformation">Transform:setTransformation</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Resets the Transform to the specified transformation parameters.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Transform__shear.html" title="Transform:shear">Transform:shear</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Applies a <a class="external text" href="https://en.wikipedia.org/wiki/Shear_mapping" rel="nofollow">shear factor</a> (skew) to the Transform's coordinate system.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Transform__transformPoint.html" title="Transform:transformPoint">Transform:transformPoint</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Applies the Transform object's transformation to the given 2D position.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Transform__translate.html" title="Transform:translate">Transform:translate</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Applies a translation to the Transform's coordinate system.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+</tbody></table>
+<h2><span class="mw-headline" id="Enums">Enums</span></h2>
+<table class="smwtable" style="background-color: #eeeeff;">
+<tbody><tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/MatrixLayout.html" title="MatrixLayout">MatrixLayout</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">The layout of matrix elements (row-major or column-major).</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+</tbody></table>
+<h2><span class="mw-headline" id="Supertypes">Supertypes</span></h2>
+<ul><li><a href="../Main/Object.html" title="Object">Object</a></li></ul>
+<h2><span class="mw-headline" id="Notes">Notes</span></h2>
+<p>Transform objects have a custom <code>*</code> (multiplication) operator. <code>result = tA * tB</code> is equivalent to <code>result = tA:clone():apply(tB)</code>. It maps to the matrix multiplication operation that <a href="../Main/Transform__apply.html" title="Transform:apply">Transform:apply</a> performs.
+</p><p>The <code>*</code> operator creates a new Transform object, so it is not recommended to use it heavily in per-frame code.
+</p>
+<h2><span class="mw-headline" id="See_Also">See Also</span></h2>
+<ul><li><a href="../Main/love.math.html" title="love.math">love.math</a></li>
+<li><a href="../Main/love.graphics.applyTransform.html" title="love.graphics.applyTransform">love.graphics.applyTransform</a></li>
+<li><a href="../Main/love.graphics.replaceTransform.html" title="love.graphics.replaceTransform">love.graphics.replaceTransform</a></li>
+<li><a href="../Main/love.graphics.draw.html" title="love.graphics.draw">love.graphics.draw</a></li>
+<li><a href="../Main/love.graphics.print.html" title="love.graphics.print">love.graphics.print</a></li>
+<li><a href="../Main/SpriteBatch__add.html" title="SpriteBatch:add">SpriteBatch:add</a></li>
+<li><a href="../Main/Text__add.html" title="Text:add">Text:add</a></li>
+<li><a href="../Main/Shader__send.html" title="Shader:send">Shader:send</a></li></ul>
+<h2><span class="mw-headline" id="Other_Languages">Other Languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Types.html">Types</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

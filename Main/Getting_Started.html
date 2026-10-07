@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Getting Started - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">Getting Started</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><h2><span id="Get_L.C3.96VE"></span><span class="mw-headline" id="Get_LÖVE">Get LÖVE</span></h2>
+<p>Download the latest version of LÖVE from <a class="external text" href="http://love2d.org/#download" rel="nofollow">the website</a>, and install it. If you're on Windows and don't want to <i>install</i> LÖVE, you can also just download the zipped executables and extract them anywhere.
+</p><p>To find out which version of LÖVE is installed, run the following command:
+</p>
+<div class="mw-highlight mw-highlight-lang-bash mw-content-ltr" dir="ltr"><pre><span></span>love<span class="w"> </span>--version
+</pre></div>
+<p>Note that you may need to add the directory where LÖVE resides to your system's PATH variable, in order to be able to run it from the command line.
+</p>
+<h2><span class="mw-headline" id="Making_a_Game">Making a Game</span></h2>
+<p>To make a minimal game, create a folder anywhere, and open up your favorite text editor. <a class="external text" href="http://www.sublimetext.com" rel="nofollow">Sublime Text</a> is a pretty good one for all operating systems, and it has Lua support built in. Create a new file in the folder you just created, and name it <code>main.lua</code>. Put the following code in the file, and save it.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="s2">"Hello World"</span><span class="p">,</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="mi">300</span><span class="p">)</span>
+<span class="kr">end</span>
+</pre></div>
+<h2><span class="mw-headline" id="Running_Games">Running Games</span></h2>
+<p>LÖVE can load a game in two ways:
+</p>
+<ul><li>From a folder that contains a main.lua file.</li>
+<li>From a <a href="../Main/L%C3%96VE_Game_File.html" title="LÖVE Game File">.love file</a> that has a main.lua file in the top-most directory level (aka root)</li></ul>
+<p>For creating .love files see <a href="../Main/Game_Distribution.html" title="Game Distribution">Game Distribution</a>.
+</p>
+<hr/>
+<h3><span class="mw-headline" id="Windows">Windows</span></h3>
+<p><a class="external text" href="http://studio.zerobrane.com" rel="nofollow">ZeroBrane Studio</a>, Sublime Text, Notepad++, and SciTE allow you to launch the game from within their code editors.
+</p><p>Otherwise, the easiest way to run the game is to drag the folder onto either love.exe or a shortcut to love.exe. Remember to drag the folder containing <code>main.lua</code>, and not <code>main.lua</code> itself.
+</p><p>You can also launch the game from the command line:
+</p>
+<div class="mw-highlight mw-highlight-lang-powershell mw-content-ltr" dir="ltr"><pre><span></span><span class="s2">"C:\Program Files\LOVE\love.exe"</span> <span class="s2">"C:\games\mygame"</span>
+<span class="s2">"C:\Program Files\LOVE\love.exe"</span> <span class="s2">"C:\games\packagedgame.love"</span>
+</pre></div>
+<p>You can create a shortcut to do this; simply make a shortcut to love.exe, right-click on it and select "Properties", and then put the command line you want in the "Target" box for the shortcut.
+</p><p>On Windows, there is a special command-line option which will attach a console to the window, allowing you to see the result of <code>print</code> calls (equivalent to setting <code>t.console=true</code> in <a class="mw-redirect" href="../Main/Config_Files.html" title="conf.lua">conf.lua</a> or running <code>lovec.exe</code> (since <a href="../Main/0.10.2.html" title="0.10.2">0.10.2</a>)):
+</p>
+<div class="mw-highlight mw-highlight-lang-bash mw-content-ltr" dir="ltr"><pre><span></span><span class="s2">"C:\Program Files\LOVE\love.exe"</span><span class="w"> </span>--console
+</pre></div>
+<hr/>
+<h3><span class="mw-headline" id="Linux">Linux</span></h3>
+<p>On Linux, you can use one of these command lines:
+</p>
+<div class="mw-highlight mw-highlight-lang-bash mw-content-ltr" dir="ltr"><pre><span></span>love<span class="w"> </span>/home/path/to/gamedir/
+love<span class="w"> </span>/home/path/to/packagedgame.love
+</pre></div>
+<p>If you installed LÖVE system-wide, you can double click on .love files in your file manager as well.
+</p>
+<hr/>
+<h3><span class="mw-headline" id="macOS">macOS</span></h3>
+<p>On macOS, a folder or .love file can be dropped onto the love application bundle. On the Mac Terminal (command line), you can use love like this (assuming it's installed to the Applications directory):
+</p>
+<div class="mw-highlight mw-highlight-lang-bash mw-content-ltr" dir="ltr"><pre><span></span>open<span class="w"> </span>-n<span class="w"> </span>-a<span class="w"> </span>love<span class="w"> </span><span class="s2">"~/path/to/mygame"</span>
+</pre></div>
+<p>However, the above method will not output printed text to the terminal window. To do that, you will need to execute the love binary inside the application bundle directly: 
+</p>
+<div class="mw-highlight mw-highlight-lang-bash mw-content-ltr" dir="ltr"><pre><span></span>/Applications/love.app/Contents/MacOS/love<span class="w"> </span>~/path/to/mygame
+</pre></div>
+<p>You can set up an alias in your Terminal session to call the binary when you use <code>love</code> by adding an alias to your <code>~/.zshrc</code> file (Z shell configuration file).
+</p><p>Open the file with
+</p>
+<div class="mw-highlight mw-highlight-lang-bash mw-content-ltr" dir="ltr"><pre><span></span>open<span class="w"> </span>-a<span class="w"> </span>TextEdit<span class="w"> </span>~/.zshrc
+</pre></div>
+<p>You may have to run
+</p>
+<div class="mw-highlight mw-highlight-lang-bash mw-content-ltr" dir="ltr"><pre><span></span>touch<span class="w"> </span>~/.zshrc
+</pre></div>
+<p>first if the file does not yet exist.
+</p><p>Then paste in the following code and save the file:
+</p>
+<div class="mw-highlight mw-highlight-lang-bash mw-content-ltr" dir="ltr"><pre><span></span><span class="c1"># alias to love</span>
+<span class="nb">alias</span><span class="w"> </span><span class="nv">love</span><span class="o">=</span><span class="s2">"/Applications/love.app/Contents/MacOS/love"</span>
+</pre></div>
+<p>Now you can call love from the command line like Linux and Windows:
+</p>
+<div class="mw-highlight mw-highlight-lang-bash mw-content-ltr" dir="ltr"><pre><span></span>love<span class="w"> </span>~/path/to/mygame
+</pre></div>
+<p>if this doesn't works you should reload the .zshrc file like this:
+</p>
+<div class="mw-highlight mw-highlight-lang-bash mw-content-ltr" dir="ltr"><pre><span></span><span class="nb">source</span><span class="w"> </span>~/.zshrc
+</pre></div>
+<p>and try it again.
+</p>
+<hr/>
+<h3><span class="mw-headline" id="Android">Android</span></h3>
+<p>As long as you have LÖVE for Android APK sideloaded from the official site, the following methods will work:
+</p>
+<ul><li>Transfer your game folder to <code>/sdcard/Android/data/org.love2d.android/files/games/lovegame</code> (<code>/sdcard/lovegame</code> also works in Pie and earlier) where <code>main.lua</code> is found at <code>/sdcard/Android/data/org.love2d.android/files/games/lovegame/main.lua</code>. In Android 11 or later, these directories only accessible through MTP in PC. Then run LÖVE for Android.</li></ul>
+<ul><li>Transfer/download a .love of your game to the device and click on it. Some file explorers will run the .love using LÖVE for Android. If it does not you can install ES File Explorer which will. If you use Dropbox, you can use that to open .love files. If that doesn't work, use LÖVE Loader and pick the .love file there.</li></ul>
+<p>If you have more questions, consider reading <a class="external text" href="https://github.com/love2d/love-android/wiki/FAQ---Frequently-Asked-Questions" rel="nofollow">Android-specific FAQ</a>. If your question is not listed, then feel free to ask in the forums or the Discord.
+</p>
+<hr/>
+<p><br/>
+</p>
+<hr/>
+<h3><span class="mw-headline" id="iOS">iOS</span></h3>
+<p>In order to run LÖVE for iOS, it must first be compiled and installed. To do that, you’ll need macOS, <a class="external text" href="https://developer.apple.com/xcode/" rel="nofollow">Xcode 7 or newer</a>, and the LÖVE for iOS source code downloadable from the <a class="external text" href="https://love2d.org" rel="nofollow">home page</a>.
+</p>
+<ul><li>If the <code>libraries</code> folder isn't present in the <code>love/platform/xcode/ios</code> folder, download the iOS libraries from the <a class="external text" href="https://love2d.org/" rel="nofollow">homepage</a>, and place the <code>iOS/libraries</code> folder from the zip there. They contain the third-party library dependencies used by LÖVE.</li></ul>
+<ul><li>Open the Xcode project found at <code>love/platform/xcode/love.xcodeproj</code> and select the <code>love-ios</code> target in the dropdown menu at the top of the window.</li></ul>
+<ul><li>You may want to change the Build Configuration from Debug to Release for better performance, by opening the "Edit Scheme..." menu from the same dropdown selection.</li></ul>
+<ul><li>Choose either an iOS Simulator device or your plugged-in iOS device in the dropdown selection to the right of the previous one, and click the Build-and-Run ▶︎ button to the left, which will install LÖVE on the target device after compiling it.</li></ul>
+<p><br/>
+LÖVE on iOS includes a simple list interface of games that are installed (until you <a href="../Main/Game_Distribution.html" title="Game Distribution">fuse</a> a .love to it for distribution.)
+</p>
+<ul><li>To put a .love file on the iOS Simulator after LÖVE is installed, drag the file onto the iOS Simulator’s window while it’s open. LÖVE will launch if it’s not running already. If another game is currently active you may need to quit LÖVE for the new game to show up (press Shift-Command-H twice to open the App Switcher menu on the iOS Simulator.)</li></ul>
+<ul><li>To put a .love file or game folder on your iOS device after LÖVE is installed, you can either download it with the Safari, or transfer it from your computer through iTunes when your device is connected: open iTunes, go to the iOS device which has LÖVE installed, go to the ‘Apps’ section and scroll down and find LÖVE, and add the .love file or game folder to LÖVE’s Documents section. On more recent iOS and Mac versions, you can use Airdrop to transfer your .love file from your Mac to where LÖVE is installed.</li></ul>
+<p><br/>
+See the <a href="../Main/Game_Distribution.html" title="Game Distribution">Game Distribution</a> page for creating Fused LÖVE games on iOS and distributing them.
+</p><p><br/>
+Note: for those interested in creating a LÖVE game directly on iOS, the Textastic app (available on the Apple App Store for purchase) can utilize SublimeText's packages-- one of which is a LÖVE package. You can follow these instructions to load that LÖVE package into the Textastic app on your iOS device to author LÖVE code directly on your iOS device. You'll then need to follow the earlier instructions on how to zip up that code into a .love file but then can either export that .love file to a LÖVE app running on your iOS device or an external device running a LÖVE application. 
+</p><p>Instructions:
+</p>
+<ol><li>Purchase the iOS Textastic app on the App Store</li>
+<li>Create a folder in Textastic (while inside the Textastic app "Local Files" section  or in the iOS Files app under the Textastic folder) called "#Textastic"</li>
+<li>go to <a class="external free" href="https://github.com/szensk/subllualove" rel="nofollow">https://github.com/szensk/subllualove</a> in Safari on your iPad</li>
+<li>tap the green "Code" button and select "Download ZIP"</li>
+<li>Unzip the file in the Files app. This will create a folder called "subllualove-master"</li>
+<li>Move or copy that folder into the folder "On my iPad/Textastic/#Textastic/". This is equivalent to this folder in Textastic: "Local Files/#Textastic/".</li>
+<li>In Textastic, go to Settings (gear wheel on the bottom left portion of the app) -&gt; Other and tap "Reload Customizations"</li>
+<li>In File Properties (document looking icon on top right portion of the app) -&gt; Syntax Definition, there is now a new item "LOVE (*.lua)" that you can select after opening a .lua file.</li></ol>
+<p>If you have any questions on this process, please contact the Textastic developer (very responsive by email support)
+</p>
+<h2><span class="mw-headline" id="Next_steps">Next steps</span></h2>
+<ul><li><a href="../Tutorial/Callback_Functions.html" title="Tutorial:Callback Functions">Tutorial:Callback_Functions</a> will teach you the basic structure of a love game.</li>
+<li><a href="../Category/Tutorials.html" title="Category:Tutorials">Category:Tutorials</a> are the next piece of reading.</li>
+<li><a href="../Main/Main_Page.html" title="Main Page">Wiki</a> The LÖVE wiki.</li></ul>
+<h2><span class="mw-headline" id="Other_Languages">Other Languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/L%C3%96VE.html">LÖVE</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

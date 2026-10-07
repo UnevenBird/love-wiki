@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>love.graphics.newSpriteBatch - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">love.graphics.newSpriteBatch</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><p>Creates a new <a href="../Main/SpriteBatch.html" title="SpriteBatch">SpriteBatch</a> object.
+</p>
+<table align="center" bgcolor="gold" class="notice" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+<tbody><tr>
+<td width="1"><span class="mw-default-size" typeof="mw:File"><a class="mw-file-description" href="../File/O.png.html"><img class="mw-file-element" data-file-height="64" data-file-width="64" decoding="async" height="64" src="../assets/images/O.png" width="64"/></a></span>
+</td>
+<td>This function can be slow if it is called repeatedly, such as from <a href="../Main/love.update.html" title="love.update">love.update</a> or <a href="../Main/love.draw.html" title="love.draw">love.draw</a>. If you need to use a specific resource often, create it once and store it somewhere it can be reused!
+</td>
+<td width="1"> 
+</td></tr></tbody></table><p><br/><br/>
+</p><h2><span class="mw-headline" id="Function">Function</span></h2>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">spriteBatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newSpriteBatch</span><span class="p">(</span><span class="w"> </span><span class="nv">image</span><span class="p">,</span><span class="w"> </span><span class="nv">maxsprites</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments">Arguments</span></h3>
+<dl><dt><code><a href="../Main/Image.html" title="Image">Image</a> image</code></dt>
+<dd>The Image to use for the sprites.</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> maxsprites (1000)</code></dt>
+<dd>The maximum number of sprites that the SpriteBatch can contain at any given time. Since version <a href="../Main/11.0.html" title="11.0">11.0</a>, additional sprites added past this number will automatically grow the spritebatch.</dd></dl>
+<h3><span class="mw-headline" id="Returns">Returns</span></h3>
+<dl><dt><code><a href="../Main/SpriteBatch.html" title="SpriteBatch">SpriteBatch</a> spriteBatch</code></dt>
+<dd>The new SpriteBatch.</dd></dl>
+<h2><span class="mw-headline" id="Function_2">Function</span></h2>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.8.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This variant is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<h3><span class="mw-headline" id="Synopsis_2">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">spriteBatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newSpriteBatch</span><span class="p">(</span><span class="w"> </span><span class="nv">image</span><span class="p">,</span><span class="w"> </span><span class="nv">maxsprites</span><span class="p">,</span><span class="w"> </span><span class="nv">usage</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments_2">Arguments</span></h3>
+<dl><dt><code><a href="../Main/Image.html" title="Image">Image</a> image</code></dt>
+<dd>The Image to use for the sprites.</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> maxsprites (1000)</code></dt>
+<dd>The maximum number of sprites that the SpriteBatch can contain at any given time. Since version <a href="../Main/11.0.html" title="11.0">11.0</a>, additional sprites added past this number will automatically grow the spritebatch.</dd>
+<dt><code><a class="mw-redirect" href="../Main/BufferDataUsage.html" title="SpriteBatchUsage">SpriteBatchUsage</a> usage ("dynamic")</code></dt>
+<dd>The expected usage of the SpriteBatch. The specified usage mode affects the SpriteBatch's memory usage and performance.</dd></dl>
+<h3><span class="mw-headline" id="Returns_2">Returns</span></h3>
+<dl><dt><code><a href="../Main/SpriteBatch.html" title="SpriteBatch">SpriteBatch</a> spriteBatch</code></dt>
+<dd>The new SpriteBatch.</dd></dl>
+<h2><span class="mw-headline" id="Function_3">Function</span></h2>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.9.1]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.9.1.html" title="0.9.1">0.9.1</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This variant is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<h3><span class="mw-headline" id="Synopsis_3">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">spriteBatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newSpriteBatch</span><span class="p">(</span><span class="w"> </span><span class="nv">texture</span><span class="p">,</span><span class="w"> </span><span class="nv">maxsprites</span><span class="p">,</span><span class="w"> </span><span class="nv">usage</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments_3">Arguments</span></h3>
+<dl><dt><code><a href="../Main/Texture.html" title="Texture">Texture</a> texture</code></dt>
+<dd>The <a href="../Main/Image.html" title="Image">Image</a> or <a href="../Main/Canvas.html" title="Canvas">Canvas</a> to use for the sprites.</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> maxsprites (1000)</code></dt>
+<dd>The maximum number of sprites that the SpriteBatch can contain at any given time. Since version <a href="../Main/11.0.html" title="11.0">11.0</a>, additional sprites added past this number will automatically grow the spritebatch.</dd>
+<dt><code><a class="mw-redirect" href="../Main/BufferDataUsage.html" title="SpriteBatchUsage">SpriteBatchUsage</a> usage ("dynamic")</code></dt>
+<dd>The expected usage of the SpriteBatch. The specified usage mode affects the SpriteBatch's memory usage and performance.</dd></dl>
+<h3><span class="mw-headline" id="Returns_3">Returns</span></h3>
+<dl><dt><code><a href="../Main/SpriteBatch.html" title="SpriteBatch">SpriteBatch</a> spriteBatch</code></dt>
+<dd>The new SpriteBatch.</dd></dl>
+<h2><span class="mw-headline" id="Examples">Examples</span></h2>
+<p>This example uses this image for all the graphics:
+</p><p><span class="mw-default-size" typeof="mw:File"><a class="mw-file-description" href="../File/spriteBatchExample.png.html"><img class="mw-file-element" data-file-height="64" data-file-width="64" decoding="async" height="64" src="../assets/images/spriteBatchExample.png" width="64"/></a></span>
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">entities</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">spriteBatch</span><span class="p">,</span><span class="w"> </span><span class="nv">protagonist</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newImage</span><span class="p">(</span><span class="s2">"spriteBatchExample.png"</span><span class="p">)</span>
+<span class="w">	</span><span class="nv">spriteBatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newSpriteBatch</span><span class="p">(</span><span class="nv">image</span><span class="p">)</span>
+
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">quadPlayer</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newQuad</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w">  </span><span class="mi">0</span><span class="p">,</span><span class="w">  </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="nv">image</span><span class="p">:</span><span class="nf">getDimensions</span><span class="p">())</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">quadTree</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newQuad</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">  </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="nv">image</span><span class="p">:</span><span class="nf">getDimensions</span><span class="p">())</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">quadSign</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newQuad</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w">  </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="nv">image</span><span class="p">:</span><span class="nf">getDimensions</span><span class="p">())</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">quadDogHouse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newQuad</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="nv">image</span><span class="p">:</span><span class="nf">getDimensions</span><span class="p">())</span>
+
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">windowWidth</span><span class="p">,</span><span class="w"> </span><span class="nv">windowHeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">getDimensions</span><span class="p">()</span>
+
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setBackgroundColor</span><span class="p">(.</span><span class="mi">05</span><span class="p">,</span><span class="w"> </span><span class="mf">.15</span><span class="p">,</span><span class="w"> </span><span class="mf">.05</span><span class="p">)</span>
+
+<span class="w">	</span><span class="c1">-- Spawn lots of random things on an uneven grid.</span>
+<span class="w">	</span><span class="kr">for</span><span class="w"> </span><span class="nv">baseY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">windowHeight</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">		</span><span class="kr">for</span><span class="w"> </span><span class="nv">baseX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">windowWidth</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">			</span><span class="kd">local</span><span class="w"> </span><span class="nv">quad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span>
+<span class="w">				</span><span class="nv">love</span><span class="p">.</span><span class="py">math</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">.10</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nv">quadSign</span><span class="w">     </span><span class="ow">or</span>
+<span class="w">				</span><span class="nv">love</span><span class="p">.</span><span class="py">math</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">.03</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nv">quadDogHouse</span><span class="w"> </span><span class="ow">or</span>
+<span class="w">				</span><span class="nv">quadTree</span>
+<span class="w">			</span><span class="p">)</span>
+<span class="w">			</span><span class="nb">table.insert</span><span class="p">(</span><span class="nv">entities</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">				</span><span class="nv">quad</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nv">quad</span><span class="p">,</span>
+<span class="w">				</span><span class="nv">x</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="nv">baseX</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">math.random</span><span class="p">(</span><span class="o">-</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">),</span>
+<span class="w">				</span><span class="nv">y</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="nv">baseY</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">math.random</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span><span class="w">  </span><span class="mi">8</span><span class="w"> </span><span class="p">),</span>
+<span class="w">				</span><span class="nv">serial</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">#</span><span class="nv">entities</span><span class="p">,</span>
+<span class="w">			</span><span class="p">})</span>
+<span class="w">		</span><span class="kr">end</span>
+<span class="w">	</span><span class="kr">end</span>
+
+<span class="w">	</span><span class="c1">-- Spawn protagonist.</span>
+<span class="w">	</span><span class="nv">protagonist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="nv">quad</span><span class="o">=</span><span class="nv">quadPlayer</span><span class="p">,</span><span class="w"> </span><span class="nv">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">serial</span><span class="o">=#</span><span class="nv">entities</span><span class="p">}</span><span class="w"> </span><span class="c1">-- We set the position in love.update().</span>
+<span class="w">	</span><span class="nb">table.insert</span><span class="p">(</span><span class="nv">entities</span><span class="p">,</span><span class="w"> </span><span class="nv">protagonist</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="nv">dt</span><span class="p">)</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">windowWidth</span><span class="p">,</span><span class="w"> </span><span class="nv">windowHeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">getDimensions</span><span class="p">()</span>
+
+<span class="w">	</span><span class="c1">-- Make the protagonist move around in a circle.</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">angle</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mf">.4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">timer</span><span class="p">.</span><span class="nf">getTime</span><span class="p">()</span>
+<span class="w">	</span><span class="nv">protagonist</span><span class="p">.</span><span class="py">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">windowWidth</span><span class="o">/</span><span class="mi">2</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="mf">.3</span><span class="o">*</span><span class="nv">windowWidth</span><span class="w">  </span><span class="o">*</span><span class="w"> </span><span class="nb">math.cos</span><span class="p">(</span><span class="nv">angle</span><span class="p">)</span>
+<span class="w">	</span><span class="nv">protagonist</span><span class="p">.</span><span class="py">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">windowHeight</span><span class="o">/</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">.3</span><span class="o">*</span><span class="nv">windowHeight</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">math.sin</span><span class="p">(</span><span class="nv">angle</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+<span class="w">	</span><span class="c1">-- Sort entities by their Y position.</span>
+<span class="w">	</span><span class="nb">table.sort</span><span class="p">(</span><span class="nv">entities</span><span class="p">,</span><span class="w"> </span><span class="kr">function</span><span class="p">(</span><span class="nv">entity1</span><span class="p">,</span><span class="w"> </span><span class="nv">entity2</span><span class="p">)</span>
+<span class="w">		</span><span class="kr">if</span><span class="w"> </span><span class="nv">entity1</span><span class="p">.</span><span class="py">y</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="nv">entity2</span><span class="p">.</span><span class="py">y</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">			</span><span class="kr">return</span><span class="w"> </span><span class="nv">entity1</span><span class="p">.</span><span class="py">y</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nv">entity2</span><span class="p">.</span><span class="py">y</span>
+<span class="w">		</span><span class="kr">end</span>
+<span class="w">		</span><span class="kr">return</span><span class="w"> </span><span class="nv">entity1</span><span class="p">.</span><span class="py">serial</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nv">entity2</span><span class="p">.</span><span class="py">serial</span><span class="w"> </span><span class="c1">-- If Y is the same, use the serial number as fallback.</span>
+<span class="w">	</span><span class="kr">end</span><span class="p">)</span>
+
+<span class="w">	</span><span class="c1">-- Add entities to sprite batch for drawing.</span>
+<span class="w">	</span><span class="nv">spriteBatch</span><span class="p">:</span><span class="nf">clear</span><span class="p">()</span>
+<span class="w">	</span><span class="kr">for</span><span class="w"> </span><span class="nv">_</span><span class="p">,</span><span class="w"> </span><span class="nv">entity</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nb">ipairs</span><span class="p">(</span><span class="nv">entities</span><span class="p">)</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">		</span><span class="nv">spriteBatch</span><span class="p">:</span><span class="nf">add</span><span class="p">(</span><span class="nv">entity</span><span class="p">.</span><span class="py">quad</span><span class="p">,</span><span class="w"> </span><span class="nb">math.floor</span><span class="p">(</span><span class="nv">entity</span><span class="p">.</span><span class="py">x</span><span class="p">),</span><span class="w"> </span><span class="nb">math.floor</span><span class="p">(</span><span class="nv">entity</span><span class="p">.</span><span class="py">y</span><span class="p">))</span>
+<span class="w">	</span><span class="kr">end</span>
+
+<span class="w">	</span><span class="c1">-- Finally, draw the sprite batch to the screen.</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">draw</span><span class="p">(</span><span class="nv">spriteBatch</span><span class="p">)</span>
+<span class="kr">end</span>
+</pre></div>
+<h2><span class="mw-headline" id="See_Also">See Also</span></h2>
+<ul><li><a href="../Main/love.graphics.html" title="love.graphics">love.graphics</a></li>
+<li><a href="../Main/SpriteBatch.html" title="SpriteBatch">SpriteBatch</a></li></ul>
+<p><br/>
+</p>
+<h2><span class="mw-headline" id="Other_Languages">Other Languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Functions.html">Functions</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

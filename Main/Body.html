@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Body - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">Body</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><p>Bodies are objects with velocity and position.
+</p>
+<h2><span class="mw-headline" id="Constructors">Constructors</span></h2>
+<table class="smwtable" style="background-color: #eeeeff;">
+<tbody><tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.physics.newBody.html" title="love.physics.newBody">love.physics.newBody</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Creates a new body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.physics.newChainBody.html" title="love.physics.newChainBody">love.physics.newChainBody</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Creates a new Body with an attached ChainShape.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.physics.newCircleBody.html" title="love.physics.newCircleBody">love.physics.newCircleBody</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Creates a new Body with an attached <a href="../Main/CircleShape.html" title="CircleShape">CircleShape</a>.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.physics.newEdgeBody.html" title="love.physics.newEdgeBody">love.physics.newEdgeBody</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Creates a new Body with an attached <a href="../Main/EdgeShape.html" title="EdgeShape">EdgeShape</a>.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.physics.newPolygonBody.html" title="love.physics.newPolygonBody">love.physics.newPolygonBody</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Creates a new Body with an attached <a href="../Main/PolygonShape.html" title="PolygonShape">PolygonShape</a>.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.physics.newRectangleBody.html" title="love.physics.newRectangleBody">love.physics.newRectangleBody</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Creates a new Body with an attached rectangle <a href="../Main/PolygonShape.html" title="PolygonShape">PolygonShape</a>.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+</tbody></table>
+<h2><span class="mw-headline" id="Functions">Functions</span></h2>
+<table class="smwtable" style="background-color: #eeeeff;">
+<tbody><tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__applyAngularImpulse.html" title="Body:applyAngularImpulse">Body:applyAngularImpulse</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Applies an angular impulse to a body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__applyForce.html" title="Body:applyForce">Body:applyForce</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Apply force to a Body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__applyImpulse.html" title="Body:applyImpulse">Body:applyImpulse</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Applies an impulse to a body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Removed in" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Remove.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a>
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__applyLinearImpulse.html" title="Body:applyLinearImpulse">Body:applyLinearImpulse</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Applies an impulse to a body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__applyTorque.html" title="Body:applyTorque">Body:applyTorque</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Apply torque to a body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__destroy.html" title="Body:destroy">Body:destroy</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Explicitly destroys the Body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getAllowSleeping.html" title="Body:getAllowSleeping">Body:getAllowSleeping</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Return whether a body is allowed to sleep.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.7.0.html" title="0.7.0">0.7.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Removed in" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Remove.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a>
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getAngle.html" title="Body:getAngle">Body:getAngle</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get the angle of the body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getAngularDamping.html" title="Body:getAngularDamping">Body:getAngularDamping</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the Angular damping of the Body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getAngularVelocity.html" title="Body:getAngularVelocity">Body:getAngularVelocity</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get the angular velocity of the Body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getContactList.html" title="Body:getContactList">Body:getContactList</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets a list of all <a href="../Main/Contact.html" title="Contact">Contacts</a> attached to the Body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.2.html" title="0.9.2">0.9.2</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Removed in" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Remove.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a>
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getContacts.html" title="Body:getContacts">Body:getContacts</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets a list of all <a href="../Main/Contact.html" title="Contact">Contacts</a> attached to the Body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getFixtureList.html" title="Body:getFixtureList">Body:getFixtureList</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Returns a table with all fixtures.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Removed in" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Remove.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a>
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getFixtures.html" title="Body:getFixtures">Body:getFixtures</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Returns a table with all fixtures.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Deprecated in" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Deprecate.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a>
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getGravityScale.html" title="Body:getGravityScale">Body:getGravityScale</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Returns the gravity scale factor.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getInertia.html" title="Body:getInertia">Body:getInertia</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the rotational inertia of the body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getJointList.html" title="Body:getJointList">Body:getJointList</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Returns a table containing the Joints attached to this Body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.2.html" title="0.9.2">0.9.2</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Removed in" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Remove.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a>
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getJoints.html" title="Body:getJoints">Body:getJoints</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Returns a table containing the <a href="../Main/Joint.html" title="Joint">Joints</a> attached to this Body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getKinematicState.html" title="Body:getKinematicState">Body:getKinematicState</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the position, angle, linear velocity and angular velocity of the Body in one call.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getLinearDamping.html" title="Body:getLinearDamping">Body:getLinearDamping</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the linear damping of the Body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getLinearVelocity.html" title="Body:getLinearVelocity">Body:getLinearVelocity</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the linear velocity of the Body from its center of mass.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getLinearVelocityFromLocalPoint.html" title="Body:getLinearVelocityFromLocalPoint">Body:getLinearVelocityFromLocalPoint</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get the linear velocity of a point on the body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getLinearVelocityFromWorldPoint.html" title="Body:getLinearVelocityFromWorldPoint">Body:getLinearVelocityFromWorldPoint</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get the linear velocity of a point on the body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getLocalCenter.html" title="Body:getLocalCenter">Body:getLocalCenter</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get the center of mass position in local coordinates.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getLocalPoint.html" title="Body:getLocalPoint">Body:getLocalPoint</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Transform a point from world coordinates to local coordinates.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getLocalPoints.html" title="Body:getLocalPoints">Body:getLocalPoints</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Transforms multiple points from world coordinates to local coordinates.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.4.html" title="11.4">11.4</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getLocalVector.html" title="Body:getLocalVector">Body:getLocalVector</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Transform a vector from world coordinates to local coordinates.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getMass.html" title="Body:getMass">Body:getMass</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get the mass of the body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getMassData.html" title="Body:getMassData">Body:getMassData</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Returns the mass, its center, and the rotational inertia.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getPosition.html" title="Body:getPosition">Body:getPosition</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get the position of the body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getShape.html" title="Body:getShape">Body:getShape</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the first Shape attached to the Body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getShapes.html" title="Body:getShapes">Body:getShapes</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Returns a table with all Shapes attached to the Body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getType.html" title="Body:getType">Body:getType</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Returns the type of the body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getUserData.html" title="Body:getUserData">Body:getUserData</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Returns the Lua value associated with this Body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.1.html" title="0.9.1">0.9.1</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getWorld.html" title="Body:getWorld">Body:getWorld</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the <a href="../Main/World.html" title="World">World</a> the body lives in.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.2.html" title="0.9.2">0.9.2</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getWorldCenter.html" title="Body:getWorldCenter">Body:getWorldCenter</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get the center of mass position in world coordinates.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getWorldPoint.html" title="Body:getWorldPoint">Body:getWorldPoint</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Transform a point from local coordinates to world coordinates.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getWorldPoints.html" title="Body:getWorldPoints">Body:getWorldPoints</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Transforms multiple points from local coordinates to world coordinates.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getWorldVector.html" title="Body:getWorldVector">Body:getWorldVector</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Transform a vector from local coordinates to world coordinates.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getX.html" title="Body:getX">Body:getX</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get the x position of the body in world coordinates.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__getY.html" title="Body:getY">Body:getY</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get the y position of the body in world coordinates.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__hasCustomMassData.html" title="Body:hasCustomMassData">Body:hasCustomMassData</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets whether the Body's mass data has been set to custom values.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__isActive.html" title="Body:isActive">Body:isActive</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Returns whether the body is actively used in the simulation.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__isAwake.html" title="Body:isAwake">Body:isAwake</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Returns the sleep status of the body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__isBullet.html" title="Body:isBullet">Body:isBullet</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get the bullet status of a body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__isDestroyed.html" title="Body:isDestroyed">Body:isDestroyed</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets whether the Body is destroyed.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.2.html" title="0.9.2">0.9.2</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__isDynamic.html" title="Body:isDynamic">Body:isDynamic</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get the dynamic status of the body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Removed in" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Remove.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a>
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__isFixedRotation.html" title="Body:isFixedRotation">Body:isFixedRotation</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Returns whether the body rotation is locked.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__isFrozen.html" title="Body:isFrozen">Body:isFrozen</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get the frozen status of the body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Removed in" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Remove.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a>
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__isSleeping.html" title="Body:isSleeping">Body:isSleeping</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get the sleeping status of a body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Removed in" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Remove.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a>
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__isSleepingAllowed.html" title="Body:isSleepingAllowed">Body:isSleepingAllowed</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Returns the sleeping behaviour of the body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__isStatic.html" title="Body:isStatic">Body:isStatic</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get the static status of the body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Removed in" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Remove.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a>
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__isTouching.html" title="Body:isTouching">Body:isTouching</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets whether the Body is touching the given other Body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__putToSleep.html" title="Body:putToSleep">Body:putToSleep</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Put the body to sleep.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Removed in" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Remove.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a>
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__resetMassData.html" title="Body:resetMassData">Body:resetMassData</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Resets the mass of the body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setActive.html" title="Body:setActive">Body:setActive</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets whether the body is active in the world.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setAllowSleeping.html" title="Body:setAllowSleeping">Body:setAllowSleeping</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Set the sleep behaviour of a body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Removed in" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Remove.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a>
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setAngle.html" title="Body:setAngle">Body:setAngle</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Set the angle of the body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setAngularDamping.html" title="Body:setAngularDamping">Body:setAngularDamping</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the angular damping of a Body</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setAngularVelocity.html" title="Body:setAngularVelocity">Body:setAngularVelocity</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the angular velocity of a Body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setAwake.html" title="Body:setAwake">Body:setAwake</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Wakes the body up or puts it to sleep.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setBullet.html" title="Body:setBullet">Body:setBullet</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Set the bullet status of a body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setFixedRotation.html" title="Body:setFixedRotation">Body:setFixedRotation</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Set whether a body has fixed rotation.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setGravityScale.html" title="Body:setGravityScale">Body:setGravityScale</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets a new gravity scale factor for the body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setInertia.html" title="Body:setInertia">Body:setInertia</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Set the inertia of a body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setKinematicState.html" title="Body:setKinematicState">Body:setKinematicState</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the position, angle, linear velocity and angular velocity of the Body in one call.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setLinearDamping.html" title="Body:setLinearDamping">Body:setLinearDamping</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the linear damping of a Body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setLinearVelocity.html" title="Body:setLinearVelocity">Body:setLinearVelocity</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets a new linear velocity for the Body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setMass.html" title="Body:setMass">Body:setMass</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the mass properties directly.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setMassData.html" title="Body:setMassData">Body:setMassData</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Overrides the calculated mass data.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setMassFromShapes.html" title="Body:setMassFromShapes">Body:setMassFromShapes</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets mass properties from attatched shapes.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Removed in" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Remove.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a>
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setPosition.html" title="Body:setPosition">Body:setPosition</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Set the position of the body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setSleepingAllowed.html" title="Body:setSleepingAllowed">Body:setSleepingAllowed</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the sleeping behaviour of the body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setType.html" title="Body:setType">Body:setType</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets a new body type.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setUserData.html" title="Body:setUserData">Body:setUserData</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Associates a Lua value with the Body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.1.html" title="0.9.1">0.9.1</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setX.html" title="Body:setX">Body:setX</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Set the x position of the body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__setY.html" title="Body:setY">Body:setY</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Set the y position of the body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Body__wakeUp.html" title="Body:wakeUp">Body:wakeUp</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Wake up a sleeping body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Removed in" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Remove.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a>
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Object__release.html" title="Object:release">Object:release</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Immediately destroys the object's Lua reference.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Object__type.html" title="Object:type">Object:type</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the type of the object as a string.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Object__typeOf.html" title="Object:typeOf">Object:typeOf</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Checks whether an object is of a certain type.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+</tbody></table>
+<h2><span class="mw-headline" id="Enums">Enums</span></h2>
+<table class="smwtable" style="background-color: #eeeeff;">
+<tbody><tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/BodyType.html" title="BodyType">BodyType</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">The types of a Body.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+</tbody></table>
+<h2><span class="mw-headline" id="Supertypes">Supertypes</span></h2>
+<ul><li><a href="../Main/Object.html" title="Object">Object</a></li></ul>
+<h2><span class="mw-headline" id="See_Also">See Also</span></h2>
+<ul><li><a href="../Main/love.physics.html" title="love.physics">love.physics</a></li></ul>
+<p><br/>
+</p>
+<h2><span class="mw-headline" id="Other_Languages">Other Languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Types.html">Types</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>love - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">love</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><p>When writing games using LÖVE, the most important part of the API are the callbacks: <a href="../Main/love.load.html" title="love.load">love.load</a> is for setting up the game state, <a href="../Main/love.update.html" title="love.update">love.update</a> is for updating that state, and <a href="../Main/love.draw.html" title="love.draw">love.draw</a> is for drawing the state to the screen.
+</p><p>Games may override additional callbacks in order to handle input from the user, handle errors, and more.
+</p><p>LÖVE provides blank placeholders for these callbacks, which you can override inside your own code by creating your own function with the same name as the callback:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="c1">-- Load some default values for our rectangle.</span>
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+<span class="w">    </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="p">,</span><span class="w"> </span><span class="nv">w</span><span class="p">,</span><span class="w"> </span><span class="nv">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span>
+<span class="kr">end</span>
+
+<span class="c1">-- Increase the size of the rectangle every frame.</span>
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="nv">dt</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">w</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="nv">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">h</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="kr">end</span>
+
+<span class="c1">-- Draw a coloured rectangle.</span>
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+<span class="w">    </span><span class="c1">-- In versions prior to 11.0, color component values are (0, 102, 102)</span>
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setColor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.4</span><span class="p">,</span><span class="w"> </span><span class="mf">0.4</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">rectangle</span><span class="p">(</span><span class="s2">"fill"</span><span class="p">,</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="p">,</span><span class="w"> </span><span class="nv">w</span><span class="p">,</span><span class="w"> </span><span class="nv">h</span><span class="p">)</span>
+<span class="kr">end</span>
+</pre></div>
+<h2><span class="mw-headline" id="Modules">Modules</span></h2>
+<table class="smwtable" style="background-color: #eeeeff;">
+<tbody><tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.audio.html" title="love.audio">love.audio</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Provides of audio interface for playback/recording sound.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.data.html" title="love.data">love.data</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Provides functionality for creating and transforming data.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.event.html" title="love.event">love.event</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Manages events, like keypresses.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.6.0.html" title="0.6.0">0.6.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.filesystem.html" title="love.filesystem">love.filesystem</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Provides an interface to the user's filesystem.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.font.html" title="love.font">love.font</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Allows you to work with fonts.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.7.0.html" title="0.7.0">0.7.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.graphics.html" title="love.graphics">love.graphics</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Drawing of shapes and images, management of screen geometry.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.image.html" title="love.image">love.image</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Provides an interface to decode encoded image data.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.joystick.html" title="love.joystick">love.joystick</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Provides an interface to connected joysticks.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.5.0.html" title="0.5.0">0.5.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.keyboard.html" title="love.keyboard">love.keyboard</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Provides an interface to the user's keyboard.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.math.html" title="love.math">love.math</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Provides system-independent mathematical functions.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.mouse.html" title="love.mouse">love.mouse</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Provides an interface to the user's mouse.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.physics.html" title="love.physics">love.physics</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Can simulate 2D rigid body physics in a realistic manner.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.4.0.html" title="0.4.0">0.4.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.sensor.html" title="love.sensor">love.sensor</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Provides functionality to access device sensors.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.sound.html" title="love.sound">love.sound</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">This module is responsible for decoding sound files.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.system.html" title="love.system">love.system</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Provides access to information about the user's system.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.thread.html" title="love.thread">love.thread</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Allows you to work with threads.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.7.0.html" title="0.7.0">0.7.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.timer.html" title="love.timer">love.timer</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Provides high-resolution timing functionality.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.touch.html" title="love.touch">love.touch</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Provides an interface to touch-screen presses.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.10.0.html" title="0.10.0">0.10.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.video.html" title="love.video">love.video</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">This module is responsible for decoding and streaming video files.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.10.0.html" title="0.10.0">0.10.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.window.html" title="love.window">love.window</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Provides an interface for the program's window.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+</tbody></table>
+<h2><span class="mw-headline" id="Third-party_modules">Third-party modules</span></h2>
+<table class="smwtable" style="background-color: #eeeeff;">
+<tbody><tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/lua-enet.html" title="lua-enet">lua-enet</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Multiplayer networking module for games.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/socket.html" title="socket">socket</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Module for HTTP, TCP, and UDP networking.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.5.0.html" title="0.5.0">0.5.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/utf8.html" title="utf8">utf8</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Provides basic support for manipulating UTF-8 strings.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.2.html" title="0.9.2">0.9.2</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+</tbody></table>
+<h2><span class="mw-headline" id="Functions">Functions</span></h2>
+<table class="smwtable" style="background-color: #eeeeff;">
+<tbody><tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.getVersion.html" title="love.getVersion">love.getVersion</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the current running version of LÖVE.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.1.html" title="0.9.1">0.9.1</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.hasDeprecationOutput.html" title="love.hasDeprecationOutput">love.hasDeprecationOutput</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets whether LÖVE displays warnings when using deprecated functionality.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.isVersionCompatible.html" title="love.isVersionCompatible">love.isVersionCompatible</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets whether the given version is compatible with the current running version of LÖVE.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.10.0.html" title="0.10.0">0.10.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.markDeprecated.html" title="love.markDeprecated">love.markDeprecated</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Marks an API as deprecated: prints a warning naming it and where it was called from, the same way LÖVE's own deprecated functions do.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.setDeprecationOutput.html" title="love.setDeprecationOutput">love.setDeprecationOutput</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets whether LÖVE displays warnings when using deprecated functionality.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+</tbody></table>
+<h2><span class="mw-headline" id="Types">Types</span></h2>
+<table class="smwtable" style="background-color: #eeeeff;">
+<tbody><tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Data.html" title="Data">Data</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">The superclass of all data.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Object.html" title="Object">Object</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">The superclass of all LÖVE types.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Variant.html" title="Variant">Variant</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">The types supported by <a href="../Main/love.thread.html" title="love.thread">love.thread</a> and <a href="../Main/love.event.html" title="love.event">love.event</a>.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+</tbody></table>
+<h2><span class="mw-headline" id="Callbacks">Callbacks</span></h2>
+<p>All callbacks are only called in main thread.
+</p>
+<h3><span class="mw-headline" id="General">General</span></h3>
+<table class="smwtable" style="background-color: #eeeeff;">
+<tbody><tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Config_Files.html" title="Config Files">Config Files</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Game configuration settings.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.audiodisconnected.html" title="love.audiodisconnected">love.audiodisconnected</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Called when the active audio device is disconnected.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.draw.html" title="love.draw">love.draw</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function used to draw on the screen every frame.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.errhand.html" title="love.errhand">love.errhand</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">The error handler, used to display error messages.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Deprecated in" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Deprecate.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a>
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.errorhandler.html" title="love.errorhandler">love.errorhandler</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">The error handler, used to display error messages.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.load.html" title="love.load">love.load</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">This function is called exactly once at the beginning of the game.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.localechanged.html" title="love.localechanged">love.localechanged</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when the user's system locale preferences have changed.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.lowmemory.html" title="love.lowmemory">love.lowmemory</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when the system is running out of memory on mobile devices.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.10.0.html" title="0.10.0">0.10.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.quit.html" title="love.quit">love.quit</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when the game is closed.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.7.0.html" title="0.7.0">0.7.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.run.html" title="love.run">love.run</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">The main callback function, containing the main loop. A sensible default is used when left out.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.sensorupdated.html" title="love.sensorupdated">love.sensorupdated</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Called when the in-device sensor is updated.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.themechanged.html" title="love.themechanged">love.themechanged</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when the system's light/dark theme changes.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.threaderror.html" title="love.threaderror">love.threaderror</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when a <a href="../Main/Thread.html" title="Thread">Thread</a> encounters an error.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.update.html" title="love.update">love.update</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function used to update the state of the game every frame.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+</tbody></table>
+<h3><span class="mw-headline" id="Window">Window</span></h3>
+<table class="smwtable" style="background-color: #eeeeff;">
+<tbody><tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.directorydropped.html" title="love.directorydropped">love.directorydropped</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when a directory is dragged and dropped onto the window.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.10.0.html" title="0.10.0">0.10.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.displayrotated.html" title="love.displayrotated">love.displayrotated</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Called when the device display orientation changed.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.3.html" title="11.3">11.3</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.dropbegan.html" title="love.dropbegan">love.dropbegan</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when a file or folder is first dragged onto the window, before the user drops it.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.dropcompleted.html" title="love.dropcompleted">love.dropcompleted</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when a file or folder is done being dragged and dropped into the window.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.dropmoved.html" title="love.dropmoved">love.dropmoved</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when an in-progress file or folder drag-and-drop operation changes position.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.exposed.html" title="love.exposed">love.exposed</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when the window was <a href="../Main/love.occluded.html" title="love.occluded">occluded</a>, is uncovered.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.filedropped.html" title="love.filedropped">love.filedropped</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when a file is dragged and dropped onto the window.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.10.0.html" title="0.10.0">0.10.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.focus.html" title="love.focus">love.focus</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when window receives or loses focus.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.7.0.html" title="0.7.0">0.7.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.mousefocus.html" title="love.mousefocus">love.mousefocus</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when window receives or loses mouse focus.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.occluded.html" title="love.occluded">love.occluded</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when the window is completely covered by other windows.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.resize.html" title="love.resize">love.resize</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Called when the window is resized.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.visible.html" title="love.visible">love.visible</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when window is shown or hidden.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+</tbody></table>
+<h3><span class="mw-headline" id="Keyboard">Keyboard</span></h3>
+<table class="smwtable" style="background-color: #eeeeff;">
+<tbody><tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.keypressed.html" title="love.keypressed">love.keypressed</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when a key is pressed.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.keyreleased.html" title="love.keyreleased">love.keyreleased</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when a keyboard key is released.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.textedited.html" title="love.textedited">love.textedited</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Called when the candidate text for an IME has changed.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.10.0.html" title="0.10.0">0.10.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.textinput.html" title="love.textinput">love.textinput</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Called when text has been entered by the user.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+</tbody></table>
+<h3><span class="mw-headline" id="Mouse">Mouse</span></h3>
+<table class="smwtable" style="background-color: #eeeeff;">
+<tbody><tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.mousemoved.html" title="love.mousemoved">love.mousemoved</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when the mouse is moved.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.2.html" title="0.9.2">0.9.2</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.mousepressed.html" title="love.mousepressed">love.mousepressed</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when a mouse button is pressed.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.mousereleased.html" title="love.mousereleased">love.mousereleased</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when a mouse button is released.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.wheelmoved.html" title="love.wheelmoved">love.wheelmoved</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when the mouse wheel is moved.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.10.0.html" title="0.10.0">0.10.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+</tbody></table>
+<h3><span class="mw-headline" id="Joystick">Joystick</span></h3>
+<table class="smwtable" style="background-color: #eeeeff;">
+<tbody><tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.gamepadaxis.html" title="love.gamepadaxis">love.gamepadaxis</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Called when a Joystick's virtual gamepad axis is moved.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.gamepadpressed.html" title="love.gamepadpressed">love.gamepadpressed</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Called when a Joystick's virtual gamepad button is pressed.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.gamepadreleased.html" title="love.gamepadreleased">love.gamepadreleased</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Called when a Joystick's virtual gamepad button is released.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.joystickadded.html" title="love.joystickadded">love.joystickadded</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Called when a <a href="../Main/Joystick.html" title="Joystick">Joystick</a> is connected.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.joystickaxis.html" title="love.joystickaxis">love.joystickaxis</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Called when a joystick axis moves.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.joystickhat.html" title="love.joystickhat">love.joystickhat</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Called when a joystick hat direction changes.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.joystickpressed.html" title="love.joystickpressed">love.joystickpressed</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Called when a joystick button is pressed.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.joystickreleased.html" title="love.joystickreleased">love.joystickreleased</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Called when a joystick button is released.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.joystickremoved.html" title="love.joystickremoved">love.joystickremoved</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Called when a <a href="../Main/Joystick.html" title="Joystick">Joystick</a> is disconnected.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.joysticksensorupdated.html" title="love.joysticksensorupdated">love.joysticksensorupdated</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Called when a <a href="../Main/Joystick.html" title="Joystick">Joystick</a>'s sensor is updated with new values.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+</tbody></table>
+<h3><span class="mw-headline" id="Touch">Touch</span></h3>
+<table class="smwtable" style="background-color: #eeeeff;">
+<tbody><tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.touchmoved.html" title="love.touchmoved">love.touchmoved</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when a touch press moves inside the touch screen.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.10.0.html" title="0.10.0">0.10.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.touchpressed.html" title="love.touchpressed">love.touchpressed</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when the touch screen is touched.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.10.0.html" title="0.10.0">0.10.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/love.touchreleased.html" title="love.touchreleased">love.touchreleased</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Callback function triggered when the touch screen stops being touched.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.10.0.html" title="0.10.0">0.10.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+</tbody></table>
+<p><br/>
+</p>
+<h2><span class="mw-headline" id="Other_Languages">Other Languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Modules.html">Modules</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

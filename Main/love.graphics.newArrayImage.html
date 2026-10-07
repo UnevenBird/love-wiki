@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>love.graphics.newArrayImage - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">love.graphics.newArrayImage</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><table bgcolor="#d0d0ff" class="new-section" data-newin="[[11.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/11.0.html" title="11.0">11.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This function is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Creates a new <a href="../Main/TextureType.html" title="TextureType">array</a> <a href="../Main/Image.html" title="Image">Image</a>.
+</p>
+<table align="center" bgcolor="gold" class="notice" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+<tbody><tr>
+<td width="1"><span class="mw-default-size" typeof="mw:File"><a class="mw-file-description" href="../File/O.png.html"><img class="mw-file-element" data-file-height="64" data-file-width="64" decoding="async" height="64" src="../assets/images/O.png" width="64"/></a></span>
+</td>
+<td>Not all systems support array images. Use <a href="../Main/love.graphics.getTextureTypes.html" title="love.graphics.getTextureTypes">love.graphics.getTextureTypes</a> to check.
+</td>
+<td width="1"> 
+</td></tr></tbody></table><p><br/>
+</p><table align="center" bgcolor="gold" class="notice" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+<tbody><tr>
+<td width="1"><span class="mw-default-size" typeof="mw:File"><a class="mw-file-description" href="../File/O.png.html"><img class="mw-file-element" data-file-height="64" data-file-width="64" decoding="async" height="64" src="../assets/images/O.png" width="64"/></a></span>
+</td>
+<td>This function can be slow if it is called repeatedly, such as from <a href="../Main/love.update.html" title="love.update">love.update</a> or <a href="../Main/love.draw.html" title="love.draw">love.draw</a>. If you need to use a specific resource often, create it once and store it somewhere it can be reused!
+</td>
+<td width="1"> 
+</td></tr></tbody></table><p><br/><br/>
+</p><p>An array image / array texture is a single object which contains multiple 'layers' or 'slices' of 2D sub-images. It can be thought of similarly to a texture atlas or sprite sheet, but it doesn't suffer from the same tile / quad bleeding artifacts that texture atlases do – although every sub-image must have the same dimensions.
+</p><p>A specific layer of an array image can be drawn with <a href="../Main/love.graphics.drawLayer.html" title="love.graphics.drawLayer">love.graphics.drawLayer</a> / <a href="../Main/SpriteBatch__addLayer.html" title="SpriteBatch:addLayer">SpriteBatch:addLayer</a>, or with the <a href="../Main/Quad.html" title="Quad">Quad</a> variant of <a href="../Main/love.graphics.draw.html" title="love.graphics.draw">love.graphics.draw</a> and <a href="../Main/Quad__setLayer.html" title="Quad:setLayer">Quad:setLayer</a>, or via a custom Shader.
+</p><p>To use an array image in a Shader, it must be declared as a <code>ArrayImage</code> or <code>sampler2DArray</code> type (instead of <code>Image</code> or <code>sampler2D</code>). The <code>Texel(ArrayImage image, vec3 texturecoord)</code> shader function must be used to get pixel colors from a slice of the array image. The vec3 argument contains the texture coordinate in the first two components, and the 0-based slice index in the third component.
+</p>
+<h2><span class="mw-headline" id="Function">Function</span></h2>
+<p>Creates an array Image given a different image file for each slice of the resulting array image object.
+</p>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newArrayImage</span><span class="p">(</span><span class="w"> </span><span class="nv">slices</span><span class="p">,</span><span class="w"> </span><span class="nv">settings</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments">Arguments</span></h3>
+<dl><dt><code><a href="../Main/table.html" title="table">table</a> slices</code></dt>
+<dd>A table containing filepaths to images (or <a href="../Main/File.html" title="File">File</a>, <a href="../Main/FileData.html" title="FileData">FileData</a>, <a href="../Main/ImageData.html" title="ImageData">ImageData</a>, or <a href="../Main/CompressedImageData.html" title="CompressedImageData">CompressedImageData</a> objects), in an array. Each sub-image must have the same dimensions. A table of tables can also be given, where each sub-table contains all mipmap levels for the slice index of that sub-table.</dd>
+<dt><code><a href="../Main/table.html" title="table">table</a> settings (nil)</code></dt>
+<dd>Optional table of settings to configure the array image, containing the following fields:
+<dl><dt><code><a href="../Main/boolean.html" title="boolean">boolean</a> mipmaps (false)</code></dt>
+<dd>True to make the image use mipmaps, false to disable them. Mipmaps will be automatically generated if the image isn't a <a href="../Main/PixelFormat.html" title="PixelFormat">compressed texture</a> format.</dd>
+<dt><code><a href="../Main/boolean.html" title="boolean">boolean</a> linear (false)</code></dt>
+<dd>True to treat the image's pixels as linear instead of sRGB, when <a href="../Main/love.graphics.isGammaCorrect.html" title="love.graphics.isGammaCorrect">gamma correct rendering</a> is enabled. Most images are authored as sRGB.</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> dpiscale (1)</code></dt>
+<dd>The DPI scale to use when drawing the array image and calling <a href="../Main/Texture__getWidth.html" title="Texture:getWidth">getWidth</a>/<a href="../Main/Texture__getHeight.html" title="Texture:getHeight">getHeight</a>.</dd></dl></dd></dl>
+<h3><span class="mw-headline" id="Returns">Returns</span></h3>
+<dl><dt><code><a href="../Main/Image.html" title="Image">Image</a> image</code></dt>
+<dd>An Array Image object.</dd></dl>
+<h2><span class="mw-headline" id="Notes">Notes</span></h2>
+<p>Illustration of how an array image works: <a class="external autonumber" href="https://web.archive.org/web/20191118024004/http://codeflow.org/entries/2010/dec/09/minecraft-like-rendering-experiments-in-opengl-4/illustrations/textures.jpg" rel="nofollow">[1]</a>
+</p><p>A DPI scale of 2 (double the normal pixel density) will result in the image taking up the same space on-screen as an image with half its pixel dimensions that has a DPI scale of 1. This allows for easily swapping out image assets that take the same space on-screen but have different pixel densities, which makes supporting high-dpi / retina resolution require less code logic.
+</p><p>In order to use an Array Texture or other non-2D texture types as the main texture in a custom <a href="../Main/Shader.html" title="Shader">Shader</a>, the <a href="../Main/love.graphics.newShader.html" title="love.graphics.newShader">void effect()</a> variant must be used in the pixel shader, and MainTex must be declared as an ArrayImage or sampler2DArray like so: <code>uniform ArrayImage MainTex;</code>.
+</p>
+<h2><span class="mw-headline" id="Examples">Examples</span></h2>
+<h3><span class="mw-headline" id="Draw_multiple_layers_of_an_Array_Image">Draw multiple layers of an Array Image</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">sprites</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s2">"sprite1.png"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sprite2.png"</span><span class="p">}</span>
+<span class="w">    </span><span class="nv">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newArrayImage</span><span class="p">(</span><span class="nv">sprites</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">drawLayer</span><span class="p">(</span><span class="nv">image</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">drawLayer</span><span class="p">(</span><span class="nv">image</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">250</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">)</span>
+<span class="kr">end</span>
+</pre></div>
+<h3><span class="mw-headline" id="Use_a_custom_shader_with_love.graphics.drawLayer">Use a custom shader with love.graphics.drawLayer</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">shader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="py">newShader</span><span class="s">[[</span>
+<span class="s">uniform ArrayImage MainTex;</span>
+
+<span class="s">void effect() {</span>
+<span class="s">    // Texel uses a third component of the texture coordinate for the layer index, when an Array Texture is passed in.</span>
+<span class="s">    // love sets up the texture coordinates to contain the layer index specified in love.graphics.drawLayer, when</span>
+<span class="s">    // rendering the Array Texture.</span>
+<span class="s">    love_PixelColor = Texel(MainTex, VaryingTexCoord.xyz) * VaryingColor;</span>
+<span class="s">}</span>
+<span class="s">]]</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">sprites</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s2">"sprite1.png"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sprite2.png"</span><span class="p">}</span>
+<span class="w">    </span><span class="nv">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newArrayImage</span><span class="p">(</span><span class="nv">sprites</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setShader</span><span class="p">(</span><span class="nv">shader</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">drawLayer</span><span class="p">(</span><span class="nv">image</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">drawLayer</span><span class="p">(</span><span class="nv">image</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">250</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">)</span>
+<span class="kr">end</span>
+</pre></div>
+<h2><span class="mw-headline" id="See_Also">See Also</span></h2>
+<ul><li><a href="../Main/love.graphics.html" title="love.graphics">love.graphics</a></li>
+<li><a href="../Main/Image.html" title="Image">Image</a></li>
+<li><a href="../Main/TextureType.html" title="TextureType">TextureType</a></li></ul>
+<p><br/>
+</p>
+<h2><span class="mw-headline" id="Other_Languages">Other Languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Functions.html">Functions</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

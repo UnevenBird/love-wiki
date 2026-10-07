@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Config Files - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">Config Files</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><h2><span class="mw-headline" id="Introduction">Introduction</span></h2>
+<p>If a file called <code>conf.lua</code> is present in your game folder (or .love file), it is run <i>before</i> the LÖVE modules are loaded. You can use this file to overwrite the <code>love.conf</code> function, which is later called by the LÖVE 'boot' script. Using the <code>love.conf</code> function, you can set some configuration options, and change things such as the default size of the window, which modules are loaded, and other program setup-related options.
+</p><p><br/>
+<code>love.conf</code> must be defined inside a file named <code>conf.lua</code>. It will not work if it's defined inside <code>main.lua</code>, because it affects initialization that happens before <code>main.lua</code> is loaded.
+</p>
+<h2><span class="mw-headline" id="love.conf">love.conf</span></h2>
+<p>The <code>love.conf</code> function takes one argument: a table filled with all the default values which you can overwrite to your liking. If you want to change the default window size, for instance, do:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">conf</span><span class="p">(</span><span class="nv">t</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">768</span>
+<span class="kr">end</span>
+</pre></div>
+<p>If you don't need the physics module or joystick module, do the following.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">conf</span><span class="p">(</span><span class="nv">t</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">joystick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">physics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="kr">end</span>
+</pre></div>
+<p>Setting unused modules to false is encouraged when you release your game. It reduces startup time slightly (especially if the joystick module is disabled) and reduces memory usage (slightly).
+</p><p>Note that you can't disable <a href="../Main/love.filesystem.html" title="love.filesystem">love.filesystem</a> and <a href="../Main/love.data.html" title="love.data">love.data</a>; it's mandatory. The same goes for the <a href="../Main/love.html" title="love">love</a> module itself. <a href="../Main/love.graphics.html" title="love.graphics">love.graphics</a> needs <a href="../Main/love.window.html" title="love.window">love.window</a> to be enabled.
+</p><p>In LÖVE version 0.9.2 and earlier, errors in the config file will cause the game to not launch and no error message to appear. If the game doesn't load, check the config file for errors first. In version 0.10.2 and later, errors in the config will now show the blue error screen showing the error in the config file.
+</p>
+<h2><span class="mw-headline" id="Current_Configuration_File">Current Configuration File</span></h2>
+<p>Here is a full list of options and their default values for LÖVE <a href="../Main/12.0.html" title="12.0">12.0</a>:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">conf</span><span class="p">(</span><span class="nv">t</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">identity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                    </span><span class="c1">-- The name of the save directory (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">appendidentity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">            </span><span class="c1">-- Search files in source directory before save directory (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"12.0"</span><span class="w">                  </span><span class="c1">-- The LÖVE version this game was made for (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">console</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">                   </span><span class="c1">-- Attach a console (boolean, Windows only)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">highdpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">                   </span><span class="c1">-- Enable high-dpi mode for the window on a Retina / high-DPI display (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">trackpadtouch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">             </span><span class="c1">-- Generate touch events for trackpads (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">externalstorage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">           </span><span class="c1">-- True to save files (and read from the save directory) in external storage on Android (boolean)</span>
+
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="py">gammacorrect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">     </span><span class="c1">-- Enable gamma-correct rendering, when supported by the system (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="py">lowpower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">         </span><span class="c1">-- Prefer the low-power GPU on systems with more than one (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="py">renderers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">          </span><span class="c1">-- Ordered list of graphics APIs to try, e.g. {"vulkan", "opengl"} (table)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="py">excluderenderers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">   </span><span class="c1">-- Graphics APIs that must not be used, e.g. {"vulkan"} (table)</span>
+
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">audio</span><span class="p">.</span><span class="py">mic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">                 </span><span class="c1">-- Request and use microphone capabilities in Android (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">audio</span><span class="p">.</span><span class="py">mixwithsystem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">        </span><span class="c1">-- Keep background music playing when opening LOVE (boolean, iOS and Android only)</span>
+
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Untitled"</span><span class="w">         </span><span class="c1">-- The window title (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">icon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                 </span><span class="c1">-- Filepath to an image to use as the window's icon (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">800</span><span class="w">                </span><span class="c1">-- The window width (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">600</span><span class="w">               </span><span class="c1">-- The window height (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">borderless</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">         </span><span class="c1">-- Remove all border visuals from the window (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">resizable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">          </span><span class="c1">-- Let the window be user-resizable (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">minwidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">               </span><span class="c1">-- Minimum window width if the window is resizable (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">minheight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">              </span><span class="c1">-- Minimum window height if the window is resizable (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">fullscreen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">         </span><span class="c1">-- Enable fullscreen (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">fullscreentype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"desktop"</span><span class="w"> </span><span class="c1">-- Choose between "desktop" fullscreen or "exclusive" fullscreen mode (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">vsync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">                  </span><span class="c1">-- Vertical sync mode (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">msaa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">                   </span><span class="c1">-- The number of samples to use with multi-sampled antialiasing (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                </span><span class="c1">-- Whether the window has a depth buffer (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">stencil</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">              </span><span class="c1">-- Whether the window has a stencil buffer (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">displayindex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">           </span><span class="c1">-- Index of the monitor to show the window in (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">usedpiscale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">         </span><span class="c1">-- Enable automatic DPI scaling when highdpi is set to true as well (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">centered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">            </span><span class="c1">-- Center the window on the display (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                    </span><span class="c1">-- The x-coordinate of the window's position in the specified display (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                    </span><span class="c1">-- The y-coordinate of the window's position in the specified display (number)</span>
+
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">audio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the audio module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">               </span><span class="c1">-- Enable the data module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the event module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">font</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">               </span><span class="c1">-- Enable the font module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">graphics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">           </span><span class="c1">-- Enable the graphics module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the image module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">joystick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">           </span><span class="c1">-- Enable the joystick module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">keyboard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">           </span><span class="c1">-- Enable the keyboard module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">math</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">               </span><span class="c1">-- Enable the math module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">mouse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the mouse module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">physics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">            </span><span class="c1">-- Enable the physics module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">sensor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the sensor module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">sound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the sound module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the system module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the thread module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the timer module (boolean), Disabling it will result 0 delta time in love.update</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">touch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the touch module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">video</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the video module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">window</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the window module (boolean)</span>
+<span class="kr">end</span>
+</pre></div>
+<h2><span class="mw-headline" id="Flags">Flags</span></h2>
+<h4><span class="mw-headline" id="identity">identity</span></h4>
+<p>This flag determines the name of the save directory for your game. Note that you can only specify the name, not the location where it will be created:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">t</span><span class="p">.</span><span class="py">identity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"gabe_HL3"</span><span class="w"> </span><span class="c1">-- Correct</span>
+<span class="nv">t</span><span class="p">.</span><span class="py">identity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"c:/Users/gabe/HL3"</span><span class="w"> </span><span class="c1">-- Incorrect</span>
+</pre></div>
+<p>Alternatively <a href="../Main/love.filesystem.setIdentity.html" title="love.filesystem.setIdentity">love.filesystem.setIdentity</a> can be used to set the save directory outside of the config file.
+</p>
+<h4><span class="mw-headline" id="appendidentity">appendidentity</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[11.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/11.0.html" title="11.0">11.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>This flag determines if game directory should be searched first then save directory (<code>true</code>) or otherwise (<code>false</code>)
+</p>
+<h4><span class="mw-headline" id="version">version</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.8.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p><code>t.version</code> should be a string, representing the version of LÖVE for which your game was made.
+</p><p>Before <a href="../Main/11.0.html" title="11.0">11.0</a>, it should be formatted as <code>"<i>X.Y.Z</i>"</code> where <code><i>X</i></code> is the major release number, <code><i>Y</i></code> the minor, and <code><i>Z</i></code> the patch level. Since 11.0, it should be formatted as <code>"<i>X.Y</i>"</code> where <code><i>X</i></code> and <code><i>Y</i></code> are the major and minor release respectively.
+</p><p>If set in the config file of the game, LÖVE will display a warning if the game isn't compatible with the current version of LÖVE being used to run the game. Its default is the version of LÖVE running.
+</p>
+<h4><span class="mw-headline" id="console">console</span></h4>
+<p>Determines whether a console should be opened alongside the game window (Windows only) or not. Note: On OSX you can get console output by running LÖVE through the terminal, or on Windows with LÖVE <a href="../Main/0.10.2.html" title="0.10.2">0.10.2</a>, by running <code>lovec.exe</code> instead of <code>love.exe</code>.
+</p>
+<h4><span class="mw-headline" id="accelerometerjoystick">accelerometerjoystick</span></h4>
+<table bgcolor="#ffacac" class="removed-section" data-oldin="[[12.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Removed in LÖVE <a href="../Main/12.0.html" title="12.0">12.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>Use the <a href="../Main/love.sensor.html" title="love.sensor">love.sensor</a> module instead.</small>
+</td></tr></tbody></table>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.10.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.10.0.html" title="0.10.0">0.10.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Sets whether the device accelerometer on iOS and Android should be exposed as a 3-axis <a href="../Main/Joystick.html" title="Joystick">Joystick</a>. Disabling the accelerometer when it's not used may reduce CPU usage.
+</p>
+<h4><span class="mw-headline" id="externalstorage">externalstorage</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.10.1]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.10.1.html" title="0.10.1">0.10.1</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Sets whether files are saved in external storage (true) or internal storage (false) on Android.
+</p>
+<h4><span class="mw-headline" id="gammacorrect">gammacorrect</span></h4>
+<table bgcolor="#ffacac" class="removed-section" data-oldin="[[12.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Removed in LÖVE <a href="../Main/12.0.html" title="12.0">12.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>It has moved to t.graphics.gammacorrect.</small>
+</td></tr></tbody></table>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.10.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.10.0.html" title="0.10.0">0.10.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Determines whether <a href="../Main/love.graphics.isGammaCorrect.html" title="love.graphics.isGammaCorrect">gamma-correct rendering</a> is enabled, when the system supports it.
+</p>
+<h4><span class="mw-headline" id="audio.mic">audio.mic</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[11.3]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/11.3.html" title="11.3">11.3</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Request microphone permission from the user. When user allows it, <a href="../Main/love.audio.getRecordingDevices.html" title="love.audio.getRecordingDevices">love.audio.getRecordingDevices</a> will lists recording devices
+available. Otherwise, <a href="../Main/love.audio.getRecordingDevices.html" title="love.audio.getRecordingDevices">love.audio.getRecordingDevices</a> returns empty table and a message is shown to inform user when called.
+</p>
+<h4><span class="mw-headline" id="audio.mixwithsystem">audio.mixwithsystem</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[11.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/11.0.html" title="11.0">11.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Sets whether background audio / music from other apps should play while LÖVE is open. See <a href="../Main/love.system.hasBackgroundMusic.html" title="love.system.hasBackgroundMusic">love.system.hasBackgroundMusic</a> for more details.
+</p>
+<h4><span class="mw-headline" id="window">window</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.9.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>These flags are not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>It is possible to defer window creation until <a href="../Main/love.window.setMode.html" title="love.window.setMode">love.window.setMode</a> is first called in your code. To do so, set <code>t.window = nil</code> in love.conf (or <code>t.screen = nil</code> in older versions.) If this is done, LÖVE may crash if any function from <a href="../Main/love.graphics.html" title="love.graphics">love.graphics</a> is called before the first <a href="../Main/love.window.setMode.html" title="love.window.setMode">love.window.setMode</a> in your code.
+</p><p>The <code>t.window</code> table was named <code>t.screen</code> in versions prior to <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a>. The <code>t.screen</code> table doesn't exist in love.conf in 0.9.0, and the <code>t.window</code> table doesn't exist in love.conf in 0.8.0. This means <b>love.conf</b> will fail to execute (therefore it will fall back to default values) if care is not taken to use the correct table for the LÖVE version being used.
+</p>
+<h4><span class="mw-headline" id="window.title">window.title</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.9.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Sets the title of the window the game is in. Alternatively <a href="../Main/love.window.setTitle.html" title="love.window.setTitle">love.window.setTitle</a> can be used to change the window title outside of the config file.
+</p>
+<h4><span class="mw-headline" id="window.icon">window.icon</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.9.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>A filepath to an image to use as the window's icon. Not all operating systems support very large icon images. The icon can also be changed with <a href="../Main/love.window.setIcon.html" title="love.window.setIcon">love.window.setIcon</a>.
+</p>
+<h4><span id="window.width_.26_window.height"></span><span class="mw-headline" id="window.width_&amp;_window.height">window.width &amp; window.height</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.9.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>These flags are not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Sets the window's dimensions. If these flags are set to 0 LÖVE automatically uses the user's desktop dimensions. In mobile, the aspect ratio will be used to determine if the game runs in landscape or portrait.
+</p>
+<h4><span class="mw-headline" id="window.borderless">window.borderless</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.9.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Removes all border visuals from the window. Note that the effects may vary between operating systems.
+</p>
+<h4><span class="mw-headline" id="window.resizable">window.resizable</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.9.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>If set to true this allows the user to resize the game's window. In version 11.4 and later for Android, this also allows changing orientation between landscape and portrait.
+</p>
+<h4><span id="window.minwidth_.26_window.minheight"></span><span class="mw-headline" id="window.minwidth_&amp;_window.minheight">window.minwidth &amp; window.minheight</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.9.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>These flags are not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Sets the minimum width and height for the game's window if it can be resized by the user. If you set lower values to <code>window.width</code> and <code>window.height</code> LÖVE will always favor the minimum dimensions set via <code>window.minwidth</code> and <code>window.minheight</code>.
+</p>
+<h4><span class="mw-headline" id="window.fullscreen">window.fullscreen</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.9.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Wether to run the game in fullscreen (<code>true</code>) or windowed (<code>false</code>) mode. The fullscreen can also be toggled via <a href="../Main/love.window.setFullscreen.html" title="love.window.setFullscreen">love.window.setFullscreen</a> or <a href="../Main/love.window.setMode.html" title="love.window.setMode">love.window.setMode</a>. In <a href="../Main/11.3.html" title="11.3">11.3</a> for Android, setting this to <code>true</code> hides the status bar.
+</p>
+<h4><span class="mw-headline" id="window.fullscreentype">window.fullscreentype</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.9.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Specifies the <a href="../Main/FullscreenType.html" title="FullscreenType">type of fullscreen</a> mode to use (<code>exclusive</code> or <code>desktop</code>). Generally the <code>desktop</code> is recommended, as it is less restrictive than <code>exclusive</code> mode on some operating systems. (Note: In <a href="../Main/0.9.2.html" title="0.9.2">0.9.2</a> and earlier, use <code>normal</code> instead of <code>exclusive</code>.)
+</p>
+<h4><span class="mw-headline" id="window.vsync">window.vsync</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.9.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Enables or deactivates vertical synchronization. Vsync tries to keep the game at a steady framerate and can prevent issues like screen tearing. It is recommended to keep vsync activated if you don't know about the possible implications of turning it off.
+Before LÖVE 11.0, this value was boolean (<code>true</code> or <code>false</code>). Since LÖVE 11.0, this value is a number (<code>-1</code> to use adaptive vsync when supported, <code>0</code> to disable vsync, <code>1</code> to enable vsync; <code>2</code> or a larger number will wait that many frames before refreshing - this is driver-dependent, however.)
+</p><p>Note that in iOS, vertical synchronization is always enabled and cannot be changed.
+</p>
+<h4><span class="mw-headline" id="window.depth">window.depth</span></h4>
+<div class="new-feature" data-love-version-note="1" style="font-weight: bold; background: #b0b0ff; color: black; padding: 2px; padding-left: 8px; -webkit-border-top-left-radius: 10px; -webkit-border-top-right-radius: 10px; -moz-border-radius-topleft: 10px; -moz-border-radius-topright: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px;">Available since LÖVE <a href="../Main/12.0.html" title="12.0">12.0</a></div><div data-love-filterable="1" data-love-version-added="12.0" style="border: 2px solid #b0b0ff; padding: 3px; padding-bottom: 1px; -webkit-border-bottom-right-radius: 10px; -webkit-border-bottom-left-radius: 10px; -moz-border-radius-bottomright: 10px; -moz-border-radius-bottomleft: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
+<p>The flag is a boolean since LÖVE 12.0 (a bit count before).
+</p>
+</div>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[11.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/11.0.html" title="11.0">11.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>The number of bits per sample in the depth buffer (16/24/32, default <code>nil</code>)
+</p>
+<h4><span class="mw-headline" id="window.stencil">window.stencil</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[11.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/11.0.html" title="11.0">11.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Then number of bits per sample in the stencil buffer (generally 8, default <code>nil</code>)
+</p>
+<h4><span class="mw-headline" id="window.msaa">window.msaa</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.9.2]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.9.2.html" title="0.9.2">0.9.2</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>The number of samples to use with multi-sampled antialiasing.
+</p>
+<h4><span class="mw-headline" id="window.display">window.display</span></h4>
+<table bgcolor="#ffacac" class="removed-section" data-oldin="[[12.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Removed in LÖVE <a href="../Main/12.0.html" title="12.0">12.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>It has been renamed to window.displayindex.</small>
+</td></tr></tbody></table>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.9.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>The index of the display to show the window in, if multiple monitors are available.
+</p>
+<h4><span class="mw-headline" id="window.highdpi">window.highdpi</span></h4>
+<table bgcolor="#ffc7ac" data-deprecatedin="[[12.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Deprecated in LÖVE <a href="../Main/12.0.html" title="12.0">12.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>Use the top-level t.highdpi flag.</small>
+</td></tr></tbody></table>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.9.1]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.9.1.html" title="0.9.1">0.9.1</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>See <a href="../Main/love.window.getDPIScale.html" title="love.window.getDPIScale">love.window.getDPIScale</a>. Allows the window's backbuffer to use the full pixel density of high-DPI displays on supported operating systems. LOVE will automatically scale things accordingly and use DPI-scaled units instead of pixels for most things (since <a href="../Main/11.0.html" title="11.0">11.0</a>) when this is true, unless the <code>usedpiscale</code> flag is set to false.
+When <code>highdpi</code> is false, the OS will keep things consistent between low-DPI and high-DPI displays by rendering to a low-resolution backbuffer and scaling that up on its own, when a high-DPI display is used.
+</p><p>This flag currently does nothing on Windows, and on Android it's effectively always enabled.
+</p>
+<h4><span class="mw-headline" id="window.usedpiscale">window.usedpiscale</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[11.3]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/11.3.html" title="11.3">11.3</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Disables LOVE's automatic DPI scaling on high-DPI displays when false. This only has an effect when the <code>highdpi</code> flag is set to true, since the OS (rather than LOVE) takes care of everything otherwise.
+</p>
+<h4><span id="window.x_.26_window.y"></span><span class="mw-headline" id="window.x_&amp;_window.y">window.x &amp; window.y</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.9.2]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.9.2.html" title="0.9.2">0.9.2</a></b> </i>
+</td></tr>
+<tr>
+<td><small>These flags are not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Determines the position of the window on the user's screen. Alternatively <a href="../Main/love.window.setPosition.html" title="love.window.setPosition">love.window.setPosition</a> can be used to change the position on the fly.
+</p>
+<h4><span class="mw-headline" id="window.fsaa">window.fsaa</span></h4>
+<table bgcolor="#ffacac" class="removed-new-section" data-newin="[[0.9.0]]" data-oldin="[[0.10.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a> and removed in LÖVE <a href="../Main/0.10.0.html" title="0.10.0">0.10.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag has been replaced by the window.msaa flag.</small>
+</td></tr></tbody></table>
+<p>The number of samples to use with multi-sampled antialiasing.
+</p>
+<h4><span class="mw-headline" id="window.srgb">window.srgb</span></h4>
+<table bgcolor="#ffacac" class="removed-new-section" data-newin="[[0.9.1]]" data-oldin="[[0.10.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.9.1.html" title="0.9.1">0.9.1</a> and removed in LÖVE <a href="../Main/0.10.0.html" title="0.10.0">0.10.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag has been replaced by the gammacorrect flag.</small>
+</td></tr></tbody></table>
+<p>Enabling this window flag will automatically convert the colors of everything drawn to the main screen from the linear RGB colorspace to the sRGB colorspace - the window's surface is treated as gamma-space sRGB. This is only one component of gamma-correct rendering, an advanced topic which is easy to mess up, so it's recommended to keep this option disabled if you're not sure about its implications.
+</p>
+<h4><span class="mw-headline" id="highdpi">highdpi</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[12.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/12.0.html" title="12.0">12.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>It replaces the window.highdpi flag.</small>
+</td></tr></tbody></table>
+<p>Enables high-DPI mode for the window on displays with a DPI scale above 1 (Retina displays on macOS and iOS, and scaled displays on Windows and other systems). See <a href="../Main/love.window.isHighDPIAllowed.html" title="love.window.isHighDPIAllowed">love.window.isHighDPIAllowed</a>. When it is enabled, <a href="../Main/love.window.getDPIScale.html" title="love.window.getDPIScale">love.window.getDPIScale</a> can return values other than 1 and the window's pixel size can differ from its size in DPI-scaled units.
+</p>
+<h4><span class="mw-headline" id="trackpadtouch">trackpadtouch</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[12.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/12.0.html" title="12.0">12.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>When true, touches on trackpads generate <a href="../Main/love.touchpressed.html" title="love.touchpressed">love.touchpressed</a>, <a href="../Main/love.touchmoved.html" title="love.touchmoved">love.touchmoved</a> and <a href="../Main/love.touchreleased.html" title="love.touchreleased">love.touchreleased</a> events (with the <code>touchpad</code> <a href="../Main/TouchDeviceType.html" title="TouchDeviceType">TouchDeviceType</a>). Disabled by default.
+</p>
+<h4><span class="mw-headline" id="graphics.gammacorrect">graphics.gammacorrect</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[12.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/12.0.html" title="12.0">12.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>It replaces the top-level gammacorrect flag.</small>
+</td></tr></tbody></table>
+<p>Enables <a href="../Main/love.graphics.isGammaCorrect.html" title="love.graphics.isGammaCorrect">gamma-correct rendering</a> when supported by the system.
+</p>
+<h4><span class="mw-headline" id="graphics.lowpower">graphics.lowpower</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[12.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/12.0.html" title="12.0">12.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Prefers the low-power (integrated) GPU on systems with more than one. See <a href="../Main/love.graphics.isLowPowerPreferred.html" title="love.graphics.isLowPowerPreferred">love.graphics.isLowPowerPreferred</a>.
+</p>
+<h4><span class="mw-headline" id="graphics.renderers_and_graphics.excluderenderers">graphics.renderers and graphics.excluderenderers</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[12.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/12.0.html" title="12.0">12.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Tables of graphics API names (<code>"opengl"</code>, <code>"vulkan"</code>, <code>"metal"</code>). <code>renderers</code> sets the order in which they are tried; <code>excluderenderers</code> lists APIs that must never be used. The <code>--renderers a,b,c</code> and <code>--excluderenderers a,b,c</code> command line arguments do the same. <a href="../Main/love.graphics.getRendererInfo.html" title="love.graphics.getRendererInfo">love.graphics.getRendererInfo</a> reports the API in use.
+</p>
+<h4><span class="mw-headline" id="window.displayindex">window.displayindex</span></h4>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[12.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/12.0.html" title="12.0">12.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>It replaces window.display.</small>
+</td></tr></tbody></table>
+<p>Index of the monitor to show the window in.
+</p>
+<h4><span class="mw-headline" id="Release_Mode">Release Mode</span></h4>
+<table bgcolor="#ffacac" class="removed-new-section" data-newin="[[0.8.0]]" data-oldin="[[0.9.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a> and removed in LÖVE <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This flag is not supported in earlier or later versions.</small>
+</td></tr></tbody></table>
+<p><br/>
+If <code>t.release</code> is enabled, LÖVE uses the <a href="../Main/love.releaseerrhand.html" title="love.releaseerrhand">release error handler</a>, which is sparse on information by default, and can, of course, be overridden.
+</p><p>The default release mode error handler also outputs a message to the player informing them to contact the author using the values <i>title, author and url</i> as specified in conf.lua.
+</p><p>When a fused game in release mode is run it will not save in the love save dir, but rather one for itself, whereas previously it would be %APPDATA%\\LOVE\\game on Windows, it now is %APPDATA%\\game. This concept applies to other platforms as well.
+</p>
+<h2><span class="mw-headline" id="Older_Versions">Older Versions</span></h2>
+<p>Here is a full list of options and their default values for LÖVE <a href="../Main/11.3.html" title="11.3">11.3</a> to <a href="../Main/11.5.html" title="11.5">11.5</a>:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">conf</span><span class="p">(</span><span class="nv">t</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">identity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                    </span><span class="c1">-- The name of the save directory (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">appendidentity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">            </span><span class="c1">-- Search files in source directory before save directory (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"11.5"</span><span class="w">                  </span><span class="c1">-- The LÖVE version this game was made for (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">console</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">                   </span><span class="c1">-- Attach a console (boolean, Windows only)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">accelerometerjoystick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">      </span><span class="c1">-- Enable the accelerometer on iOS and Android by exposing it as a Joystick (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">externalstorage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">           </span><span class="c1">-- True to save files (and read from the save directory) in external storage on Android (boolean) </span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">gammacorrect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">              </span><span class="c1">-- Enable gamma-correct rendering, when supported by the system (boolean)</span>
+
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">audio</span><span class="p">.</span><span class="py">mic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">                 </span><span class="c1">-- Request and use microphone capabilities in Android (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">audio</span><span class="p">.</span><span class="py">mixwithsystem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">        </span><span class="c1">-- Keep background music playing when opening LOVE (boolean, iOS and Android only)</span>
+
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Untitled"</span><span class="w">         </span><span class="c1">-- The window title (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">icon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                 </span><span class="c1">-- Filepath to an image to use as the window's icon (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">800</span><span class="w">                </span><span class="c1">-- The window width (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">600</span><span class="w">               </span><span class="c1">-- The window height (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">borderless</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">         </span><span class="c1">-- Remove all border visuals from the window (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">resizable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">          </span><span class="c1">-- Let the window be user-resizable (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">minwidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">               </span><span class="c1">-- Minimum window width if the window is resizable (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">minheight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">              </span><span class="c1">-- Minimum window height if the window is resizable (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">fullscreen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">         </span><span class="c1">-- Enable fullscreen (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">fullscreentype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"desktop"</span><span class="w"> </span><span class="c1">-- Choose between "desktop" fullscreen or "exclusive" fullscreen mode (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">vsync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">                  </span><span class="c1">-- Vertical sync mode (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">msaa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">                   </span><span class="c1">-- The number of samples to use with multi-sampled antialiasing (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                </span><span class="c1">-- The number of bits per sample in the depth buffer</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">stencil</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">              </span><span class="c1">-- The number of bits per sample in the stencil buffer</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">display</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">                </span><span class="c1">-- Index of the monitor to show the window in (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">highdpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">            </span><span class="c1">-- Enable high-dpi mode for the window on a Retina display (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">usedpiscale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">         </span><span class="c1">-- Enable automatic DPI scaling when highdpi is set to true as well (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                    </span><span class="c1">-- The x-coordinate of the window's position in the specified display (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                    </span><span class="c1">-- The y-coordinate of the window's position in the specified display (number)</span>
+
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">audio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the audio module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">               </span><span class="c1">-- Enable the data module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the event module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">font</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">               </span><span class="c1">-- Enable the font module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">graphics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">           </span><span class="c1">-- Enable the graphics module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the image module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">joystick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">           </span><span class="c1">-- Enable the joystick module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">keyboard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">           </span><span class="c1">-- Enable the keyboard module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">math</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">               </span><span class="c1">-- Enable the math module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">mouse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the mouse module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">physics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">            </span><span class="c1">-- Enable the physics module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">sound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the sound module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the system module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the thread module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the timer module (boolean), Disabling it will result 0 delta time in love.update</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">touch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the touch module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">video</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the video module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">window</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the window module (boolean)</span>
+<span class="kr">end</span>
+</pre></div>
+<p>Here is a full list of options and their default values for LÖVE <a href="../Main/11.0.html" title="11.0">11.0</a> until <a href="../Main/11.2.html" title="11.2">11.2</a>:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">conf</span><span class="p">(</span><span class="nv">t</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">identity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                    </span><span class="c1">-- The name of the save directory (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">appendidentity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">            </span><span class="c1">-- Search files in source directory before save directory (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"11.0"</span><span class="w">                  </span><span class="c1">-- The LÖVE version this game was made for (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">console</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">                   </span><span class="c1">-- Attach a console (boolean, Windows only)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">accelerometerjoystick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">      </span><span class="c1">-- Enable the accelerometer on iOS and Android by exposing it as a Joystick (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">externalstorage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">           </span><span class="c1">-- True to save files (and read from the save directory) in external storage on Android (boolean) </span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">gammacorrect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">              </span><span class="c1">-- Enable gamma-correct rendering, when supported by the system (boolean)</span>
+
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">audio</span><span class="p">.</span><span class="py">mixwithsystem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">        </span><span class="c1">-- Keep background music playing when opening LOVE (boolean, iOS and Android only)</span>
+
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Untitled"</span><span class="w">         </span><span class="c1">-- The window title (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">icon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                 </span><span class="c1">-- Filepath to an image to use as the window's icon (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">800</span><span class="w">                </span><span class="c1">-- The window width (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">600</span><span class="w">               </span><span class="c1">-- The window height (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">borderless</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">         </span><span class="c1">-- Remove all border visuals from the window (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">resizable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">          </span><span class="c1">-- Let the window be user-resizable (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">minwidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">               </span><span class="c1">-- Minimum window width if the window is resizable (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">minheight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">              </span><span class="c1">-- Minimum window height if the window is resizable (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">fullscreen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">         </span><span class="c1">-- Enable fullscreen (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">fullscreentype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"desktop"</span><span class="w"> </span><span class="c1">-- Choose between "desktop" fullscreen or "exclusive" fullscreen mode (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">vsync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">                  </span><span class="c1">-- Vertical sync mode (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">msaa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">                   </span><span class="c1">-- The number of samples to use with multi-sampled antialiasing (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                </span><span class="c1">-- The number of bits per sample in the depth buffer</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">stencil</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">              </span><span class="c1">-- The number of bits per sample in the stencil buffer</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">display</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">                </span><span class="c1">-- Index of the monitor to show the window in (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">highdpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">            </span><span class="c1">-- Enable high-dpi mode for the window on a Retina display (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                    </span><span class="c1">-- The x-coordinate of the window's position in the specified display (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                    </span><span class="c1">-- The y-coordinate of the window's position in the specified display (number)</span>
+
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">audio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the audio module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">               </span><span class="c1">-- Enable the data module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the event module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">font</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">               </span><span class="c1">-- Enable the font module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">graphics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">           </span><span class="c1">-- Enable the graphics module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the image module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">joystick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">           </span><span class="c1">-- Enable the joystick module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">keyboard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">           </span><span class="c1">-- Enable the keyboard module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">math</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">               </span><span class="c1">-- Enable the math module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">mouse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the mouse module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">physics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">            </span><span class="c1">-- Enable the physics module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">sound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the sound module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the system module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the thread module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the timer module (boolean), Disabling it will result 0 delta time in love.update</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">touch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the touch module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">video</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the video module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">window</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the window module (boolean)</span>
+<span class="kr">end</span>
+</pre></div>
+<p>Here is a full list of options and their default values for LÖVE <a href="../Main/0.10.1.html" title="0.10.1">0.10.1</a> and <a href="../Main/0.10.2.html" title="0.10.2">0.10.2</a>:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">conf</span><span class="p">(</span><span class="nv">t</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">identity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                    </span><span class="c1">-- The name of the save directory (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"0.10.2"</span><span class="w">                </span><span class="c1">-- The LÖVE version this game was made for (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">console</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">                   </span><span class="c1">-- Attach a console (boolean, Windows only)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">accelerometerjoystick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">      </span><span class="c1">-- Enable the accelerometer on iOS and Android by exposing it as a Joystick (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">externalstorage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">           </span><span class="c1">-- True to save files (and read from the save directory) in external storage on Android (boolean) </span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">gammacorrect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">              </span><span class="c1">-- Enable gamma-correct rendering, when supported by the system (boolean)</span>
+
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Untitled"</span><span class="w">         </span><span class="c1">-- The window title (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">icon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                 </span><span class="c1">-- Filepath to an image to use as the window's icon (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">800</span><span class="w">                </span><span class="c1">-- The window width (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">600</span><span class="w">               </span><span class="c1">-- The window height (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">borderless</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">         </span><span class="c1">-- Remove all border visuals from the window (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">resizable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">          </span><span class="c1">-- Let the window be user-resizable (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">minwidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">               </span><span class="c1">-- Minimum window width if the window is resizable (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">minheight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">              </span><span class="c1">-- Minimum window height if the window is resizable (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">fullscreen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">         </span><span class="c1">-- Enable fullscreen (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">fullscreentype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"desktop"</span><span class="w"> </span><span class="c1">-- Choose between "desktop" fullscreen or "exclusive" fullscreen mode (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">vsync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">               </span><span class="c1">-- Enable vertical sync (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">msaa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">                   </span><span class="c1">-- The number of samples to use with multi-sampled antialiasing (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">display</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">                </span><span class="c1">-- Index of the monitor to show the window in (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">highdpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">            </span><span class="c1">-- Enable high-dpi mode for the window on a Retina display (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                    </span><span class="c1">-- The x-coordinate of the window's position in the specified display (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                    </span><span class="c1">-- The y-coordinate of the window's position in the specified display (number)</span>
+
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">audio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the audio module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the event module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">graphics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">           </span><span class="c1">-- Enable the graphics module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the image module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">joystick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">           </span><span class="c1">-- Enable the joystick module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">keyboard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">           </span><span class="c1">-- Enable the keyboard module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">math</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">               </span><span class="c1">-- Enable the math module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">mouse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the mouse module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">physics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">            </span><span class="c1">-- Enable the physics module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">sound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the sound module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the system module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the timer module (boolean), Disabling it will result 0 delta time in love.update</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">touch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the touch module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">video</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the video module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">window</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the window module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the thread module (boolean)</span>
+<span class="kr">end</span>
+</pre></div>
+<p>Here is a full list of options and their default values for LÖVE <a href="../Main/0.10.0.html" title="0.10.0">0.10.0</a>:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">conf</span><span class="p">(</span><span class="nv">t</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">identity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                    </span><span class="c1">-- The name of the save directory (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"0.10.0"</span><span class="w">                </span><span class="c1">-- The LÖVE version this game was made for (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">console</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">                   </span><span class="c1">-- Attach a console (boolean, Windows only)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">accelerometerjoystick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">      </span><span class="c1">-- Enable the accelerometer on iOS and Android by exposing it as a Joystick (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">gammacorrect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">              </span><span class="c1">-- Enable gamma-correct rendering, when supported by the system (boolean)</span>
+
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Untitled"</span><span class="w">         </span><span class="c1">-- The window title (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">icon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                 </span><span class="c1">-- Filepath to an image to use as the window's icon (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">800</span><span class="w">                </span><span class="c1">-- The window width (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">600</span><span class="w">               </span><span class="c1">-- The window height (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">borderless</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">         </span><span class="c1">-- Remove all border visuals from the window (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">resizable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">          </span><span class="c1">-- Let the window be user-resizable (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">minwidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">               </span><span class="c1">-- Minimum window width if the window is resizable (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">minheight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">              </span><span class="c1">-- Minimum window height if the window is resizable (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">fullscreen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">         </span><span class="c1">-- Enable fullscreen (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">fullscreentype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"desktop"</span><span class="w"> </span><span class="c1">-- Choose between "desktop" fullscreen or "exclusive" fullscreen mode (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">vsync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">               </span><span class="c1">-- Enable vertical sync (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">msaa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">                   </span><span class="c1">-- The number of samples to use with multi-sampled antialiasing (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">display</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">                </span><span class="c1">-- Index of the monitor to show the window in (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">highdpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">            </span><span class="c1">-- Enable high-dpi mode for the window on a Retina display (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                    </span><span class="c1">-- The x-coordinate of the window's position in the specified display (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                    </span><span class="c1">-- The y-coordinate of the window's position in the specified display (number)</span>
+
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">audio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the audio module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the event module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">graphics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">           </span><span class="c1">-- Enable the graphics module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the image module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">joystick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">           </span><span class="c1">-- Enable the joystick module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">keyboard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">           </span><span class="c1">-- Enable the keyboard module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">math</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">               </span><span class="c1">-- Enable the math module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">mouse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the mouse module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">physics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">            </span><span class="c1">-- Enable the physics module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">sound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the sound module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the system module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the timer module (boolean), Disabling it will result 0 delta time in love.update</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">touch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the touch module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">video</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the video module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">window</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the window module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the thread module (boolean)</span>
+<span class="kr">end</span>
+</pre></div>
+<p>Here is a full list of options and their default values for LÖVE <a href="../Main/0.9.2.html" title="0.9.2">0.9.2</a>:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">conf</span><span class="p">(</span><span class="nv">t</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">identity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                   </span><span class="c1">-- The name of the save directory (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"0.9.2"</span><span class="w">                </span><span class="c1">-- The LÖVE version this game was made for (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">console</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">                  </span><span class="c1">-- Attach a console (boolean, Windows only)</span>
+
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Untitled"</span><span class="w">        </span><span class="c1">-- The window title (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">icon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                </span><span class="c1">-- Filepath to an image to use as the window's icon (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">800</span><span class="w">               </span><span class="c1">-- The window width (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">600</span><span class="w">              </span><span class="c1">-- The window height (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">borderless</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">        </span><span class="c1">-- Remove all border visuals from the window (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">resizable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">         </span><span class="c1">-- Let the window be user-resizable (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">minwidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">              </span><span class="c1">-- Minimum window width if the window is resizable (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">minheight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">             </span><span class="c1">-- Minimum window height if the window is resizable (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">fullscreen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">        </span><span class="c1">-- Enable fullscreen (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">fullscreentype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"normal"</span><span class="w"> </span><span class="c1">-- Choose between "normal" fullscreen or "desktop" fullscreen mode (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">vsync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable vertical sync (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">fsaa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">                  </span><span class="c1">-- The number of samples to use with multi-sampled antialiasing (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">display</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">               </span><span class="c1">-- Index of the monitor to show the window in (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">highdpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">           </span><span class="c1">-- Enable high-dpi mode for the window on a Retina display (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">srgb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">              </span><span class="c1">-- Enable sRGB gamma correction when drawing to the screen (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                   </span><span class="c1">-- The x-coordinate of the window's position in the specified display (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                   </span><span class="c1">-- The y-coordinate of the window's position in the specified display (number)</span>
+
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">audio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the audio module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the event module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">graphics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">          </span><span class="c1">-- Enable the graphics module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the image module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">joystick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">          </span><span class="c1">-- Enable the joystick module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">keyboard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">          </span><span class="c1">-- Enable the keyboard module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">math</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the math module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">mouse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the mouse module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">physics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">           </span><span class="c1">-- Enable the physics module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">sound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the sound module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">            </span><span class="c1">-- Enable the system module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the timer module (boolean), Disabling it will result 0 delta time in love.update</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">window</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">            </span><span class="c1">-- Enable the window module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">            </span><span class="c1">-- Enable the thread module (boolean)</span>
+<span class="kr">end</span>
+</pre></div>
+<p>Here is a full list of options and their default values for LÖVE <a href="../Main/0.9.1.html" title="0.9.1">0.9.1</a>:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">conf</span><span class="p">(</span><span class="nv">t</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">identity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                   </span><span class="c1">-- The name of the save directory (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"0.9.1"</span><span class="w">                </span><span class="c1">-- The LÖVE version this game was made for (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">console</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">                  </span><span class="c1">-- Attach a console (boolean, Windows only)</span>
+
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Untitled"</span><span class="w">        </span><span class="c1">-- The window title (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">icon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                </span><span class="c1">-- Filepath to an image to use as the window's icon (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">800</span><span class="w">               </span><span class="c1">-- The window width (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">600</span><span class="w">              </span><span class="c1">-- The window height (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">borderless</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">        </span><span class="c1">-- Remove all border visuals from the window (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">resizable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">         </span><span class="c1">-- Let the window be user-resizable (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">minwidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">              </span><span class="c1">-- Minimum window width if the window is resizable (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">minheight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">             </span><span class="c1">-- Minimum window height if the window is resizable (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">fullscreen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">        </span><span class="c1">-- Enable fullscreen (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">fullscreentype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"normal"</span><span class="w"> </span><span class="c1">-- Standard fullscreen or desktop fullscreen mode (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">vsync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable vertical sync (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">fsaa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">                  </span><span class="c1">-- The number of samples to use with multi-sampled antialiasing (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">display</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">               </span><span class="c1">-- Index of the monitor to show the window in (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">highdpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">           </span><span class="c1">-- Enable high-dpi mode for the window on a Retina display (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">srgb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">              </span><span class="c1">-- Enable sRGB gamma correction when drawing to the screen (boolean)</span>
+
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">audio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the audio module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the event module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">graphics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">          </span><span class="c1">-- Enable the graphics module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the image module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">joystick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">          </span><span class="c1">-- Enable the joystick module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">keyboard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">          </span><span class="c1">-- Enable the keyboard module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">math</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the math module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">mouse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the mouse module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">physics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">           </span><span class="c1">-- Enable the physics module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">sound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the sound module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">            </span><span class="c1">-- Enable the system module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the timer module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">window</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">            </span><span class="c1">-- Enable the window module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">            </span><span class="c1">-- Enable the thread module (boolean)</span>
+<span class="kr">end</span>
+</pre></div>
+<p>Here is a full list of options and their default values for LÖVE <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a>:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">conf</span><span class="p">(</span><span class="nv">t</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">identity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                   </span><span class="c1">-- The name of the save directory (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"0.9.0"</span><span class="w">                </span><span class="c1">-- The LÖVE version this game was made for (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">console</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">                  </span><span class="c1">-- Attach a console (boolean, Windows only)</span>
+
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Untitled"</span><span class="w">        </span><span class="c1">-- The window title (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">icon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                </span><span class="c1">-- Filepath to an image to use as the window's icon (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">800</span><span class="w">               </span><span class="c1">-- The window width (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">600</span><span class="w">              </span><span class="c1">-- The window height (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">borderless</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">        </span><span class="c1">-- Remove all border visuals from the window (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">resizable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">         </span><span class="c1">-- Let the window be user-resizable (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">minwidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">              </span><span class="c1">-- Minimum window width if the window is resizable (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">minheight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">             </span><span class="c1">-- Minimum window height if the window is resizable (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">fullscreen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">        </span><span class="c1">-- Enable fullscreen (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">fullscreentype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"normal"</span><span class="w"> </span><span class="c1">-- Standard fullscreen or desktop fullscreen mode (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">vsync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable vertical sync (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">fsaa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">                  </span><span class="c1">-- The number of samples to use with multi-sampled antialiasing (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="py">display</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">               </span><span class="c1">-- Index of the monitor to show the window in (number)</span>
+
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">audio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the audio module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the event module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">graphics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">          </span><span class="c1">-- Enable the graphics module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the image module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">joystick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">          </span><span class="c1">-- Enable the joystick module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">keyboard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">          </span><span class="c1">-- Enable the keyboard module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">math</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">              </span><span class="c1">-- Enable the math module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">mouse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the mouse module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">physics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">           </span><span class="c1">-- Enable the physics module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">sound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the sound module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">            </span><span class="c1">-- Enable the system module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">             </span><span class="c1">-- Enable the timer module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">window</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">            </span><span class="c1">-- Enable the window module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">            </span><span class="c1">-- Enable the thread module (boolean)</span>
+<span class="kr">end</span>
+</pre></div>
+<p>Here is a full list of options and their default values for LÖVE <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a>:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">conf</span><span class="p">(</span><span class="nv">t</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Untitled"</span><span class="w">        </span><span class="c1">-- The title of the window the game is in (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Unnamed"</span><span class="w">        </span><span class="c1">-- The author of the game (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">                 </span><span class="c1">-- The website of the game (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">identity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">            </span><span class="c1">-- The name of the save directory (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"0.8.0"</span><span class="w">         </span><span class="c1">-- The LÖVE version this game was made for (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">console</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">           </span><span class="c1">-- Attach a console (boolean, Windows only)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">release</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">           </span><span class="c1">-- Enable release mode (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">screen</span><span class="p">.</span><span class="py">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">800</span><span class="w">        </span><span class="c1">-- The window width (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">screen</span><span class="p">.</span><span class="py">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">600</span><span class="w">       </span><span class="c1">-- The window height (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">screen</span><span class="p">.</span><span class="py">fullscreen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="c1">-- Enable fullscreen (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">screen</span><span class="p">.</span><span class="py">vsync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">       </span><span class="c1">-- Enable vertical sync (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">screen</span><span class="p">.</span><span class="py">fsaa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">           </span><span class="c1">-- The number of MSAA samples (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">joystick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">   </span><span class="c1">-- Enable the joystick module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">audio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">      </span><span class="c1">-- Enable the audio module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">keyboard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">   </span><span class="c1">-- Enable the keyboard module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">      </span><span class="c1">-- Enable the event module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">      </span><span class="c1">-- Enable the image module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">graphics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">   </span><span class="c1">-- Enable the graphics module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">      </span><span class="c1">-- Enable the timer module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">mouse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">      </span><span class="c1">-- Enable the mouse module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">sound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">      </span><span class="c1">-- Enable the sound module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">physics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">    </span><span class="c1">-- Enable the physics module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">thread</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">     </span><span class="c1">-- Enable the thread module (boolean)</span>
+<span class="kr">end</span>
+</pre></div>
+<p>Here is a full list of options and their default values for LÖVE <a href="../Main/0.7.2.html" title="0.7.2">0.7.2</a> and earlier:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">conf</span><span class="p">(</span><span class="nv">t</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Untitled"</span><span class="w">        </span><span class="c1">-- The title of the window the game is in (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Unnamed"</span><span class="w">        </span><span class="c1">-- The author of the game (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">identity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span><span class="w">            </span><span class="c1">-- The name of the save directory (string)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">               </span><span class="c1">-- The LÖVE version this game was made for (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">console</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">           </span><span class="c1">-- Attach a console (boolean, Windows only)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">screen</span><span class="p">.</span><span class="py">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">800</span><span class="w">        </span><span class="c1">-- The window width (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">screen</span><span class="p">.</span><span class="py">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">600</span><span class="w">       </span><span class="c1">-- The window height (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">screen</span><span class="p">.</span><span class="py">fullscreen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="c1">-- Enable fullscreen (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">screen</span><span class="p">.</span><span class="py">vsync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">       </span><span class="c1">-- Enable vertical sync (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">screen</span><span class="p">.</span><span class="py">fsaa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">           </span><span class="c1">-- The number of MSAA samples (number)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">joystick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">   </span><span class="c1">-- Enable the joystick module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">audio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">      </span><span class="c1">-- Enable the audio module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">keyboard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">   </span><span class="c1">-- Enable the keyboard module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">      </span><span class="c1">-- Enable the event module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">      </span><span class="c1">-- Enable the image module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">graphics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">   </span><span class="c1">-- Enable the graphics module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">      </span><span class="c1">-- Enable the timer module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">mouse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">      </span><span class="c1">-- Enable the mouse module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">sound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">      </span><span class="c1">-- Enable the sound module (boolean)</span>
+<span class="w">    </span><span class="nv">t</span><span class="p">.</span><span class="py">modules</span><span class="p">.</span><span class="py">physics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">    </span><span class="c1">-- Enable the physics module (boolean)</span>
+<span class="kr">end</span>
+</pre></div>
+<h2><span class="mw-headline" id="See_Also">See Also</span></h2>
+<ul><li><a href="../Main/love.html" title="love">love</a></li></ul>
+<p><br/>
+</p>
+<h2><span class="mw-headline" id="Other_Languages">Other Languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/L%C3%96VE.html">LÖVE</a></li><li><a href="../Category/Callbacks.html">Callbacks</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

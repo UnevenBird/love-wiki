@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>World:rayCast - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">World:rayCast</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.8.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This method is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Casts a ray and calls a function for each fixture it intersects. 
+</p>
+<h2><span class="mw-headline" id="Function">Function</span></h2>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">World</span><span class="p">:</span><span class="nf">rayCast</span><span class="p">(</span><span class="w"> </span><span class="nv">x1</span><span class="p">,</span><span class="w"> </span><span class="nv">y1</span><span class="p">,</span><span class="w"> </span><span class="nv">x2</span><span class="p">,</span><span class="w"> </span><span class="nv">y2</span><span class="p">,</span><span class="w"> </span><span class="nv">callback</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments">Arguments</span></h3>
+<dl><dt><code><a href="../Main/number.html" title="number">number</a> x1</code></dt>
+<dd>The x position of the starting point of the ray.</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> y1</code></dt>
+<dd>The y position of the starting point of the ray.</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> x2</code></dt>
+<dd>The x position of the end point of the ray.</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> y2</code></dt>
+<dd>The y position of the end point of the ray.</dd>
+<dt><code><a href="../Main/function.html" title="function">function</a> callback</code></dt>
+<dd>A function called for each fixture intersected by the ray. The function gets six arguments and should return a number as a control value. The intersection points fed into the function will be in an arbitrary order. If you wish to find the closest point of intersection, you'll need to do that yourself within the function. The easiest way to do that is by using the fraction value.</dd></dl>
+<h3><span class="mw-headline" id="Returns">Returns</span></h3>
+<p>Nothing.
+</p>
+<h2><span class="mw-headline" id="Callback">Callback</span></h2>
+<h3><span class="mw-headline" id="Synopsis_2">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">control</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">callback</span><span class="p">(</span><span class="w"> </span><span class="nv">fixture</span><span class="p">,</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="p">,</span><span class="w"> </span><span class="nv">xn</span><span class="p">,</span><span class="w"> </span><span class="nv">yn</span><span class="p">,</span><span class="w"> </span><span class="nv">fraction</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments_2">Arguments</span></h3>
+<dl><dt><code><a href="../Main/Fixture.html" title="Fixture">Fixture</a> fixture</code></dt>
+<dd>The fixture intersecting the ray.</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> x</code></dt>
+<dd>The x position of the intersection point.</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> y</code></dt>
+<dd>The y position of the intersection point.</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> xn</code></dt>
+<dd>The x value of the surface normal vector of the shape edge.</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> yn</code></dt>
+<dd>The y value of the surface normal vector of the shape edge.</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> fraction</code></dt>
+<dd>The position of the intersection on the ray as a number from 0 to 1 (or even higher if the ray length was changed with the return value).</dd></dl>
+<h3><span class="mw-headline" id="Returns_2">Returns</span></h3>
+<dl><dt><code><a href="../Main/number.html" title="number">number</a> control</code></dt>
+<dd>The ray can be controlled with the return value. A positive value sets a new ray length where 1 is the default value. A value of 0 terminates the ray. If the callback function returns -1, the intersection gets ignored as if it didn't happen.</dd></dl>
+<h2><span class="mw-headline" id="Notes">Notes</span></h2>
+<p>There is a bug in LÖVE <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a> where the normal vector passed to the callback function gets scaled by <a href="../Main/love.physics.getMeter.html" title="love.physics.getMeter">love.physics.getMeter</a>.
+</p>
+<h2><span class="mw-headline" id="Examples">Examples</span></h2>
+<h3><span class="mw-headline" id="Casting_a_ray_over_some_random_shapes.">Casting a ray over some random shapes.</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nf">worldRayCastCallback</span><span class="p">(</span><span class="nv">fixture</span><span class="p">,</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="p">,</span><span class="w"> </span><span class="nv">xn</span><span class="p">,</span><span class="w"> </span><span class="nv">yn</span><span class="p">,</span><span class="w"> </span><span class="nv">fraction</span><span class="p">)</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">hit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">	</span><span class="nv">hit</span><span class="p">.</span><span class="py">fixture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">fixture</span>
+<span class="w">	</span><span class="nv">hit</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="nv">hit</span><span class="p">.</span><span class="py">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span>
+<span class="w">	</span><span class="nv">hit</span><span class="p">.</span><span class="py">xn</span><span class="p">,</span><span class="w"> </span><span class="nv">hit</span><span class="p">.</span><span class="py">yn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">xn</span><span class="p">,</span><span class="w"> </span><span class="nv">yn</span>
+<span class="w">	</span><span class="nv">hit</span><span class="p">.</span><span class="py">fraction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">fraction</span>
+
+<span class="w">	</span><span class="nb">table.insert</span><span class="p">(</span><span class="nv">Ray</span><span class="p">.</span><span class="py">hitList</span><span class="p">,</span><span class="w"> </span><span class="nv">hit</span><span class="p">)</span>
+
+<span class="w">	</span><span class="kr">return</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">-- Continues with ray cast through all shapes.</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nf">createStuff</span><span class="p">()</span>
+<span class="w">	</span><span class="c1">-- Cleaning up the previous stuff.</span>
+<span class="w">	</span><span class="kr">for</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">#</span><span class="nv">Terrain</span><span class="p">.</span><span class="py">Stuff</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">		</span><span class="nv">Terrain</span><span class="p">.</span><span class="py">Stuff</span><span class="p">[</span><span class="nv">i</span><span class="p">].</span><span class="nv">Fixture</span><span class="p">:</span><span class="nf">destroy</span><span class="p">()</span>
+<span class="w">		</span><span class="nv">Terrain</span><span class="p">.</span><span class="py">Stuff</span><span class="p">[</span><span class="nv">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span>
+<span class="w">	</span><span class="kr">end</span>
+
+<span class="w">	</span><span class="c1">-- Generates some random shapes.</span>
+<span class="w">	</span><span class="kr">for</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">		</span><span class="kd">local</span><span class="w"> </span><span class="nv">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">		</span><span class="nv">p</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="nv">p</span><span class="p">.</span><span class="py">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">math.random</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">700</span><span class="p">),</span><span class="w"> </span><span class="nb">math.random</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">)</span>
+<span class="w">		</span><span class="kd">local</span><span class="w"> </span><span class="nv">shapetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">math.random</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="w">		</span><span class="kr">if</span><span class="w"> </span><span class="nv">shapetype</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">			</span><span class="kd">local</span><span class="w"> </span><span class="nv">w</span><span class="p">,</span><span class="w"> </span><span class="nv">h</span><span class="p">,</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">math.random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="nb">math.random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="nb">math.random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">math.pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">			</span><span class="nv">p</span><span class="p">.</span><span class="py">Shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">physics</span><span class="p">.</span><span class="nf">newRectangleShape</span><span class="p">(</span><span class="nv">p</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="nv">p</span><span class="p">.</span><span class="py">y</span><span class="p">,</span><span class="w"> </span><span class="nv">w</span><span class="p">,</span><span class="w"> </span><span class="nv">h</span><span class="p">,</span><span class="w"> </span><span class="nv">r</span><span class="p">)</span>
+<span class="w">		</span><span class="kr">elseif</span><span class="w"> </span><span class="nv">shapetype</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">			</span><span class="kd">local</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">math.random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">math.pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">			</span><span class="kd">local</span><span class="w"> </span><span class="nv">x2</span><span class="p">,</span><span class="w"> </span><span class="nv">y2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">p</span><span class="p">.</span><span class="py">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">math.cos</span><span class="p">(</span><span class="nv">a</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="nb">math.random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">20</span><span class="p">),</span><span class="w"> </span><span class="nv">p</span><span class="p">.</span><span class="py">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">math.sin</span><span class="p">(</span><span class="nv">a</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="nb">math.random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span>
+<span class="w">			</span><span class="nv">p</span><span class="p">.</span><span class="py">Shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">physics</span><span class="p">.</span><span class="nf">newEdgeShape</span><span class="p">(</span><span class="nv">p</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="nv">p</span><span class="p">.</span><span class="py">y</span><span class="p">,</span><span class="w"> </span><span class="nv">x2</span><span class="p">,</span><span class="w"> </span><span class="nv">y2</span><span class="p">)</span>
+<span class="w">		</span><span class="kr">else</span>
+<span class="w">			</span><span class="kd">local</span><span class="w"> </span><span class="nv">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">math.random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">40</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">			</span><span class="nv">p</span><span class="p">.</span><span class="py">Shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">physics</span><span class="p">.</span><span class="nf">newCircleShape</span><span class="p">(</span><span class="nv">p</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="nv">p</span><span class="p">.</span><span class="py">y</span><span class="p">,</span><span class="w"> </span><span class="nv">r</span><span class="p">)</span>
+<span class="w">		</span><span class="kr">end</span>
+
+<span class="w">		</span><span class="nv">p</span><span class="p">.</span><span class="py">Fixture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">physics</span><span class="p">.</span><span class="nf">newFixture</span><span class="p">(</span><span class="nv">Terrain</span><span class="p">.</span><span class="py">Body</span><span class="p">,</span><span class="w"> </span><span class="nv">p</span><span class="p">.</span><span class="py">Shape</span><span class="p">)</span>
+
+<span class="w">		</span><span class="nv">Terrain</span><span class="p">.</span><span class="py">Stuff</span><span class="p">[</span><span class="nv">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">p</span>
+<span class="w">	</span><span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">keypressed</span><span class="p">()</span>
+<span class="w">	</span><span class="nf">createStuff</span><span class="p">()</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+<span class="w">	</span><span class="c1">-- Setting this to 1 to avoid all current scaling bugs.</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">physics</span><span class="p">.</span><span class="nf">setMeter</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="w">	</span><span class="c1">-- Start out with the same random stuff each start.</span>
+<span class="w">	</span><span class="nb">math.randomseed</span><span class="p">(</span><span class="mh">0xfacef00d</span><span class="p">)</span>
+
+<span class="w">	</span><span class="nv">World</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">physics</span><span class="p">.</span><span class="nf">newWorld</span><span class="p">()</span>
+
+<span class="w">	</span><span class="nv">Terrain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">	</span><span class="nv">Terrain</span><span class="p">.</span><span class="py">Body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">physics</span><span class="p">.</span><span class="nf">newBody</span><span class="p">(</span><span class="nv">World</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"static"</span><span class="p">)</span>
+<span class="w">	</span><span class="nv">Terrain</span><span class="p">.</span><span class="py">Stuff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">	</span><span class="nf">createStuff</span><span class="p">()</span>
+
+<span class="w">	</span><span class="nv">Ray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">		</span><span class="nv">x1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">		</span><span class="nv">y1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">		</span><span class="nv">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">		</span><span class="nv">y2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">		</span><span class="nv">hitList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">	</span><span class="p">}</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="nv">dt</span><span class="p">)</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">now</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">timer</span><span class="p">.</span><span class="nf">getTime</span><span class="p">()</span>
+
+<span class="w">	</span><span class="nv">World</span><span class="p">:</span><span class="nf">update</span><span class="p">(</span><span class="nv">dt</span><span class="p">)</span>
+
+<span class="w">	</span><span class="c1">-- Clear fixture hit list.</span>
+<span class="w">	</span><span class="nv">Ray</span><span class="p">.</span><span class="py">hitList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">	</span>
+<span class="w">	</span><span class="c1">-- Calculate ray position.</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nb">math.sin</span><span class="p">(</span><span class="nv">now</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1.2</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.4</span>
+<span class="w">	</span><span class="nv">Ray</span><span class="p">.</span><span class="py">x2</span><span class="p">,</span><span class="w"> </span><span class="nv">Ray</span><span class="p">.</span><span class="py">y2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">math.cos</span><span class="p">(</span><span class="nv">pos</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="nb">math.pi</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="nb">math.sin</span><span class="p">(</span><span class="nv">pos</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="nb">math.pi</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span>
+<span class="w">	</span>
+<span class="w">	</span><span class="c1">-- Cast the ray and populate the hitList table.</span>
+<span class="w">	</span><span class="nv">World</span><span class="p">:</span><span class="nf">rayCast</span><span class="p">(</span><span class="nv">Ray</span><span class="p">.</span><span class="py">x1</span><span class="p">,</span><span class="w"> </span><span class="nv">Ray</span><span class="p">.</span><span class="py">y1</span><span class="p">,</span><span class="w"> </span><span class="nv">Ray</span><span class="p">.</span><span class="py">x2</span><span class="p">,</span><span class="w"> </span><span class="nv">Ray</span><span class="p">.</span><span class="py">y2</span><span class="p">,</span><span class="w"> </span><span class="nv">worldRayCastCallback</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+<span class="w">	</span><span class="c1">-- Drawing the terrain.</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setColor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">	</span><span class="kr">for</span><span class="w"> </span><span class="nv">i</span><span class="p">,</span><span class="w"> </span><span class="nv">v</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nb">ipairs</span><span class="p">(</span><span class="nv">Terrain</span><span class="p">.</span><span class="py">Stuff</span><span class="p">)</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">		</span><span class="kr">if</span><span class="w"> </span><span class="nv">v</span><span class="p">.</span><span class="py">Shape</span><span class="p">:</span><span class="nf">getType</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"polygon"</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">			</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">polygon</span><span class="p">(</span><span class="s2">"line"</span><span class="p">,</span><span class="w"> </span><span class="nv">Terrain</span><span class="p">.</span><span class="py">Body</span><span class="p">:</span><span class="nf">getWorldPoints</span><span class="p">(</span><span class="w"> </span><span class="nv">v</span><span class="p">.</span><span class="py">Shape</span><span class="p">:</span><span class="nf">getPoints</span><span class="p">()</span><span class="w"> </span><span class="p">))</span>
+<span class="w">		</span><span class="kr">elseif</span><span class="w"> </span><span class="nv">v</span><span class="p">.</span><span class="py">Shape</span><span class="p">:</span><span class="nf">getType</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"edge"</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">			</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">line</span><span class="p">(</span><span class="nv">Terrain</span><span class="p">.</span><span class="py">Body</span><span class="p">:</span><span class="nf">getWorldPoints</span><span class="p">(</span><span class="w"> </span><span class="nv">v</span><span class="p">.</span><span class="py">Shape</span><span class="p">:</span><span class="nf">getPoints</span><span class="p">()</span><span class="w"> </span><span class="p">))</span>
+<span class="w">		</span><span class="kr">else</span>
+<span class="w">			</span><span class="kd">local</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Terrain</span><span class="p">.</span><span class="py">Body</span><span class="p">:</span><span class="nf">getWorldPoints</span><span class="p">(</span><span class="nv">v</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="nv">v</span><span class="p">.</span><span class="py">y</span><span class="p">)</span>
+<span class="w">			</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">circle</span><span class="p">(</span><span class="s2">"line"</span><span class="p">,</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="p">,</span><span class="w"> </span><span class="nv">v</span><span class="p">.</span><span class="py">Shape</span><span class="p">:</span><span class="nf">getRadius</span><span class="p">())</span>
+<span class="w">		</span><span class="kr">end</span>
+<span class="w">	</span><span class="kr">end</span>
+
+<span class="w">	</span><span class="c1">-- Drawing the ray.</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setLineWidth</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setColor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">.4</span><span class="p">)</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">line</span><span class="p">(</span><span class="nv">Ray</span><span class="p">.</span><span class="py">x1</span><span class="p">,</span><span class="w"> </span><span class="nv">Ray</span><span class="p">.</span><span class="py">y1</span><span class="p">,</span><span class="w"> </span><span class="nv">Ray</span><span class="p">.</span><span class="py">x2</span><span class="p">,</span><span class="w"> </span><span class="nv">Ray</span><span class="p">.</span><span class="py">y2</span><span class="p">)</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setLineWidth</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="w">	</span><span class="c1">-- Drawing the intersection points and normal vectors if there were any.</span>
+<span class="w">	</span><span class="kr">for</span><span class="w"> </span><span class="nv">i</span><span class="p">,</span><span class="w"> </span><span class="nv">hit</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nb">ipairs</span><span class="p">(</span><span class="nv">Ray</span><span class="p">.</span><span class="py">hitList</span><span class="p">)</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">		</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setColor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">		</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="nv">i</span><span class="p">,</span><span class="w"> </span><span class="nv">hit</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="nv">hit</span><span class="p">.</span><span class="py">y</span><span class="p">)</span><span class="w"> </span><span class="c1">-- Prints the hit order besides the point.</span>
+<span class="w">		</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">circle</span><span class="p">(</span><span class="s2">"line"</span><span class="p">,</span><span class="w"> </span><span class="nv">hit</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="nv">hit</span><span class="p">.</span><span class="py">y</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="w">		</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setColor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">		</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">line</span><span class="p">(</span><span class="nv">hit</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="nv">hit</span><span class="p">.</span><span class="py">y</span><span class="p">,</span><span class="w"> </span><span class="nv">hit</span><span class="p">.</span><span class="py">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">hit</span><span class="p">.</span><span class="py">xn</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="nv">hit</span><span class="p">.</span><span class="py">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">hit</span><span class="p">.</span><span class="py">yn</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">25</span><span class="p">)</span>
+<span class="w">	</span><span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+<figure class="mw-default-size mw-halign-none" typeof="mw:File/Thumb"><a class="mw-file-description" href="../File/world_raycast_callback_example.png.html"><img class="mw-file-element" data-file-height="629" data-file-width="806" decoding="async" height="234" src="../assets/images/world_raycast_callback_example.png" width="300"/></a><figcaption>Screenshot of the example.</figcaption></figure>
+<h2><span class="mw-headline" id="See_Also">See Also</span></h2>
+<ul><li><a href="../Main/World.html" title="World">World</a></li></ul>
+<p><br/>
+</p>
+<h2><span class="mw-headline" id="Other_Languages">Other Languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Functions.html">Functions</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

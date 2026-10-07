@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Contact - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">Contact</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><p>Contacts are objects created to manage collisions in worlds.
+</p><p>The lifetimes of Contacts are short. When you receive them in callbacks, they may be destroyed immediately after the callback returns.  Cache their values instead of storing Contacts directly.
+</p>
+<h2><span class="mw-headline" id="Functions">Functions</span></h2>
+<table class="smwtable" style="background-color: #eeeeff;">
+<tbody><tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Contact__getChildren.html" title="Contact:getChildren">Contact:getChildren</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the child indices of the shapes of the two colliding fixtures.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Contact__getFixtures.html" title="Contact:getFixtures">Contact:getFixtures</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the two <a href="../Main/Fixture.html" title="Fixture">Fixtures</a> that hold the shapes that are in contact.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.2.html" title="0.9.2">0.9.2</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Contact__getFriction.html" title="Contact:getFriction">Contact:getFriction</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get the friction between two shapes that are in contact.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Contact__getNormal.html" title="Contact:getNormal">Contact:getNormal</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get the normal vector between two shapes that are in contact.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Contact__getPosition.html" title="Contact:getPosition">Contact:getPosition</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get the location of the contact point between two shapes.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Removed in" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Remove.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a>
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Contact__getPositions.html" title="Contact:getPositions">Contact:getPositions</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Returns the contact points of the two colliding fixtures.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Contact__getRestitution.html" title="Contact:getRestitution">Contact:getRestitution</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get the restitution between two shapes that are in contact.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Contact__getSeparation.html" title="Contact:getSeparation">Contact:getSeparation</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get the separation between two shapes that are in contact.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Removed in" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Remove.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a>
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Contact__getShapes.html" title="Contact:getShapes">Contact:getShapes</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the two Shapess that are in contact.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/12.0.html" title="12.0">12.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Contact__getTangentSpeed.html" title="Contact:getTangentSpeed">Contact:getTangentSpeed</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the desired tangent speed of the Contact, in world units per second.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Contact__getVelocity.html" title="Contact:getVelocity">Contact:getVelocity</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get the linear impact velocity of a contact.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Removed in" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Remove.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a>
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Contact__isDestroyed.html" title="Contact:isDestroyed">Contact:isDestroyed</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets whether the Contact is destroyed.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.2.html" title="0.9.2">0.9.2</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Contact__isEnabled.html" title="Contact:isEnabled">Contact:isEnabled</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Returns whether the contact is enabled.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Contact__isTouching.html" title="Contact:isTouching">Contact:isTouching</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Returns whether the two colliding fixtures are touching each other.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Contact__resetFriction.html" title="Contact:resetFriction">Contact:resetFriction</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Resets the contact friction to the mixture value of both fixtures.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Contact__resetRestitution.html" title="Contact:resetRestitution">Contact:resetRestitution</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Resets the contact restitution to the mixture value of both fixtures.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Contact__setEnabled.html" title="Contact:setEnabled">Contact:setEnabled</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Enables or disables the contact.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Contact__setFriction.html" title="Contact:setFriction">Contact:setFriction</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the contact friction.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Contact__setRestitution.html" title="Contact:setRestitution">Contact:setRestitution</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the contact restitution.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Contact__setTangentSpeed.html" title="Contact:setTangentSpeed">Contact:setTangentSpeed</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the desired tangent speed of the Contact, in world units per second.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Object__release.html" title="Object:release">Object:release</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Immediately destroys the object's Lua reference.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/11.0.html" title="11.0">11.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Object__type.html" title="Object:type">Object:type</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the type of the object as a string.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/Object__typeOf.html" title="Object:typeOf">Object:typeOf</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Checks whether an object is of a certain type.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+<tr>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"><a href="../Main/World__setCallbacks.html" title="World:setCallbacks">World:setCallbacks</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets functions to be called when shapes collide.</td>
+<td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;"><span class="mw-default-size" typeof="mw:File/Frameless"><span><img alt="Added since" class="mw-file-element" data-file-height="11" data-file-width="8" decoding="async" height="11" src="../assets/images/Add.png" width="8"/></span></span> <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></td>
+<td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td></tr>
+</tbody></table>
+<h2><span class="mw-headline" id="Supertypes">Supertypes</span></h2>
+<ul><li><a href="../Main/Object.html" title="Object">Object</a></li></ul>
+<h2><span class="mw-headline" id="See_Also">See Also</span></h2>
+<ul><li><a href="../Main/World__setCallbacks.html" title="World:setCallbacks">World:setCallbacks</a></li>
+<li><a href="../Main/World__getContacts.html" title="World:getContacts">World:getContacts</a></li>
+<li><a href="../Main/love.physics.html" title="love.physics">love.physics</a></li></ul>
+<h2><span class="mw-headline" id="Examples">Examples</span></h2>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="c1">-- Demonstration of correct use of Contacts to avoid "Attempt to use destroyed contact."</span>
+<span class="c1">-- Most relevant parts are physics.collisionOnEnter, love.update, love.draw.</span>
+
+<span class="kd">local</span><span class="w"> </span><span class="nv">screen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nv">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span>
+<span class="w">    </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nv">blue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mf">0.23</span><span class="p">,</span><span class="w"> </span><span class="mf">0.25</span><span class="p">,</span><span class="w"> </span><span class="mf">0.59</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span>
+<span class="w">    </span><span class="nv">purple</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mf">0.25</span><span class="p">,</span><span class="w"> </span><span class="mf">0.09</span><span class="p">,</span><span class="w"> </span><span class="mf">0.28</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span>
+<span class="w">    </span><span class="nv">white</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mf">0.89</span><span class="p">,</span><span class="w"> </span><span class="mf">0.91</span><span class="p">,</span><span class="w"> </span><span class="mf">0.90</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="kd">local</span><span class="w"> </span><span class="nv">physics</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nv">normals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{},</span>
+<span class="p">}</span>
+
+<span class="c1">-- Source: https://www.love2d.org/forums/viewtopic.php?p=17018&amp;sid=5c8509cf6b97e3ce5aab1bc49e85acc5#p17018</span>
+<span class="kd">local</span><span class="w"> </span><span class="kr">function</span><span class="w"> </span><span class="nf">draw_arrow</span><span class="p">(</span><span class="nv">x1</span><span class="p">,</span><span class="w"> </span><span class="nv">y1</span><span class="p">,</span><span class="w"> </span><span class="nv">x2</span><span class="p">,</span><span class="w"> </span><span class="nv">y2</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">head_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">head_angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">math.pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.2</span>
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">line</span><span class="p">(</span><span class="nv">x1</span><span class="p">,</span><span class="w"> </span><span class="nv">y1</span><span class="p">,</span><span class="w"> </span><span class="nv">x2</span><span class="p">,</span><span class="w"> </span><span class="nv">y2</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">math.atan2</span><span class="p">(</span><span class="nv">y1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">y2</span><span class="p">,</span><span class="w"> </span><span class="nv">x1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">x2</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">polygon</span><span class="p">(</span><span class="s1">'fill'</span><span class="p">,</span><span class="w"> </span><span class="nv">x2</span><span class="p">,</span><span class="w"> </span><span class="nv">y2</span><span class="p">,</span><span class="w"> </span><span class="nv">x2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">head_length</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">math.cos</span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">head_angle</span><span class="p">),</span><span class="w"> </span><span class="nv">y2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">head_length</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">math.sin</span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">head_angle</span><span class="p">),</span><span class="w"> </span><span class="nv">x2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">head_length</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">math.cos</span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">head_angle</span><span class="p">),</span><span class="w"> </span><span class="nv">y2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">head_length</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">math.sin</span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">head_angle</span><span class="p">))</span>
+<span class="kr">end</span>
+
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">physics</span><span class="p">.</span><span class="nf">collisionOnEnter</span><span class="p">(</span><span class="nv">fixture_a</span><span class="p">,</span><span class="w"> </span><span class="nv">fixture_b</span><span class="p">,</span><span class="w"> </span><span class="nv">contact</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">dx</span><span class="p">,</span><span class="nv">dy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">contact</span><span class="p">:</span><span class="nf">getNormal</span><span class="p">()</span>
+<span class="w">    </span><span class="nv">dx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">dx</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">30</span>
+<span class="w">    </span><span class="nv">dy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">dy</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">30</span>
+<span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="nv">contact</span><span class="p">:</span><span class="nf">getPositions</span><span class="p">()}</span>
+<span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="nv">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="o">#</span><span class="nv">point</span><span class="p">,</span><span class="mi">2</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">        </span><span class="kd">local</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">point</span><span class="p">[</span><span class="nv">i</span><span class="p">],</span><span class="w"> </span><span class="nv">point</span><span class="p">[</span><span class="nv">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">        </span><span class="c1">-- Cache the values inside the contacts because they're not guaranteed</span>
+<span class="w">        </span><span class="c1">-- to be valid later in the frame.</span>
+<span class="w">        </span><span class="nb">table.insert</span><span class="p">(</span><span class="nv">physics</span><span class="p">.</span><span class="py">normals</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nv">x</span><span class="p">,</span><span class="nv">y</span><span class="p">,</span><span class="w"> </span><span class="nv">x</span><span class="o">+</span><span class="nv">dx</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="o">+</span><span class="nv">dy</span><span class="p">})</span>
+<span class="w">    </span><span class="kr">end</span>
+
+<span class="w">    </span><span class="c1">-- do not use contact after this function returns</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">physics</span><span class="p">.</span><span class="nf">setMeter</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">can_bodies_sleep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="nv">physics</span><span class="p">.</span><span class="py">world</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">physics</span><span class="p">.</span><span class="nf">newWorld</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">9.8</span><span class="p">,</span><span class="w"> </span><span class="nv">can_bodies_sleep</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">physics</span><span class="p">.</span><span class="py">world</span><span class="p">:</span><span class="nf">setCallbacks</span><span class="p">(</span><span class="nv">physics</span><span class="p">.</span><span class="py">collisionOnEnter</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nv">physics</span><span class="p">.</span><span class="py">geo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="nv">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">        </span><span class="kd">local</span><span class="w"> </span><span class="nv">side</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">        </span><span class="nv">side</span><span class="p">.</span><span class="py">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">physics</span><span class="p">.</span><span class="nf">newBody</span><span class="p">(</span><span class="nv">physics</span><span class="p">.</span><span class="py">world</span><span class="p">,</span><span class="w"> </span><span class="nv">screen</span><span class="p">.</span><span class="py">x</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nv">screen</span><span class="p">.</span><span class="py">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">y</span><span class="p">)</span>
+<span class="w">        </span><span class="nv">side</span><span class="p">.</span><span class="py">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">physics</span><span class="p">.</span><span class="nf">newRectangleShape</span><span class="p">(</span><span class="nv">screen</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">)</span>
+<span class="w">        </span><span class="nv">side</span><span class="p">.</span><span class="py">fixture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">physics</span><span class="p">.</span><span class="nf">newFixture</span><span class="p">(</span><span class="nv">side</span><span class="p">.</span><span class="py">body</span><span class="p">,</span><span class="w"> </span><span class="nv">side</span><span class="p">.</span><span class="py">shape</span><span class="p">)</span>
+<span class="w">        </span><span class="nb">table.insert</span><span class="p">(</span><span class="nv">physics</span><span class="p">.</span><span class="py">geo</span><span class="p">,</span><span class="w"> </span><span class="nv">side</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">end</span>
+<span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="nv">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">        </span><span class="kd">local</span><span class="w"> </span><span class="nv">side</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">        </span><span class="nv">side</span><span class="p">.</span><span class="py">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">physics</span><span class="p">.</span><span class="nf">newBody</span><span class="p">(</span><span class="nv">physics</span><span class="p">.</span><span class="py">world</span><span class="p">,</span><span class="w"> </span><span class="nv">screen</span><span class="p">.</span><span class="py">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">screen</span><span class="p">.</span><span class="py">y</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">        </span><span class="nv">side</span><span class="p">.</span><span class="py">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">physics</span><span class="p">.</span><span class="nf">newRectangleShape</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="nv">screen</span><span class="p">.</span><span class="py">y</span><span class="p">)</span>
+<span class="w">        </span><span class="nv">side</span><span class="p">.</span><span class="py">fixture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">physics</span><span class="p">.</span><span class="nf">newFixture</span><span class="p">(</span><span class="nv">side</span><span class="p">.</span><span class="py">body</span><span class="p">,</span><span class="w"> </span><span class="nv">side</span><span class="p">.</span><span class="py">shape</span><span class="p">)</span>
+<span class="w">        </span><span class="nb">table.insert</span><span class="p">(</span><span class="nv">physics</span><span class="p">.</span><span class="py">geo</span><span class="p">,</span><span class="w"> </span><span class="nv">side</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">end</span>
+
+<span class="w">    </span><span class="nv">physics</span><span class="p">.</span><span class="py">bouncers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="nv">y</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="nv">screen</span><span class="p">.</span><span class="py">y</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">        </span><span class="kr">for</span><span class="w"> </span><span class="nv">x</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="nv">screen</span><span class="p">.</span><span class="py">x</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="mi">50</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">            </span><span class="kd">local</span><span class="w"> </span><span class="nv">ball</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">            </span><span class="nv">ball</span><span class="p">.</span><span class="py">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">physics</span><span class="p">.</span><span class="nf">newBody</span><span class="p">(</span><span class="nv">physics</span><span class="p">.</span><span class="py">world</span><span class="p">,</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="p">,</span><span class="w"> </span><span class="s2">"dynamic"</span><span class="p">)</span>
+<span class="w">            </span><span class="nv">ball</span><span class="p">.</span><span class="py">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">physics</span><span class="p">.</span><span class="nf">newCircleShape</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="w">            </span><span class="nv">ball</span><span class="p">.</span><span class="py">fixture</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">physics</span><span class="p">.</span><span class="nf">newFixture</span><span class="p">(</span><span class="nv">ball</span><span class="p">.</span><span class="py">body</span><span class="p">,</span><span class="w"> </span><span class="nv">ball</span><span class="p">.</span><span class="py">shape</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">            </span><span class="nv">ball</span><span class="p">.</span><span class="py">fixture</span><span class="p">:</span><span class="nf">setRestitution</span><span class="p">(</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="w">            </span><span class="nv">ball</span><span class="p">.</span><span class="py">body</span><span class="p">:</span><span class="nf">setMass</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="w">            </span><span class="nv">ball</span><span class="p">.</span><span class="py">body</span><span class="p">:</span><span class="nf">setLinearVelocity</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<span class="w">            </span><span class="nb">table.insert</span><span class="p">(</span><span class="nv">physics</span><span class="p">.</span><span class="py">bouncers</span><span class="p">,</span><span class="w"> </span><span class="nv">ball</span><span class="p">)</span>
+<span class="w">        </span><span class="kr">end</span>
+<span class="w">    </span><span class="kr">end</span>
+
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setBackgroundColor</span><span class="p">(</span><span class="nv">color</span><span class="p">.</span><span class="py">blue</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="nf">setMode</span><span class="p">(</span><span class="nv">screen</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="nv">screen</span><span class="p">.</span><span class="py">y</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="nv">dt</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">-- Updating the world will trigger collisionOnEnter</span>
+<span class="w">    </span><span class="nv">physics</span><span class="p">.</span><span class="py">world</span><span class="p">:</span><span class="nf">update</span><span class="p">(</span><span class="nv">dt</span><span class="p">)</span>
+
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">keyboard</span><span class="p">.</span><span class="nf">isDown</span><span class="p">(</span><span class="s2">"space"</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">        </span><span class="kr">for</span><span class="w"> </span><span class="nv">_</span><span class="p">,</span><span class="nv">ball</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nb">ipairs</span><span class="p">(</span><span class="nv">physics</span><span class="p">.</span><span class="py">bouncers</span><span class="p">)</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">            </span><span class="nv">ball</span><span class="p">.</span><span class="py">body</span><span class="p">:</span><span class="nf">applyLinearImpulse</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span>
+<span class="w">        </span><span class="kr">end</span>
+<span class="w">    </span><span class="kr">elseif</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">keyboard</span><span class="p">.</span><span class="nf">isDown</span><span class="p">(</span><span class="s2">"escape"</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">        </span><span class="nv">love</span><span class="p">.</span><span class="py">event</span><span class="p">.</span><span class="nf">quit</span><span class="p">()</span>
+<span class="w">    </span><span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setColor</span><span class="p">(</span><span class="nv">color</span><span class="p">.</span><span class="py">purple</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="nv">i</span><span class="p">,</span><span class="nv">side</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nb">ipairs</span><span class="p">(</span><span class="nv">physics</span><span class="p">.</span><span class="py">geo</span><span class="p">)</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">        </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">polygon</span><span class="p">(</span><span class="s2">"fill"</span><span class="p">,</span><span class="w"> </span><span class="nv">side</span><span class="p">.</span><span class="py">body</span><span class="p">:</span><span class="nf">getWorldPoints</span><span class="p">(</span><span class="nv">side</span><span class="p">.</span><span class="py">shape</span><span class="p">:</span><span class="nf">getPoints</span><span class="p">()))</span>
+<span class="w">    </span><span class="kr">end</span>
+<span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="nv">i</span><span class="p">,</span><span class="nv">ball</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nb">ipairs</span><span class="p">(</span><span class="nv">physics</span><span class="p">.</span><span class="py">bouncers</span><span class="p">)</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">        </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">circle</span><span class="p">(</span><span class="s2">"fill"</span><span class="p">,</span><span class="w"> </span><span class="nv">ball</span><span class="p">.</span><span class="py">body</span><span class="p">:</span><span class="nf">getX</span><span class="p">(),</span><span class="w"> </span><span class="nv">ball</span><span class="p">.</span><span class="py">body</span><span class="p">:</span><span class="nf">getY</span><span class="p">(),</span><span class="w"> </span><span class="nv">ball</span><span class="p">.</span><span class="py">shape</span><span class="p">:</span><span class="nf">getRadius</span><span class="p">())</span>
+<span class="w">    </span><span class="kr">end</span>
+
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setColor</span><span class="p">(</span><span class="nv">color</span><span class="p">.</span><span class="py">white</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">printf</span><span class="p">(</span><span class="s2">"smoosh balls with space"</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="s2">"left"</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">printf</span><span class="p">(</span><span class="nb">string.format</span><span class="p">(</span><span class="s2">"%i contacts"</span><span class="p">,</span><span class="w"> </span><span class="o">#</span><span class="nv">physics</span><span class="p">.</span><span class="py">normals</span><span class="p">),</span><span class="w"> </span><span class="nv">screen</span><span class="p">.</span><span class="py">x</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="s2">"right"</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">printf</span><span class="p">(</span><span class="s2">"arrows show contact normals"</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="nv">screen</span><span class="p">.</span><span class="py">y</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="s2">"left"</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1">-- Use our cached normals</span>
+<span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="nv">key</span><span class="p">,</span><span class="nv">args</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nb">pairs</span><span class="p">(</span><span class="nv">physics</span><span class="p">.</span><span class="py">normals</span><span class="p">)</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">        </span><span class="kd">local</span><span class="w"> </span><span class="nv">x1</span><span class="p">,</span><span class="w"> </span><span class="nv">y1</span><span class="p">,</span><span class="w"> </span><span class="nv">x2</span><span class="p">,</span><span class="w"> </span><span class="nv">y2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">unpack</span><span class="p">(</span><span class="nv">args</span><span class="p">)</span>
+<span class="w">        </span><span class="nf">draw_arrow</span><span class="p">(</span><span class="nv">x1</span><span class="p">,</span><span class="w"> </span><span class="nv">y1</span><span class="p">,</span><span class="w"> </span><span class="nv">x2</span><span class="p">,</span><span class="w"> </span><span class="nv">y2</span><span class="p">)</span>
+<span class="w">        </span><span class="nv">physics</span><span class="p">.</span><span class="py">normals</span><span class="p">[</span><span class="nv">key</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">nil</span>
+<span class="w">    </span><span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+<p><br/>
+</p>
+<h2><span class="mw-headline" id="Other_Languages">Other Languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Types.html">Types</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

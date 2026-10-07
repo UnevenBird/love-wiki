@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>love.graphics.scale - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">love.graphics.scale</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><p>Scales the coordinate system in two dimensions.
+</p><p>By default the coordinate system in LÖVE corresponds to the display pixels in horizontal and vertical directions one-to-one, and the x-axis increases towards the right while the y-axis increases downwards. Scaling the coordinate system changes this relation.
+</p><p>After scaling by sx and sy, all coordinates are treated as if they were multiplied by sx and sy. Every result of a drawing operation is also correspondingly scaled, so scaling by (2, 2) for example would mean making everything twice as large in both x- and y-directions. Scaling by a negative value flips the coordinate system in the corresponding direction, which also means everything will be drawn flipped or upside down, or both. Scaling by zero is not a useful operation.
+</p><p>Scale and translate are not commutative operations, therefore, calling them in different orders will change the outcome.
+</p><p>This change lasts until the next <a href="../Main/love.draw.html" title="love.draw">love.draw</a> call, or a <a href="../Main/love.graphics.pop.html" title="love.graphics.pop">love.graphics.pop</a> reverts to a previous <a href="../Main/love.graphics.push.html" title="love.graphics.push">love.graphics.push</a>, or <a href="../Main/love.graphics.origin.html" title="love.graphics.origin">love.graphics.origin</a> is called - whichever comes first.
+</p>
+<h2><span class="mw-headline" id="Function">Function</span></h2>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">scale</span><span class="p">(</span><span class="w"> </span><span class="nv">sx</span><span class="p">,</span><span class="w"> </span><span class="nv">sy</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments">Arguments</span></h3>
+<dl><dt><code><a href="../Main/number.html" title="number">number</a> sx</code></dt>
+<dd>The scaling in the direction of the x-axis.</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> sy (sx)</code></dt>
+<dd>The scaling in the direction of the y-axis. If omitted, it defaults to same as parameter sx.</dd></dl>
+<h3><span class="mw-headline" id="Returns">Returns</span></h3>
+<p>Nothing.
+</p>
+<h2><span class="mw-headline" id="Examples">Examples</span></h2>
+<p>Draw two lines of text, one scaled and one normal. Uses <a href="../Main/love.graphics.push.html" title="love.graphics.push">love.graphics.push</a> and <a href="../Main/love.graphics.pop.html" title="love.graphics.pop">love.graphics.pop</a> to return to normal render scale.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+<span class="w">   </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">push</span><span class="p">()</span>
+<span class="w">   </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">scale</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span><span class="w">   </span><span class="c1">-- reduce everything by 50% in both X and Y coordinates</span>
+<span class="w">   </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="s2">"Scaled text"</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">)</span>
+<span class="w">   </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">pop</span><span class="p">()</span>
+<span class="w">   </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="s2">"Normal text"</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">)</span>
+<span class="kr">end</span>
+</pre></div>
+<h3><span class="mw-headline" id="Example_with_translate_and_scale">Example with translate and scale</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">load</span><span class="w"> </span><span class="p">()</span>
+<span class="w">	</span><span class="c1">-- if your code was optimized for fullHD:</span>
+<span class="w">	</span><span class="nv">window</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="nv">translateX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="nv">translateY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="nv">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nv">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w"> </span><span class="nv">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1080</span><span class="p">}</span>
+<span class="w">	</span><span class="nv">width</span><span class="p">,</span><span class="w"> </span><span class="nv">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">getDimensions</span><span class="w"> </span><span class="p">()</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">window</span><span class="p">.</span><span class="nf">setMode</span><span class="w"> </span><span class="p">(</span><span class="nv">width</span><span class="p">,</span><span class="w"> </span><span class="nv">height</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nv">resizable</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nv">borderless</span><span class="o">=</span><span class="kc">false</span><span class="p">})</span>
+<span class="w">	</span><span class="nf">resize</span><span class="w"> </span><span class="p">(</span><span class="nv">width</span><span class="p">,</span><span class="w"> </span><span class="nv">height</span><span class="p">)</span><span class="w"> </span><span class="c1">-- update new translation and scale</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">update</span><span class="w"> </span><span class="p">(</span><span class="nv">dt</span><span class="p">)</span>
+<span class="w">	</span><span class="c1">-- mouse position with applied translate and scale:</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">mx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">math.floor</span><span class="w"> </span><span class="p">((</span><span class="nv">love</span><span class="p">.</span><span class="py">mouse</span><span class="p">.</span><span class="nf">getX</span><span class="p">()</span><span class="o">-</span><span class="nv">window</span><span class="p">.</span><span class="py">translateX</span><span class="p">)</span><span class="o">/</span><span class="nv">window</span><span class="p">.</span><span class="py">scale</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">my</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">math.floor</span><span class="w"> </span><span class="p">((</span><span class="nv">love</span><span class="p">.</span><span class="py">mouse</span><span class="p">.</span><span class="nf">getY</span><span class="p">()</span><span class="o">-</span><span class="nv">window</span><span class="p">.</span><span class="py">translateY</span><span class="p">)</span><span class="o">/</span><span class="nv">window</span><span class="p">.</span><span class="py">scale</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="w">	</span><span class="c1">-- your code here, use mx and my as mouse X and Y positions</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="w"> </span><span class="p">()</span>
+<span class="w">	</span><span class="c1">-- first translate, then scale</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">translate</span><span class="w"> </span><span class="p">(</span><span class="nv">window</span><span class="p">.</span><span class="py">translateX</span><span class="p">,</span><span class="w"> </span><span class="nv">window</span><span class="p">.</span><span class="py">translateY</span><span class="p">)</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">scale</span><span class="w"> </span><span class="p">(</span><span class="nv">window</span><span class="p">.</span><span class="py">scale</span><span class="p">)</span>
+<span class="w">	</span><span class="c1">-- your graphics code here, optimized for fullHD</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">rectangle</span><span class="p">(</span><span class="s1">'line'</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w"> </span><span class="mi">1080</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nf">resize</span><span class="w"> </span><span class="p">(</span><span class="nv">w</span><span class="p">,</span><span class="w"> </span><span class="nv">h</span><span class="p">)</span><span class="w"> </span><span class="c1">-- update new translation and scale:</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">w1</span><span class="p">,</span><span class="w"> </span><span class="nv">h1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">window</span><span class="p">.</span><span class="py">width</span><span class="p">,</span><span class="w"> </span><span class="nv">window</span><span class="p">.</span><span class="py">height</span><span class="w"> </span><span class="c1">-- target rendering resolution</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">math.min</span><span class="w"> </span><span class="p">(</span><span class="nv">w</span><span class="o">/</span><span class="nv">w1</span><span class="p">,</span><span class="w"> </span><span class="nv">h</span><span class="o">/</span><span class="nv">h1</span><span class="p">)</span>
+<span class="w">	</span><span class="nv">window</span><span class="p">.</span><span class="py">translateX</span><span class="p">,</span><span class="w"> </span><span class="nv">window</span><span class="p">.</span><span class="py">translateY</span><span class="p">,</span><span class="w"> </span><span class="nv">window</span><span class="p">.</span><span class="py">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nv">w</span><span class="o">-</span><span class="nv">w1</span><span class="o">*</span><span class="nv">scale</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nv">h</span><span class="o">-</span><span class="nv">h1</span><span class="o">*</span><span class="nv">scale</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nv">scale</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">resize</span><span class="w"> </span><span class="p">(</span><span class="nv">w</span><span class="p">,</span><span class="w"> </span><span class="nv">h</span><span class="p">)</span>
+<span class="w">	</span><span class="nf">resize</span><span class="w"> </span><span class="p">(</span><span class="nv">w</span><span class="p">,</span><span class="w"> </span><span class="nv">h</span><span class="p">)</span><span class="w"> </span><span class="c1">-- update new translation and scale</span>
+<span class="kr">end</span>
+</pre></div>
+<h2><span class="mw-headline" id="See_Also">See Also</span></h2>
+<ul><li><a href="../Main/love.graphics.html" title="love.graphics">love.graphics</a></li>
+<li><a href="../Main/love.graphics.pop.html" title="love.graphics.pop">love.graphics.pop</a></li>
+<li><a href="../Main/love.graphics.push.html" title="love.graphics.push">love.graphics.push</a></li>
+<li><a href="../Main/love.graphics.rotate.html" title="love.graphics.rotate">love.graphics.rotate</a></li>
+<li><a href="../Main/love.graphics.shear.html" title="love.graphics.shear">love.graphics.shear</a></li>
+<li><a href="../Main/love.graphics.translate.html" title="love.graphics.translate">love.graphics.translate</a></li>
+<li><a href="../Main/love.graphics.origin.html" title="love.graphics.origin">love.graphics.origin</a></li></ul>
+<p><br/>
+</p>
+<h2><span class="mw-headline" id="Other_Languages">Other Languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Functions.html">Functions</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>PixelEffect:send - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">PixelEffect:send</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><table bgcolor="#ffacac" class="removed-new-section" data-newin="[[0.8.0]]" data-oldin="[[0.9.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a> and removed in LÖVE <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>It has been renamed to <a href="../Main/Shader__send.html" title="Shader:send">Shader:send</a>.</small>
+</td></tr></tbody></table>
+<p>Sends one or more values to a special (<i>extern</i>) variable inside the pixel effect. Extern variables have to be marked using the <i>extern</i> keyword, e.g.
+</p>
+<div class="mw-highlight mw-highlight-lang-glsl mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">extern</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="n">time</span><span class="p">;</span>
+<span class="kr">extern</span><span class="w"> </span><span class="kt">vec2</span><span class="w"> </span><span class="n">light_pos</span><span class="p">;</span>
+<span class="kr">extern</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">colors</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+</pre></div>
+<p>The corresponding send calls would be
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">effect</span><span class="p">:</span><span class="nf">send</span><span class="p">(</span><span class="s2">"time"</span><span class="p">,</span><span class="w"> </span><span class="nv">t</span><span class="p">)</span>
+<span class="nv">effect</span><span class="p">:</span><span class="nf">send</span><span class="p">(</span><span class="s2">"light_pos"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nv">light_x</span><span class="p">,</span><span class="w"> </span><span class="nv">light_y</span><span class="p">})</span>
+<span class="nv">effect</span><span class="p">:</span><span class="nf">send</span><span class="p">(</span><span class="s2">"colors"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nv">r1</span><span class="p">,</span><span class="w"> </span><span class="nv">g1</span><span class="p">,</span><span class="w"> </span><span class="nv">b1</span><span class="p">,</span><span class="w"> </span><span class="nv">a1</span><span class="p">},</span><span class="w">  </span><span class="p">{</span><span class="nv">r2</span><span class="p">,</span><span class="w"> </span><span class="nv">g2</span><span class="p">,</span><span class="w"> </span><span class="nv">b2</span><span class="p">,</span><span class="w"> </span><span class="nv">a2</span><span class="p">},</span><span class="w">  </span><span class="p">{</span><span class="nv">r3</span><span class="p">,</span><span class="w"> </span><span class="nv">g3</span><span class="p">,</span><span class="w"> </span><span class="nv">b3</span><span class="p">,</span><span class="w"> </span><span class="nv">a3</span><span class="p">},</span><span class="w">  </span><span class="p">{</span><span class="nv">r4</span><span class="p">,</span><span class="w"> </span><span class="nv">g4</span><span class="p">,</span><span class="w"> </span><span class="nv">b4</span><span class="p">,</span><span class="w"> </span><span class="nv">a4</span><span class="p">})</span>
+</pre></div>
+<h2><span class="mw-headline" id="Function">Function</span></h2>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">PixelEffect</span><span class="p">:</span><span class="nf">send</span><span class="p">(</span><span class="w"> </span><span class="nv">name</span><span class="p">,</span><span class="w"> </span><span class="nv">number</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments">Arguments</span></h3>
+<dl><dt><code><a href="../Main/string.html" title="string">string</a> name</code></dt>
+<dd>Name of the number to send to the pixel effect.</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> number</code></dt>
+<dd>Number to send to store in the extern.</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> ...</code></dt>
+<dd>Additional numbers to send in case the extern is an array.</dd></dl>
+<h3><span class="mw-headline" id="Returns">Returns</span></h3>
+<p>Nothing.
+</p>
+<h2><span class="mw-headline" id="Function_2">Function</span></h2>
+<h3><span class="mw-headline" id="Synopsis_2">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">PixelEffect</span><span class="p">:</span><span class="nf">send</span><span class="p">(</span><span class="w"> </span><span class="nv">name</span><span class="p">,</span><span class="w"> </span><span class="nv">vector</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments_2">Arguments</span></h3>
+<dl><dt><code><a href="../Main/string.html" title="string">string</a> name</code></dt>
+<dd>Name of the vector to send to the pixel effect.</dd>
+<dt><code><a href="../Main/table.html" title="table">table</a> vector</code></dt>
+<dd>Numbers to send to the extern as a vector. The number of elements in the table determines the type of the vector (e.g. two numbers -&gt; vec2). At least two and at most four numbers can be used.</dd>
+<dt><code><a href="../Main/table.html" title="table">table</a> ...</code></dt>
+<dd>Additional vectors to send in case the extern is an array. All vectors need to be of the same size (e.g. only vec3's)</dd></dl>
+<h3><span class="mw-headline" id="Returns_2">Returns</span></h3>
+<p>Nothing.
+</p>
+<h2><span class="mw-headline" id="Function_3">Function</span></h2>
+<h3><span class="mw-headline" id="Synopsis_3">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">PixelEffect</span><span class="p">:</span><span class="nf">send</span><span class="p">(</span><span class="w"> </span><span class="nv">name</span><span class="p">,</span><span class="w"> </span><span class="nv">matrix</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments_3">Arguments</span></h3>
+<dl><dt><code><a href="../Main/string.html" title="string">string</a> name</code></dt>
+<dd>Name of the matrix to send to the pixel effect.</dd>
+<dt><code><a href="../Main/table.html" title="table">table</a> matrix</code></dt>
+<dd>2x2, 3x3, or 4x4 matrix to send to the extern. Using table form: <code>{{a,b,c,d}, {e,f,g,h}, ... }</code></dd>
+<dt><code><a href="../Main/table.html" title="table">table</a> ...</code></dt>
+<dd>Additional matrices of the same type as <i>matrix</i> to store in the extern array.</dd></dl>
+<h3><span class="mw-headline" id="Returns_3">Returns</span></h3>
+<p>Nothing.
+</p>
+<h2><span class="mw-headline" id="Function_4">Function</span></h2>
+<h3><span class="mw-headline" id="Synopsis_4">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">PixelEffect</span><span class="p">:</span><span class="nf">send</span><span class="p">(</span><span class="w"> </span><span class="nv">name</span><span class="p">,</span><span class="w"> </span><span class="nv">image</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments_4">Arguments</span></h3>
+<dl><dt><code><a href="../Main/string.html" title="string">string</a> name</code></dt>
+<dd>Name of the Image to send to the pixel effect.</dd>
+<dt><code><a href="../Main/Image.html" title="Image">Image</a> image</code></dt>
+<dd>Image to send to the extern.</dd>
+<dt><code><a href="../Main/Image.html" title="Image">Image</a> ...</code></dt>
+<dd>Additional images in case the extern is an array.</dd></dl>
+<h3><span class="mw-headline" id="Returns_4">Returns</span></h3>
+<p>Nothing.
+</p>
+<h2><span class="mw-headline" id="Function_5">Function</span></h2>
+<h3><span class="mw-headline" id="Synopsis_5">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">PixelEffect</span><span class="p">:</span><span class="nf">send</span><span class="p">(</span><span class="w"> </span><span class="nv">name</span><span class="p">,</span><span class="w"> </span><span class="nv">canvas</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments_5">Arguments</span></h3>
+<dl><dt><code><a href="../Main/string.html" title="string">string</a> name</code></dt>
+<dd>Name of the Canvas to send to the pixel effect.</dd>
+<dt><code><a href="../Main/Canvas.html" title="Canvas">Canvas</a> canvas</code></dt>
+<dd>Canvas to send to the extern. The pixel effect type is <i>Image</i>.</dd>
+<dt><code><a href="../Main/Image.html" title="Image">Image</a> ...</code></dt>
+<dd>Additional canvases to send to the extern array.</dd></dl>
+<h3><span class="mw-headline" id="Returns_5">Returns</span></h3>
+<p>Nothing.
+</p>
+<h2><span class="mw-headline" id="See_Also">See Also</span></h2>
+<ul><li><a href="../Main/PixelEffect.html" title="PixelEffect">PixelEffect</a></li></ul>
+<h2><span class="mw-headline" id="Other_Languages">Other Languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Functions.html">Functions</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

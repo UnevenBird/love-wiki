@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Tutorial:Callback Functions - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-500" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-namespace">Tutorial</span><span class="mw-page-title-separator">:</span><span class="mw-page-title-main">Callback Functions</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><p>The <a href="../Category/Callbacks.html" title="Category:Callbacks">callback</a> functions in LÖVE are called by <a href="../Main/love.run.html" title="love.run">love.run</a> to perform various tasks and are all optional. However, a fully-featured game experience would probably utilize nearly all of them, so it's wise to know what they are.
+</p><p>A callback, for those new to programming or otherwise unfamiliar with the term, is a function which works backwards in a sense. In a regular function like <a href="../Main/love.graphics.draw.html" title="love.graphics.draw">love.graphics.draw</a> or math.floor, you call it and LÖVE or Lua does something. A callback, on the other hand, is a function that you code and LÖVE calls at certain times. This makes it easy to keep your code organized and optimal. For example, since love.load will only get called once when the game is first started (before any other callback), it's a fine place to put code which loads game content and otherwise prepares things.
+</p>
+<h2><span class="mw-headline" id="love.load"><a href="../Main/love.load.html" title="love.load">love.load</a></span></h2>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+<span class="w">   </span><span class="nv">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newImage</span><span class="p">(</span><span class="s2">"cake.jpg"</span><span class="p">)</span>
+<span class="w">   </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setNewFont</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="w">   </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setColor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">   </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setBackgroundColor</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">)</span>
+<span class="kr">end</span>
+</pre></div>
+<p>This function gets called only once, when the game is started, and is usually where you would load resources, initialize variables and set specific settings. All those things can be done anywhere else as well, but doing them here means that they are done once only, saving a lot of system resources. 
+</p>
+<h2><span class="mw-headline" id="love.update"><a href="../Main/love.update.html" title="love.update">love.update</a></span></h2>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="nv">dt</span><span class="p">)</span>
+<span class="w">   </span><span class="kr">if</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">keyboard</span><span class="p">.</span><span class="nf">isDown</span><span class="p">(</span><span class="s2">"up"</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">      </span><span class="nv">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">num</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">dt</span><span class="w"> </span><span class="c1">-- this would increment num by 100 per second</span>
+<span class="w">   </span><span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+<p>This function is called continuously and will probably be where most of your math is done. 'dt' stands for "<a href="../Main/love.timer.getDelta.html" title="love.timer.getDelta">delta time</a>" and is the amount of seconds since the last time this function was called (which is usually a small value like 0.025714). 
+</p>
+<h2><span class="mw-headline" id="love.draw"><a href="../Main/love.draw.html" title="love.draw">love.draw</a></span></h2>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+<span class="w">   </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">draw</span><span class="p">(</span><span class="nv">image</span><span class="p">,</span><span class="w"> </span><span class="nv">imgx</span><span class="p">,</span><span class="w"> </span><span class="nv">imgy</span><span class="p">)</span>
+<span class="w">   </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="s2">"Click and drag the cake around or use the arrow keys"</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<span class="kr">end</span>
+</pre></div>
+<p><code><a href="../Main/love.draw.html" title="love.draw">love.draw</a></code> is where all the drawing happens (if that wasn't obvious enough already) and if you call any of the <code><a href="../Main/love.graphics.draw.html" title="love.graphics.draw">love.graphics.draw</a></code> outside of this function then it's not going to have any effect. This function is also called continuously so keep in mind that if you change the font/color/mode/etc at the end of the function then it will have an effect on things at the beginning of the function. For example: 
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+<span class="w">   </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setColor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+<span class="w">   </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="s2">"This text is not black because of the line below"</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+<span class="w">   </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setColor</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">   </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="s2">"This text is red"</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">)</span>
+<span class="kr">end</span>
+</pre></div>
+<h2><span class="mw-headline" id="love.mousepressed"><a href="../Main/love.mousepressed.html" title="love.mousepressed">love.mousepressed</a></span></h2>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.10.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.10.0.html" title="0.10.0">0.10.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This variant is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">mousepressed</span><span class="p">(</span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="p">,</span><span class="w"> </span><span class="nv">button</span><span class="p">,</span><span class="w"> </span><span class="nv">istouch</span><span class="p">)</span>
+<span class="w">   </span><span class="kr">if</span><span class="w"> </span><span class="nv">button</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">      </span><span class="nv">imgx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="c1">-- move image to where mouse clicked</span>
+<span class="w">      </span><span class="nv">imgy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">y</span>
+<span class="w">   </span><span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+<p>This function is called whenever a mouse button is pressed and it receives the button and the coordinates of where it was pressed. The button can be any of the button index that was pressed. This function goes very well along with <code><a href="../Main/love.mousereleased.html" title="love.mousereleased">love.mousereleased</a></code>.
+</p>
+<h2><span class="mw-headline" id="love.mousereleased"><a href="../Main/love.mousereleased.html" title="love.mousereleased">love.mousereleased</a></span></h2>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.10.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.10.0.html" title="0.10.0">0.10.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This variant is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">mousereleased</span><span class="p">(</span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="p">,</span><span class="w"> </span><span class="nv">button</span><span class="p">,</span><span class="w"> </span><span class="nv">istouch</span><span class="p">)</span>
+<span class="w">   </span><span class="kr">if</span><span class="w"> </span><span class="nv">button</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">      </span><span class="nf">fireSlingshot</span><span class="p">(</span><span class="nv">x</span><span class="p">,</span><span class="nv">y</span><span class="p">)</span><span class="w"> </span><span class="c1">-- this totally awesome custom function is defined elsewhere</span>
+<span class="w">   </span><span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+<p>This function is called whenever a mouse button is released and it receives the button and the coordinates of where it was released. You can have this function together with <code><a href="../Main/love.mousepressed.html" title="love.mousepressed">love.mousepressed</a></code> or separate, they aren't connected in any way.
+</p>
+<h2><span class="mw-headline" id="love.keypressed"><a href="../Main/love.keypressed.html" title="love.keypressed">love.keypressed</a></span></h2>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">keypressed</span><span class="p">(</span><span class="nv">key</span><span class="p">)</span>
+<span class="w">   </span><span class="kr">if</span><span class="w"> </span><span class="nv">key</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'b'</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">      </span><span class="nv">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"The B key was pressed."</span>
+<span class="w">   </span><span class="kr">elseif</span><span class="w"> </span><span class="nv">key</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'a'</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">      </span><span class="nv">a_down</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">   </span><span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+<p>This function is called whenever a keyboard key is pressed and receives the key that was pressed. The key can be any of the <a href="../Main/KeyConstant.html" title="KeyConstant">constants</a>. This functions goes very well along with <code><a href="../Main/love.keyreleased.html" title="love.keyreleased">love.keyreleased</a></code>.
+</p>
+<h2><span class="mw-headline" id="love.keyreleased"><a href="../Main/love.keyreleased.html" title="love.keyreleased">love.keyreleased</a></span></h2>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">keyreleased</span><span class="p">(</span><span class="nv">key</span><span class="p">)</span>
+<span class="w">   </span><span class="kr">if</span><span class="w"> </span><span class="nv">key</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'b'</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">      </span><span class="nv">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"The B key was released."</span>
+<span class="w">   </span><span class="kr">elseif</span><span class="w"> </span><span class="nv">key</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'a'</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">      </span><span class="nv">a_down</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">   </span><span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+<p>This function is called whenever a keyboard key is released and receives the key that was released. You can have this function together with <code><a href="../Main/love.keypressed.html" title="love.keypressed">love.keypressed</a></code> or separate, they aren't connected in any way. 
+</p>
+<h2><span class="mw-headline" id="love.focus"><a href="../Main/love.focus.html" title="love.focus">love.focus</a></span></h2>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">focus</span><span class="p">(</span><span class="nv">f</span><span class="p">)</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nv">f</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">"LOST FOCUS"</span><span class="p">)</span>
+<span class="w">  </span><span class="kr">else</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">"GAINED FOCUS"</span><span class="p">)</span>
+<span class="w">  </span><span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+<p>This function is called whenever the user clicks off and on the LÖVE window. For instance, if they are playing a windowed game and a user clicks on their Internet browser, the game could be notified and automatically pause the game.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">focus</span><span class="p">(</span><span class="nv">f</span><span class="p">)</span><span class="w"> </span><span class="nv">gameIsPaused</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nv">f</span><span class="w"> </span><span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="nv">dt</span><span class="p">)</span>
+<span class="w">	</span><span class="kr">if</span><span class="w"> </span><span class="nv">gameIsPaused</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="kr">return</span><span class="w"> </span><span class="kr">end</span>
+
+<span class="w">	</span><span class="c1">-- The rest of your love.update code goes here</span>
+<span class="kr">end</span>
+</pre></div>
+<h2><span class="mw-headline" id="love.quit"><a href="../Main/love.quit.html" title="love.quit">love.quit</a></span></h2>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">quit</span><span class="p">()</span>
+<span class="w">  </span><span class="nb">print</span><span class="p">(</span><span class="s2">"Thanks for playing! Come back soon!"</span><span class="p">)</span>
+<span class="kr">end</span>
+</pre></div>
+<p>This function is called whenever the user clicks the window's close button (often an X). For instance, if the user decides they are done playing, they could click the close button. Then, before it closes, the game can save its state.
+</p><p>Those are the callback functions and their basic usage.
+</p><p><br/>
+</p>
+<h2><span class="mw-headline" id="Other_languages">Other languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Tutorials.html">Tutorials</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

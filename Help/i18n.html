@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Help:i18n - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-12" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-namespace">Help</span><span class="mw-page-title-separator">:</span><span class="mw-page-title-main">i18n</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><p><a class="external text" href="https://wiki.archlinux.org/index.php/Help:I18n" rel="nofollow">Stolen from the Arch Wiki.</a>
+</p>
+<h2><span class="mw-headline" id="Guidelines">Guidelines</span></h2>
+<h3><span class="mw-headline" id="Article_titles">Article titles</span></h3>
+<p>Non-English article titles should be of the form <b>Title in English (Language)</b> where "Language" is the localized spelling of said language. For example: <b>Beginners' Guide (Français)</b>. English titles should not include a language tag. See <a href="#Languages">#Languages</a> for a list of languages and expected localized spellings.
+</p><p>Rationale:
+</p>
+<ul><li>English titles facilitate administration; all admins and sysops understand English, but may not be bilingual. When browsing Special:RecentChanges and other special pages, admins need to know what is being edited without resorting to external translation programs.</li>
+<li>Standardized article titles simplify inter-language linking and allow for the creation of internationalization templates such as <a href="../Template/i18n.html" title="Template:i18n">Template:i18n</a>.</li></ul>
+<h3><span class="mw-headline" id="Localized_redirects">Localized redirects</span></h3>
+<p>Localized titles can and should be created, but must redirect to the English-named article as described above. Redirect titles need not include language tags. For example: <b>Manuel du débutant</b> redirets to <b>Beginners' Guide (Français)</b>.
+</p><p>Rationale:
+</p>
+<ul><li>Localized titles improve navigability for international readers. Both the internal search feature and external search engines can utilize such redirects.</li>
+<li>Useful redirects facilitate internal linking.</li></ul>
+<h3><span class="mw-headline" id="Inter-language_links">Inter-language links</span></h3>
+<p><a href="../Template/i18n.html" title="Template:i18n">Template:i18n</a> should be included in every article to display a list of available translations by including the following wiki text at the beginning of the article:
+</p>
+<pre>{{i18n|Title in English}}
+</pre>
+<p>See <a href="../Template/i18n.html" title="Template:i18n">Template:i18n</a> for detailed usage instructions.
+</p><p>Rationale:
+</p>
+<ul><li>Maintaining separate inter-language links for each translation is unrealistic and error-prone. <a href="../Template/i18n.html" title="Template:i18n">Template:i18n</a> makes use of standardized article titles described above to generate a complete and consistent list across translations.</li>
+<li>Including inter-language links at the beginning of an article allows international readers to promptly determine whether content is available in their language, and similarly allows translators to ascertain whether an article requires translation.</li></ul>
+<h2><span class="mw-headline" id="Languages">Languages</span></h2>
+<p>The following table lists all languages encountered on the wiki along with related links.
+</p><p>For information regarding the subtag, please see:
+</p>
+<ul><li><a class="external free" href="http://www.iana.org/assignments/language-subtag-registry" rel="nofollow">http://www.iana.org/assignments/language-subtag-registry</a></li>
+<li><a class="external free" href="http://tools.ietf.org/rfc/bcp/bcp47.txt" rel="nofollow">http://tools.ietf.org/rfc/bcp/bcp47.txt</a></li>
+<li><a class="external free" href="http://rishida.net/utils/subtags/" rel="nofollow">http://rishida.net/utils/subtags/</a></li></ul>
+<table border="1" class="sortable">
+<caption>Language table
+</caption>
+<tbody><tr>
+<th>English</th>
+<th>Localized</th>
+<th>Subtag</th>
+<th>Category
+</th></tr>
+<tr>
+<td>Bulgarian</td>
+<td>Български</td>
+<td>bg</td>
+<td>Български
+</td></tr>
+<tr>
+<td>Chinese (Simplified)</td>
+<td>简体中文</td>
+<td>zh-CN</td>
+<td>简体中文
+</td></tr>
+<tr>
+<td>Chinese (Traditional)</td>
+<td>正體中文</td>
+<td>zh-TW</td>
+<td>正體中文
+</td></tr>
+<tr>
+<td>Czech</td>
+<td>Česky</td>
+<td>cs</td>
+<td>Česky
+</td></tr>
+<tr>
+<td>Danish</td>
+<td>Dansk</td>
+<td>da</td>
+<td>Dansk
+</td></tr>
+<tr>
+<td>Dutch</td>
+<td>Nederlands</td>
+<td>nl</td>
+<td>Nederlands
+</td></tr>
+<tr>
+<td>English</td>
+<td>English</td>
+<td>en</td>
+<td><a href="../Category/English.html" title="Category:English">Category:English</a>
+</td></tr>
+<tr>
+<td>Finnish</td>
+<td>Suomi</td>
+<td>fi</td>
+<td>Suomi
+</td></tr>
+<tr>
+<td>French</td>
+<td>Français</td>
+<td>fr</td>
+<td>Français
+</td></tr>
+<tr>
+<td>German</td>
+<td>Deutsch</td>
+<td>de</td>
+<td>Deutsch
+</td></tr>
+<tr>
+<td>Greek</td>
+<td>Ελληνικά</td>
+<td>el</td>
+<td>Ελληνικά
+</td></tr>
+<tr>
+<td>Hebrew</td>
+<td>עברית</td>
+<td>he</td>
+<td>עברית
+</td></tr>
+<tr>
+<td>Hungarian</td>
+<td>Magyar</td>
+<td>hu</td>
+<td>Magyar
+</td></tr>
+<tr>
+<td>Indonesian</td>
+<td>Indonesia (Bahasa Indonesia)</td>
+<td>id</td>
+<td>Indonesia
+</td></tr>
+<tr>
+<td>Italian</td>
+<td>Italiano</td>
+<td>it</td>
+<td>Italiano
+</td></tr>
+<tr>
+<td>Japanese</td>
+<td>日本語</td>
+<td>ja</td>
+<td>日本語
+</td></tr>
+<tr>
+<td>Korean</td>
+<td>한국어</td>
+<td>ko</td>
+<td>한국어
+</td></tr>
+<tr>
+<td>Lithuanian</td>
+<td>Lietuviškai</td>
+<td>lt</td>
+<td>Lietuviškai
+</td></tr>
+<tr>
+<td>Persian</td>
+<td>فارسی</td>
+<td>fa</td>
+<td>فارسی
+</td></tr>
+<tr>
+<td>Polish</td>
+<td>Polski</td>
+<td>pl</td>
+<td>Polski
+</td></tr>
+<tr>
+<td>Portuguese</td>
+<td>Português</td>
+<td>pt</td>
+<td>Português
+</td></tr>
+<tr>
+<td>Romanian</td>
+<td>Română</td>
+<td>ro</td>
+<td>Română
+</td></tr>
+<tr>
+<td>Russian</td>
+<td>Русский</td>
+<td>ru</td>
+<td>Русский
+</td></tr>
+<tr>
+<td>Serbian</td>
+<td>Српски (Srpski)</td>
+<td>sr</td>
+<td>Српски
+</td></tr>
+<tr>
+<td>Slovak</td>
+<td>Slovenský</td>
+<td>sk</td>
+<td>Slovenský
+</td></tr>
+<tr>
+<td>Spanish</td>
+<td>Español</td>
+<td>es</td>
+<td>Español
+</td></tr>
+<tr>
+<td>Swedish</td>
+<td>Svenska</td>
+<td>sv</td>
+<td>Svenska
+</td></tr>
+<tr>
+<td>Thai</td>
+<td>ไทย</td>
+<td>th</td>
+<td>ไทย
+</td></tr>
+<tr>
+<td>Turkish</td>
+<td>Türkçe</td>
+<td>tr</td>
+<td>Türkçe
+</td></tr>
+<tr>
+<td>Ukrainian</td>
+<td>Українська</td>
+<td>uk</td>
+<td>Українська
+</td></tr>
+<tr>
+<td>Vietnamese</td>
+<td>Tiếng Việt</td>
+<td>vi</td>
+<td>Tiếng Việt
+</td></tr>
+<tr>
+<td>Arabic</td>
+<td>عربي</td>
+<td>ar</td>
+<td>عربي
+</td></tr></tbody></table>
+<h2><span class="mw-headline" id="Other_Languages">Other Languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i>More info</i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

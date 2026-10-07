@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>SoundData:setSample - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">SoundData:setSample</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><p>Sets the value of the sample-point at the specified position. For stereo SoundData objects, the data from the left and right channels are interleaved in that order.
+</p>
+<h2><span class="mw-headline" id="Function">Function</span></h2>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">SoundData</span><span class="p">:</span><span class="nf">setSample</span><span class="p">(</span><span class="w"> </span><span class="nv">i</span><span class="p">,</span><span class="w"> </span><span class="nv">sample</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments">Arguments</span></h3>
+<dl><dt><code><a href="../Main/number.html" title="number">number</a> i</code></dt>
+<dd>An integer value specifying the position of the sample (starting at 0).</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> sample</code></dt>
+<dd>The normalized samplepoint (range -1.0 to 1.0).</dd></dl>
+<h3><span class="mw-headline" id="Returns">Returns</span></h3>
+<p>Nothing.
+</p>
+<h2><span class="mw-headline" id="Function_2">Function</span></h2>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[11.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/11.0.html" title="11.0">11.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This variant is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<p>Sets the value of a sample using an explicit sample index instead of interleaving them in the sample position parameter.
+</p>
+<h3><span class="mw-headline" id="Synopsis_2">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">SoundData</span><span class="p">:</span><span class="nf">setSample</span><span class="p">(</span><span class="w"> </span><span class="nv">i</span><span class="p">,</span><span class="w"> </span><span class="nv">channel</span><span class="p">,</span><span class="w"> </span><span class="nv">sample</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments_2">Arguments</span></h3>
+<dl><dt><code><a href="../Main/number.html" title="number">number</a> i</code></dt>
+<dd>An integer value specifying the position of the sample (starting at 0).</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> channel</code></dt>
+<dd>The index of the channel to set within the given sample (starting at 1). For stereo, 1 is left channel and 2 is right channel.</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> sample</code></dt>
+<dd>The normalized samplepoint (range -1.0 to 1.0).</dd></dl>
+<h3><span class="mw-headline" id="Returns_2">Returns</span></h3>
+<p>Nothing.
+</p>
+<h2><span class="mw-headline" id="Example:_Generate_notes_with_a_sine_wave">Example: Generate notes with a sine wave</span></h2>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">tau</span><span class="w">          </span><span class="o">=</span><span class="w">   </span><span class="nb">math.pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">samplerate</span><span class="w">   </span><span class="o">=</span><span class="w">         </span><span class="mi">44100</span><span class="w"> </span><span class="c1">-- Hz</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">bits</span><span class="w">         </span><span class="o">=</span><span class="w">            </span><span class="mi">16</span><span class="w"> </span><span class="c1">-- 8 bits results in very low quality sound</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">channels</span><span class="w">     </span><span class="o">=</span><span class="w">             </span><span class="mi">2</span><span class="w"> </span><span class="c1">-- löve only supports mono or stereo</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">buffercount</span><span class="w">  </span><span class="o">=</span><span class="w">             </span><span class="mi">2</span><span class="w"> </span><span class="c1">-- don't need too many buffers</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">qsource</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">audio</span><span class="p">.</span><span class="nf">newQueueableSource</span><span class="p">(</span><span class="nv">samplerate</span><span class="p">,</span><span class="w"> </span><span class="nv">bits</span><span class="p">,</span><span class="w"> </span><span class="nv">channels</span><span class="p">,</span><span class="w"> </span><span class="nv">buffercount</span><span class="p">)</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">samplepoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">samplerate</span><span class="o">/</span><span class="mi">10</span><span class="w"> </span><span class="c1">-- how many numbers does one buffer hold</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">buffer</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">sound</span><span class="p">.</span><span class="nf">newSoundData</span><span class="p">(</span><span class="nv">samplepoints</span><span class="p">,</span><span class="w"> </span><span class="nv">samplerate</span><span class="p">,</span><span class="w"> </span><span class="nv">bits</span><span class="p">,</span><span class="w"> </span><span class="nv">channels</span><span class="p">)</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">phase</span><span class="w">        </span><span class="o">=</span><span class="w">           </span><span class="mf">0.0</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">frequency</span><span class="w">    </span><span class="o">=</span><span class="w">        </span><span class="mf">220.00</span><span class="w"> </span><span class="c1">-- Hz</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">amplitude</span><span class="w">    </span><span class="o">=</span><span class="w">           </span><span class="mf">0.5</span><span class="w"> </span><span class="c1">-- 50%</span>
+
+
+<span class="kd">local</span><span class="w"> </span><span class="kr">function</span><span class="w"> </span><span class="nf">synth</span><span class="p">()</span>
+<span class="w">    </span><span class="nv">phase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">phase</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nv">tau</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">frequency</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nv">samplerate</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="nb">math.sin</span><span class="p">(</span><span class="nv">phase</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">amplitude</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="nv">dt</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">while</span><span class="w"> </span><span class="nv">qsource</span><span class="p">:</span><span class="nf">getFreeBufferCount</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">        </span><span class="kr">for</span><span class="w"> </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">samplepoints</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">            </span><span class="nv">buffer</span><span class="p">:</span><span class="nf">setSample</span><span class="p">(</span><span class="nv">i</span><span class="p">,</span><span class="w"> </span><span class="nf">synth</span><span class="p">())</span>
+<span class="w">        </span><span class="kr">end</span>
+<span class="w">        </span><span class="nv">qsource</span><span class="p">:</span><span class="nf">queue</span><span class="p">(</span><span class="nv">buffer</span><span class="p">)</span>
+<span class="w">        </span><span class="nv">qsource</span><span class="p">:</span><span class="nf">play</span><span class="p">()</span>
+<span class="w">    </span><span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">keypressed</span><span class="p">(</span><span class="nv">key</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">key</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'k'</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">        </span><span class="nv">frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">frequency</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="o">^</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">elseif</span><span class="w"> </span><span class="nv">key</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'j'</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">        </span><span class="nv">frequency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">frequency</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+<h2><span class="mw-headline" id="See_Also">See Also</span></h2>
+<ul><li><a href="../Main/SoundData.html" title="SoundData">SoundData</a></li></ul>
+<p><br/>
+</p>
+<h2><span class="mw-headline" id="Other_Languages">Other Languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Functions.html">Functions</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

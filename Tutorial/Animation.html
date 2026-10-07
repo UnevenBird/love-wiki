@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Tutorial:Animation - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-500" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-namespace">Tutorial</span><span class="mw-page-title-separator">:</span><span class="mw-page-title-main">Animation</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><p>Before we begin. This is a tutorial for semi advanced users. You are expected to know about tables, loops and the basics of drawing in Löve2D. And of course how to run a Löve2D game.
+</p><p>Alright. Let's get to it shall we?
+</p><p>I'm going to cover the basics of sprite based animation. This means you have a series of images which are displayed one after another. If you intent to create your own spritesheet make sure to leave at least 1px of pure transparency between the individual sprites. Otherwise you might see artifacts from the next or previous image and nobody wants that!
+</p>
+<h2><span class="mw-headline" id="Loading_animations">Loading animations</span></h2>
+<p>For this tutorial we'll be using a unnamed old hero. Generously made available for everyone by GrafxKid on <a class="external text" href="https://opengameart.org/content/classic-hero" rel="nofollow">OpenGameArt.org</a>. Download the image below and place it next to your main.lua in the folder.
+</p>
+<figure class="mw-halign-center" typeof="mw:File/Thumb"><a class="mw-file-description" href="../File/oldHero.png.html"><img class="mw-file-element" data-file-height="18" data-file-width="96" decoding="async" height="18" src="../assets/images/oldHero.png" width="96"/></a><figcaption>oldHero.png</figcaption></figure>
+<p>To be able to create multiple animations we want a reusable function that provides us with a table that we can use for everything related to the animation.
+We start this by defining a new function, storing our image in a variable and creating a new local table (the return value will be our table. We don't want some random animation table be globally defined or worse yet overwrite other data!)
+</p><p>The following parameters are going to be needed:
+</p>
+<ul><li>image</li></ul>
+<p>An image object created with <code>love.graphics.newImage(filepath)</code>
+</p>
+<ul><li>width</li></ul>
+<p>The width of each individual sprite. We are going to assume all sprites have the same size.
+</p>
+<ul><li>height</li></ul>
+<p>The height of each individual sprite.
+</p>
+<ul><li>duration</li></ul>
+<p>How long the animation takes before it loops back to the first frame.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nf">newAnimation</span><span class="p">(</span><span class="nv">image</span><span class="p">,</span><span class="w"> </span><span class="nv">width</span><span class="p">,</span><span class="w"> </span><span class="nv">height</span><span class="p">,</span><span class="w"> </span><span class="nv">duration</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">animation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="nv">animation</span><span class="p">.</span><span class="py">spriteSheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">image</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="nv">animation</span>
+<span class="kr">end</span>
+</pre></div>
+<p>You can try to just draw this directly with <code>love.graphics.draw(animation.spriteSheet)</code>. However. Then we'd just have all the images drawn next to each other. Certainly not what we want. Which is where <a href="../Main/Quad.html" title="Quad">Quads</a> come in very handy! 
+</p><p>They define a part of the image which will be drawn instead of the whole image. Exactly what we need!
+</p><p>Now we could define each quad individually. But that's going to be very annoying if we have several animations and hundreds of sprites! So instead we will load it within a loop that detects how many sprites are within an image. For this setup there must not be empty spaces and the image must contain exactly one animation.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nf">newAnimation</span><span class="p">(</span><span class="nv">image</span><span class="p">,</span><span class="w"> </span><span class="nv">width</span><span class="p">,</span><span class="w"> </span><span class="nv">height</span><span class="p">,</span><span class="w"> </span><span class="nv">duration</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">animation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="nv">animation</span><span class="p">.</span><span class="py">spriteSheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">image</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">animation</span><span class="p">.</span><span class="py">quads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+
+<span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">image</span><span class="p">:</span><span class="nf">getHeight</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">height</span><span class="p">,</span><span class="w"> </span><span class="nv">height</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">        </span><span class="kr">for</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">image</span><span class="p">:</span><span class="nf">getWidth</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">width</span><span class="p">,</span><span class="w"> </span><span class="nv">width</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">            </span><span class="nb">table.insert</span><span class="p">(</span><span class="nv">animation</span><span class="p">.</span><span class="py">quads</span><span class="p">,</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newQuad</span><span class="p">(</span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="p">,</span><span class="w"> </span><span class="nv">width</span><span class="p">,</span><span class="w"> </span><span class="nv">height</span><span class="p">,</span><span class="w"> </span><span class="nv">image</span><span class="p">:</span><span class="nf">getDimensions</span><span class="p">()))</span>
+<span class="w">        </span><span class="kr">end</span>
+<span class="w">    </span><span class="kr">end</span>
+
+<span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="nv">animation</span>
+<span class="kr">end</span>
+</pre></div>
+<p>The 3 parameters to the for loop mean the following:
+</p><p>1. The starting value for y or x.
+</p><p>2. The maximum value (in this case the total width or height of the reference image)
+</p><p>3. How much should be added per step. In our case the size of the sprite.
+</p><p>With this we get the location on the sprite sheet from y and x!
+</p><p>You might wonder why we do "image:getHeight() - height" instead of just testing against the height of the image. This is because we want to make sure another sprite still fits on the sprite sheet. The sheet itself might not have the exact size we want it to. If it were one pixel too large. We do not want to add another quad (which would render as nothing) but instead ignore it. 
+</p><p>Now we have 6 Quads ranging from index 1 - 6 in the table. Awesome!
+</p><p>But we have the issue that we have essentially 6 images that we can draw individually. But we need to draw them one after another over time.
+Also we don't just want to play this animation. We might want to change the speed at which it plays.
+</p><p>To cover this we add two more variables to our animation table.
+Duration (which we expect as parameter) and currentTime which is used to measure how much time has passed.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nf">newAnimation</span><span class="p">(</span><span class="nv">image</span><span class="p">,</span><span class="w"> </span><span class="nv">width</span><span class="p">,</span><span class="w"> </span><span class="nv">height</span><span class="p">,</span><span class="w"> </span><span class="nv">duration</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">animation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="nv">animation</span><span class="p">.</span><span class="py">spriteSheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">image</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">animation</span><span class="p">.</span><span class="py">quads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+
+<span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">image</span><span class="p">:</span><span class="nf">getHeight</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">height</span><span class="p">,</span><span class="w"> </span><span class="nv">height</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">        </span><span class="kr">for</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">image</span><span class="p">:</span><span class="nf">getWidth</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">width</span><span class="p">,</span><span class="w"> </span><span class="nv">width</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">            </span><span class="nb">table.insert</span><span class="p">(</span><span class="nv">animation</span><span class="p">.</span><span class="py">quads</span><span class="p">,</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newQuad</span><span class="p">(</span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="p">,</span><span class="w"> </span><span class="nv">width</span><span class="p">,</span><span class="w"> </span><span class="nv">height</span><span class="p">,</span><span class="w"> </span><span class="nv">image</span><span class="p">:</span><span class="nf">getDimensions</span><span class="p">()))</span>
+<span class="w">        </span><span class="kr">end</span>
+<span class="w">    </span><span class="kr">end</span>
+
+<span class="w">    </span><span class="nv">animation</span><span class="p">.</span><span class="py">duration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">duration</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="nv">animation</span><span class="p">.</span><span class="py">currentTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="nv">animation</span>
+<span class="kr">end</span>
+</pre></div>
+<p>Which concludes our animation creation function already!
+</p>
+<h2><span class="mw-headline" id="Updating_the_animation">Updating the animation</span></h2>
+<p>Next up we need to load our animation table (call our newly created function) and update our current time.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+<span class="w">    </span><span class="nv">animation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">newAnimation</span><span class="p">(</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newImage</span><span class="p">(</span><span class="s2">"oldHero.png"</span><span class="p">),</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="nv">dt</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">animation</span><span class="p">.</span><span class="py">currentTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">animation</span><span class="p">.</span><span class="py">currentTime</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">dt</span>
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">animation</span><span class="p">.</span><span class="py">currentTime</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nv">animation</span><span class="p">.</span><span class="py">duration</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">        </span><span class="nv">animation</span><span class="p">.</span><span class="py">currentTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">animation</span><span class="p">.</span><span class="py">currentTime</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">animation</span><span class="p">.</span><span class="py">duration</span>
+<span class="w">    </span><span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+<p>The demo sprite sheet has a sprite size of 16 pixels wide and 18 pixels high. We intent to play all images over the course of 1 second.
+</p><p>In <code>love.update</code> we simply add dt (delta time aka the time since the last frame) to our current time. We now count upwards continuously!
+</p><p>But we will use the current time to determine which frame should be shown. As such we will want it to be between 0 and the value of "duration". The if simply checks if "currentTime" is more than "duration" in which case we subtract "duration". You could just set "currentTime" to 0 instead of subtracting "duration". However this will result in fractions of a second being lost every time the animation finishes and therefore slow down the animation playtime ever so slightly. Which can easily be avoided and should be avoided!
+</p><p>Now for the really interesting part!
+</p>
+<h2><span class="mw-headline" id="Drawing_the_animation">Drawing the animation</span></h2>
+<p>How do we draw this?
+</p><p>Well. We have the duration and current time. With this info we can calculate a percentage! How much of the animation has passed so far?
+</p><p>If you've followed this tutorial correctly so far <i>"currentTime / duration"</i> will provide you with a number between 0 and 1. Which represents the percentage. 0.25 means 25% of the animation has passed.
+</p><p>Considering this we can search for the correct image to use! Since we already have a number between 0 and 1 we can simply multiply this percentage with our total amount of images and get a number between 0 and 6!
+</p><p><i>currentTime / duration * #quads</i>
+</p><p>However. If we try to get this from our table we will run into the issue that this is not a whole number. But our images are stored with whole numbers! So attempting to get the image at index "4.75" will give us nothing. Bummer! 
+</p><p>Fear not. The solution is not too difficult.
+</p><p>"currentTime" will be a number between 0 and just below "duration" (because we reduce "currentTime" if it is larger or <i>equal</i> "duration"). Which would result in a number between 0 and 5.
+</p><p>To transform this value from our decimal point value to a whole number between 1 and 6 we do the following:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nb">math.floor</span><span class="p">(</span><span class="nv">currentTime</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nv">duration</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">#</span><span class="nv">quads</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+</pre></div>
+<p>"math.floor" provides us with the next lower number. Which means in our case a number between 0 and 5. We add one pushing it to a number between 1 and 6. All the sprites we have!
+</p><p>Lövely!
+</p><p>Alright. So all that's left is to draw the appropriate quad!
+</p><p>This simply requires us to provide <code>love.graphics.draw</code> with the image reference (our spriteSheet) and the quad we want to use. Simple enough!
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">spriteNum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">math.floor</span><span class="p">(</span><span class="nv">animation</span><span class="p">.</span><span class="py">currentTime</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nv">animation</span><span class="p">.</span><span class="py">duration</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">#</span><span class="nv">animation</span><span class="p">.</span><span class="py">quads</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">draw</span><span class="p">(</span><span class="nv">animation</span><span class="p">.</span><span class="py">spriteSheet</span><span class="p">,</span><span class="w"> </span><span class="nv">animation</span><span class="p">.</span><span class="py">quads</span><span class="p">[</span><span class="nv">spriteNum</span><span class="p">])</span>
+</pre></div>
+<p>And we are done! You should have a walking dude in the top left corner of your window when you execute this code!
+</p><p>You can change where and how it is drawn by providing more parameters to the <a href="../Main/love.graphics.draw.html" title="love.graphics.draw">draw function</a>.
+</p><p><b>Disclaimer: This code is not game ready! It is meant to explain the basic logic behind animations. If you are searching for game ready code take a look at the list of Libraries available!</b>
+</p>
+<h2><span class="mw-headline" id="Task">Task</span></h2>
+<p>To improve this code. Try to rewrite the update and draw function to be able to handle multiple animations.
+</p><p>You can load the same animation multiple times and store them in a special table to get started right away!
+</p><p>As hint as to how it could be done: You could put the drawing logic in the animation table as well. And build it so you can call "animation:draw(x, y, r, sx, sy, [...])" to draw it on the screen. 
+</p><p>Good luck and have fun!
+</p>
+<h2><span class="mw-headline" id="Full_Sourcecode">Full Sourcecode</span></h2>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+<span class="w">    </span><span class="nv">animation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">newAnimation</span><span class="p">(</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newImage</span><span class="p">(</span><span class="s2">"oldHero.png"</span><span class="p">),</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="nv">dt</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">animation</span><span class="p">.</span><span class="py">currentTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">animation</span><span class="p">.</span><span class="py">currentTime</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">dt</span>
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">animation</span><span class="p">.</span><span class="py">currentTime</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nv">animation</span><span class="p">.</span><span class="py">duration</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">        </span><span class="nv">animation</span><span class="p">.</span><span class="py">currentTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">animation</span><span class="p">.</span><span class="py">currentTime</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">animation</span><span class="p">.</span><span class="py">duration</span>
+<span class="w">    </span><span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">spriteNum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">math.floor</span><span class="p">(</span><span class="nv">animation</span><span class="p">.</span><span class="py">currentTime</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nv">animation</span><span class="p">.</span><span class="py">duration</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">#</span><span class="nv">animation</span><span class="p">.</span><span class="py">quads</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">draw</span><span class="p">(</span><span class="nv">animation</span><span class="p">.</span><span class="py">spriteSheet</span><span class="p">,</span><span class="w"> </span><span class="nv">animation</span><span class="p">.</span><span class="py">quads</span><span class="p">[</span><span class="nv">spriteNum</span><span class="p">],</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nf">newAnimation</span><span class="p">(</span><span class="nv">image</span><span class="p">,</span><span class="w"> </span><span class="nv">width</span><span class="p">,</span><span class="w"> </span><span class="nv">height</span><span class="p">,</span><span class="w"> </span><span class="nv">duration</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">animation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="nv">animation</span><span class="p">.</span><span class="py">spriteSheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">image</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">animation</span><span class="p">.</span><span class="py">quads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+
+<span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">image</span><span class="p">:</span><span class="nf">getHeight</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">height</span><span class="p">,</span><span class="w"> </span><span class="nv">height</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">        </span><span class="kr">for</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">image</span><span class="p">:</span><span class="nf">getWidth</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">width</span><span class="p">,</span><span class="w"> </span><span class="nv">width</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">            </span><span class="nb">table.insert</span><span class="p">(</span><span class="nv">animation</span><span class="p">.</span><span class="py">quads</span><span class="p">,</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newQuad</span><span class="p">(</span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="p">,</span><span class="w"> </span><span class="nv">width</span><span class="p">,</span><span class="w"> </span><span class="nv">height</span><span class="p">,</span><span class="w"> </span><span class="nv">image</span><span class="p">:</span><span class="nf">getDimensions</span><span class="p">()))</span>
+<span class="w">        </span><span class="kr">end</span>
+<span class="w">    </span><span class="kr">end</span>
+
+<span class="w">    </span><span class="nv">animation</span><span class="p">.</span><span class="py">duration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">duration</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="nv">animation</span><span class="p">.</span><span class="py">currentTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="nv">animation</span>
+<span class="kr">end</span>
+</pre></div>
+<p><br/>
+</p>
+<h2><span class="mw-headline" id="Other_Languages">Other Languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Tutorials.html">Tutorials</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

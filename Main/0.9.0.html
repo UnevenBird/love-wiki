@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>0.9.0 - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">0.9.0</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><figure class="mw-default-size" typeof="mw:File/Thumb"><a class="mw-file-description" href="../File/0.9.0_no-game.png.html"><img class="mw-file-element" data-file-height="696" data-file-width="884" decoding="async" height="236" src="../assets/images/0.9.0_no-game.png" width="300"/></a><figcaption>no-game screen</figcaption></figure>
+<p>The codename for LÖVE 0.9.0 is <b>Baby Inspector</b>. It is currently <b><span style="color:#0000ff;">released</span></b>.
+</p>
+<h2><span class="mw-headline" id="Major_changes_from_0.8.0">Major changes from <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></span></h2>
+<ul><li>Added three new modules: <a href="../Main/love.window.html" title="love.window">love.window</a>, <a href="../Main/love.math.html" title="love.math">love.math</a>, and <a href="../Main/love.system.html" title="love.system">love.system</a>.</li>
+<li>Reworked the <a href="../Main/love.joystick.html" title="love.joystick">love.joystick</a> and <a href="../Main/love.thread.html" title="love.thread">love.thread</a> modules.</li>
+<li>Added new features to love.graphics, including <a href="../Main/Mesh.html" title="Mesh">polygon meshes</a> and <a href="../Main/Shader.html" title="Shader">vertex shaders</a>.</li>
+<li>Integrated the <a class="external text" href="http://enet.bespin.org" rel="nofollow">ENet</a> networking library via <a class="external text" href="http://leafo.net/lua-enet/" rel="nofollow">lua-enet</a>.</li>
+<li>Renamed many functions to be more consistent with the rest of the API.</li>
+<li>Improved the performance of several APIs in <a href="../Main/love.graphics.html" title="love.graphics">love.graphics</a>.</li>
+<li>And a <b>lot</b> more!</li></ul>
+<h2><span class="mw-headline" id="All_changes_from_0.8.0">All changes from <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></span></h2>
+<h3><span class="mw-headline" id="Additions">Additions</span></h3>
+<ul><li>Added better multiplayer networking support with <a class="external text" href="http://enet.bespin.org" rel="nofollow">ENet</a> (via the <a class="external text" href="http://leafo.net/lua-enet/" rel="nofollow">lua-enet</a> library.)</li>
+<li>Added --fused command line argument, to simulate fusing.</li>
+<li>Added liblove.</li>
+<li>Added the ability to have exit values.</li>
+<li>Added exit value of 1 in case of error by default.</li>
+<li>Added basic support for the file:// URI scheme.</li>
+<li>Added <a href="../Main/love.timer.getAverageDelta.html" title="love.timer.getAverageDelta">love.timer.getAverageDelta</a>.</li>
+<li>Added <a href="../Main/Data__getString.html" title="Data:getString">Data:getString</a>.</li>
+<li>Added <a href="../Main/Contact__getChildren.html" title="Contact:getChildren">Contact:getChildren</a>.</li></ul>
+<ul><li>Added <a href="../Main/love.filesystem.isFused.html" title="love.filesystem.isFused">love.filesystem.isFused</a>.</li>
+<li>Added <a href="../Main/love.filesystem.getIdentity.html" title="love.filesystem.getIdentity">love.filesystem.getIdentity</a>.</li>
+<li>Added <a href="../Main/love.filesystem.append.html" title="love.filesystem.append">love.filesystem.append</a>.</li>
+<li>Added <a href="../Main/love.filesystem.getSize.html" title="love.filesystem.getSize">love.filesystem.getSize</a>.</li>
+<li>Added <a href="../Main/love.filesystem.mount.html" title="love.filesystem.mount">love.filesystem.mount</a> and <a href="../Main/love.filesystem.unmount.html" title="love.filesystem.unmount">love.filesystem.unmount</a>.</li>
+<li>Added an optional file search order parameter to <a href="../Main/love.filesystem.setIdentity.html" title="love.filesystem.setIdentity">love.filesystem.setIdentity</a>.</li>
+<li>Added <a href="../Main/(File)__isOpen.html" title="(File):isOpen">File:isOpen</a> and <a href="../Main/(File)__getMode.html" title="(File):getMode">File:getMode</a>.</li>
+<li>Added <a href="../Main/(File)__setBuffer.html" title="(File):setBuffer">File:setBuffer</a>, <a href="../Main/(File)__getBuffer.html" title="(File):getBuffer">File:getBuffer</a>, and <a href="../Main/(File)__flush.html" title="(File):flush">File:flush</a>.</li></ul>
+<ul><li>Added <a href="../Main/love.textinput.html" title="love.textinput">textinput</a> event for unicode text input.</li>
+<li>Added <a href="../Main/love.keyboard.setTextInput.html" title="love.keyboard.setTextInput">love.keyboard.setTextInput</a> and <a href="../Main/love.keyboard.hasTextInput.html" title="love.keyboard.hasTextInput">love.keyboard.hasTextInput</a>.</li></ul>
+<ul><li>Added previously internal <a href="../Main/Rasterizer.html" title="Rasterizer">Rasterizer</a> and <a href="../Main/GlyphData.html" title="GlyphData">GlyphData</a> methods.</li>
+<li>Added support for UTF-8 Image <a href="../Main/Font.html" title="Font">Fonts</a>.</li>
+<li>Added <a href="../Main/Font__getAscent.html" title="Font:getAscent">Font:getAscent</a>, <a href="../Main/Font__getDescent.html" title="Font:getDescent">Font:getDescent</a>, and <a href="../Main/Font__getBaseline.html" title="Font:getBaseline">Font:getBaseline</a>.</li>
+<li>Added <a href="../Main/Font__setFilter.html" title="Font:setFilter">Font:setFilter</a> and <a href="../Main/Font__getFilter.html" title="Font:getFilter">Font:getFilter</a>.</li>
+<li>Added <a href="../Main/Font__hasGlyphs.html" title="Font:hasGlyphs">Font:hasGlyphs</a>.</li></ul>
+<ul><li>Added angle, scale, and shear parameters to <a href="../Main/love.graphics.printf.html" title="love.graphics.printf">love.graphics.printf</a>.</li>
+<li>Added support for <a class="mw-redirect" href="../Main/TextureFormat.html" title="TextureMode">high dynamic range</a> (HDR) Canvases.</li>
+<li>Added mipmapping support to <a href="../Main/Image.html" title="Image">Images</a> (has <a href="../Main/love.graphics.isSupported.html" title="love.graphics.isSupported">love.graphics.isSupported</a> test).</li>
+<li>Added <a href="../Main/Shader.html" title="Shader">vertex shader</a> support.</li>
+<li>Added boolean support to <a href="../Main/Shader__send.html" title="Shader:send">Shader:send</a>.</li>
+<li>Added <a href="../Main/Canvas__getPixel.html" title="Canvas:getPixel">Canvas:getPixel</a>.</li>
+<li>Added <a href="../Main/BlendMode.html" title="BlendMode">BlendMode</a> "replace".</li>
+<li>Added <a href="../Main/LineJoin.html" title="LineJoin">LineJoin</a> modes.</li>
+<li>Added <a href="../Main/Mesh.html" title="Mesh">Mesh</a> objects, allowing for arbitrary textured polygons.</li>
+<li>Added multiple render target support to <a href="../Main/love.graphics.setCanvas.html" title="love.graphics.setCanvas">love.graphics.setCanvas</a>.</li>
+<li>Added <a href="../Main/love.graphics.setColorMask.html" title="love.graphics.setColorMask">love.graphics.setColorMask</a>.</li>
+<li>Added <a href="../Main/love.graphics.origin.html" title="love.graphics.origin">love.graphics.origin</a>.</li>
+<li>Added <a href="../Main/love.graphics.getRendererInfo.html" title="love.graphics.getRendererInfo">love.graphics.getRendererInfo</a>.</li>
+<li>Added <a href="../Main/love.graphics.getMaxImageSize.html" title="love.graphics.getMaxImageSize">love.graphics.getMaxImageSize</a>.</li>
+<li>Added <a href="../Main/SpriteBatch__getCount.html" title="SpriteBatch:getCount">SpriteBatch:getCount</a> and <a href="../Main/SpriteBatch__getBufferSize.html" title="SpriteBatch:getBufferSize">SpriteBatch:getBufferSize</a>.</li>
+<li>Added <a href="../Main/SpriteBatch__getColor.html" title="SpriteBatch:getColor">SpriteBatch:getColor</a>.</li>
+<li>Added <a href="../Main/ParticleSystem__emit.html" title="ParticleSystem:emit">ParticleSystem:emit</a>.</li>
+<li>Added <a href="../Main/ParticleSystem__setInsertMode.html" title="ParticleSystem:setInsertMode">ParticleSystem:setInsertMode</a>.</li>
+<li>Added <a href="../Main/ParticleSystem__setAreaSpread.html" title="ParticleSystem:setAreaSpread">ParticleSystem:setAreaSpread</a>.</li>
+<li>Added <a href="../Main/ParticleSystem__isPaused.html" title="ParticleSystem:isPaused">ParticleSystem:isPaused</a> and <a href="../Main/ParticleSystem__isStopped.html" title="ParticleSystem:isStopped">ParticleSystem:isStopped</a>.</li>
+<li>Added many <a href="../Main/ParticleSystem.html" title="ParticleSystem">ParticleSystem</a> getter methods.</li>
+<li>Added DXT compressed texture support to <a href="../Main/Image.html" title="Image">Images</a> via <a href="../Main/love.image.newCompressedData.html" title="love.image.newCompressedData">love.image.newCompressedData</a>.</li>
+<li>Added <a href="../Main/love.image.isCompressed.html" title="love.image.isCompressed">love.image.isCompressed</a> and <a href="../Main/(Image)__isCompressed.html" title="(Image):isCompressed">Image:isCompressed</a>.</li>
+<li>Added <a href="../Main/(Image)__getDimensions.html" title="(Image):getDimensions">Image:getDimensions</a>, <a href="../Main/Canvas__getDimensions.html" title="Canvas:getDimensions">Canvas:getDimensions</a>, and <a href="../Main/ImageData__getDimensions.html" title="ImageData:getDimensions">ImageData:getDimensions</a>.</li>
+<li>Added anisotropic filtering support for <a href="../Main/Image.html" title="Image">Images</a>, <a href="../Main/Canvas.html" title="Canvas">Canvases</a>, and <a href="../Main/Font.html" title="Font">Fonts</a>.</li>
+<li>Added <a href="../Main/(Image)__refresh.html" title="(Image):refresh">Image:refresh</a>.</li>
+<li>Added <a href="../Main/(Image)__getData.html" title="(Image):getData">Image:getData</a>.</li></ul>
+<ul><li>Added <a href="../Main/love.math.html" title="love.math">love.math</a> module.</li>
+<li>Added a platform-independent (good) random implementation to <a href="../Main/love.math.html" title="love.math">love.math</a>.</li>
+<li>Added <a href="../Main/RandomGenerator.html" title="RandomGenerator">RandomGenerator</a> objects.</li>
+<li>Added <a href="../Main/BezierCurve.html" title="BezierCurve">BezierCurve</a> objects.</li>
+<li>Added <a href="../Main/love.math.triangulate.html" title="love.math.triangulate">love.math.triangulate</a> and <a href="../Main/love.math.isConvex.html" title="love.math.isConvex">love.math.isConvex</a>.</li>
+<li>Added <a href="../Main/love.math.noise.html" title="love.math.noise">love.math.noise</a>.</li></ul>
+<ul><li>Added <a href="../Main/love.system.html" title="love.system">love.system</a> module.</li>
+<li>Added <a href="../Main/love.system.getClipboardText.html" title="love.system.getClipboardText">love.system.getClipboardText</a> and <a href="../Main/love.system.setClipboardText.html" title="love.system.setClipboardText">love.system.setClipboardText</a>.</li>
+<li>Added <a href="../Main/love.system.getOS.html" title="love.system.getOS">love.system.getOS</a> and <a href="../Main/love.system.getProcessorCount.html" title="love.system.getProcessorCount">love.system.getProcessorCount</a>.</li></ul>
+<ul><li>Added <a href="../Main/love.window.html" title="love.window">love.window</a> module.</li>
+<li>Added <a href="../Main/love.window.isVisible.html" title="love.window.isVisible">love.window.isVisible</a>.</li>
+<li>Added flags to <a href="../Main/love.window.setMode.html" title="love.window.setMode">love.window.setMode</a>.</li>
+<li>Added monitor choosing support to love.window.setMode.</li>
+<li>Added support for resizable, borderless, and non-centered windows.</li>
+<li>Added support for <a href="../Main/FullscreenType.html" title="FullscreenType">"fullscreen-desktop"</a> mode.</li>
+<li>Added window <a href="../Main/love.resize.html" title="love.resize">resize</a> and <a href="../Main/love.visible.html" title="love.visible">visible</a> events.</li>
+<li>Added <a href="../Main/love.window.getIcon.html" title="love.window.getIcon">love.window.getIcon</a>.</li>
+<li>Added t.window.icon to <a class="mw-redirect" href="../Main/Config_Files.html" title="love.conf">love.conf</a>.</li></ul>
+<ul><li>Added <a href="../Main/SoundData__getDuration.html" title="SoundData:getDuration">SoundData:getDuration</a> and <a href="../Main/SoundData__getSampleCount.html" title="SoundData:getSampleCount">SoundData:getSampleCount</a>.</li>
+<li>Added <a href="../Main/Source__isPlaying.html" title="Source:isPlaying">Source:isPlaying</a>.</li>
+<li>Added <a href="../Main/Source__setRelative.html" title="Source:setRelative">Source:setRelative</a> and <a href="../Main/Source__isRelative.html" title="Source:isRelative">Source:isRelative</a>.</li>
+<li>Added <a href="../Main/Source__setCone.html" title="Source:setCone">Source:setCone</a> and <a href="../Main/Source__getCone.html" title="Source:getCone">Source:getCone</a>.</li>
+<li>Added <a href="../Main/Source__getChannels.html" title="Source:getChannels">Source:getChannels</a>.</li></ul>
+<ul><li>Added new <a href="../Main/Channel.html" title="Channel">Channels</a> API for <a href="../Main/love.thread.html" title="love.thread">love.thread</a>.</li>
+<li>Added limited table support to <a href="../Main/Channel__push.html" title="Channel:push">Channel:push</a>.</li>
+<li>Added <a href="../Main/Thread__getError.html" title="Thread:getError">Thread:getError</a>.</li>
+<li>Added <a href="../Main/Thread__isRunning.html" title="Thread:isRunning">Thread:isRunning</a>.</li>
+<li>Added <a href="../Main/love.threaderror.html" title="love.threaderror">threaderror</a> event.</li></ul>
+<ul><li>Added <a href="../Main/love.mousefocus.html" title="love.mousefocus">love.mousefocus</a> and <a href="../Main/love.window.hasMouseFocus.html" title="love.window.hasMouseFocus">love.window.hasMouseFocus</a>.</li>
+<li>Added custom <a href="../Main/Cursor.html" title="Cursor">hardware cursor</a> support via <a href="../Main/love.mouse.newCursor.html" title="love.mouse.newCursor">love.mouse.newCursor</a>.</li>
+<li>Added <a href="../Main/love.mouse.setX.html" title="love.mouse.setX">love.mouse.setX</a> and <a href="../Main/love.mouse.setY.html" title="love.mouse.setY">love.mouse.setY</a>.</li></ul>
+<ul><li>Added <a href="../Main/Joystick.html" title="Joystick">Joystick</a> objects.</li>
+<li>Added joystick <a href="../Main/love.joystickadded.html" title="love.joystickadded">add</a> and <a href="../Main/love.joystickremoved.html" title="love.joystickremoved">remove</a> events.</li>
+<li>Added joystick <a href="../Main/love.joystickaxis.html" title="love.joystickaxis">axis</a> and <a href="../Main/love.joystickhat.html" title="love.joystickhat">hat</a> move events.</li>
+<li>Added unified <a href="../Main/Joystick__isGamepadDown.html" title="Joystick:isGamepadDown">Gamepad API</a> for joysticks which have a similar layout to the Xbox controller.</li>
+<li>Added joystick <a href="../Main/Joystick__setVibration.html" title="Joystick:setVibration">vibration</a> support.</li></ul>
+<h3><span class="mw-headline" id="Removals">Removals</span></h3>
+<ul><li>Removed release mode (but Fused mode is still there.)</li>
+<li>Removed <a href="../Main/love.keyboard.getKeyRepeat.html" title="love.keyboard.getKeyRepeat">love.keyboard.getKeyRepeat</a> (see <a href="../Main/love.keyboard.hasKeyRepeat.html" title="love.keyboard.hasKeyRepeat">love.keyboard.hasKeyRepeat</a>).</li>
+<li>Removed the unicode argument from <a href="../Main/love.keypressed.html" title="love.keypressed">love.keypressed</a> (see <a href="../Main/love.textinput.html" title="love.textinput">love.textinput</a>).</li></ul>
+<ul><li>Removed love.graphics.drawTest.</li>
+<li>Removed <a href="../Main/love.graphics.quad.html" title="love.graphics.quad">love.graphics.quad</a> and <a href="../Main/love.graphics.triangle.html" title="love.graphics.triangle">love.graphics.triangle</a>.</li>
+<li>Removed <a href="../Main/ColorMode.html" title="ColorMode">ColorModes</a> and <a href="../Main/love.graphics.setColorMode.html" title="love.graphics.setColorMode">love.graphics.setColorMode</a>.</li>
+<li>Removed <a href="../Main/love.graphics.newStencil.html" title="love.graphics.newStencil">love.graphics.newStencil</a>.</li>
+<li>Removed <a href="../Main/love.graphics.setLine.html" title="love.graphics.setLine">love.graphics.setLine</a> and <a href="../Main/love.graphics.setPoint.html" title="love.graphics.setPoint">love.graphics.setPoint</a>.</li>
+<li>Removed <a href="../Main/love.graphics.drawq.html" title="love.graphics.drawq">love.graphics.drawq</a> (functionality is merged into <a href="../Main/love.graphics.draw.html" title="love.graphics.draw">love.graphics.draw</a>).</li>
+<li>Removed <a href="../Main/SpriteBatch__addq.html" title="SpriteBatch:addq">SpriteBatch:addq</a> and <a href="../Main/SpriteBatch__setq.html" title="SpriteBatch:setq">SpriteBatch:setq</a> (functionality is merged into <a href="../Main/SpriteBatch__add.html" title="SpriteBatch:add">SpriteBatch:add</a> and <a href="../Main/SpriteBatch__set.html" title="SpriteBatch:set">SpriteBatch:set</a>).</li>
+<li>Removed <a href="../Main/Quad__flip.html" title="Quad:flip">Quad:flip</a>.</li>
+<li>Removed <a href="../Main/ParticleSystem__isFull.html" title="ParticleSystem:isFull">ParticleSystem:isFull</a> and <a href="../Main/ParticleSystem__isEmpty.html" title="ParticleSystem:isEmpty">ParticleSystem:isEmpty</a>.</li>
+<li>Removed <a href="../Main/ParticleSystem__getX.html" title="ParticleSystem:getX">ParticleSystem:getX</a> and <a href="../Main/ParticleSystem__getY.html" title="ParticleSystem:getY">ParticleSystem:getY</a>.</li>
+<li>Removed <a href="../Main/love.graphics.checkMode.html" title="love.graphics.checkMode">love.graphics.checkMode</a>.</li></ul>
+<ul><li>Removed <a href="../Main/love.joystick.html" title="love.joystick">love.joystick</a> module functions which operated on individual joysticks (see <a href="../Main/Joystick.html" title="Joystick">Joystick</a> objects).</li>
+<li>Removed <a href="../Main/love.joystick.getNumBalls.html" title="love.joystick.getNumBalls">joystick ball</a> support.</li>
+<li>Removed thread names.</li>
+<li>Removed old thread messaging API (see <a href="../Main/Channel.html" title="Channel">Channels</a>).</li>
+<li>Removed <a href="../Main/love.timer.getMicroTime.html" title="love.timer.getMicroTime">love.timer.getMicroTime</a>.</li></ul>
+<h3><span class="mw-headline" id="Renamed_APIs">Renamed APIs</span></h3>
+<ul><li>Renamed love's boot script to 'love.boot', which can be required.</li>
+<li>Renamed <a href="../Main/love.filesystem.mkdir.html" title="love.filesystem.mkdir">love.filesystem.mkdir</a> to <a href="../Main/love.filesystem.createDirectory.html" title="love.filesystem.createDirectory">love.filesystem.createDirectory</a>.</li>
+<li>Renamed <a href="../Main/love.filesystem.enumerate.html" title="love.filesystem.enumerate">love.filesystem.enumerate</a> to <a href="../Main/love.filesystem.getDirectoryItems.html" title="love.filesystem.getDirectoryItems">love.filesystem.getDirectoryItems</a>.</li>
+<li>Renamed <a href="../Main/World__setAllowSleeping.html" title="World:setAllowSleeping">World:setAllowSleeping</a> and <a href="../Main/World__getAllowSleeping.html" title="World:getAllowSleeping">World:getAllowSleeping</a> to <a href="../Main/World__setSleepingAllowed.html" title="World:setSleepingAllowed">World:setSleepingAllowed</a> and <a href="../Main/World__isSleepingAllowed.html" title="World:isSleepingAllowed">World:isSleepingAllowed</a>.</li>
+<li>Renamed <a href="../Main/ChainShape__setPrevVertex.html" title="ChainShape:setPrevVertex">ChainShape:setPrevVertex</a> to <a href="../Main/ChainShape__setPreviousVertex.html" title="ChainShape:setPreviousVertex">ChainShape:setPreviousVertex</a>.</li>
+<li>Renamed Joint:enableMotor to Joint:setMotorEnabled.</li>
+<li>Renamed Joint:enableLimit and Joint:isLimitEnabled to Joint:setLimitsEnabled and Joint:hasLimitsEnabled.</li>
+<li>Renamed t.screen to t.window in <a class="mw-redirect" href="../Main/Config_Files.html" title="love.conf">love.conf</a>.</li>
+<li>Renamed <a href="../Main/love.graphics.setCaption.html" title="love.graphics.setCaption">love.graphics.setCaption</a> to <a href="../Main/love.window.setTitle.html" title="love.window.setTitle">love.window.setTitle</a>.</li>
+<li>Renamed <a href="../Main/PixelEffect.html" title="PixelEffect">PixelEffect</a> to <a href="../Main/Shader.html" title="Shader">Shader</a> (but now with vertex shaders).</li>
+<li>Renamed <a href="../Main/love.graphics.setDefaultImageFilter.html" title="love.graphics.setDefaultImageFilter">love.graphics.setDefaultImageFilter</a> to <a href="../Main/love.graphics.setDefaultFilter.html" title="love.graphics.setDefaultFilter">love.graphics.setDefaultFilter</a>.</li>
+<li>Renamed <a href="../Main/ParticleSystem__setSprite.html" title="ParticleSystem:setSprite">ParticleSystem:setSprite</a> to <a href="../Main/ParticleSystem__setImage.html" title="ParticleSystem:setImage">ParticleSystem:setImage</a>.</li>
+<li>Renamed <a href="../Main/ParticleSystem__setGravity.html" title="ParticleSystem:setGravity">ParticleSystem:setGravity</a> to <a href="../Main/ParticleSystem__setLinearAcceleration.html" title="ParticleSystem:setLinearAcceleration">ParticleSystem:setLinearAcceleration</a>.</li>
+<li>Renamed <a href="../Main/ParticleSystem__setLifetime.html" title="ParticleSystem:setLifetime">ParticleSystem:setLifetime</a> and <a href="../Main/ParticleSystem__setParticleLife.html" title="ParticleSystem:setParticleLife">ParticleSystem:setParticleLife</a> to <a href="../Main/ParticleSystem__setEmitterLifetime.html" title="ParticleSystem:setEmitterLifetime">ParticleSystem:setEmitterLifetime</a> and <a href="../Main/ParticleSystem__setParticleLifetime.html" title="ParticleSystem:setParticleLifetime">ParticleSystem:setParticleLifetime</a>.</li>
+<li>Renamed <a href="../Main/ParticleSystem__count.html" title="ParticleSystem:count">ParticleSystem:count</a> and all getNum* functions to get*Count.</li>
+<li>Renamed <a href="../Main/SoundData__getBits.html" title="SoundData:getBits">SoundData:getBits</a> and <a href="../Main/Decoder__getBits.html" title="Decoder:getBits">Decoder:getBits</a> to <a href="../Main/SoundData__getBitDepth.html" title="SoundData:getBitDepth">SoundData:getBitDepth</a> and <a href="../Main/Decoder__getBitDepth.html" title="Decoder:getBitDepth">Decoder:getBitDepth</a>.</li>
+<li>Renamed <a href="../Main/Source__setDistance.html" title="Source:setDistance">Source:setDistance</a> and <a href="../Main/Source__getDistance.html" title="Source:getDistance">Source:getDistance</a> to <a href="../Main/Source__setAttenuationDistances.html" title="Source:setAttenuationDistances">Source:setAttenuationDistances</a> and <a href="../Main/Source__getAttenuationDistances.html" title="Source:getAttenuationDistances">Source:getAttenuationDistances</a>.</li>
+<li>Renamed <a href="../Main/love.mouse.setGrab.html" title="love.mouse.setGrab">love.mouse.setGrab</a> to <a href="../Main/love.mouse.setGrabbed.html" title="love.mouse.setGrabbed">love.mouse.setGrabbed</a>.</li></ul>
+<h3><span class="mw-headline" id="Fixes">Fixes</span></h3>
+<ul><li>Fixed fused mode in OS X.</li>
+<li>Fixed printing to the console in Windows before <a href="../Main/love.load.html" title="love.load">love.load</a> is called.</li>
+<li>Fixed the default <a href="../Main/love.run.html" title="love.run">love.run</a> to not include the time taken by <a href="../Main/love.load.html" title="love.load">love.load</a> in the first frame's dt calculation.</li>
+<li>Fixed the error screen not always appearing until the next input event.</li>
+<li>Fixed <a href="../Main/love.event.clear.html" title="love.event.clear">love.event.clear</a>.</li>
+<li>Fixed <a href="../Main/love.mouse.setPosition.html" title="love.mouse.setPosition">love.mouse.setPosition</a> when called in <a href="../Main/love.load.html" title="love.load">love.load</a>.</li></ul>
+<ul><li>Fixed scaling in several <a href="../Main/love.physics.html" title="love.physics">love.physics</a> functions.</li>
+<li>Fixed Box2D exception in <a href="../Main/World__update.html" title="World:update">World:update</a>.</li>
+<li>Fixed many uncaught Box2D / <a href="../Main/love.physics.html" title="love.physics">love.physics</a> exceptions for <a href="../Main/Body.html" title="Body">Bodies</a> and <a href="../Main/Joint.html" title="Joint">Joints</a>.</li>
+<li>Fixed <a href="../Main/ChainShape__getPoints.html" title="ChainShape:getPoints">ChainShape:getPoints</a> running out of Lua stack space and crashing.</li></ul>
+<ul><li>Fixed <a href="../Main/(File)__read.html" title="(File):read">File:read</a> reading past end of file.</li>
+<li>Fixed <a href="../Main/love.filesystem.setIdentity.html" title="love.filesystem.setIdentity">love.filesystem.setIdentity</a> not removing read access from old directories.</li></ul>
+<ul><li>Fixed possible memory leak in UTF-8 decoder.</li>
+<li>Fixed spacing for the last character in an Image <a href="../Main/Font.html" title="Font">Font</a>.</li>
+<li>Fixed line wrapping in <a href="../Main/love.graphics.printf.html" title="love.graphics.printf">love.graphics.printf</a>.</li>
+<li>Fixed <a href="../Main/love.graphics.printf.html" title="love.graphics.printf">love.graphics.printf</a> to error if the wrap limit is negative.</li>
+<li>Fixed <a href="../Main/love.graphics.print.html" title="love.graphics.print">love.graphics.print</a> truncating strings with embedded zeros.</li>
+<li>Fixed crashes with font drawing on some ATI cards.</li>
+<li>Fixed artifacts when drawing lines at huge scale.</li>
+<li>Fixed <a href="../Main/Font.html" title="Font">Fonts</a> and <a href="../Main/Canvas.html" title="Canvas">Canvases</a> ignoring default image filter.</li>
+<li>Fixed <a href="../Main/love.graphics.getLineWidth.html" title="love.graphics.getLineWidth">love.graphics.getLineWidth</a> returning incorrect values.</li>
+<li>Fixed <a href="../Main/love.graphics.getColor.html" title="love.graphics.getColor">love.graphics.getColor</a> on some Windows systems.</li>
+<li>Fixed alpha <a href="../Main/BlendMode.html" title="BlendMode">BlendMode</a>.</li>
+<li>Fixed multiplicative <a href="../Main/BlendMode.html" title="BlendMode">BlendMode</a>.</li>
+<li>Fixed <a href="../Main/love.graphics.getPointStyle.html" title="love.graphics.getPointStyle">love.graphics.getPointStyle</a>.</li>
+<li>Fixed line numbers in <a href="../Main/Shader.html" title="Shader">Shader</a> errors.</li>
+<li>Fixed <a href="../Main/Shader__send.html" title="Shader:send">Shader:send</a> with Images and Canvases failing sometimes.</li>
+<li>Fixed <a href="../Main/Shader__send.html" title="Shader:send">Shader:send</a> to keep a reference to sent Images and Canvases.</li>
+<li>Fixed crash when binding <a href="../Main/SpriteBatch.html" title="SpriteBatch">SpriteBatches</a> multiple times.</li>
+<li>Fixed <a href="../Main/SpriteBatch.html" title="SpriteBatch">SpriteBatches</a> with more than 16,384 sprites.</li>
+<li>Fixed draw order for <a href="../Main/ParticleSystem.html" title="ParticleSystem">ParticleSystems</a>.</li>
+<li>Fixed <a href="../Main/ParticleSystem__setSizes.html" title="ParticleSystem:setSizes">ParticleSystem:setSizes</a> resetting the size variation.</li></ul>
+<ul><li>Fixed <a href="../Main/love.window.getMode.html" title="love.window.getMode">love.window.getMode</a> and friends returning wrong values when using desktop size.</li>
+<li>Fixed keyrepeat settings being lost after (indirect) <a href="../Main/love.window.setMode.html" title="love.window.setMode">love.window.setMode</a>.</li>
+<li>Fixed the icon being reset after <a href="../Main/love.window.setMode.html" title="love.window.setMode">love.window.setMode</a>.</li></ul>
+<ul><li>Fixed memory leak in the mp3 decoder.</li>
+<li>Fixed sound issues with some versions of OpenAL soft, by enabling direct channels.</li>
+<li>Fixed 'random' hangs in audio.</li>
+<li>Fixed case (in)sensitivity of sound file extension parsing.</li>
+<li>Fixed looping support in tracker music formats.</li>
+<li>Fixed skipping/looping issues when playing streaming audio <a href="../Main/Source.html" title="Source">Sources</a>.</li>
+<li>Fixed a race condition in <a href="../Main/Source__play.html" title="Source:play">Source:play</a>.</li>
+<li>Fixed WAVE sound playback.</li></ul>
+<h3><span class="mw-headline" id="Other_Changes">Other Changes</span></h3>
+<ul><li>Moved love's startup to modules/love.</li>
+<li>Moved window-related functions from <a href="../Main/love.graphics.html" title="love.graphics">love.graphics</a> to <a href="../Main/love.window.html" title="love.window">love.window</a>.</li></ul>
+<ul><li>Updated functions which return LOVE objects to re-use the Lua-side object instead of always recreating it.</li></ul>
+<ul><li>Updated the windows console, it now tries to re-use an active one first.</li>
+<li>Updated error handling, error handlers now get resolved when the error occurs.</li>
+<li>Updated order of sleep/present in <a href="../Main/love.run.html" title="love.run">love.run</a> (now draws, *then* sleeps).</li></ul>
+<ul><li>Updated <a href="../Main/love.keyboard.setKeyRepeat.html" title="love.keyboard.setKeyRepeat">love.keyboard.setKeyRepeat</a> to take a boolean argument instead of numbers.</li>
+<li>Updated <a href="../Main/love.keypressed.html" title="love.keypressed">love.keypressed</a>'s second argument to indicate whether the keypress is a repeat.</li>
+<li>Updated keyboard <a href="../Main/KeyConstant.html" title="KeyConstant">key constants</a> with some modern keyboard keys.</li></ul>
+<ul><li>Updated love.filesystem to try to create the appdata directory if it doesn't exist yet.</li>
+<li>Updated the default filesystem identity to omit file extension.</li>
+<li>Updated <a href="../Main/love.filesystem.newFile.html" title="love.filesystem.newFile">love.filesystem.newFile</a> to optionally open the file.</li>
+<li>Updated most <a href="../Main/love.filesystem.html" title="love.filesystem">love.filesystem</a> functions to return nil, error on internal failure.</li></ul>
+<ul><li>Updated <a href="../Main/love.graphics.print.html" title="love.graphics.print">love.graphics.print</a>'s x and y arguments to default to 0.</li>
+<li>Updated the setFilter and setWrap methods, the second argument is now optional.</li>
+<li>Updated <a href="../Main/Font.html" title="Font">Font</a> and <a href="../Main/ParticleSystem.html" title="ParticleSystem">ParticleSystem</a> rendering code, now more performant.</li>
+<li>Updated <a href="../Main/SpriteBatch.html" title="SpriteBatch">SpriteBatch</a> code, now more performant when adding/setting and (un)binding.</li>
+<li>Updated <a href="../Main/Canvas.html" title="Canvas">Canvas</a> code to support more systems.</li>
+<li>Updated <a href="../Main/Canvas__getImageData.html" title="Canvas:getImageData">Canvas:getImageData</a> and <a href="../Main/love.graphics.newScreenshot.html" title="love.graphics.newScreenshot">love.graphics.newScreenshot</a> to be more efficient.</li>
+<li>Updated <a href="../Main/love.graphics.newScreenshot.html" title="love.graphics.newScreenshot">love.graphics.newScreenshot</a> to create a fully opaque image by default.</li>
+<li>Updated error messages when sending bad values to <a href="../Main/Shader.html" title="Shader">Shaders</a>.</li>
+<li>Updated <a href="../Main/love.graphics.newParticleSystem.html" title="love.graphics.newParticleSystem">love.graphics.newParticleSystem</a> to have a default buffer size of 1000.</li></ul>
+<ul><li>Updated <a href="../Main/love.image.newImageData.html" title="love.image.newImageData">love.image.newImageData</a> and <a href="../Main/love.graphics.newImage.html" title="love.graphics.newImage">love.graphics.newImage</a> to accept <a href="../Main/FileData.html" title="FileData">FileData</a>.</li>
+<li>Updated <a href="../Main/ImageData__setPixel.html" title="ImageData:setPixel">ImageData:setPixel</a> to accept a table and default to 255 alpha.</li>
+<li>Updated <a href="../Main/ImageData__mapPixel.html" title="ImageData:mapPixel">ImageData:mapPixel</a>, is now more efficient and now accepts optional x,y,w,h arguments.</li>
+<li>Updated <a href="../Main/love.image.html" title="love.image">love.image</a> memory handling, improves errors and thread-safety.</li></ul>
+<ul><li>Updated <a href="../Main/love.audio.newSource.html" title="love.audio.newSource">love.audio.newSource</a>, <a href="../Main/love.sound.newDecoder.html" title="love.sound.newDecoder">love.sound.newDecoder</a>, and <a href="../Main/love.sound.newSoundData.html" title="love.sound.newSoundData">love.sound.newSoundData</a> to accept <a href="../Main/FileData.html" title="FileData">FileData</a>.</li>
+<li>Updated allocation for <a href="../Main/SoundData.html" title="SoundData">SoundData</a>, it's more efficient and less wasteful.</li>
+<li>Updated <a href="../Main/SoundData__setSample.html" title="SoundData:setSample">SoundData:setSample</a> and <a href="../Main/SoundData__getSample.html" title="SoundData:getSample">SoundData:getSample</a> to error for invalid samples.</li>
+<li>Updated Source:set* functions to default z to 0.</li>
+<li>Updated <a href="../Main/Source__seek.html" title="Source:seek">Source:seek</a> to error for negative offsets.</li></ul>
+<ul><li>Updated <a href="../Main/Thread__start.html" title="Thread:start">Thread:start</a> to accept arguments. The arguments are available in the thread via <b>...</b> (the vararg expression.)</li></ul>
+<ul><li>Updated <a href="../Main/love.timer.getFPS.html" title="love.timer.getFPS">love.timer.getFPS</a> to be microsecond-accurate.</li>
+<li>Updated <a href="../Main/love.timer.getTime.html" title="love.timer.getTime">love.timer.getTime</a> to be microsecond-accurate and monotonic.</li></ul>
+<ul><li>Updated Box2D to version 2.3.</li></ul>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Versions.html">Versions</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Tutorial:PhysicsDrawing - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-500" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-namespace">Tutorial</span><span class="mw-page-title-separator">:</span><span class="mw-page-title-main">PhysicsDrawing</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><p>This is not so much a tutorial but an explained code snippet that helps with physics debugging.
+</p>
+<h2><span class="mw-headline" id="Drawing_Physics_Collisions">Drawing Physics Collisions</span></h2>
+<p>When developing with Box2D (aka love.physics) you will likely get to a point where the collisions don't quite match up with what you expect them to be due to some minor mistake.
+</p><p>At the end of this guide there's a complete snippet that will draw all collisions at the correct location. If you just want the code feel free to jump down and just copy &amp; paste it. But we will go over what the code does bit by bit.
+</p><p>love.physics works via a few different sets of objects. Most notably. "World", "Body", "Shape" and "Fixture". 
+</p>
+<ul><li>"World" is the physics world. You can have multiple ones but only objects within the same world will collide.</li></ul>
+<ul><li>"Body" is the location of your object within the physics world. It defines which world this object belongs to, if it can move and the mass of the object (which will be calculated from the size of your shape by default). It also holds a reference to the fixture.</li></ul>
+<ul><li>"Shape" is the collision itself. If two shapes collide, the physics system will handle it. It also holds a reference to the fixture.</li></ul>
+<ul><li>"Fixture" is how we attach a shape to a body. It defines a few additional properties how collisions will be handled (such as friction, collision channels and a few more). It also holds a reference to the body and the shape.</li></ul>
+<p>In order to draw all shapes we need to start at the world. It handles all collisions. So it's gotta contain a list of things. Specifically. It contains a list of bodies which we can get in the following way:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">listOfBodies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">World</span><span class="p">:</span><span class="nf">getBodyList</span><span class="p">()</span>
+</pre></div>
+<p>We don't need a list of bodies though. We just wanna do something for every body. So we make a for loop out of it:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">for</span><span class="w"> </span><span class="nv">_</span><span class="p">,</span><span class="w"> </span><span class="nv">body</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nb">pairs</span><span class="p">(</span><span class="nv">World</span><span class="p">:</span><span class="nf">getBodyList</span><span class="p">())</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">    </span><span class="c1">-- ToDo</span>
+<span class="kr">end</span>
+</pre></div>
+<p>A body can have multiple shapes which are attached with multiple fixtures. So we have to iterate over the list of fixtures as well:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">for</span><span class="w"> </span><span class="nv">_</span><span class="p">,</span><span class="w"> </span><span class="nv">body</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nb">pairs</span><span class="p">(</span><span class="nv">World</span><span class="p">:</span><span class="nf">getBodyList</span><span class="p">())</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="nv">_</span><span class="p">,</span><span class="w"> </span><span class="nv">fixture</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nb">pairs</span><span class="p">(</span><span class="nv">body</span><span class="p">:</span><span class="nf">getFixtureList</span><span class="p">())</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">        </span><span class="c1">-- ToDo</span>
+<span class="w">    </span><span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+<p>A fixture however can only have one shape. So now we already have a reference to all collision fixtures (and therefore shapes) there are within this loop!
+</p><p>We can simply store a reference to the shape by doing
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">for</span><span class="w"> </span><span class="nv">_</span><span class="p">,</span><span class="w"> </span><span class="nv">body</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nb">pairs</span><span class="p">(</span><span class="nv">World</span><span class="p">:</span><span class="nf">getBodyList</span><span class="p">())</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="nv">_</span><span class="p">,</span><span class="w"> </span><span class="nv">fixture</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nb">pairs</span><span class="p">(</span><span class="nv">body</span><span class="p">:</span><span class="nf">getFixtureList</span><span class="p">())</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">        </span><span class="kd">local</span><span class="w"> </span><span class="nv">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">fixture</span><span class="p">:</span><span class="nf">getShape</span><span class="p">()</span>
+
+<span class="w">        </span><span class="c1">-- ToDo Draw collision</span>
+<span class="w">    </span><span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+<p>So next up is the drawing. There are multiple types of shapes. To be specific we have
+</p>
+<ul><li>CircleShape</li></ul>
+<ul><li>PolygonShape</li></ul>
+<ul><li>EdgeShape</li></ul>
+<ul><li>ChainShape</li></ul>
+<h2><span class="mw-headline" id="Drawing_circle_shapes">Drawing circle shapes</span></h2>
+<p>So let's first look at the circle. We will draw it with the following code:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">cx</span><span class="p">,</span><span class="w"> </span><span class="nv">cy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="nf">getWorldPoints</span><span class="p">(</span><span class="nv">shape</span><span class="p">:</span><span class="nf">getPoint</span><span class="p">())</span>
+<span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">circle</span><span class="p">(</span><span class="s2">"fill"</span><span class="p">,</span><span class="w"> </span><span class="nv">cx</span><span class="p">,</span><span class="w"> </span><span class="nv">cy</span><span class="p">,</span><span class="w"> </span><span class="nv">shape</span><span class="p">:</span><span class="nf">getRadius</span><span class="p">())</span>
+</pre></div>
+<p>cx &amp; cy stand for "CircleX" and "CircleY". The position we want to draw it at.
+</p><p>body:getWorldPoints() will take any amount of points and convert them into world space (a point being two numbers. One for x and one for y). In other words. It will do "x + body:getX()", "y + body:getY()" for all points provided. 
+</p><p>Then we simply draw the circle at the position we just calculated with the radius of the shape. I choose "fill" as first parameter. You can also use "line". "fill" means it'll be drawn as circle. "fill" will draw it as a ring.
+</p>
+<h2><span class="mw-headline" id="Drawing_a_polygon_shapes">Drawing a polygon shapes</span></h2>
+<p>Next up is the PolygonShape. A polygon is a list of points with up to 8 vertices (aka 16 numbers representing x and y. e.g. (x1,y1, x2,y2, ..., xn,yn) )
+</p><p>We can abuse a little bit of functionality of Lua to make this a super small snippet of code. We can get all the points by calling "shape:getPoints()" (once we verified it's a polygon shape).
+</p><p>This will return up to 16 individual numbers. However. If we put this directly into another function without following parameter. It will simply put the next number as next parameter.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="kr">function</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="nv">a</span><span class="p">,</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span>
+<span class="kr">end</span>
+<span class="kd">local</span><span class="w"> </span><span class="kr">function</span><span class="w"> </span><span class="nf">f</span><span class="p">()</span>
+<span class="w">    </span><span class="kr">return</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span>
+<span class="kr">end</span>
+
+<span class="nf">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">   </span><span class="c1">--&gt; Prints 4.</span>
+<span class="nf">add</span><span class="p">(</span><span class="nf">f</span><span class="p">())</span><span class="w">    </span><span class="c1">--&gt; Prints 3. We returned multiple parameters which are simply considered as following parameters. So a -&gt; 1, b -&gt; 2.</span>
+<span class="nf">add</span><span class="p">(</span><span class="nf">f</span><span class="p">(),</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="c1">--&gt; Prints 1. We returned multiple parameters. However those are directly followed by another value. So only the first return value is used and the others will be discarded. a -&gt; 1, b -&gt; 0.</span>
+</pre></div>
+<p>Knowing this we can do the following:
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">polygon</span><span class="p">(</span><span class="s2">"fill"</span><span class="p">,</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="nf">getWorldPoints</span><span class="p">(</span><span class="nv">shape</span><span class="p">:</span><span class="nf">getPoints</span><span class="p">()))</span>
+</pre></div>
+<p>Since there is no following parameter it will simply put as many points in the function as the shape has. We don't have to handle anything else!
+</p>
+<h2><span class="mw-headline" id="Drawing_edge_and_chain_Shapes">Drawing edge and chain Shapes</span></h2>
+<p>Lastly we have edge and chain shapes. They are essentially the same. Internally they are handled a bit differently. But for our case we can assume an EdgeShape to be the same as a ChainShape with two points. A ChainShape can have two or more points (this is the only shape without a limit).
+</p><p>However. Both are made up of lines that may or may not loop around. And both have the function "shape:getPoints()" as well! So we do not have to treat them separately.
+</p><p>We pretty much do the same as we did for the polygon. But instead of drawing a polygon we draw a line.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">line</span><span class="p">(</span><span class="nv">body</span><span class="p">:</span><span class="nf">getWorldPoints</span><span class="p">(</span><span class="nv">shape</span><span class="p">:</span><span class="nf">getPoints</span><span class="p">()))</span>
+</pre></div>
+<h2><span class="mw-headline" id="Final_code">Final code</span></h2>
+<p>This leaves us with the final code snippet that will draw all of our collisions at the correct location on the screen!
+</p><p>Happy debugging! 
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">for</span><span class="w"> </span><span class="nv">_</span><span class="p">,</span><span class="w"> </span><span class="nv">body</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nb">pairs</span><span class="p">(</span><span class="nv">world</span><span class="p">:</span><span class="nf">getBodies</span><span class="p">())</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">    </span><span class="kr">for</span><span class="w"> </span><span class="nv">_</span><span class="p">,</span><span class="w"> </span><span class="nv">fixture</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nb">pairs</span><span class="p">(</span><span class="nv">body</span><span class="p">:</span><span class="nf">getFixtures</span><span class="p">())</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">        </span><span class="kd">local</span><span class="w"> </span><span class="nv">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">fixture</span><span class="p">:</span><span class="nf">getShape</span><span class="p">()</span>
+
+<span class="w">        </span><span class="kr">if</span><span class="w"> </span><span class="nv">shape</span><span class="p">:</span><span class="nf">typeOf</span><span class="p">(</span><span class="s2">"CircleShape"</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">            </span><span class="kd">local</span><span class="w"> </span><span class="nv">cx</span><span class="p">,</span><span class="w"> </span><span class="nv">cy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="nf">getWorldPoints</span><span class="p">(</span><span class="nv">shape</span><span class="p">:</span><span class="nf">getPoint</span><span class="p">())</span>
+<span class="w">            </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">circle</span><span class="p">(</span><span class="s2">"fill"</span><span class="p">,</span><span class="w"> </span><span class="nv">cx</span><span class="p">,</span><span class="w"> </span><span class="nv">cy</span><span class="p">,</span><span class="w"> </span><span class="nv">shape</span><span class="p">:</span><span class="nf">getRadius</span><span class="p">())</span>
+<span class="w">        </span><span class="kr">elseif</span><span class="w"> </span><span class="nv">shape</span><span class="p">:</span><span class="nf">typeOf</span><span class="p">(</span><span class="s2">"PolygonShape"</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">            </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">polygon</span><span class="p">(</span><span class="s2">"fill"</span><span class="p">,</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="nf">getWorldPoints</span><span class="p">(</span><span class="nv">shape</span><span class="p">:</span><span class="nf">getPoints</span><span class="p">()))</span>
+<span class="w">        </span><span class="kr">else</span>
+<span class="w">            </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">line</span><span class="p">(</span><span class="nv">body</span><span class="p">:</span><span class="nf">getWorldPoints</span><span class="p">(</span><span class="nv">shape</span><span class="p">:</span><span class="nf">getPoints</span><span class="p">()))</span>
+<span class="w">        </span><span class="kr">end</span>
+<span class="w">    </span><span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+</div></div>
+<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

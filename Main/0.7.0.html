@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>0.7.0 - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">0.7.0</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><figure class="mw-default-size" typeof="mw:File/Thumb"><a class="mw-file-description" href="../File/0.7.2_no-game.png.html"><img class="mw-file-element" data-file-height="669" data-file-width="846" decoding="async" height="237" src="../assets/images/0.7.2_no-game.png" width="300"/></a><figcaption>no-game screen</figcaption></figure>
+<p>The codename of LÖVE 0.7.0 is "<b>Game Slave</b>". It is currently <b><span style="color:#0000ff;">released</span></b>.
+</p>
+<h2><span class="mw-headline" id="Changes_from_0.6.2">Changes from <a href="../Main/0.6.2.html" title="0.6.2">0.6.2</a></span></h2>
+<h3><span class="mw-headline" id="Additions">Additions</span></h3>
+<ul><li>Added <a href="../Main/love.thread.html" title="love.thread">love.thread</a>.</li>
+<li>Added <a href="../Main/love.font.html" title="love.font">love.font</a>.</li>
+<li>Added <a href="../Main/Framebuffer.html" title="Framebuffer">love.graphics.Framebuffer</a>.</li>
+<li>Added <a href="../Main/Source__play.html" title="Source:play">Source:play</a>, <a href="../Main/Source__pause.html" title="Source:pause">Source:pause</a>, etc.</li>
+<li>Added <a href="../Main/Source__isStatic.html" title="Source:isStatic">Source:isStatic</a>.</li>
+<li>Added <a href="../Main/Source__getPosition.html" title="Source:getPosition">Source:getPosition</a>/<a href="../Main/Source__setPosition.html" title="Source:setPosition">setPosition</a>, <a href="../Main/Source__getVelocity.html" title="Source:getVelocity">Source:getVelocity</a>/<a href="../Main/Source__setVelocity.html" title="Source:setVelocity">setVelocity</a>, and <a href="../Main/Source__getDirection.html" title="Source:getDirection">Source:getDirection</a>/<a href="../Main/Source__setDirection.html" title="Source:setDirection">setDirection</a> to <a href="../Main/Source.html" title="Source">Source</a>.</li>
+<li>Added CircleShape:getGroupIndex/setGroupIndex</li>
+<li>Added PolygonShape:getGroupIndex/setGroupIndex</li>
+<li>Added <a href="../Main/Font__getWrap.html" title="Font:getWrap">Font:getWrap</a>.</li>
+<li>Added identity field to <a class="mw-redirect" href="../Main/Config_Files.html" title="love.conf">love.conf</a>.</li>
+<li>Added <a href="../Main/love.quit.html" title="love.quit">love.quit</a> callback.</li>
+<li>Added <a href="../Main/love.focus.html" title="love.focus">love.focus</a> callback.</li>
+<li>Added extra meter parameter to <a href="../Main/love.physics.newWorld.html" title="love.physics.newWorld">love.physics.newWorld</a>.</li>
+<li>Added <a href="../Main/love.graphics.setIcon.html" title="love.graphics.setIcon">love.graphics.setIcon</a>.</li>
+<li>Added way to make the window desktop resolution.</li>
+<li>Added subtractive and multiplicative <a href="../Main/BlendMode.html" title="BlendMode">blend modes</a>.</li>
+<li>Added <a href="../Main/Body__getAllowSleeping.html" title="Body:getAllowSleeping">Body:getAllowSleeping</a>.</li>
+<li>Added <a href="../Main/Shape__getBody.html" title="Shape:getBody">Shape:getBody</a>.</li>
+<li>Added <a href="../Main/FileData.html" title="FileData">love.filesystem.FileData</a> for public usage.</li>
+<li>Added base64 support for <a href="../Main/FileData.html" title="FileData">love.filesystem.FileData</a>.</li></ul>
+<h3><span class="mw-headline" id="Bugfixes">Bugfixes</span></h3>
+<ul><li>Fixed the debug module not being an upvalue of the error handlers. (you can now override debug)</li>
+<li>Fixed some cases when <a href="../Main/love.audio.pause.html" title="love.audio.pause">love.audio.pause</a> and friends were acting on everything, not just the passed <a href="../Main/Source.html" title="Source">Source</a>.</li>
+<li>Fixed <a href="../Main/Body__setFixedRotation.html" title="Body:setFixedRotation">setFixedRotation</a> enabling other flags.</li>
+<li>Fixed a bug in the loader (for require).</li>
+<li>Fixed ParticleSystem::setSprite not retaining the new image.</li>
+<li>Fixed <a href="../Main/love.graphics.setMode.html" title="love.graphics.setMode">setMode</a> removing images settings (wrapping, filters).</li>
+<li>Fixed <a href="../Main/Shape__getBody.html" title="Shape:getBody">Shape:getBody</a>, it's now exposed for LÖVE usage.</li>
+<li>Fixed <a href="../Main/Joint__getType.html" title="Joint:getType">DistanceJoint:getType()</a> returning "circle" - it now returns "distance".</li>
+<li>Fixed <a href="../Main/SpriteBatch.html" title="SpriteBatch">SpriteBatches</a> being unaffected by <a href="../Main/love.graphics.setColor.html" title="love.graphics.setColor">setColor</a></li>
+<li>Fixed the audio bug.</li>
+<li>Fixed invalid FSAA values crashing LÖVE.</li>
+<li>Fixed a bunch of compiler warnings.</li>
+<li>Fixed OS X not properly using UTIs for .love files.</li>
+<li>Fixed the modplug decoder not properly handeling files that fail to load.</li>
+<li>Fixed a memory leak in <a href="../Main/love.graphics.setFont.html" title="love.graphics.setFont">setFont</a>.</li>
+<li>Fixed bug where errors in threads wouldn't get picked up by demand.</li>
+<li>Fixed part of the bug with newlines when scaling text (rotating still messes up the lines).</li>
+<li>Fixed the bug where <a href="../Main/love.graphics.newImageFont.html" title="love.graphics.newImageFont">newImageFont</a> would try to create <a href="../Main/ImageData.html" title="ImageData">ImageData</a> out of ImageData.</li>
+<li>Fixed error handler not resetting the <a href="../Main/BlendMode.html" title="BlendMode">blend mode</a>.</li></ul>
+<h3><span class="mw-headline" id="Others">Others</span></h3>
+<ul><li>Changed fonts, they're now po2 safe.</li>
+<li>Changed the traceback in the error screen.</li>
+<li>Changed font origin to top-left.</li>
+<li>Changed behavior of <a href="../Main/love.physics.newWorld.html" title="love.physics.newWorld">love.physics.newWorld(w, h)</a>, it now creates a w*h world, not a 4*w*h world.</li>
+<li>Removed font functions from <a href="../Main/love.graphics.html" title="love.graphics">love.graphics</a>.</li></ul>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Versions.html">Versions</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

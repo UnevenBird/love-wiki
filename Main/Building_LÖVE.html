@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Building LÖVE - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">Building LÖVE</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><table align="center" bgcolor="gold" class="notice" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+<tbody><tr>
+<td width="1"><span class="mw-default-size" typeof="mw:File"><a class="mw-file-description" href="../File/O.png.html"><img class="mw-file-element" data-file-height="64" data-file-width="64" decoding="async" height="64" src="../assets/images/O.png" width="64"/></a></span>
+</td>
+<td>This page is still incomplete, you are likely to be eaten by a grue.
+</td>
+<td width="1"> 
+</td></tr></tbody></table><p><br/>
+</p><table align="center" bgcolor="gold" class="notice" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+<tbody><tr>
+<td width="1"><span class="mw-default-size" typeof="mw:File"><a class="mw-file-description" href="../File/O.png.html"><img class="mw-file-element" data-file-height="64" data-file-width="64" decoding="async" height="64" src="../assets/images/O.png" width="64"/></a></span>
+</td>
+<td>This page has information on compiling the LÖVE source code. This is only necessary if you want to make modifications or additions to the framework itself, or if a binary is not provided for your platform (for example, GNU/Linux distributions other than Ubuntu or 32-bit GNU/Linux). If you just want to code a game in Lua, go back to <a href="../Main/Getting_Started.html" title="Getting Started">Getting Started</a>.
+</td>
+<td width="1"> 
+</td></tr></tbody></table><p><br/>
+</p><table align="center" bgcolor="gold" class="notice" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+<tbody><tr>
+<td width="1"><span class="mw-default-size" typeof="mw:File"><a class="mw-file-description" href="../File/O.png.html"><img class="mw-file-element" data-file-height="64" data-file-width="64" decoding="async" height="64" src="../assets/images/O.png" width="64"/></a></span>
+</td>
+<td>LÖVE for Android has its own build instructions which deviates entirely from this page. See the <a class="external text" href="https://github.com/love2d/love-android" rel="nofollow">repository</a> for more information!
+</td>
+<td width="1"> 
+</td></tr></tbody></table><p><br/>
+</p><p>Still interested? Okay. Follow these three steps and you'll have your very own LÖVE binary:
+</p>
+<ol><li><a href="#1._Getting_the_source">Getting the source</a></li>
+<li><a href="#2._Dependencies">Dependencies</a></li>
+<li><a href="#3._Building">Building</a></li></ol>
+<h2><span class="mw-headline" id="1._Getting_the_source">1. Getting the source</span></h2>
+<p>The official repository of LÖVE is hosted on <a class="external text" href="https://github.com/love2d/love" rel="nofollow">GitHub</a>.
+</p><p>You can download the source code either by downloading an archive from one of the tags on the <a class="external text" href="https://github.com/love2d/love/releases" rel="nofollow">download page</a> or by installing Git and cloning the repository. Almost every Linux distributions have Git in their repositories, some even have it installed by default. Windows and OS X users can get the official binary of Git from <a class="external text" href="https://git-scm.com/downloads" rel="nofollow">here</a>.
+</p><p>To create a clone with Git, open a terminal or command prompt, go to the directory that you want to download the source code folder to and use the following commands:
+</p>
+<div class="mw-highlight mw-highlight-lang-bash mw-content-ltr" dir="ltr"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/love2d/love
+</pre></div>
+<p>This will create a love folder and download the latest source code into it.
+</p><p>If you want to use the source code of a specific version, go into the love directory and issue one of the following commands:
+</p>
+<div class="mw-highlight mw-highlight-lang-bash mw-content-ltr" dir="ltr"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span><span class="m">0</span>.8.0<span class="w">		</span><span class="c1"># any (released) version from 0.6.0 onwards.</span>
+git<span class="w"> </span>checkout<span class="w"> </span><span class="m">0</span>.7.2
+git<span class="w"> </span>checkout<span class="w"> </span><span class="m">11</span>.x<span class="w">		</span><span class="c1"># to the latest commit at stable branch (currently 11.x)</span>
+git<span class="w"> </span>checkout<span class="w"> </span>main<span class="w">		</span><span class="c1"># to the latest commit at upcoming version 12.0</span>
+</pre></div>
+<h2><span class="mw-headline" id="2._Dependencies">2. Dependencies</span></h2>
+<p>LÖVE uses several open source libraries such as Lua, libvorbis, etc. Some are shipped alongside LÖVE source code but some must be installed manually. Those libraries and their development files are required to successfully build LÖVE. It's possible to build every dependency yourself, but this is out of the scope of this page. The following explains how you can get prebuilt binaries instead.
+</p>
+<h3><span class="mw-headline" id="Windows">Windows</span></h3>
+<p>The dependencies and instructions for LÖVE <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a>+ can be found <a class="external text" href="https://github.com/love2d/megasource" rel="nofollow">here</a>.
+</p>
+<h3><span class="mw-headline" id="Mac_OS_X">Mac OS X</span></h3>
+<p>The required pre-built frameworks are available <a class="external text" href="https://love2d.org/sdk/" rel="nofollow">here</a>. Place the frameworks in <code>/Library/Frameworks/</code> in order for LÖVE's Xcode project to recognize them.
+</p>
+<h3><span class="mw-headline" id="Linux">Linux</span></h3>
+<p>Download the development packages of the dependencies from the repository of your distribution.
+</p>
+<h4><span id="Note_on_L.C3.96VE_12.0"></span><span class="mw-headline" id="Note_on_LÖVE_12.0">Note on LÖVE 12.0</span></h4>
+<p>LÖVE 12 requires <b>SDL3</b> instead of SDL2, which may not provided by your distro. We recommend using
+<a class="external text" href="https://github.com/love2d/love-appimage-source" rel="nofollow">love-appimage-source</a> to compile LÖVE 12. If for any reason you cannot use it, you must have SDL3 development files installed.
+</p><p>LÖVE 12 no longer uses mpg123. It is safe to compile LÖVE 12 without it present.
+</p>
+<h4><span class="mw-headline" id="Ubuntu_and_Debian_Jessie_onwards">Ubuntu and Debian Jessie onwards</span></h4>
+<div class="mw-highlight mw-highlight-lang-bash mw-content-ltr" dir="ltr"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>build-essential<span class="w"> </span>autotools-dev<span class="w"> </span>automake<span class="w"> </span>libtool<span class="w"> </span>pkg-config<span class="w"> </span><span class="se">\</span>
+libfreetype6-dev<span class="w"> </span>libluajit-5.1-dev<span class="w"> </span>libsdl3-dev<span class="w"> </span>libopenal-dev<span class="w"> </span>libogg-dev<span class="w"> </span><span class="se">\</span>
+libvorbis-dev<span class="w"> </span>libmodplug-dev<span class="w"> </span>libtheora-dev<span class="w"> </span>libharfbuzz-dev
+</pre></div>
+<p>These are taken from the <code>platform/unix/debian/control.in</code> file in the repository.
+</p><p>For the 0.9.0 branch, older versions of Ubuntu need the latest libsdl2-dev packages, which can be found via this ppa: <a class="external free" href="https://launchpad.net/~bartbes/+archive/love-stable" rel="nofollow">https://launchpad.net/~bartbes/+archive/love-stable</a>
+</p><p>If you get an error during the build complaining about libturbojpeg, you must first fix a bug in Ubuntu, then run `configure` again:
+</p>
+<div class="mw-highlight mw-highlight-lang-bash mw-content-ltr" dir="ltr"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>/usr/lib/x86_64-linux-gnu/libturbojpeg.so.0<span class="w"> </span>/usr/lib/x86_64-linux-gnu/libturbojpeg.so
+</pre></div>
+<p>Notes:
+</p>
+<ul><li>Prior to 10.0, <code>libdevil</code> is also needed.</li>
+<li>Prior to <a href="../Main/11.0.html" title="11.0">11.0</a>, <code>libphysfs-dev</code> is also needed.</li>
+<li>Prior to <a href="../Main/12.0.html" title="12.0">12.0</a>, <code>libmpg123-dev</code> is also needed.</li>
+<li>Starting on 12.0, <code>libsdl3-dev</code> is required, which is not available in any stable channels. 11.x requires <code>libsdl2-dev</code> instead.</li></ul>
+<h4><span class="mw-headline" id="Arch_Linux">Arch Linux</span></h4>
+<div class="mw-highlight mw-highlight-lang-bash mw-content-ltr" dir="ltr"><pre><span></span>pacman<span class="w"> </span>-S<span class="w"> </span>devil<span class="w"> </span>flac<span class="w"> </span>freetype2<span class="w"> </span>glibc<span class="w"> </span>libmodplug<span class="w"> </span>libvorbis<span class="w"> </span>lua51<span class="w"> </span>mesa<span class="w"> </span>mpg123<span class="w"> </span>openal<span class="w"> </span>physfs<span class="w"> </span>sdl<span class="w"> </span><span class="c1"># 0.6.x</span>
+pacman<span class="w"> </span>-S<span class="w"> </span>devil<span class="w"> </span>freetype2<span class="w"> </span>libmodplug<span class="w"> </span>libvorbis<span class="w"> </span>lua51<span class="w"> </span>mpg123<span class="w"> </span>openal<span class="w"> </span>physfs<span class="w"> </span>sdl<span class="w"> </span><span class="c1"># 0.7.x</span>
+pacman<span class="w"> </span>-S<span class="w"> </span>luajit<span class="w"> </span>physfs<span class="w"> </span>freetype2<span class="w"> </span>devil<span class="w"> </span>mpg123<span class="w"> </span>openal<span class="w"> </span>libvorbis<span class="w"> </span>libmodplug<span class="w"> </span>sdl2<span class="w"> </span>shared-mime-info<span class="w"> </span>hicolor-icon-theme<span class="w"> </span>desktop-file-utils<span class="w"> </span><span class="c1"># for 0.9.x (taken from package in repository)</span>
+pacman<span class="w"> </span>-S<span class="w"> </span>luajit<span class="w"> </span>freetype2<span class="w"> </span>mpg123<span class="w"> </span>openal<span class="w"> </span>libvorbis<span class="w"> </span>libtheora<span class="w"> </span>libmodplug<span class="w"> </span>sdl2<span class="w"> </span>shared-mime-info<span class="w"> </span>hicolor-icon-theme<span class="w"> </span>desktop-file-utils<span class="w"> </span><span class="c1"># for 11.x</span>
+pacman<span class="w"> </span>-S<span class="w"> </span>luajit<span class="w"> </span>freetype2<span class="w"> </span>openal<span class="w"> </span>libvorbis<span class="w"> </span>libtheora<span class="w"> </span>libmodplug<span class="w"> </span>sdl3<span class="w"> </span>shared-mime-info<span class="w"> </span>hicolor-icon-theme<span class="w"> </span>desktop-file-utils<span class="w"> </span><span class="c1"># for 12.x, see note below</span>
+</pre></div>
+<h4><span class="mw-headline" id="Fedora">Fedora</span></h4>
+<div class="mw-highlight mw-highlight-lang-bash mw-content-ltr" dir="ltr"><pre><span></span>dnf<span class="w"> </span>install<span class="w"> </span>freetype-devel<span class="w"> </span>glibc-devel<span class="w"> </span>libmpg123-devel<span class="w"> </span>libmodplug-devel<span class="w"> </span>physfs-devel<span class="w"> </span>mesa-libGL-devel<span class="w"> </span>openal-soft-devel<span class="w"> </span>libvorbis-devel<span class="w"> </span>SDL-devel<span class="w"> </span>libmng-devel<span class="w"> </span>libtiff-devel<span class="w"> </span>lua-devel<span class="w"> </span>gcc-c++<span class="w"> </span>libtool<span class="w">  </span>luajit<span class="w"> </span>luajit-devel<span class="w"> </span>libtheora-devel<span class="w"> </span>SDL2-devel
+</pre></div>
+<p>Please note that libmpg123-devel is in the rpmfusion-free repository.
+</p>
+<h4><span class="mw-headline" id="Mageia_2">Mageia 2</span></h4>
+<div class="mw-highlight mw-highlight-lang-bash mw-content-ltr" dir="ltr"><pre><span></span>urpmi<span class="w"> </span>make<span class="w"> </span>automake<span class="w"> </span>autoconf<span class="w"> </span>libopenal-devel<span class="w"> </span>libtool<span class="w"> </span>libtool-base<span class="w"> </span>libphysfs-devel<span class="w"> </span>libSDL-devel<span class="w"> </span>lua<span class="w"> </span>liblua-devel<span class="w"> </span>libmodplug-devel<span class="w"> </span>libfreetype6-devel<span class="w"> </span>libmpg123-devel<span class="w"> </span>libvorbis-devel<span class="w"> </span>libmng-devel<span class="w"> </span>libxpm-devel<span class="w"> </span>libxcursor-devel<span class="w"> </span>libxxf86vm-devel
+</pre></div>
+<h4><span class="mw-headline" id="Gentoo">Gentoo</span></h4>
+<div class="mw-highlight mw-highlight-lang-bash mw-content-ltr" dir="ltr"><pre><span></span>emerge<span class="w"> </span>-va<span class="w"> </span>lua<span class="w"> </span>physfs<span class="w"> </span>libsdl<span class="w"> </span>opengl<span class="w"> </span>freetype<span class="w"> </span>openal<span class="w"> </span>libvorbis<span class="w"> </span>mpg123<span class="w"> </span>libmodplug
+</pre></div>
+<p>Make sure you have autotools installed (which should normally be the case):
+</p>
+<div class="mw-highlight mw-highlight-lang-bash mw-content-ltr" dir="ltr"><pre><span></span>emerge<span class="w"> </span>-va<span class="w"> </span>automake<span class="w"> </span>autoconf<span class="w"> </span>libtool
+</pre></div>
+<h4><span id="Nix.2FNixOS"></span><span class="mw-headline" id="Nix/NixOS">Nix/NixOS</span></h4>
+<p>NixOS provides it's own official <a class="external text" href="https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/interpreters/love/11.nix" rel="nofollow">build script</a>.
+</p>
+<h4><span class="mw-headline" id="Other_distributions">Other distributions</span></h4>
+<p>Any other distribution will most likely have the dependencies in their repositories too, possibly with slightly different package names.
+</p>
+<h2><span class="mw-headline" id="3._Building">3. Building</span></h2>
+<h3><span class="mw-headline" id="Windows_2">Windows</span></h3>
+<p>Follow the instructions at the <a class="external text" href="https://github.com/love2d/megasource" rel="nofollow">megasource</a> repository page to build LÖVE 0.9.0+.
+</p><p>Be sure to keep the required DLLs in the same folder as love.exe when running the executable.
+</p>
+<h3><span class="mw-headline" id="Mac_OS_X_2">Mac OS X</span></h3>
+<p>Open the <code>love.xcodeproj</code> file with Xcode and press 'build', or use the <code>xcodebuild</code> command-line utility.
+</p>
+<h3><span class="mw-headline" id="Linux_2">Linux</span></h3>
+<p>Use the automagic script to generate the configure file and then run configure and make as usual.
+</p><p>Be aware that if you got your source from the <a class="external text" href="https://love2d.org/" rel="nofollow">LÖVE homepage</a> your configure script has been pre-generated. This means that the ./platform/unix/automagic step should be skipped.
+</p>
+<div class="mw-highlight mw-highlight-lang-bash mw-content-ltr" dir="ltr"><pre><span></span>./platform/unix/automagic
+./configure
+make
+</pre></div>
+<p>Your LÖVE binary will end up in the src directory.
+</p><p>Note: If you need to build an AppImage, check <a class="external text" href="https://github.com/love2d/love-appimage-source" rel="nofollow">love-appimage-source</a> repository instead.
+</p>
+<h2><span class="mw-headline" id="Other_Languages">Other Languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/L%C3%96VE.html">LÖVE</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Guidelines - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">Guidelines</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><p>All registered users can edit the wiki, but please follow these guidelines for consistency. If you think the guidelines should be changed, or should contain additional information, please don't hesitate to contact Rude.
+</p>
+<h2><span class="mw-headline" id="Purpose">Purpose</span></h2>
+<p>The main purposes of the wiki are as follows.
+</p>
+<ol><li>To document the LÖVE API, and provide tutorials.</li>
+<li>To provide information about games and libraries using LÖVE.</li></ol>
+<p>That said, it is fully allowed to add information about other things which fall way outside these categories.
+</p><p>If you would like to make major changes in the wiki, like deploying a new structure for built-in types, for example; don't do it. You <i>must</i> talk to Rude first, otherwise there's a high chance your changes will be reverted.
+</p>
+<h2><span class="mw-headline" id="Name_Conflics">Name Conflics</span></h2>
+<p>To avoid too much parenthesized URLs, documentation pages have plain titles without prefixes or suffixes. For instance, the type <a href="../Main/Image.html" title="Image">Image</a> can be referred to externally as <a class="external free" href="http://love2d.org/wiki/Image" rel="nofollow">http://love2d.org/wiki/Image</a>.
+</p><p>This may occasionally lead to name conflicts, in which case the documentation page will always win. If you create a game called <i>Awesome</i>, and LÖVE later decides to expose a type called <i>Awesome</i> (not completely unlikely), then your game will be moved to another title.
+</p>
+<h2><span class="mw-headline" id="Style">Style</span></h2>
+<p>If you're talking about types built into LÖVE, link to them. For instance, <a href="../Main/Image.html" title="Image">Image</a> is an object which can be displayed on screen.
+</p><p>When referring to variables and code inside a regular sentence, use the &lt;code&gt; tag to improve the reading experience. For instance: when you add <code>foo</code> and <code>bar</code>, the result is <code>foobar</code>.
+</p>
+<h2><span class="mw-headline" id="Documentation">Documentation</span></h2>
+<p>Documentation pages <i>must</i> follow the same structure if the documentation is to be usable. 
+</p><p>All documentation pages must have a semantic link to their parent in their <i>See Also</i> section. Without this, the item will not appear in the automatic lists throughout the wiki. A semantic link is added like this for a function, type or enum in <a href="../Main/love.audio.html" title="love.audio">love.audio</a>:
+</p>
+<pre>[[parent::love.audio]]
+</pre>
+<p>All documentation pages must also have a semantic, 'list-friendly' description. This is done by adding the following to the bottom of the page: 
+</p>
+<pre>{{#set:Description=Draws an [[Image]] on screen.}}
+</pre>
+<h3><span class="mw-headline" id="Modules">Modules</span></h3>
+<p>The following 'level 2' headers are allowed, but should only be used if they contain anything.
+</p>
+<ul><li>Types</li>
+<li>Functions</li>
+<li>Enums</li>
+<li>Notes</li>
+<li>Examples</li>
+<li>See Also</li></ul>
+<p>All modules must be assiciated with <a href="../Category/Modules.html" title="Category:Modules">Category:Modules</a>.
+</p>
+<h3><span class="mw-headline" id="Types">Types</span></h3>
+<p>The following 'level 2' headers are allowed, but again, don't use then and leave them empty.
+</p>
+<ul><li>Functions</li>
+<li>Enums</li>
+<li>Supertypes</li>
+<li>Subtypes</li>
+<li>Notes</li>
+<li>Examples</li>
+<li>See Also</li></ul>
+<p>All types must be assiciated with <a href="../Category/Types.html" title="Category:Types">Category:Types</a>.
+</p>
+<h3><span class="mw-headline" id="Functions">Functions</span></h3>
+<p>For functions, all headers are <i>required</i>, except <i>Notes</i>, <i>Examples</i> and <i>See Also</i>. This means that if a function returns nothing, it should explicitly say that it returns nothing. The same goes for arguments. 
+</p><p>Similarly, if there are no constructors for a certain type (e.g. <a href="../Main/Contact.html" title="Contact">Contact</a>), this should be explicitly mentioned.
+</p><p>The outer items in the list below are 'level 2' headers, and the inner ones are 'level 3'. 
+</p>
+<ul><li>Constructors</li>
+<li>Function
+<ul><li>Synopsis</li>
+<li>Arguments</li>
+<li>Returns</li></ul></li>
+<li>Notes</li>
+<li>Examples</li>
+<li>See Also</li></ul>
+<p>If a function has overloads, repeat the 'Function' header for each overload. This is not required for trailing optional arguments; just indicate the default value in parentheses instead. 
+</p><p>Arguments and return values should be presented as a definition list, using <a href="../Template/param.html" title="Template:param">Template:param</a>.
+</p><p>All functions must be assiciated with <a href="../Category/Functions.html" title="Category:Functions">Category:Functions</a>.
+</p>
+<h3><span class="mw-headline" id="Enums">Enums</span></h3>
+<p>For enums, these headers are allowed:
+</p>
+<ul><li>Constants</li>
+<li>Notes</li>
+<li>See Also</li></ul>
+<p>The constants should be listed as a definition list.
+</p><p>All enums must be associated with <a href="../Category/Enums.html" title="Category:Enums">Category:Enums</a>.
+</p>
+<h2><span class="mw-headline" id="Games">Games</span></h2>
+<p>For games, you can choose your own structure, but you should always add some semantic properties to the page to make it appear correctly in the list of games:
+</p>
+<pre>{{#set:Name=NoGame}} (Should be same as page title)
+{{#set:Author=User:Rude}}
+{{#set:Genre=What kind of game your game is}}
+{{#set:LOVE Version=0.6.1}}
+{{#set:Description=A short description of your game.}}
+{{#set:Screenshot=File:ScreenshotURL.png}}
+</pre>
+<p>Screenshots will automatically be resized to fit a box of 161x100 pixels.
+</p><p>Also, put your game in Games to make it appear automatically in the Games page. To put your game in the correct category, add this line at the end of the page.
+</p>
+<pre>[[Category:Games]]
+</pre>
+<p>It is also recommended that you provide screenshots of your game.
+</p>
+<h2><span class="mw-headline" id="Libraries">Libraries</span></h2>
+<p>No strict rules, but as for games, you should add these semantic properties:
+</p>
+<pre>{{#set:LOVE Version=0.6.1}}
+{{#set:Description=A short description of your library.}}
+</pre>
+<p>Put your library in Libraries to make it appear automatically in on the Libraries page. To put your library in the correct category, add this line at the end of the page.
+</p>
+<pre>[[Category:Libraries]]
+</pre>
+</div></div>
+<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

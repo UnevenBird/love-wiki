@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>love.graphics.draw - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">love.graphics.draw</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><p>Draws a <a href="../Main/Drawable.html" title="Drawable">Drawable</a> object (an <a href="../Main/Image.html" title="Image">Image</a>, <a href="../Main/Canvas.html" title="Canvas">Canvas</a>, <a href="../Main/SpriteBatch.html" title="SpriteBatch">SpriteBatch</a>, <a href="../Main/ParticleSystem.html" title="ParticleSystem">ParticleSystem</a>, <a href="../Main/Mesh.html" title="Mesh">Mesh</a>, <a href="../Main/Text.html" title="Text">Text</a> object, or <a href="../Main/Video.html" title="Video">Video</a>) on the screen with optional rotation, scaling and shearing.
+</p><p>Objects are drawn relative to their local coordinate system. The origin is by default located at the top left corner of <a href="../Main/Image.html" title="Image">Image</a> and <a href="../Main/Canvas.html" title="Canvas">Canvas</a> objects. All scaling, shearing, and rotation arguments transform the object relative to that point.
+</p><p>It's possible to rotate an object about, for example, its center by offsetting the origin to the center. Angles must be given in radians for rotation. One can also use negative scaling factors to flip the object about its origin.
+</p><p>Note that the offsets are applied before rotation, scaling, or shearing; scaling and shearing are applied before rotation.
+</p><p>The right and bottom edges of the object are shifted at an angle defined by the shearing factors.
+</p><p>When using the default shader anything drawn with this function will be tinted according to the currently selected color. Set it to pure white to preserve the object's original colors.
+</p>
+<h2><span class="mw-headline" id="Function">Function</span></h2>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">draw</span><span class="p">(</span><span class="w"> </span><span class="nv">drawable</span><span class="p">,</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="p">,</span><span class="w"> </span><span class="nv">r</span><span class="p">,</span><span class="w"> </span><span class="nv">sx</span><span class="p">,</span><span class="w"> </span><span class="nv">sy</span><span class="p">,</span><span class="w"> </span><span class="nv">ox</span><span class="p">,</span><span class="w"> </span><span class="nv">oy</span><span class="p">,</span><span class="w"> </span><span class="nv">kx</span><span class="p">,</span><span class="w"> </span><span class="nv">ky</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments">Arguments</span></h3>
+<dl><dt><code><a href="../Main/Drawable.html" title="Drawable">Drawable</a> drawable</code></dt>
+<dd>A drawable object.</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> x (0)</code></dt>
+<dd>The position to draw the object (x-axis).</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> y (0)</code></dt>
+<dd>The position to draw the object (y-axis).</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> r (0)</code></dt>
+<dd>Orientation (radians).</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> sx (1)</code></dt>
+<dd>Scale factor (x-axis).</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> sy (sx)</code></dt>
+<dd>Scale factor (y-axis).</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> ox (0)</code></dt>
+<dd>Origin offset (x-axis).</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> oy (0)</code></dt>
+<dd>Origin offset (y-axis).</dd></dl>
+<div class="new-feature" data-love-version-note="1" style="font-weight: bold; background: #b0b0ff; color: black; padding: 2px; padding-left: 8px; -webkit-border-top-left-radius: 10px; -webkit-border-top-right-radius: 10px; -moz-border-radius-topleft: 10px; -moz-border-radius-topright: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px;">Available since LÖVE <a href="../Main/0.8.0.html" title="0.8.0">0.8.0</a></div><div data-love-filterable="1" data-love-version-added="0.8.0" style="border: 2px solid #b0b0ff; padding: 3px; padding-bottom: 1px; -webkit-border-bottom-right-radius: 10px; -webkit-border-bottom-left-radius: 10px; -moz-border-radius-bottomright: 10px; -moz-border-radius-bottomleft: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
+<dl><dt><code><a href="../Main/number.html" title="number">number</a> kx (0)</code></dt>
+<dd>Shearing factor (x-axis).</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> ky (0)</code></dt>
+<dd>Shearing factor (y-axis).</dd></dl>
+</div>
+<h3><span class="mw-headline" id="Returns">Returns</span></h3>
+<p>Nothing.
+</p>
+<h2><span class="mw-headline" id="Function_2">Function</span></h2>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.9.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>It has replaced <a href="../Main/love.graphics.drawq.html" title="love.graphics.drawq">love.graphics.drawq</a>.</small>
+</td></tr></tbody></table>
+<h3><span class="mw-headline" id="Synopsis_2">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">draw</span><span class="p">(</span><span class="w"> </span><span class="nv">texture</span><span class="p">,</span><span class="w"> </span><span class="nv">quad</span><span class="p">,</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="p">,</span><span class="w"> </span><span class="nv">r</span><span class="p">,</span><span class="w"> </span><span class="nv">sx</span><span class="p">,</span><span class="w"> </span><span class="nv">sy</span><span class="p">,</span><span class="w"> </span><span class="nv">ox</span><span class="p">,</span><span class="w"> </span><span class="nv">oy</span><span class="p">,</span><span class="w"> </span><span class="nv">kx</span><span class="p">,</span><span class="w"> </span><span class="nv">ky</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments_2">Arguments</span></h3>
+<dl><dt><code><a href="../Main/Texture.html" title="Texture">Texture</a> texture</code></dt>
+<dd>A <a href="../Main/Texture.html" title="Texture">Texture</a> (<a href="../Main/Image.html" title="Image">Image</a> or <a href="../Main/Canvas.html" title="Canvas">Canvas</a>) to texture the <a href="../Main/Quad.html" title="Quad">Quad</a> with.</dd>
+<dt><code><a href="../Main/Quad.html" title="Quad">Quad</a> quad</code></dt>
+<dd>The Quad to draw on screen.</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> x</code></dt>
+<dd>The position to draw the object (x-axis).</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> y</code></dt>
+<dd>The position to draw the object (y-axis).</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> r (0)</code></dt>
+<dd>Orientation (radians).</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> sx (1)</code></dt>
+<dd>Scale factor (x-axis).</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> sy (sx)</code></dt>
+<dd>Scale factor (y-axis).</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> ox (0)</code></dt>
+<dd>Origin offset (x-axis).</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> oy (0)</code></dt>
+<dd>Origin offset (y-axis).</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> kx (0)</code></dt>
+<dd>Shearing factor (x-axis).</dd>
+<dt><code><a href="../Main/number.html" title="number">number</a> ky (0)</code></dt>
+<dd>Shearing factor (y-axis).</dd></dl>
+<h3><span class="mw-headline" id="Returns_2">Returns</span></h3>
+<p>Nothing.
+</p>
+<h2><span class="mw-headline" id="Function_3">Function</span></h2>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[11.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/11.0.html" title="11.0">11.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This variant is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<h3><span class="mw-headline" id="Synopsis_3">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">draw</span><span class="p">(</span><span class="w"> </span><span class="nv">drawable</span><span class="p">,</span><span class="w"> </span><span class="nv">transform</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments_3">Arguments</span></h3>
+<dl><dt><code><a href="../Main/Drawable.html" title="Drawable">Drawable</a> drawable</code></dt>
+<dd>A drawable object.</dd>
+<dt><code><a href="../Main/Transform.html" title="Transform">Transform</a> transform</code></dt>
+<dd>Transformation object.</dd></dl>
+<h3><span class="mw-headline" id="Returns_3">Returns</span></h3>
+<p>Nothing.
+</p>
+<h2><span class="mw-headline" id="Function_4">Function</span></h2>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[11.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/11.0.html" title="11.0">11.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This variant is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<h3><span class="mw-headline" id="Synopsis_4">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">draw</span><span class="p">(</span><span class="w"> </span><span class="nv">texture</span><span class="p">,</span><span class="w"> </span><span class="nv">quad</span><span class="p">,</span><span class="w"> </span><span class="nv">transform</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments_4">Arguments</span></h3>
+<dl><dt><code><a href="../Main/Texture.html" title="Texture">Texture</a> texture</code></dt>
+<dd>A <a href="../Main/Texture.html" title="Texture">Texture</a> (<a href="../Main/Image.html" title="Image">Image</a> or <a href="../Main/Canvas.html" title="Canvas">Canvas</a>) to texture the <a href="../Main/Quad.html" title="Quad">Quad</a> with.</dd>
+<dt><code><a href="../Main/Quad.html" title="Quad">Quad</a> quad</code></dt>
+<dd>The Quad to draw on screen.</dd>
+<dt><code><a href="../Main/Transform.html" title="Transform">Transform</a> transform</code></dt>
+<dd>Transformation object.</dd></dl>
+<h3><span class="mw-headline" id="Returns_4">Returns</span></h3>
+<p>Nothing.
+</p>
+<h2><span class="mw-headline" id="Examples">Examples</span></h2>
+<h3><span id="Draw_an_image_.28the_Hamster_Ball.29_at_100_by_100_pixels"></span><span class="mw-headline" id="Draw_an_image_(the_Hamster_Ball)_at_100_by_100_pixels">Draw an image (the <a href="../File/Resource-HamsterBall.png.html" title="File:Resource-HamsterBall.png">Hamster Ball</a>) at 100 by 100 pixels</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+<span class="w">	</span><span class="nv">hamster</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newImage</span><span class="p">(</span><span class="s2">"hamster.png"</span><span class="p">)</span>
+<span class="kr">end</span>
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">draw</span><span class="p">(</span><span class="nv">hamster</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="kr">end</span>
+</pre></div>
+<h3><span id="Draw_an_image_.28the_Hamster_Ball.29_from_the_center_at_100_by_100_pixels.2C_rotating_over_time"></span><span class="mw-headline" id="Draw_an_image_(the_Hamster_Ball)_from_the_center_at_100_by_100_pixels,_rotating_over_time">Draw an image (the <a href="../File/Resource-HamsterBall.png.html" title="File:Resource-HamsterBall.png">Hamster Ball</a>) from the center at 100 by 100 pixels, rotating over time</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+<span class="w">	</span><span class="nv">hamster</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newImage</span><span class="p">(</span><span class="s2">"hamster.png"</span><span class="p">)</span>
+<span class="kr">end</span>
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">width</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nv">hamster</span><span class="p">:</span><span class="nf">getWidth</span><span class="p">()</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">hamster</span><span class="p">:</span><span class="nf">getHeight</span><span class="p">()</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">angle</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">timer</span><span class="p">.</span><span class="nf">getTime</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="nb">math.pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.5</span><span class="w"> </span><span class="c1">-- Rotate one turn per 2.5 seconds.</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">draw</span><span class="p">(</span><span class="nv">hamster</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="nv">angle</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nv">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nv">height</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="kr">end</span>
+</pre></div>
+<hr/>
+<table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.9.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This functionality is not supported in earlier versions.</small>
+</td></tr></tbody></table>
+<h3><span id="Draw_the_top_half_of_an_image_.28the_Hamster_Ball.29_at_100_by_100_pixels."></span><span class="mw-headline" id="Draw_the_top_half_of_an_image_(the_Hamster_Ball)_at_100_by_100_pixels.">Draw the top half of an image (the <a href="../File/Resource-HamsterBall.png.html" title="File:Resource-HamsterBall.png">Hamster Ball</a>) at 100 by 100 pixels.</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+<span class="w">	</span><span class="nv">hamster</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newImage</span><span class="p">(</span><span class="s2">"hamster.png"</span><span class="p">)</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">width</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nv">hamster</span><span class="p">:</span><span class="nf">getWidth</span><span class="p">()</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">hamster</span><span class="p">:</span><span class="nf">getHeight</span><span class="p">()</span>
+<span class="w">	</span><span class="nv">quad</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newQuad</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">width</span><span class="p">,</span><span class="nv">height</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nv">width</span><span class="p">,</span><span class="nv">height</span><span class="p">)</span>
+<span class="kr">end</span>
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">draw</span><span class="p">(</span><span class="nv">hamster</span><span class="p">,</span><span class="nv">quad</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="kr">end</span>
+</pre></div>
+<p><br/>
+</p>
+<h3><span class="mw-headline" id="Draw_the_flying_rocket_directed_to_the_mouse_pointer">Draw the flying <a href="../File/rocket.png.html" title="File:rocket.png">rocket</a> directed to the mouse pointer</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">load</span><span class="p">()</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newImage</span><span class="w"> </span><span class="p">(</span><span class="s1">'rocket.png'</span><span class="p">)</span>
+<span class="w">	</span><span class="nv">Rocket</span><span class="w"> </span><span class="o">=</span><span class="p">{</span><span class="nv">x</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="nv">y</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="nv">angle</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="nv">image</span><span class="o">=</span><span class="nv">image</span><span class="p">,</span><span class="nv">ox</span><span class="o">=</span><span class="nv">image</span><span class="p">:</span><span class="nf">getWidth</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="nv">oy</span><span class="o">=</span><span class="nv">image</span><span class="p">:</span><span class="nf">getHeight</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">}</span>
+<span class="kr">end</span>
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="nv">dt</span><span class="p">)</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">mx</span><span class="p">,</span><span class="w"> </span><span class="nv">my</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">mouse</span><span class="p">.</span><span class="nf">getPosition</span><span class="p">()</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">dx</span><span class="p">,</span><span class="w"> </span><span class="nv">dy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">mx</span><span class="o">-</span><span class="nv">Rocket</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="nv">my</span><span class="o">-</span><span class="nv">Rocket</span><span class="p">.</span><span class="py">y</span>
+<span class="w">	</span><span class="nv">Rocket</span><span class="p">.</span><span class="py">angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">math.atan2</span><span class="w"> </span><span class="p">(</span><span class="nv">dy</span><span class="p">,</span><span class="w"> </span><span class="nv">dx</span><span class="p">)</span>
+<span class="w">	</span><span class="nv">Rocket</span><span class="p">.</span><span class="py">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Rocket</span><span class="p">.</span><span class="py">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">dt</span><span class="o">*</span><span class="nv">dx</span>
+<span class="w">	</span><span class="nv">Rocket</span><span class="p">.</span><span class="py">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Rocket</span><span class="p">.</span><span class="py">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">dt</span><span class="o">*</span><span class="nv">dy</span>
+<span class="kr">end</span>
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">draw</span><span class="w"> </span><span class="p">(</span><span class="nv">Rocket</span><span class="p">.</span><span class="py">image</span><span class="p">,</span><span class="w"> </span><span class="nv">Rocket</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="nv">Rocket</span><span class="p">.</span><span class="py">y</span><span class="p">,</span><span class="w"> </span><span class="nv">Rocket</span><span class="p">.</span><span class="py">angle</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nv">Rocket</span><span class="p">.</span><span class="py">ox</span><span class="p">,</span><span class="w"> </span><span class="nv">Rocket</span><span class="p">.</span><span class="py">oy</span><span class="p">)</span>
+<span class="kr">end</span>
+</pre></div>
+<h2><span class="mw-headline" id="See_Also">See Also</span></h2>
+<ul><li><a href="../Main/love.graphics.drawInstanced.html" title="love.graphics.drawInstanced">love.graphics.drawInstanced</a></li>
+<li><a href="../Main/love.graphics.drawLayer.html" title="love.graphics.drawLayer">love.graphics.drawLayer</a></li>
+<li><a href="../Main/love.graphics.html" title="love.graphics">love.graphics</a></li></ul>
+<p><br/>
+</p><p><br/>
+</p>
+<h2><span class="mw-headline" id="Other_Languages">Other Languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Functions.html">Functions</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

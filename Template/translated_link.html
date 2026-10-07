@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Template:translated link - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-10" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-namespace">Template</span><span class="mw-page-title-separator">:</span><span class="mw-page-title-main">translated link</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><div class="template-documentation iezoomfix" id="template-documentation"><div style="padding-bottom: 3px; border-bottom: 1px solid #aaa; margin-bottom: 1ex;"><span class="editsection plainlinks" id="doc_editlinks">[edit] [<span class="noprint plainlinks purgelink"><span title="Purge this page">purge</span></span>]</span> <span style="font-weight: bold; font-size: 125%"><span typeof="mw:File"><a class="mw-file-description" href="../File/Template-info.png.html"><img alt="" class="mw-file-element" data-file-height="256" data-file-width="500" decoding="async" height="26" src="../assets/images/Template-info.png" width="50"/></a></span> Template documentation</span></div>
+<p>This template creates a link either to the translated page (if it exists), or to the English page with an (Eng.) suffix. The (Eng.) suffix is localised.
+</p><p>It's used as follows:
+</p>
+<pre>   {{translated link|page title|language name|text=link text|english text=untranslated link text}}
+</pre>
+<p>To remove the (Eng.) suffix, add the <code>|no marker=1</code> argument:
+</p>
+<pre>   {{translated link|page title|language name|text=link text|english text=untranslated link text|no marker=1}}
+</pre>
+<p>Not all pages can be translated at once. For usability, it's often more useful to add a link to an English page than to leave the link red. However, in this case, translators will have to go through all the pages, find the English links and replace them with Ukrainian links.
+</p><p>This template automatically replaces English links only translated ones become available, thus having the best of the both worlds.
+</p>
+<h2><span class="mw-headline" id="Examples">Examples</span></h2>
+<ul><li><code>{{translated link|love.thread|Українська}}</code> becomes <a href="../Main/love.thread.html" title="love.thread">love.thread</a> (англ.)</li>
+<li><code>{{translated link|lua-enet|Українська}}</code> becomes <a href="../Main/lua-enet.html" title="lua-enet">lua-enet</a> (англ.)</li>
+<li><code>{{translated link|lua-enet|Українська|no marker=1}}</code> becomes <a href="../Main/lua-enet.html" title="lua-enet">lua-enet</a></li>
+<li><code>{{translated link|love.thread|עברית}}</code> becomes <a href="../Main/lua-enet.html" title="lua-enet">lua-enet</a> (אנגלית)</li>
+<li><code>{{translated link|Main Page|Indonesia}}</code> becomes <a href="../Main/Main_Page.html" title="Main Page">Main Page</a> (Ingg.)</li>
+<li><code>{{translated link|love.thread|Indonesia}}</code> becomes <a href="../Main/love.thread.html" title="love.thread">love.thread</a> (Ingg.)</li>
+<li><code>{{translated link|Main Page|日本語}}</code> becomes <a href="../Main/Main_Page.html" title="Main Page">Main Page</a>（英語）</li>
+<li><code>{{translated link|love.thread|日本語}}</code> becomes <a href="../Main/love.thread.html" title="love.thread">love.thread</a>（英語）</li>
+<li><code>{{translated link|Main Page|正體中文}}</code> becomes <a href="../Main/Main_Page.html" title="Main Page">Main Page</a>（英文）</li>
+<li><code>{{translated link|love.thread|正體中文}}</code> becomes <a href="../Main/love.thread.html" title="love.thread">love.thread</a>（英文）</li>
+<li><code>{{translated link|Main Page|한국어}}</code> becomes <a href="../Main/Main_Page.html" title="Main Page">Main Page</a>（영어）</li>
+<li><code>{{translated link|lua-enet|한국어}}</code> becomes <a href="../Main/lua-enet.html" title="lua-enet">lua-enet</a>（영어）</li></ul>
+<p>Examples with text:
+</p>
+<ul><li><code>«Натисніть {{translated link|love.thread|Українська|text=сюди}}»</code> becomes «Натисніть <a href="../Main/love.thread.html" title="love.thread">сюди</a> (англ.)»</li>
+<li><code>«А потім {{translated link|lua-enet|Українська|text=сюди}}»</code> becomes «А потім <a href="../Main/lua-enet.html" title="lua-enet">сюди</a> (англ.)»</li></ul>
+<p>Examples with english text:
+</p>
+<ul><li><code>{{translated link|love.thread|Українська|text=I'm translated|english text=I'm untranslated}}</code> becomes <a href="../Main/love.thread.html" title="love.thread">I'm untranslated</a> (англ.)</li>
+<li><code>{{translated link|lua-enet|Українська|text=I'm translated|english text=I'm untranslated}}</code> becomes <a href="../Main/lua-enet.html" title="lua-enet">I'm untranslated</a> (англ.)</li></ul>
+<div style="clear: both;"></div>
+</div><table class="plainlinks fmbox fmbox-system" id="documentation-meta-data" style="background-color: #ecfcf4;">
+<tbody><tr>
+<td class="mbox-text" style="font-style: italic;"> The above documentation is transcluded from <a href="../Template/translated_link/doc.html" title="Template:translated link/doc">Template:translated link/doc</a>. <small style="font-style: normal">(edit | history)</small> <br/>Editors can experiment in this template's sandbox <small style="font-style: normal">(create)</small> and testcases <small style="font-style: normal">(create)</small> pages. <br/>Please add categories and interwikis to the <a href="../Template/translated_link/doc.html" title="Template:translated link/doc">/doc</a> subpage. Subpages of this template. </td>
+</tr>
+</tbody></table>
+<p><br/>
+</p></div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Templates.html">Templates</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

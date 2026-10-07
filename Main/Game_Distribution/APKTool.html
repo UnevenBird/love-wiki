@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Game Distribution/APKTool - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../../assets/wiki.css">
+<script src="../../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">Game Distribution/APKTool</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><p>This method will assume the usage of <a class="external text" href="https://apktool.org/" rel="nofollow">APKTool</a>.
+To distribute your game for Android using APKTool:
+</p>
+<table align="center" bgcolor="gold" class="notice" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+<tbody><tr>
+<td width="1"><span class="mw-default-size" typeof="mw:File"><a class="mw-file-description" href="../../File/O.png.html"><img class="mw-file-element" data-file-height="64" data-file-width="64" decoding="async" height="64" src="../../assets/images/O.png" width="64"/></a></span>
+</td>
+<td><b>Note:</b> APK is the format used to distribute your games independently for Android outside of Google's Play Store. <a class="external text" href="https://android-developers.googleblog.com/2020/08/recent-android-app-bundle-improvements.html" rel="nofollow">Google Play Store mandate Android Application Bundle since 2021</a>, thus this method is <b>not suitable</b> if you're looking to distribute your app into Play Store
+</td>
+<td width="1"> 
+</td></tr></tbody></table><p><br/>
+</p><table align="center" bgcolor="gold" class="notice" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+<tbody><tr>
+<td width="1"><span class="mw-default-size" typeof="mw:File"><a class="mw-file-description" href="../../File/O.png.html"><img class="mw-file-element" data-file-height="64" data-file-width="64" decoding="async" height="64" src="../../assets/images/O.png" width="64"/></a></span>
+</td>
+<td>Some notes before performing this method:
+<p>1. This method assume <b>you have PC or Mac available</b>.
+</p><p>2. Make sure to specify valid, acceptable package name and <b>sign the APK</b> afterwards! Often errors include "Problem parsing package" and "App not installed" error. If you sure it's already signed and has valid package name, try installing via ADB.
+</p>
+</td>
+<td width="1"> 
+</td></tr></tbody></table><p><br/>
+</p><p>1. Download <a class="external text" href="https://apktool.org/" rel="nofollow">APKTool</a> and follow the installation instructions.
+</p><p>2. Download latest LÖVE APK from <a class="external text" href="https://github.com/love2d/love-android/releases/download/11.5a/love-11.5-android-embed.apk" rel="nofollow">here</a> and put it somewhere in folder.
+</p><p>3. In current folder (where you store the LÖVE APK), open Command Prompt/Terminal in the current directory and execute <code>apktool d -s -o love_decoded love-11.5-android-embed.apk</code> and new folder <code>love_decoded</code> will be created. You can use any folder name, just make sure to make it consistent in later operations.
+</p><p>4. In <code>love_decoded</code> folder, create new folder named <code>assets</code> and put your <code>game.love</code> inside that folder. Your packaged game must be named exactly <code>game.love</code>!
+</p><p>5. Change the APK icon by replacing the LÖVE icon in <code>res/drawable-{mdpi,{x,{x,{x,}}}hdpi}</code> (mdpi, hdpi, xhdpi, xxhdpi, and xxxhdpi). Replace <code>love.png</code> with your game icon in those folders. Make sure the image dimensions are same!
+</p><p>6. Modify <code>AndroidManifest.xml</code> and use this template:
+</p>
+<div class="mw-highlight mw-highlight-lang-xml mw-content-ltr" dir="ltr"><pre><span></span><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;manifest</span><span class="w"> </span><span class="na">package=</span><span class="s">"${GamePackageName}"</span>
+<span class="w">        </span><span class="na">android:versionCode=</span><span class="s">"${GameVersionCode}"</span>
+<span class="w">        </span><span class="na">android:versionName=</span><span class="s">"${GameVersionSemantic}"</span>
+<span class="w">        </span><span class="na">android:installLocation=</span><span class="s">"auto"</span>
+<span class="w">		</span><span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;uses-permission</span><span class="w"> </span><span class="na">android:name=</span><span class="s">"android.permission.INTERNET"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;uses-permission</span><span class="w"> </span><span class="na">android:name=</span><span class="s">"android.permission.VIBRATE"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;uses-permission</span><span class="w"> </span><span class="na">android:name=</span><span class="s">"android.permission.BLUETOOTH"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;uses-permission</span><span class="w"> </span><span class="na">android:name=</span><span class="s">"android.permission.WRITE_EXTERNAL_STORAGE"</span><span class="w"> </span><span class="na">android:maxSdkVersion=</span><span class="s">"18"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!--Uncomment line below if your game uses microphone capabilities. !--&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!--uses-permission android:name="android.permission.RECORD_AUDIO" /!--&gt;</span>
+
+<span class="w">    </span><span class="cm">&lt;!-- OpenGL ES 2.0 --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;uses-feature</span><span class="w"> </span><span class="na">android:glEsVersion=</span><span class="s">"0x00020000"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- Touchscreen support --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;uses-feature</span><span class="w"> </span><span class="na">android:name=</span><span class="s">"android.hardware.touchscreen"</span><span class="w"> </span><span class="na">android:required=</span><span class="s">"false"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- Game controller support --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;uses-feature</span><span class="w"> </span><span class="na">android:name=</span><span class="s">"android.hardware.bluetooth"</span><span class="w"> </span><span class="na">android:required=</span><span class="s">"false"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;uses-feature</span><span class="w"> </span><span class="na">android:name=</span><span class="s">"android.hardware.gamepad"</span><span class="w"> </span><span class="na">android:required=</span><span class="s">"false"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;uses-feature</span><span class="w"> </span><span class="na">android:name=</span><span class="s">"android.hardware.usb.host"</span><span class="w"> </span><span class="na">android:required=</span><span class="s">"false"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- External mouse input events --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;uses-feature</span><span class="w"> </span><span class="na">android:name=</span><span class="s">"android.hardware.type.pc"</span><span class="w"> </span><span class="na">android:required=</span><span class="s">"false"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- Low latency audio --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;uses-feature</span><span class="w"> </span><span class="na">android:name=</span><span class="s">"android.hardware.audio.low_latency"</span><span class="w"> </span><span class="na">android:required=</span><span class="s">"false"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;uses-feature</span><span class="w"> </span><span class="na">android:name=</span><span class="s">"android.hardware.audio.pro"</span><span class="w"> </span><span class="na">android:required=</span><span class="s">"false"</span><span class="w"> </span><span class="nt">/&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;application</span>
+<span class="w">            </span><span class="na">android:allowBackup=</span><span class="s">"true"</span>
+<span class="w">            </span><span class="na">android:icon=</span><span class="s">"@drawable/love"</span>
+<span class="w">            </span><span class="na">android:label=</span><span class="s">"${GameName}"</span>
+<span class="w">            </span><span class="na">android:usesCleartextTraffic=</span><span class="s">"true"</span><span class="w"> </span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;activity</span>
+<span class="w">                </span><span class="na">android:name=</span><span class="s">"org.love2d.android.GameActivity"</span>
+<span class="w">                </span><span class="na">android:exported=</span><span class="s">"true"</span>
+<span class="w">                </span><span class="na">android:configChanges=</span><span class="s">"orientation|screenSize|smallestScreenSize|screenLayout|keyboard|keyboardHidden|navigation"</span>
+<span class="w">                </span><span class="na">android:label=</span><span class="s">"${GameName}"</span>
+<span class="w">                </span><span class="na">android:launchMode=</span><span class="s">"singleInstance"</span>
+<span class="w">                </span><span class="na">android:screenOrientation=</span><span class="s">"${ORIENTATION}"</span>
+<span class="w">                </span><span class="na">android:resizeableActivity=</span><span class="s">"false"</span>
+<span class="w">                </span><span class="na">android:theme=</span><span class="s">"@android:style/Theme.NoTitleBar.Fullscreen"</span><span class="w"> </span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;intent-filter&gt;</span>
+<span class="w">                </span><span class="nt">&lt;action</span><span class="w"> </span><span class="na">android:name=</span><span class="s">"android.intent.action.MAIN"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;category</span><span class="w"> </span><span class="na">android:name=</span><span class="s">"android.intent.category.LAUNCHER"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">                </span><span class="nt">&lt;category</span><span class="w"> </span><span class="na">android:name=</span><span class="s">"tv.ouya.intent.category.GAME"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/intent-filter&gt;</span>
+<span class="w">            </span><span class="nt">&lt;intent-filter&gt;</span>
+<span class="w">                </span><span class="nt">&lt;action</span><span class="w"> </span><span class="na">android:name=</span><span class="s">"android.hardware.usb.action.USB_DEVICE_ATTACHED"</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/intent-filter&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/activity&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/application&gt;</span>
+<span class="nt">&lt;/manifest&gt;</span>
+</pre></div>
+<pre> Here are the explanation of the variables. You just have to substitute them:
+ * <code>${GamePackageName}</code> is your game internal package name.
+ * <code>${GameVersionCode}</code> is the internal APK version code.
+ * <code>${GameVersionSemantic}</code> is the readable APK version string. Example: 2.1.0
+ * <code>${GameName}</code> is your game name which is going to be displayed in home screen/launcher.
+ Make sure to substitute those variables.
+</pre>
+<p>7. Back to folder where you put the LÖVE APK then execute <code>apktool b -o your_game.apk love_decoded</code>. You can use any name, but again, make it consistent.
+</p><p>8. <b>Sign the resulting APK!!!</b> This page doesn't cover how to do that, because it can be too long. <b>You can't install the APK if it's not signed!!!</b>. Hint: <a class="external free" href="https://github.com/patrickfav/uber-apk-signer" rel="nofollow">https://github.com/patrickfav/uber-apk-signer</a>
+</p><p>If you find something is wrong or having some problems, don't hesitate to edit or mention me in LOVE Discord: "auahdark".
+</p>
+<h2><span class="mw-headline" id="Termux">Termux</span></h2>
+<table align="center" bgcolor="gold" class="notice" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+<tbody><tr>
+<td width="1"><span class="mw-default-size" typeof="mw:File"><a class="mw-file-description" href="../../File/O.png.html"><img class="mw-file-element" data-file-height="64" data-file-width="64" decoding="async" height="64" src="../../assets/images/O.png" width="64"/></a></span>
+</td>
+<td>Using Termux is not supported. Proceed at your own risk (YMMV)!
+</td>
+<td width="1"> 
+</td></tr></tbody></table><p><br/>
+</p><p>You can also create APKs from your Android device directly with the help of <a class="external text" href="https://termux.dev" rel="nofollow">Termux</a>.
+</p><p>1. <a class="external text" href="https://f-droid.org/en/packages/com.termux" rel="nofollow">Install Termux from F-Droid</a>.
+</p><p>2. Install <a class="external text" href="https://github.com/rendiix/termux-apktool" rel="nofollow">termux-apktool</a>.
+</p><p>3. Follow the instructions above as usual.
+</p>
+<h2><span class="mw-headline" id="See_Also">See Also</span></h2>
+<ul><li><a href="../../Main/Game_Distribution.html" title="Game Distribution">Game Distribution</a></li></ul>
+<p><br/>
+</p><p><br/>
+</p>
+<h2><span class="mw-headline" id="Other_Languages">Other Languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

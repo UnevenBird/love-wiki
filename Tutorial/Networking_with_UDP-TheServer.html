@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Tutorial:Networking with UDP-TheServer - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-500" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-namespace">Tutorial</span><span class="mw-page-title-separator">:</span><span class="mw-page-title-main">Networking with UDP-TheServer</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><p>The complete source for the UDP server
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">require</span><span class="w"> </span><span class="s2">"socket"</span>
+
+<span class="c1">-- begin</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">udp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">socket</span><span class="p">.</span><span class="nf">udp</span><span class="p">()</span>
+
+<span class="c1">-- normally socket reads block until they have data, or a</span>
+<span class="c1">-- certain amount of time passes.</span>
+<span class="c1">-- that doesn't suit us, so we tell it not to do that by setting the </span>
+<span class="c1">-- 'timeout' to zero</span>
+<span class="nv">udp</span><span class="p">:</span><span class="nf">settimeout</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1">-- unlike the client, the server has to be specific about where its</span>
+<span class="c1">-- 'bound', or the poor clients will never find it.</span>
+<span class="c1">-- thus while we can happily let the client auto-bind to whatever it likes,</span>
+<span class="c1">-- we have to tell the server to bind to something known.</span>
+<span class="c1">-- </span>
+<span class="c1">-- the first part is which "interface" we should bind to...a bit beyond this tutorial, but '*' basically means "all of them"</span>
+<span class="c1">-- port is simpler, the system maintains a list of up to 65535 (!) "ports"</span>
+<span class="c1">-- ...really just numbers. point is that if you send to a particular port, </span>
+<span class="c1">-- then only things "listening" to that port will be able to receive it, </span>
+<span class="c1">-- and likewise you can only read data sent to ports you are listening too.</span>
+<span class="c1">-- generally speaking, if an address is which machine you want to talk to, then a port is what program on that machine you want to talk to.</span>
+<span class="c1">--</span>
+<span class="c1">-- [NOTE: on some operating systems, ports between 0 and 1024 are "reserved for </span>
+<span class="c1">-- privileged processes". its a security precaution for those system.</span>
+<span class="c1">-- generally speaking, just not using ports in that range avoids a lot of problems]</span>
+<span class="nv">udp</span><span class="p">:</span><span class="nf">setsockname</span><span class="p">(</span><span class="s1">'*'</span><span class="p">,</span><span class="w"> </span><span class="mi">12345</span><span class="p">)</span>
+
+<span class="kd">local</span><span class="w"> </span><span class="nv">world</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="c1">-- the empty world-state</span>
+
+<span class="c1">-- We declare a whole bunch of local variables that we'll be using the in </span>
+<span class="c1">-- main server loop below. you probably recognise some of them from the</span>
+<span class="c1">--client example, but you are also probably wondering what's with the fruity</span>
+<span class="c1">-- names, 'msg_or_ip'? 'port_or_nil'?</span>
+<span class="c1">-- </span>
+<span class="c1">-- well, we're using a slightly different function this time, you'll see when we get there.</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">data</span><span class="p">,</span><span class="w"> </span><span class="nv">msg_or_ip</span><span class="p">,</span><span class="w"> </span><span class="nv">port_or_nil</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">entity</span><span class="p">,</span><span class="w"> </span><span class="nv">cmd</span><span class="p">,</span><span class="w"> </span><span class="nv">parms</span>
+<span class="c1">-- indefinite loops are probably not something you used to if you only </span>
+<span class="c1">-- know love, but they are quite common. and in fact love has one at its</span>
+<span class="c1">-- heart, you just don't see it.</span>
+<span class="c1">-- regardless, we'll be needing one for our server. and this little</span>
+<span class="c1">-- variable lets us *stop* it :3</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">running</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="c1">-- the beginning of the loop proper...</span>
+<span class="nb">print</span><span class="w"> </span><span class="s2">"Beginning server loop."</span>
+<span class="kr">while</span><span class="w"> </span><span class="nv">running</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">	</span><span class="c1">-- this line looks familiar, I'm sure, but we're using 'receivefrom'</span>
+<span class="w">	</span><span class="c1">-- this time. its similar to receive, but returns the data, sender's</span>
+<span class="w">	</span><span class="c1">-- ip address, and the sender's port. (which you'll hopefully recognise</span>
+<span class="w">	</span><span class="c1">-- as the two things we need to send messages to someone)</span>
+<span class="w">	</span><span class="c1">-- we didn't have to do this in the client example because we just bound</span>
+<span class="w">	</span><span class="c1">-- the socket to the server. ...but that also ignores messages from</span>
+<span class="w">	</span><span class="c1">-- sources other than what we've bound to, which obviously won't do at</span>
+<span class="w">	</span><span class="c1">-- all as a server.</span>
+<span class="w">	</span><span class="c1">--</span>
+<span class="w">	</span><span class="c1">-- [NOTE: strictly, we could have just used receivefrom (and its </span>
+<span class="w">	</span><span class="c1">-- counterpart, sendto) in the client. there's nothing special about the</span>
+<span class="w">	</span><span class="c1">-- functions to prevent it, indeed. send/receive are just convenience</span>
+<span class="w">	</span><span class="c1">-- functions, sendto/receive from are the real workers.]</span>
+<span class="w">	</span><span class="nv">data</span><span class="p">,</span><span class="w"> </span><span class="nv">msg_or_ip</span><span class="p">,</span><span class="w"> </span><span class="nv">port_or_nil</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">udp</span><span class="p">:</span><span class="nf">receivefrom</span><span class="p">()</span>
+<span class="w">	</span><span class="kr">if</span><span class="w"> </span><span class="nv">data</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">		</span><span class="c1">-- more of these funky match paterns!</span>
+<span class="w">		</span><span class="nv">entity</span><span class="p">,</span><span class="w"> </span><span class="nv">cmd</span><span class="p">,</span><span class="w"> </span><span class="nv">parms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">data</span><span class="p">:</span><span class="nf">match</span><span class="p">(</span><span class="s2">"^(%S*) (%S*) (.*)"</span><span class="p">)</span>
+<span class="w">		</span><span class="kr">if</span><span class="w"> </span><span class="nv">cmd</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'move'</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">			</span><span class="kd">local</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">parms</span><span class="p">:</span><span class="nf">match</span><span class="p">(</span><span class="s2">"^(%-?[%d.e]*) (%-?[%d.e]*)$"</span><span class="p">)</span>
+<span class="w">			</span><span class="nb">assert</span><span class="p">(</span><span class="nv">x</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nv">y</span><span class="p">)</span><span class="w"> </span><span class="c1">-- validation is better, but asserts will serve.</span>
+<span class="w">			</span><span class="c1">-- don't forget, even if you matched a "number", the result is still a string!</span>
+<span class="w">			</span><span class="c1">-- thankfully conversion is easy in lua.</span>
+<span class="w">			</span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">tonumber</span><span class="p">(</span><span class="nv">x</span><span class="p">),</span><span class="w"> </span><span class="nb">tonumber</span><span class="p">(</span><span class="nv">y</span><span class="p">)</span>
+<span class="w">			</span><span class="c1">-- and finally we stash it away</span>
+<span class="w">			</span><span class="kd">local</span><span class="w"> </span><span class="nv">ent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">world</span><span class="p">[</span><span class="nv">entity</span><span class="p">]</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="p">{</span><span class="nv">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="o">=</span><span class="mi">0</span><span class="p">}</span>
+<span class="w">			</span><span class="nv">world</span><span class="p">[</span><span class="nv">entity</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="nv">x</span><span class="o">=</span><span class="nv">ent</span><span class="p">.</span><span class="py">x</span><span class="o">+</span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="o">=</span><span class="nv">ent</span><span class="p">.</span><span class="py">y</span><span class="o">+</span><span class="nv">y</span><span class="p">}</span>
+<span class="w">		</span><span class="kr">elseif</span><span class="w"> </span><span class="nv">cmd</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'at'</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">			</span><span class="kd">local</span><span class="w"> </span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">parms</span><span class="p">:</span><span class="nf">match</span><span class="p">(</span><span class="s2">"^(%-?[%d.e]*) (%-?[%d.e]*)$"</span><span class="p">)</span>
+<span class="w">			</span><span class="nb">assert</span><span class="p">(</span><span class="nv">x</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nv">y</span><span class="p">)</span><span class="w"> </span><span class="c1">-- validation is better, but asserts will serve.</span>
+<span class="w">			</span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">tonumber</span><span class="p">(</span><span class="nv">x</span><span class="p">),</span><span class="w"> </span><span class="nb">tonumber</span><span class="p">(</span><span class="nv">y</span><span class="p">)</span>
+<span class="w">			</span><span class="nv">world</span><span class="p">[</span><span class="nv">entity</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="nv">x</span><span class="o">=</span><span class="nv">x</span><span class="p">,</span><span class="w"> </span><span class="nv">y</span><span class="o">=</span><span class="nv">y</span><span class="p">}</span>
+<span class="w">		</span><span class="kr">elseif</span><span class="w"> </span><span class="nv">cmd</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'update'</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">			</span><span class="kr">for</span><span class="w"> </span><span class="nv">k</span><span class="p">,</span><span class="w"> </span><span class="nv">v</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nb">pairs</span><span class="p">(</span><span class="nv">world</span><span class="p">)</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">				</span><span class="nv">udp</span><span class="p">:</span><span class="nf">sendto</span><span class="p">(</span><span class="nb">string.format</span><span class="p">(</span><span class="s2">"%s %s %f %f"</span><span class="p">,</span><span class="w"> </span><span class="nv">k</span><span class="p">,</span><span class="w"> </span><span class="s1">'at'</span><span class="p">,</span><span class="w"> </span><span class="nv">v</span><span class="p">.</span><span class="py">x</span><span class="p">,</span><span class="w"> </span><span class="nv">v</span><span class="p">.</span><span class="py">y</span><span class="p">),</span><span class="w"> </span><span class="nv">msg_or_ip</span><span class="p">,</span><span class="w">  </span><span class="nv">port_or_nil</span><span class="p">)</span>
+<span class="w">			</span><span class="kr">end</span>
+<span class="w">		</span><span class="kr">elseif</span><span class="w"> </span><span class="nv">cmd</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'quit'</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">			</span><span class="nv">running</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">		</span><span class="kr">else</span>
+<span class="w">			</span><span class="nb">print</span><span class="p">(</span><span class="s2">"unrecognised command:"</span><span class="p">,</span><span class="w"> </span><span class="nv">cmd</span><span class="p">)</span>
+<span class="w">		</span><span class="kr">end</span>
+<span class="w">	</span><span class="kr">elseif</span><span class="w"> </span><span class="nv">msg_or_ip</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="s1">'timeout'</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">		</span><span class="nb">error</span><span class="p">(</span><span class="s2">"Unknown network error: "</span><span class="o">..</span><span class="nb">tostring</span><span class="p">(</span><span class="nv">msg</span><span class="p">))</span>
+<span class="w">	</span><span class="kr">end</span>
+<span class="w">	</span>
+<span class="w">	</span><span class="nv">socket</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="nb">print</span><span class="w"> </span><span class="s2">"Thank you."</span>
+
+<span class="c1">-- and that the end of the udp server example.</span>
+</pre></div>
+</div></div>
+<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

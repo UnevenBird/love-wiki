@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>TextureFormat - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">TextureFormat</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><table bgcolor="#ffacac" class="removed-new-section" data-newin="[[0.9.0]]" data-oldin="[[0.10.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a> and removed in LÖVE <a href="../Main/0.10.0.html" title="0.10.0">0.10.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>This enum is not supported in earlier or later versions.</small>
+</td></tr></tbody></table>
+<p><a href="../Main/Image.html" title="Image">Image</a> texture formats.
+</p><p>As of LÖVE <a href="../Main/0.9.2.html" title="0.9.2">0.9.2</a>, <a href="../Main/Canvas.html" title="Canvas">Canvases</a> use <a href="../Main/CanvasFormat.html" title="CanvasFormat">CanvasFormats</a> rather than TextureFormats.
+</p>
+<h2><span class="mw-headline" id="Constants">Constants</span></h2>
+<dl><dt>normal</dt>
+<dd>The default texture format: 8 bits per channel (32 bpp) RGBA. Color channel values range from 0-255 (0-1 in shaders.)</dd>
+<dt>hdr</dt>
+<dd>Only usable in Canvases. The high dynamic range texture format: floating point 16 bits per channel (64 bpp) RGBA. Color channel values inside the Canvas range from -infinity to +infinity.</dd></dl>
+<div class="new-feature" data-love-version-note="1" style="font-weight: bold; background: #b0b0ff; color: black; padding: 2px; padding-left: 8px; -webkit-border-top-left-radius: 10px; -webkit-border-top-right-radius: 10px; -moz-border-radius-topleft: 10px; -moz-border-radius-topright: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px;">Available since LÖVE <a href="../Main/0.9.1.html" title="0.9.1">0.9.1</a></div><div data-love-filterable="1" data-love-version-added="0.9.1" style="border: 2px solid #b0b0ff; padding: 3px; padding-bottom: 1px; -webkit-border-bottom-right-radius: 10px; -webkit-border-bottom-left-radius: 10px; -moz-border-radius-bottomright: 10px; -moz-border-radius-bottomleft: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
+<dl><dt>srgb</dt>
+<dd>The same as <code>normal</code>, but the texture is <i>interpreted</i> as being in the sRGB color space. It will be decoded from sRGB to linear RGB when drawn or sampled from in a shader. For Canvases, this will also convert everything drawn <i>to</i> the Canvas from linear RGB to sRGB. </dd></dl></div>
+<h2><span class="mw-headline" id="Notes">Notes</span></h2>
+<p>The HDR format is most useful when combined with pixel shaders. Effects such as tonemapped HDR with bloom can be accomplished, or the canvas can be used to store arbitrary non-color data such as positions which are then interpreted and used in a shader, as long as you draw the right things to the canvas.
+</p><p>The sRGB format should only be used when doing gamma-correct rendering, which is an advanced topic and it's easy to get color-spaces mixed up. If you're not sure whether you need this, you might want to avoid it. Read more about gamma-correct rendering <a class="external text" href="http://http.developer.nvidia.com/GPUGems3/gpugems3_ch24.html" rel="nofollow">here</a>, <a class="external text" href="http://filmicgames.com/archives/299" rel="nofollow">here</a>, and <a class="external text" href="http://renderwonk.com/blog/index.php/archive/adventures-with-gamma-correct-rendering/" rel="nofollow">here</a>.
+</p><p>Not all systems support the HDR and sRGB formats. Use <a href="../Main/love.graphics.isSupported.html" title="love.graphics.isSupported">love.graphics.isSupported</a> to check before creating the Canvas or Image.
+</p>
+<h2><span class="mw-headline" id="See_Also">See Also</span></h2>
+<ul><li><a href="../Main/love.graphics.html" title="love.graphics">love.graphics</a></li>
+<li><a href="../Main/love.graphics.newImage.html" title="love.graphics.newImage">love.graphics.newImage</a></li>
+<li><a href="../Main/love.graphics.newCanvas.html" title="love.graphics.newCanvas">love.graphics.newCanvas</a></li>
+<li><a href="../Main/love.graphics.isSupported.html" title="love.graphics.isSupported">love.graphics.isSupported</a></li></ul>
+<h2><span class="mw-headline" id="Other_Languages">Other Languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Enums.html">Enums</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

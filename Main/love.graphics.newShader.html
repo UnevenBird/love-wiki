@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>love.graphics.newShader - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">love.graphics.newShader</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><table bgcolor="#d0d0ff" class="new-section" data-newin="[[0.9.0]]" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+<tbody><tr>
+<td><i> <b>Available since LÖVE <a href="../Main/0.9.0.html" title="0.9.0">0.9.0</a></b> </i>
+</td></tr>
+<tr>
+<td><small>It has been renamed from <a href="../Main/love.graphics.newPixelEffect.html" title="love.graphics.newPixelEffect">love.graphics.newPixelEffect</a>.</small>
+</td></tr></tbody></table>
+<p><br/>
+</p>
+<table align="center" bgcolor="gold" class="notice" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+<tbody><tr>
+<td width="1"><span class="mw-default-size" typeof="mw:File"><a class="mw-file-description" href="../File/O.png.html"><img class="mw-file-element" data-file-height="64" data-file-width="64" decoding="async" height="64" src="../assets/images/O.png" width="64"/></a></span>
+</td>
+<td>This function can be slow if it is called repeatedly, such as from <a href="../Main/love.update.html" title="love.update">love.update</a> or <a href="../Main/love.draw.html" title="love.draw">love.draw</a>. If you need to use a specific resource often, create it once and store it somewhere it can be reused!
+</td>
+<td width="1"> 
+</td></tr></tbody></table><p><br/><br/>
+</p><p>Creates a new Shader object for hardware-accelerated vertex and pixel effects. A Shader contains either vertex shader code, pixel shader code, or both.
+</p><p>Shaders are small programs which are run on the graphics card when drawing. Vertex shaders are run once for each vertex (for example, an image has 4 vertices - one at each corner. A <a href="../Main/Mesh.html" title="Mesh">Mesh</a> might have many more.) Pixel shaders are run once for each pixel on the screen which the drawn object touches. Pixel shader code is executed after all the object's vertices have been processed by the vertex shader.
+</p>
+<h2><span class="mw-headline" id="Function">Function</span></h2>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">shader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newShader</span><span class="p">(</span><span class="w"> </span><span class="nv">code</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments">Arguments</span></h3>
+<dl><dt><code><a href="../Main/string.html" title="string">string</a> code</code></dt>
+<dd>The pixel shader or vertex shader code, or a filename pointing to a file with the code.</dd></dl>
+<h3><span class="mw-headline" id="Returns">Returns</span></h3>
+<dl><dt><code><a href="../Main/Shader.html" title="Shader">Shader</a> shader</code></dt>
+<dd>A Shader object for use in drawing operations.</dd></dl>
+<h2><span class="mw-headline" id="Function_2">Function</span></h2>
+<h3><span class="mw-headline" id="Synopsis_2">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">shader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newShader</span><span class="p">(</span><span class="w"> </span><span class="nv">pixelcode</span><span class="p">,</span><span class="w"> </span><span class="nv">vertexcode</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments_2">Arguments</span></h3>
+<dl><dt><code><a href="../Main/string.html" title="string">string</a> pixelcode</code></dt>
+<dd>The pixel shader code, or a filename pointing to a file with the code.</dd>
+<dt><code><a href="../Main/string.html" title="string">string</a> vertexcode</code></dt>
+<dd>The vertex shader code, or a filename pointing to a file with the code.</dd></dl>
+<h3><span class="mw-headline" id="Returns_2">Returns</span></h3>
+<dl><dt><code><a href="../Main/Shader.html" title="Shader">Shader</a> shader</code></dt>
+<dd>A Shader object for use in drawing operations.</dd></dl>
+<h3><span class="mw-headline" id="Notes">Notes</span></h3>
+<p>The pixelcode and vertexcode arguments can be in any order.
+</p>
+<h2><span class="mw-headline" id="Shader_Language">Shader Language</span></h2>
+<p>Shaders are not programmed in Lua, but by using a special shader language – GLSL, with a few aliases and a different entry point for convenience – instead. GLSL has very similar syntax to C. None of the aliases LÖVE provides are mandatory, but using <code>Texel</code> instead of <code>texture2D</code> is recommended since <code>Texel</code> works in all glsl versions, whereas <code>texture2D</code> does not work in GLSL 3.
+</p>
+<table cellpadding="5">
+<tbody><tr>
+<th>GLSL</th>
+<th>LÖVE shader language
+</th></tr>
+<tr>
+<td>sampler2D</td>
+<td>Image
+</td></tr>
+<tr>
+<td>sampler2DArray</td>
+<td>ArrayImage
+</td></tr>
+<tr>
+<td>samplerCube</td>
+<td>CubeImage
+</td></tr>
+<tr>
+<td>sampler3D</td>
+<td>VolumeImage
+</td></tr>
+<tr>
+<td>texture2D(tex, uv) (in GLSL 1)</td>
+<td>Texel(tex, uv)
+</td></tr>
+<tr>
+<td>texture(tex, uv) (in GLSL 3)</td>
+<td>Texel(tex, uv)
+</td></tr>
+<tr>
+<td>float</td>
+<td>number (deprecated)
+</td></tr>
+<tr>
+<td>uniform</td>
+<td>extern (deprecated)
+</td></tr></tbody></table>
+<p><br/>
+The version of GLSL used depends on whether the <code>#pragma language glsl3</code> line is added to the top of a shader file, as well as whether LÖVE is running on a desktop or mobile device:
+</p>
+<table cellpadding="5">
+<tbody><tr>
+<th>LÖVE shader language</th>
+<th>desktop GLSL version</th>
+<th>mobile GLSL version
+</th></tr>
+<tr>
+<td>glsl1 (default)</td>
+<td><a class="external text" href="http://www.opengl.org/registry/doc/GLSLangSpec.Full.1.20.8.pdf" rel="nofollow">GLSL 1.20</a></td>
+<td><a class="external text" href="https://www.khronos.org/files/opengles_shading_language.pdf" rel="nofollow">GLSL ES 1.00</a>
+</td></tr>
+<tr>
+<td>glsl3</td>
+<td><a class="external text" href="https://www.khronos.org/registry/OpenGL/specs/gl/GLSLangSpec.3.30.pdf" rel="nofollow">GLSL 3.30</a></td>
+<td><a class="external text" href="https://www.khronos.org/registry/OpenGL/specs/es/3.0/GLSL_ES_Specification_3.00.pdf" rel="nofollow">GLSL ES 3.00</a>
+</td></tr></tbody></table>
+<p>GLSL 3 is <a href="../Main/GraphicsFeature.html" title="GraphicsFeature">not supported</a> on some older systems. Use <a href="../Main/love.graphics.getSupported.html" title="love.graphics.getSupported">love.graphics.getSupported</a> to check at run-time.
+</p><p><br/>
+Vertex shader code must contain at least one function, named <code>position</code>, which is the function that will produce transformed vertex positions of drawn objects in screen-space.
+</p><p>Pixel shader code must contain at least one function, named <code>effect</code>, which is the function that will produce the color which is blended onto the screen for each pixel a drawn object touches.
+</p><p>LÖVE provides several useful <a href="../Main/Shader_Variables.html" title="Shader Variables">Shader Variables</a> by default. Additionally, LÖVE exposes a function <code>VideoTexel(uv)</code> which yields the color value of the currently drawn video at that position. Since Videos are drawn as YUV data in multiple textures, and then converted in the shader, the Texel function cannot be used.
+</p>
+<h2><span class="mw-headline" id="Pixel_Shader_Function">Pixel Shader Function</span></h2>
+<p>When an object is drawn, the pixel shader <code>effect</code> function is called hundreds or thousands of times: once for each pixel on the screen that the object touches. The pixel shader is run after the vertex shader, if there is one.
+</p>
+<h3><span class="mw-headline" id="Synopsis_3">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-glsl mw-content-ltr" dir="ltr"><pre><span></span><span class="kt">vec4</span><span class="w"> </span><span class="n">effect</span><span class="p">(</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">color</span><span class="p">,</span><span class="w"> </span><span class="n">Image</span><span class="w"> </span><span class="n">tex</span><span class="p">,</span><span class="w"> </span><span class="kt">vec2</span><span class="w"> </span><span class="n">texture_coords</span><span class="p">,</span><span class="w"> </span><span class="kt">vec2</span><span class="w"> </span><span class="n">screen_coords</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments_3">Arguments</span></h3>
+<dl><dt><code><a href="../Main/vec4.html" title="vec4">vec4</a> color</code></dt>
+<dd>The drawing color set with <a href="../Main/love.graphics.setColor.html" title="love.graphics.setColor">love.graphics.setColor</a> or the per-vertex <a href="../Main/Mesh.html" title="Mesh">Mesh</a> color.</dd>
+<dt><code><a href="../Main/Image.html" title="Image">Image</a> tex</code></dt>
+<dd>The texture of the image or canvas being drawn.</dd>
+<dt><code><a href="../Main/vec2.html" title="vec2">vec2</a> texture_coords</code></dt>
+<dd>The location inside the texture to get pixel data from. Texture coordinates are usually normalized to the range of (0, 0) to (1, 1), with the top-left corner being (0, 0).</dd>
+<dt><code><a href="../Main/vec2.html" title="vec2">vec2</a> screen_coords</code></dt>
+<dd>Coordinates of the pixel on the screen. Pixel coordinates are not normalized (unlike texture coordinates). (0.5, 0.5) represents the top left of the screen (bottom left in LÖVE versions prior to <a href="../Main/0.10.0.html" title="0.10.0">0.10.0</a>).</dd></dl>
+<h3><span class="mw-headline" id="Returns_3">Returns</span></h3>
+<dl><dt><code><a href="../Main/vec4.html" title="vec4">vec4</a> output_color</code></dt>
+<dd>The color of the pixel.</dd></dl>
+<h3><span class="mw-headline" id="Notes_2">Notes</span></h3>
+<table align="center" bgcolor="gold" class="notice" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+<tbody><tr>
+<td width="1"><span class="mw-default-size" typeof="mw:File"><a class="mw-file-description" href="../File/O.png.html"><img class="mw-file-element" data-file-height="64" data-file-width="64" decoding="async" height="64" src="../assets/images/O.png" width="64"/></a></span>
+</td>
+<td>On mobile devices, variables in pixel shaders use <code>mediump</code> (16 bit float) precision by default instead of 32 bit float, for performance reasons. This may cause numeric instability or visual artifacts for larger numbers. Use the <code>highp</code> qualifier when declaring a variable (for example <code>highp float pos;</code>) to make it use always 32 bit float precision. Furthermore, <code>highp</code> precision is not supported on all devices, particularly GLES2 devices. Use <a href="../Main/love.graphics.getSupported.html" title="love.graphics.getSupported">love.graphics.getSupported</a> to check!
+</td>
+<td width="1"> 
+</td></tr></tbody></table><p><br/>
+</p><p>If no pixel shader is used, LÖVE internally uses a default. This is its code:
+</p>
+<div class="mw-highlight mw-highlight-lang-glsl mw-content-ltr" dir="ltr"><pre><span></span><span class="kt">vec4</span><span class="w"> </span><span class="n">effect</span><span class="p">(</span><span class="kt">vec4</span><span class="w"> </span><span class="n">color</span><span class="p">,</span><span class="w"> </span><span class="n">Image</span><span class="w"> </span><span class="n">tex</span><span class="p">,</span><span class="w"> </span><span class="kt">vec2</span><span class="w"> </span><span class="n">texture_coords</span><span class="p">,</span><span class="w"> </span><span class="kt">vec2</span><span class="w"> </span><span class="n">screen_coords</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">vec4</span><span class="w"> </span><span class="n">texturecolor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Texel</span><span class="p">(</span><span class="n">tex</span><span class="p">,</span><span class="w"> </span><span class="n">texture_coords</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">texturecolor</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">color</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+<p>Or for Video
+</p>
+<div class="mw-highlight mw-highlight-lang-glsl mw-content-ltr" dir="ltr"><pre><span></span><span class="kt">vec4</span><span class="w"> </span><span class="n">effect</span><span class="p">(</span><span class="kt">vec4</span><span class="w"> </span><span class="n">color</span><span class="p">,</span><span class="w"> </span><span class="n">Image</span><span class="w"> </span><span class="n">tex</span><span class="p">,</span><span class="w"> </span><span class="kt">vec2</span><span class="w"> </span><span class="n">texture_coords</span><span class="p">,</span><span class="w"> </span><span class="kt">vec2</span><span class="w"> </span><span class="n">screen_coords</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">vec4</span><span class="w"> </span><span class="n">texturecolor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VideoTexel</span><span class="p">(</span><span class="n">texture_coords</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">texturecolor</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">color</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+<p>If multiple canvases are being rendered to simultaneously (by giving multiple Canvas parameters to <a href="../Main/love.graphics.setCanvas.html" title="love.graphics.setCanvas">love.graphics.setCanvas</a>), you can use the <b>void effect</b> (no arguments!) function instead of <b>vec4 effect</b> in order to output a separate color to each Canvas. It has the following prototype:
+</p>
+<div class="mw-highlight mw-highlight-lang-glsl mw-content-ltr" dir="ltr"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">effect</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// love_Canvases is a writable array of vec4 colors. Each index corresponds to a Canvas.</span>
+<span class="w">    </span><span class="c1">// IMPORTANT: If you don't assign a value to all active canvases, bad things will happen.</span>
+<span class="w">    </span><span class="n">love_Canvases</span><span class="p">[</span><span class="mo">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">color</span><span class="p">;</span>
+<span class="w">    </span><span class="n">love_Canvases</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="kt">vec4</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// etc.</span>
+<span class="p">}</span>
+</pre></div>
+<p>If you wish to get the arguments that are passed to the single-canvas version (<code>vec4 effect</code>), see the built-in <a href="../Main/Shader_Variables.html" title="Shader Variables">Shader Variables</a>. 
+<code>color</code> will be in <code>VaryingColor</code>, <code>texture_coords</code> will be in <code>VaryingTexCoord</code> and <code>screen_coords</code> is in <code>love_PixelCoord</code>.
+And if you wish to access the texture used in the drawing operation, you can do that by defining a uniform texture (of the appropriate type) named <code>MainTex</code> or by sending it yourself via  <a href="../Main/Shader__send.html" title="Shader:send">Shader:send</a>.
+</p>
+<h2><span class="mw-headline" id="Vertex_Shader_Function">Vertex Shader Function</span></h2>
+<h3><span class="mw-headline" id="Synopsis_4">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-glsl mw-content-ltr" dir="ltr"><pre><span></span><span class="kt">vec4</span><span class="w"> </span><span class="n">position</span><span class="p">(</span><span class="w"> </span><span class="kt">mat4</span><span class="w"> </span><span class="n">transform_projection</span><span class="p">,</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">vertex_position</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments_4">Arguments</span></h3>
+<dl><dt><code><a href="../Main/mat4.html" title="mat4">mat4</a> transform_projection</code></dt>
+<dd>The transformation matrix affected by <a href="../Main/love.graphics.translate.html" title="love.graphics.translate">love.graphics.translate</a> and friends combined with the orthographic projection matrix.</dd>
+<dt><code><a href="../Main/vec4.html" title="vec4">vec4</a> vertex_position</code></dt>
+<dd>The raw un-transformed position of the current vertex.</dd></dl>
+<h3><span class="mw-headline" id="Returns_4">Returns</span></h3>
+<dl><dt><code><a href="../Main/vec4.html" title="vec4">vec4</a> output_pos</code></dt>
+<dd>The final transformed position of the current vertex.</dd></dl>
+<h3><span class="mw-headline" id="Notes_3">Notes</span></h3>
+<p>If no vertex shader code is used, LÖVE uses a default. This is its code:
+</p>
+<div class="mw-highlight mw-highlight-lang-glsl mw-content-ltr" dir="ltr"><pre><span></span><span class="kt">vec4</span><span class="w"> </span><span class="n">position</span><span class="p">(</span><span class="kt">mat4</span><span class="w"> </span><span class="n">transform_projection</span><span class="p">,</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">vertex_position</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// The order of operations matters when doing matrix multiplication.</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">transform_projection</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vertex_position</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+<h2><span class="mw-headline" id="Notes_4">Notes</span></h2>
+<p>Vertex shader code is run for every vertex drawn to the screen (for example, love.graphics.rectangle will produce 4 vertices) and is used to transform the vertex positions from their original coordinates into screen-space, as well as to send information such as per-vertex color and texture coordinate values to the pixel shader.
+</p><p>Pixel shader code is run for every pixel on the screen that a drawn object touches, and is used to produce the color that will be blended onto the screen at that pixel, often by reading from an image. Pixel shaders are sometimes called fragment shaders.
+</p><p>The <code>varying</code> keyword can be used to set a value in the vertex shader and have it interpolated in between vertices and passed down to the pixel shader.
+</p><p>Vertex and Pixel shader code can be combined into one file or string if you wrap the vertex-specific code in <code>#ifdef VERTEX .. #endif</code> and the pixel-specific code in <code>#ifdef PIXEL .. #endif</code>.
+</p>
+<h2><span class="mw-headline" id="Built-in_variables">Built-in variables</span></h2>
+<p>LÖVE provides several built-in variables for both pixel and vertex shaders. The full list can be found here: <a href="../Main/Shader_Variables.html" title="Shader Variables">Shader Variables</a>.
+</p>
+<h2><span class="mw-headline" id="Examples">Examples</span></h2>
+<h3><span class="mw-headline" id="Create_a_shader_using_vertex_and_pixel_shader_code_which_behaves_as_if_no_shader_is_set.">Create a shader using vertex and pixel shader code which behaves as if no shader is set.</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">pixelcode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">[[</span>
+<span class="s">    vec4 effect( vec4 color, Image tex, vec2 texture_coords, vec2 screen_coords )</span>
+<span class="s">    {</span>
+<span class="s">        vec4 texcolor = Texel(tex, texture_coords);</span>
+<span class="s">        return texcolor * color;</span>
+<span class="s">    }</span>
+<span class="s">]]</span>
+
+<span class="kd">local</span><span class="w"> </span><span class="nv">vertexcode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">[[</span>
+<span class="s">    vec4 position( mat4 transform_projection, vec4 vertex_position )</span>
+<span class="s">    {</span>
+<span class="s">        return transform_projection * vertex_position;</span>
+<span class="s">    }</span>
+<span class="s">]]</span>
+
+<span class="nv">shader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">newShader</span><span class="p">(</span><span class="nv">pixelcode</span><span class="p">,</span><span class="w"> </span><span class="nv">vertexcode</span><span class="p">)</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setShader</span><span class="p">(</span><span class="nv">shader</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">-- draw things</span>
+<span class="w">    </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setShader</span><span class="p">()</span>
+<span class="w">    </span><span class="c1">-- draw more things</span>
+<span class="kr">end</span>
+</pre></div>
+<h3><span class="mw-headline" id="Access_the_pre-transformed_vertex_position_in_the_pixel_shader_with_the_varying_keyword.">Access the pre-transformed vertex position in the pixel shader with the <b>varying</b> keyword.</span></h3>
+<h4><span class="mw-headline" id="vertex_shader_code">vertex shader code</span></h4>
+<div class="mw-highlight mw-highlight-lang-glsl mw-content-ltr" dir="ltr"><pre><span></span><span class="k">varying</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">vpos</span><span class="p">;</span>
+
+<span class="kt">vec4</span><span class="w"> </span><span class="n">position</span><span class="p">(</span><span class="w"> </span><span class="kt">mat4</span><span class="w"> </span><span class="n">transform_projection</span><span class="p">,</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">vertex_position</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">vpos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vertex_position</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">transform_projection</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vertex_position</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+<h4><span class="mw-headline" id="pixel_shader_code">pixel shader code</span></h4>
+<div class="mw-highlight mw-highlight-lang-glsl mw-content-ltr" dir="ltr"><pre><span></span><span class="k">varying</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">vpos</span><span class="p">;</span>
+
+<span class="kt">vec4</span><span class="w"> </span><span class="n">effect</span><span class="p">(</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">color</span><span class="p">,</span><span class="w"> </span><span class="n">Image</span><span class="w"> </span><span class="n">tex</span><span class="p">,</span><span class="w"> </span><span class="kt">vec2</span><span class="w"> </span><span class="n">texture_coords</span><span class="p">,</span><span class="w"> </span><span class="kt">vec2</span><span class="w"> </span><span class="n">screen_coords</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">texture_coords</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="kt">vec2</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">vpos</span><span class="p">.</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">vpos</span><span class="p">.</span><span class="n">y</span><span class="p">));</span>
+<span class="w">    </span><span class="kt">vec4</span><span class="w"> </span><span class="n">texcolor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Texel</span><span class="p">(</span><span class="n">tex</span><span class="p">,</span><span class="w"> </span><span class="n">texture_coords</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">texcolor</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">color</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+<h3><span id="Combine_the_above_example_into_one_string_or_file_with_the_help_of_.23ifdef."></span><span class="mw-headline" id="Combine_the_above_example_into_one_string_or_file_with_the_help_of_#ifdef.">Combine the above example into one string or file with the help of <b>#ifdef</b>.</span></h3>
+<div class="mw-highlight mw-highlight-lang-glsl mw-content-ltr" dir="ltr"><pre><span></span><span class="k">varying</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">vpos</span><span class="p">;</span>
+
+<span class="cp">#ifdef VERTEX</span>
+<span class="kt">vec4</span><span class="w"> </span><span class="n">position</span><span class="p">(</span><span class="w"> </span><span class="kt">mat4</span><span class="w"> </span><span class="n">transform_projection</span><span class="p">,</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">vertex_position</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">vpos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vertex_position</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">transform_projection</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vertex_position</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#ifdef PIXEL</span>
+<span class="kt">vec4</span><span class="w"> </span><span class="n">effect</span><span class="p">(</span><span class="w"> </span><span class="kt">vec4</span><span class="w"> </span><span class="n">color</span><span class="p">,</span><span class="w"> </span><span class="n">Image</span><span class="w"> </span><span class="n">tex</span><span class="p">,</span><span class="w"> </span><span class="kt">vec2</span><span class="w"> </span><span class="n">texture_coords</span><span class="p">,</span><span class="w"> </span><span class="kt">vec2</span><span class="w"> </span><span class="n">screen_coords</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">texture_coords</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="kt">vec2</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">vpos</span><span class="p">.</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">vpos</span><span class="p">.</span><span class="n">y</span><span class="p">));</span>
+<span class="w">    </span><span class="kt">vec4</span><span class="w"> </span><span class="n">texcolor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Texel</span><span class="p">(</span><span class="n">tex</span><span class="p">,</span><span class="w"> </span><span class="n">texture_coords</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">texcolor</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">color</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+</pre></div>
+<h2><span class="mw-headline" id="See_Also">See Also</span></h2>
+<ul><li><a href="../Main/love.graphics.html" title="love.graphics">love.graphics</a></li>
+<li><a href="../Main/Shader.html" title="Shader">Shader</a></li>
+<li><a href="../Main/love.graphics.setShader.html" title="love.graphics.setShader">love.graphics.setShader</a></li>
+<li><a href="../Main/Shader_Variables.html" title="Shader Variables">Shader Variables</a></li></ul>
+<p><br/>
+</p>
+<h2><span class="mw-headline" id="Other_Languages">Other Languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Functions.html">Functions</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

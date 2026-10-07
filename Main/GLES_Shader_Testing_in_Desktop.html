@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>GLES Shader Testing in Desktop - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">GLES Shader Testing in Desktop</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><p>Writing shaders to support mobile devices might be not trivial. You may be wondering if there is a way to test shaders on mobile devices without really using mobile device.
+</p><p>The answer is yes, there's a way.
+</p><p>GPUs nowadays (even integrated ones) should support creating OpenGL ES context, which means all shaders must be GLSL ES/ESSL compatible. We can make LOVE use OpenGL ES context by using the environment variable <code>LOVE_GRAPHICS_USE_OPENGLES=1</code>.
+</p><p>Note that this guide is mostly Windows oriented. For other desktop platforms, please adapt accordingly!
+</p>
+<h2><span class="mw-headline" id="love.graphics.validateShader">love.graphics.validateShader</span></h2>
+<p>Since <a href="../Main/11.0.html" title="11.0">11.0</a>, there's <a href="../Main/love.graphics.validateShader.html" title="love.graphics.validateShader">love.graphics.validateShader</a> which can be used to validate both GLSL and ESSL shader code. Note that it only validates, it doesn't run your shader code. If you really want to run your game under GLES context, proceed below!
+</p>
+<h2><span class="mw-headline" id="Requirements">Requirements</span></h2>
+<p>You need a GPU which supports OpenGL ES context or ANGLE. As previously written, today's GPUs should support this, thus ANGLE is normally unnecessary.
+</p>
+<h2><span class="mw-headline" id="Tell_LOVE_to_use_OpenGL_ES_context">Tell LOVE to use OpenGL ES context</span></h2>
+<p>FIXME: AMD drivers expose OpenGL ES context under EGL (and it's very hidden) which is not compatible with LOVE SDL build. For AMD GPUs in Windows, proceed below on using ANGLE directly.
+</p><p>Now, we need to tell LOVE to use OpenGL ES context. You need to set this environment variable before starting LOVE. It can be set using Command Prompt/Terminal and launching LOVE from same Terminal, or from Windows, from Advanced System Settings.
+</p>
+<ul><li>Windows: <code>set LOVE_GRAPHICS_USE_OPENGLES=1</code> then <code>lovec ...</code>. <a href="../Main/0.10.2.html" title="0.10.2">0.10.2</a> or later is assumed.</li></ul>
+<ul><li>Linux/macOS: <code>LOVE_GRAPHICS_USE_OPENGLES=1 love ...</code></li></ul>
+<p>Verify if LOVE uses OpenGL ES context by checking the 1st return value of <a href="../Main/love.graphics.getRendererInfo.html" title="love.graphics.getRendererInfo">love.graphics.getRendererInfo</a> which should be "OpenGL ES".
+</p><p>Once you've got OpenGL ES context, you can test if your shader code works on mobile devices. Otherwise, if you're on Windows, proceed below.
+</p>
+<h2><span class="mw-headline" id="Using_ANGLE_in_Windows">Using ANGLE in Windows</span></h2>
+<table align="center" bgcolor="gold" class="notice" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+<tbody><tr>
+<td width="1"><span class="mw-default-size" typeof="mw:File"><a class="mw-file-description" href="../File/O.png.html"><img class="mw-file-element" data-file-height="64" data-file-width="64" decoding="async" height="64" src="../assets/images/O.png" width="64"/></a></span>
+</td>
+<td>Using ANGLE with AMD GPU in Windows requires LÖVE <a href="../Main/11.5.html" title="11.5">11.5</a> or later.
+</td>
+<td width="1"> 
+</td></tr></tbody></table><p><br/>
+</p><p><a class="external text" href="https://chromium.googlesource.com/angle/angle" rel="nofollow">ANGLE</a> is an implementation of OpenGL ES 2.0 and 3.0 on top of other rendering backends. In Windows, it will run OpenGL ES using Direct3D 11 or Direct3D 9. If your GPU doesn't support OpenGL ES context or if you want to force ANGLE, you can copy <b>libEGL.dll</b> and <b>libGLESv2.dll</b> from <a class="external text" href="https://github.com/MikuAuahDark/angle-winbuild" rel="nofollow">here</a>, or on one of these applications:
+</p>
+<ul><li>Google Chrome</li></ul>
+<ul><li>Microsoft Edge Chromium</li></ul>
+<ul><li>Visual Studio Code</li></ul>
+<ul><li>osu! stable (32-bit DLL)</li></ul>
+<p>Note: Using Firefox's DLLs doesn't work because it links with Firefox-specific DLLs and copying all the dependent DLLs can be troublesome.
+</p><p>One thing for sure is <b>make sure the bit count of the DLL matches</b>, i.e. 64-bit Chrome has 64-bit DLLs and can only be used on 64-bit LOVE.
+</p><p>Next, set the environment <code>LOVE_GRAPHICS_USE_OPENGLES=1</code> and <code>SDL_OPENGL_ES_DRIVER=1</code> then launch LOVE. To confirm you're using ANGLE backend, check the 2nd return value of <a href="../Main/love.graphics.getRendererInfo.html" title="love.graphics.getRendererInfo">love.graphics.getRendererInfo</a> which should contain "ANGLE" (all uppercase).
+</p></div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Tutorials.html">Tutorials</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

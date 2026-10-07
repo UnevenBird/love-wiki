@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>love.graphics.rotate - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">love.graphics.rotate</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><p>Rotates the coordinate system in two dimensions.
+</p><p>Calling this function affects all future drawing operations by rotating the coordinate system around the origin by the given amount of radians.
+</p><p>This change lasts until the next <a href="../Main/love.draw.html" title="love.draw">love.draw</a> call, or a <a href="../Main/love.graphics.pop.html" title="love.graphics.pop">love.graphics.pop</a> reverts to a previous <a href="../Main/love.graphics.push.html" title="love.graphics.push">love.graphics.push</a>, or <a href="../Main/love.graphics.origin.html" title="love.graphics.origin">love.graphics.origin</a> is called - whichever comes first.
+</p>
+<h2><span class="mw-headline" id="Function">Function</span></h2>
+<h3><span class="mw-headline" id="Synopsis">Synopsis</span></h3>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">rotate</span><span class="p">(</span><span class="w"> </span><span class="nv">angle</span><span class="w"> </span><span class="p">)</span>
+</pre></div>
+<h3><span class="mw-headline" id="Arguments">Arguments</span></h3>
+<dl><dt><code><a href="../Main/number.html" title="number">number</a> angle</code></dt>
+<dd>The amount to rotate the coordinate system in radians.</dd></dl>
+<h3><span class="mw-headline" id="Returns">Returns</span></h3>
+<p>Nothing.
+</p>
+<h2><span class="mw-headline" id="Examples">Examples</span></h2>
+<h3><span class="mw-headline" id="Rotating_a_static_scene">Rotating a static scene</span></h3>
+<p>This example shows how to rotate a static scene around a given point. Since the rotation is always around the origin, translating the center of the screen to the origin and back around the rotate operation makes the effective rotation point be the center of the screen. This is demonstrated by drawing a rectangle that shows the rotation and a point that is right in the center and thus does not move when the scene rotates. Note that the drawing commands have coordinates that depend solely on the screen size.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="nv">dt</span><span class="p">)</span>
+<span class="w">	</span><span class="c1">-- Rotate a quarter turn per second.</span>
+<span class="w">	</span><span class="nv">angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">angle</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">.5</span><span class="o">*</span><span class="nb">math.pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">dt</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">width</span><span class="p">,</span><span class="w"> </span><span class="nv">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">getDimensions</span><span class="p">()</span>
+
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">centerX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">width</span><span class="o">/</span><span class="mi">2</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">centerY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">height</span><span class="o">/</span><span class="mi">2</span>
+
+<span class="w">	</span><span class="c1">-- Rotate around the center of the screen by angle radians.</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">translate</span><span class="p">(</span><span class="nv">centerX</span><span class="p">,</span><span class="w"> </span><span class="nv">centerY</span><span class="p">)</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">rotate</span><span class="p">(</span><span class="nv">angle</span><span class="p">)</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">translate</span><span class="p">(</span><span class="o">-</span><span class="nv">centerX</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="nv">centerY</span><span class="p">)</span>
+
+<span class="w">	</span><span class="c1">-- Draw a white rectangle slightly off center.</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setColor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">rectangle</span><span class="p">(</span><span class="s2">"fill"</span><span class="p">,</span><span class="w"> </span><span class="nv">centerX</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="nv">centerY</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="mi">400</span><span class="p">)</span>
+
+<span class="w">	</span><span class="c1">-- Draw some black text with the top left corner at the center.</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setColor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="s2">"Lorem ipsum."</span><span class="p">,</span><span class="w"> </span><span class="nv">centerX</span><span class="p">,</span><span class="w"> </span><span class="nv">centerY</span><span class="p">)</span>
+
+<span class="w">	</span><span class="c1">-- Draw a five-pixel-wide blue point at the center.</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setPointSize</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setColor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">points</span><span class="p">(</span><span class="nv">centerX</span><span class="p">,</span><span class="w"> </span><span class="nv">centerY</span><span class="p">)</span>
+<span class="kr">end</span>
+</pre></div>
+<h3><span class="mw-headline" id="Rotating_the_entire_screen">Rotating the entire screen</span></h3>
+<p>This example shows how you can rotate the screen 90 degrees, counter clockwise. Especially useful if you just distribute .love files for android, where the game always starts in landscape mode. After this, the width and height of the canvas will be "swapped". Don't forget to always translate the input and do all the screen bounds specific checks accordingly.
+</p>
+<div class="mw-highlight mw-highlight-lang-lua mw-content-ltr" dir="ltr"><pre><span></span><span class="c1">-- Simple function for translating on-screen coordinates to in-game coordinates.</span>
+<span class="kd">local</span><span class="w"> </span><span class="kr">function</span><span class="w"> </span><span class="nf">screenToGame</span><span class="p">(</span><span class="nv">xOnScreen</span><span class="p">,</span><span class="w"> </span><span class="nv">yOnScreen</span><span class="p">)</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">xInGame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">getHeight</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">yOnScreen</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">yInGame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">xOnScreen</span>
+
+<span class="w">	</span><span class="kr">return</span><span class="w"> </span><span class="nv">xInGame</span><span class="p">,</span><span class="w"> </span><span class="nv">yInGame</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span><span class="w"> </span><span class="nc">love</span><span class="p">.</span><span class="nf">draw</span><span class="p">()</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">screenWidth</span><span class="p">,</span><span class="w"> </span><span class="nv">screenHeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">getDimensions</span><span class="p">()</span>
+
+<span class="w">	</span><span class="c1">-- Transform the coordinate system so the top left in-game corner is in</span>
+<span class="w">	</span><span class="c1">-- the bottom left corner of the screen.</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">translate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nv">screenHeight</span><span class="p">)</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">rotate</span><span class="p">(</span><span class="o">-</span><span class="nb">math.pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="w">	</span><span class="c1">-- Draw some text in the (translated) top left corner.</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setColor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="s2">"Lorem ipsum."</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+
+<span class="w">	</span><span class="c1">-- Draw a rectangle that lights up when hovered.</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">rectX</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mi">150</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">rectY</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mi">250</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">rectWidth</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">180</span>
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">rectHeight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">110</span>
+
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">mouseX</span><span class="p">,</span><span class="w"> </span><span class="nv">mouseY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">love</span><span class="p">.</span><span class="py">mouse</span><span class="p">.</span><span class="nf">getPosition</span><span class="p">()</span><span class="w">     </span><span class="c1">-- On-screen.</span>
+<span class="w">	</span><span class="nv">mouseX</span><span class="p">,</span><span class="w"> </span><span class="nv">mouseY</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="nf">screenToGame</span><span class="p">(</span><span class="nv">mouseX</span><span class="p">,</span><span class="w"> </span><span class="nv">mouseY</span><span class="p">)</span><span class="w"> </span><span class="c1">-- In-game.</span>
+
+<span class="w">	</span><span class="kd">local</span><span class="w"> </span><span class="nv">isHovered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nv">mouseX</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nv">rectX</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nv">mouseY</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nv">rectY</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nv">mouseX</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nv">rectX</span><span class="o">+</span><span class="nv">rectWidth</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nv">mouseY</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nv">rectY</span><span class="o">+</span><span class="nv">rectHeight</span><span class="p">)</span>
+
+<span class="w">	</span><span class="kr">if</span><span class="w"> </span><span class="nv">isHovered</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">		</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setColor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">	</span><span class="kr">else</span>
+<span class="w">		</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">setColor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">	</span><span class="kr">end</span>
+<span class="w">	</span><span class="nv">love</span><span class="p">.</span><span class="py">graphics</span><span class="p">.</span><span class="nf">rectangle</span><span class="p">(</span><span class="s2">"fill"</span><span class="p">,</span><span class="w"> </span><span class="nv">rectX</span><span class="p">,</span><span class="w"> </span><span class="nv">rectY</span><span class="p">,</span><span class="w"> </span><span class="nv">rectWidth</span><span class="p">,</span><span class="w"> </span><span class="nv">rectHeight</span><span class="p">)</span>
+<span class="kr">end</span>
+</pre></div>
+<h2><span class="mw-headline" id="See_Also">See Also</span></h2>
+<ul><li><a href="../Main/love.graphics.html" title="love.graphics">love.graphics</a></li>
+<li><a href="../Main/love.graphics.push.html" title="love.graphics.push">love.graphics.push</a></li>
+<li><a href="../Main/love.graphics.pop.html" title="love.graphics.pop">love.graphics.pop</a></li>
+<li><a href="../Main/love.graphics.scale.html" title="love.graphics.scale">love.graphics.scale</a></li>
+<li><a href="../Main/love.graphics.shear.html" title="love.graphics.shear">love.graphics.shear</a></li>
+<li><a href="../Main/love.graphics.translate.html" title="love.graphics.translate">love.graphics.translate</a></li>
+<li><a href="../Main/love.graphics.origin.html" title="love.graphics.origin">love.graphics.origin</a></li></ul>
+<p><br/>
+</p><p><br/>
+</p>
+<h2><span class="mw-headline" id="Other_Languages">Other Languages</span></h2>
+<div class="i18n">
+<p>English
+<br/>
+<span style="text-align:right;"><i><a href="../Help/i18n.html" title="Help:i18n">More info</a></i></span>
+</p>
+</div>
+</div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Functions.html">Functions</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>

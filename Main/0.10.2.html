@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>0.10.2 - LOVE</title>
+<meta name="viewport" content="width=1000">
+<link rel="stylesheet" href="../assets/wiki.css">
+<script src="../assets/search.js" defer></script>
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt skin-love action-view ns-0" data-root="../"><div id="globalWrapper">
+<div id="column-content">
+<div class="mw-body" id="content" role="main">
+
+
+
+
+<h1 class="firstHeading mw-first-heading" id="firstHeading"><span class="mw-page-title-main">0.10.2</span></h1>
+<div class="monobook-body" id="bodyContent">
+<div id="siteSub">From LOVE</div>
+
+
+
+<div class="mw-body-content" id="mw-content-text" lang="en"><div class="mw-content-ltr mw-parser-output" dir="ltr" lang="en"><figure class="mw-default-size" typeof="mw:File/Thumb"><a class="mw-file-description" href="../File/NoGameScreen_0100.png.html"><img class="mw-file-element" data-file-height="600" data-file-width="800" decoding="async" height="225" src="../assets/images/NoGameScreen_0100.png" width="300"/></a><figcaption>no-game screen</figcaption></figure>
+<p>The codename for LÖVE 0.10.2 is <b>Super Toast</b>. It is currently <b><span style="color:#0000ff;">released</span></b>.
+</p>
+<h2><span class="mw-headline" id="Changes_from_0.10.1">Changes from <a href="../Main/0.10.1.html" title="0.10.1">0.10.1</a></span></h2>
+<h3><span class="mw-headline" id="Additions">Additions</span></h3>
+<ul><li>Added lovec.exe in Windows. It is the same as love.exe but built with the Console subsystem, so it always uses or provides a console.</li>
+<li>Added the ability to restart the game via <a href="../Main/love.event.quit.html" title="love.event.quit">love.event.quit</a>("restart").</li>
+<li>Added support for passing a table to <a href="../Main/love.mouse.isDown.html" title="love.mouse.isDown">love.mouse.isDown</a>, <a href="../Main/love.keyboard.isDown.html" title="love.keyboard.isDown">love.keyboard.isDown</a>, <a href="../Main/love.keyboard.isScancodeDown.html" title="love.keyboard.isScancodeDown">love.keyboard.isScancodeDown</a>, <a href="../Main/Joystick__isDown.html" title="Joystick:isDown">Joystick:isDown</a>, and <a href="../Main/Joystick__isGamepadDown.html" title="Joystick:isGamepadDown">Joystick:isGamepadDown</a>.</li>
+<li>Added <a href="../Main/love.window.isMaximized.html" title="love.window.isMaximized">love.window.isMaximized</a>.</li>
+<li>Added 'ellipse' <a href="../Main/AreaSpreadDistribution.html" title="AreaSpreadDistribution">area distribution</a> to <a href="../Main/ParticleSystem.html" title="ParticleSystem">ParticleSystems</a>.</li>
+<li>Added support for BC4-7 <a href="../Main/CompressedImageFormat.html" title="CompressedImageFormat">compressed texture formats</a> in KTX files.</li>
+<li>Added 'shaderswitches' field to the table returned by <a href="../Main/love.graphics.getStats.html" title="love.graphics.getStats">love.graphics.getStats</a>.</li>
+<li>Added <a href="../Main/Quad__getTextureDimensions.html" title="Quad:getTextureDimensions">Quad:getTextureDimensions</a>.</li>
+<li>Added <a href="../Main/PrismaticJoint__getAxis.html" title="PrismaticJoint:getAxis">PrismaticJoint:getAxis</a> and <a href="../Main/WheelJoint__getAxis.html" title="WheelJoint:getAxis">WheelJoint:getAxis</a>.</li>
+<li>Added 2-point version of <a href="../Main/love.physics.newRevoluteJoint.html" title="love.physics.newRevoluteJoint">love.physics.newRevoluteJoint</a>.</li>
+<li>Added table variants of <a href="../Main/Fixture__setCategory.html" title="Fixture:setCategory">Fixture:setCategory</a> and <a href="../Main/Fixture__setMask.html" title="Fixture:setMask">Fixture:setMask</a>.</li>
+<li>Added <a href="../Main/EdgeShape__setNextVertex.html" title="EdgeShape:setNextVertex">EdgeShape:setNextVertex</a>, <a href="../Main/EdgeShape__setPreviousVertex.html" title="EdgeShape:setPreviousVertex">EdgeShape:setPreviousVertex</a>, <a href="../Main/EdgeShape__getNextVertex.html" title="EdgeShape:getNextVertex">EdgeShape:getNextVertex</a>, and <a href="../Main/EdgeShape__getPreviousVertex.html" title="EdgeShape:getPreviousVertex">EdgeShape:getPreviousVertex</a>.</li>
+<li>Added <a href="../Main/ChainShape__getNextVertex.html" title="ChainShape:getNextVertex">ChainShape:getNextVertex</a> and <a href="../Main/ChainShape__getPreviousVertex.html" title="ChainShape:getPreviousVertex">ChainShape:getPreviousVertex</a>.</li>
+<li>Added optional reference angle arguments to <a href="../Main/love.physics.newRevoluteJoint.html" title="love.physics.newRevoluteJoint">love.physics.newRevoluteJoint</a>, <a href="../Main/love.physics.newPrismaticJoint.html" title="love.physics.newPrismaticJoint">love.physics.newPrismaticJoint</a>, and <a href="../Main/love.physics.newWeldJoint.html" title="love.physics.newWeldJoint">love.physics.newWeldJoint</a>.</li>
+<li>Added <a href="../Main/RevoluteJoint__getReferenceAngle.html" title="RevoluteJoint:getReferenceAngle">RevoluteJoint:getReferenceAngle</a>, <a href="../Main/PrismaticJoint__getReferenceAngle.html" title="PrismaticJoint:getReferenceAngle">PrismaticJoint:getReferenceAngle</a>, and <a href="../Main/WeldJoint__getReferenceAngle.html" title="WeldJoint:getReferenceAngle">WeldJoint:getReferenceAngle</a>.</li></ul>
+<p><br/>
+</p>
+<h3><span class="mw-headline" id="Deprecations">Deprecations</span></h3>
+<ul><li>Deprecated undocumented Shader:sendTexture, Shader:sendMatrix, Shader:sendInt, Shader:sendFloat, and Shader:sendBoolean methods.</li></ul>
+<p><br/>
+</p>
+<h3><span class="mw-headline" id="Fixes">Fixes</span></h3>
+<ul><li>Fixed love on iOS 6.</li>
+<li>Fixed os.execute always returning -1 on Linux.</li>
+<li>Fixed the <a href="../Main/love.lowmemory.html" title="love.lowmemory">love.lowmemory</a> callback to call collectgarbage() after the callback has fired, instead of before.</li>
+<li>Fixed <a href="../Main/love.math.noise.html" title="love.math.noise">love.math.noise</a>(nil) to error instead of returning nil.</li>
+<li>Fixed an occasional crash when a <a href="../Main/Thread.html" title="Thread">Thread</a> ends.</li>
+<li>Fixed a hang at the end of video playback with some video files.</li>
+<li>Fixed the video decoding thread to not do any work when there are no videos to decode.</li>
+<li>Fixed <a href="../Main/love.graphics.newVideo.html" title="love.graphics.newVideo">love.graphics.newVideo</a>(file) to no longer error if <a href="../Main/love.audio.html" title="love.audio">love.audio</a> is disabled.</li>
+<li>Fixed a rare bug in <a href="../Main/Source__play.html" title="Source:play">Source:play</a> for streaming <a href="../Main/Source.html" title="Source">Sources</a> if the associated OpenAL source object was previously used for a static Source.</li>
+<li>Fixed corrupted <a href="../Main/Font.html" title="Font">Font</a> glyphs in rare cases.</li>
+<li>Fixed stencils inside <a href="../Main/Canvas.html" title="Canvas">Canvases</a> on some OpenGL ES 2 devices.</li>
+<li>Fixed an OpenGL error in OpenGL ES 3 when multiple render targets are used.</li>
+<li>Fixed <a href="../Main/love.window.setMode.html" title="love.window.setMode">love.window.setMode</a> crashing when called with a Canvas active.</li>
+<li>Fixed <a href="../Main/love.window.maximize.html" title="love.window.maximize">love.window.maximize</a> to update the reported window dimensions immediately.</li>
+<li>Fixed gamma correction of ImageFonts and BMFonts with colored images.</li>
+<li>Fixed the default shader improperly applying gamma correction to per-vertex colors when gamma correction is requested but not supported on OpenGL ES.</li>
+<li>Fixed text coloring breaking because of an empty string.</li>
+<li>Fixed large burst of particles when dramatically increasing the emission rate of a <a href="../Main/ParticleSystem.html" title="ParticleSystem">ParticleSystem</a>.</li>
+<li>Fixed <a href="../Main/SpriteBatch__setBufferSize.html" title="SpriteBatch:setBufferSize">SpriteBatch:setBufferSize</a> to keep old sprite data if it can fit.</li>
+<li>Fixed <a href="../Main/Joint__getBodies.html" title="Joint:getBodies">Joint:getBodies</a> unconditionally erroring.</li>
+<li>Fixed memory leak in <a href="../Main/Text__set.html" title="Text:set">Text:set</a>.</li>
+<li>Fixed incorrect kerning caused by using kerning information for the wrong character in some fonts.</li>
+<li>Fixed <a href="../Main/ImageData__setPixel.html" title="ImageData:setPixel">ImageData:setPixel</a>, <a href="../Main/ImageData__getPixel.html" title="ImageData:getPixel">ImageData:getPixel</a>, <a href="../Main/ImageData__mapPixel.html" title="ImageData:mapPixel">ImageData:mapPixel</a>, <a href="../Main/SoundData__setSample.html" title="SoundData:setSample">SoundData:setSample</a>, and <a href="../Main/SoundData__getSample.html" title="SoundData:getSample">SoundData:getSample</a> to properly handle non-integer coordinates.</li></ul>
+<p><br/>
+</p>
+<h3><span class="mw-headline" id="Other_changes">Other changes</span></h3>
+<ul><li>Improved performance of <a href="../Main/Channel.html" title="Channel">Channel</a> methods by roughly 2x in many cases.</li>
+<li>Improved performance of <a href="../Main/Shader__send.html" title="Shader:send">Shader:send</a> when small numbers of arguments are given.</li></ul>
+<ul><li>Updated <a href="../Main/love.filesystem.mount.html" title="love.filesystem.mount">love.filesystem.mount</a> to accept a DroppedFile as the first parameter.</li>
+<li>Updated <a href="../Main/Shader__send.html" title="Shader:send">Shader:send</a> to do type and argument checking based on the specified uniform variable's information instead of the arguments to the function.</li>
+<li>Updated <a href="../Main/Shader__send.html" title="Shader:send">Shader:send</a> to accept a flat table for matrix uniforms.</li></ul>
+<p><br/>
+</p><p><br/>
+</p></div></div>
+<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks">Categories: <ul><li><a href="../Category/Versions.html">Versions</a></li></ul></div></div>
+
+<div class="visualClear"></div>
+</div>
+</div>
+<div class="visualClear"></div>
+</div>
+<div id="column-one">
+
+<div class="portlet" id="p-logo" role="banner">
+<a class="mw-wiki-logo" href="../Main/Main_Page.html"></a>
+</div>
+<div class="portlet" id="p-search" role="search">
+<h5 id="p-search-label"><label for="searchInput">Search</label></h5>
+<div class="pBody" id="searchBody"><form action="../search.html" id="searchform"><input accesskey="f" autocomplete="off" id="searchInput" name="q" placeholder="Search" title="Search the wiki [f]" type="search"/><input class="searchButton" id="searchGoButton" type="submit" value="Go"/></form></div>
+</div>
+<div aria-labelledby="p-documentation-label" class="portlet mw-portlet mw-portlet-documentation" id="p-documentation" role="navigation">
+<h5 id="p-documentation-label">documentation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-love"><a href="../Main/love.html">love</a></li><li class="mw-list-item" id="n-love.audio"><a href="../Main/love.audio.html">love.audio</a></li><li class="mw-list-item" id="n-love.data"><a href="../Main/love.data.html">love.data</a></li><li class="mw-list-item" id="n-love.event"><a href="../Main/love.event.html">love.event</a></li><li class="mw-list-item" id="n-love.filesystem"><a href="../Main/love.filesystem.html">love.filesystem</a></li><li class="mw-list-item" id="n-love.font"><a href="../Main/love.font.html">love.font</a></li><li class="mw-list-item" id="n-love.graphics"><a href="../Main/love.graphics.html">love.graphics</a></li><li class="mw-list-item" id="n-love.image"><a href="../Main/love.image.html">love.image</a></li><li class="mw-list-item" id="n-love.joystick"><a href="../Main/love.joystick.html">love.joystick</a></li><li class="mw-list-item" id="n-love.keyboard"><a href="../Main/love.keyboard.html">love.keyboard</a></li><li class="mw-list-item" id="n-love.math"><a href="../Main/love.math.html">love.math</a></li><li class="mw-list-item" id="n-love.mouse"><a href="../Main/love.mouse.html">love.mouse</a></li><li class="mw-list-item" id="n-love.physics"><a href="../Main/love.physics.html">love.physics</a></li><li class="mw-list-item" id="n-love.sound"><a href="../Main/love.sound.html">love.sound</a></li><li class="mw-list-item" id="n-love.system"><a href="../Main/love.system.html">love.system</a></li><li class="mw-list-item" id="n-love.thread"><a href="../Main/love.thread.html">love.thread</a></li><li class="mw-list-item" id="n-love.timer"><a href="../Main/love.timer.html">love.timer</a></li><li class="mw-list-item" id="n-love.touch"><a href="../Main/love.touch.html">love.touch</a></li><li class="mw-list-item" id="n-love.video"><a href="../Main/love.video.html">love.video</a></li><li class="mw-list-item" id="n-love.window"><a href="../Main/love.window.html">love.window</a></li><li class="mw-list-item" id="n-lua-enet"><a href="../Main/lua-enet.html">lua-enet</a></li><li class="mw-list-item" id="n-luasocket"><a href="../Main/socket.html">luasocket</a></li><li class="mw-list-item" id="n-utf8"><a href="../Main/utf8.html">utf8</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-navigation-label" class="portlet mw-portlet mw-portlet-navigation" id="p-navigation" role="navigation">
+<h5 id="p-navigation-label">Navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-Home"><a href="https://love2d.org/" rel="nofollow">Home</a></li><li class="mw-list-item" id="n-Forums"><a href="https://love2d.org/forums/" rel="nofollow">Forums</a></li><li class="mw-list-item" id="n-Issue-tracker"><a href="https://github.com/love2d/love/issues" rel="nofollow">Issue tracker</a></li></ul>
+</div>
+</div>
+<div aria-labelledby="p-wiki_navigation-label" class="portlet mw-portlet mw-portlet-wiki_navigation" id="p-wiki_navigation" role="navigation">
+<h5 id="p-wiki_navigation-label">wiki navigation</h5>
+<div class="pBody">
+<ul><li class="mw-list-item" id="n-mainpage-description"><a href="../Main/Main_Page.html">Main page</a></li></ul>
+</div>
+</div>
+
+</div>
+
+<div class="visualClear"></div>
+<div class="mw-footer" id="footer" role="contentinfo">
+
+<ul id="f-list">
+
+<li id="about"><a href="../LOVE/About.html">About LOVE</a></li>
+</ul>
+</div>
+</div>
+
+</body>
+</html>
